@@ -1,4 +1,4 @@
-package com.example.demo;
+package de.hs_kl.staab;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
@@ -10,7 +10,7 @@ public class DemoApplication {
 
 	@GetMapping("/")
 	String home() {
-		return "Spring is here!";
+		return "Spring is still here!";
 	}
 
 	public static void main(String[] args) {
