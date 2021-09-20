@@ -23,7 +23,7 @@ public class Sandbox {
 
 	@RequestMapping(value = "/ping", method = RequestMethod.GET)
 	public String home() {
-		return "Sandbox is here!";
+		return "<html><h1>Sandbox is here!</h1></html>";
 	}
 
 }
