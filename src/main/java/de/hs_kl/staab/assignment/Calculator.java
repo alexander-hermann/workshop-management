@@ -9,7 +9,7 @@ public class Calculator {
 	 * @return The square of the number.
 	 */
 	public int square(int n) {
-		return 0;
+		return n * n;
 	}
 
 }
