@@ -12,7 +12,7 @@ cache:
   paths:
     - .m2/repository
 
-java:
+junit-testing:
   stage: test
   script:
     - mvn verify
