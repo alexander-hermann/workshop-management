@@ -18,19 +18,21 @@ cache:
 junit-tests:
   stage: test
   script:
-    - mvn verify
+    - mvn verify spotbugs:spotbugs compile
   artifacts:
     when: always
+    paths: 
+      - target/spotbugs/spotbugsXml.html
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
 
-spotbugs:
-   stage: test
-   script:
-    - mvn spotbugs:spotbugs compile
-   artifacts:
-    when: always
-    paths: 
-      - target/spotbugs/spotbugsXml.html
+#spotbugs:
+#   stage: test
+#   script:
+#    - mvn spotbugs:spotbugs compile
+#   artifacts:
+#    when: always
+#    paths: 
+#      - target/spotbugs/spotbugsXml.html
 
