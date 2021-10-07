@@ -24,9 +24,3 @@ junit-tests:
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
-
-stage: test
-  script:
-    - mvn spotbugs:spotbugs
-  artifacts:
-    when: always
