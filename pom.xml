@@ -80,18 +80,62 @@
     				</dependency>
   				</dependencies>
   				<configuration>
-                <!--
+  				    <failOnError>false</failOnError>
+                    <!--
                     Enables analysis which takes more memory but finds more bugs.
                     If you run out of memory, changes the value of the effort element
                     to 'low'.
-                -->
+                    -->                	
                 	<effort>low</effort>
                 	<!-- Reports all bugs (other values are medium and max) -->
                 	<threshold>max</threshold>
                 	<!-- Produces XML report -->
-                	<xmlOutput>true</xmlOutput>
-            	</configuration>
+                	<xmlOutput>true</xmlOutput>                	
+                	<spotbugsXmlOutputDirectory>${project.build.directory}/spotbugs</spotbugsXmlOutputDirectory>                	
+            	</configuration>                
 			</plugin>
+			<plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>xml-maven-plugin</artifactId>            
+            <configuration>
+                <transformationSets>
+                    <transformationSet>
+                        <!-- Configures the source directory of XML files. -->
+                        <dir>${project.build.directory}/spotbugs</dir>
+                        <!-- Configures the directory in which the FindBugs report is written.-->
+                        <outputDir>${project.build.directory}/spotbugs</outputDir>
+                        <!-- Selects the used stylesheet. -->
+                        <!-- <stylesheet>fancy-hist.xsl</stylesheet> -->
+                        <stylesheet>default.xsl</stylesheet>
+                        <!--<stylesheet>plain.xsl</stylesheet>-->
+                        <!--<stylesheet>fancy.xsl</stylesheet>-->
+                        <!--<stylesheet>summary.xsl</stylesheet>-->
+                        <fileMappers>
+                            <!-- Configures the file extension of the output files. -->
+                            <fileMapper
+                                    implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                <targetExtension>.html</targetExtension>
+                            </fileMapper>
+                        </fileMappers>
+                    </transformationSet>
+                </transformationSets>
+            </configuration>
+            <executions> 
+            	<execution>
+					<phase>compile</phase>
+					<goals>
+						<goal>transform</goal>
+					</goals>            	
+            	</execution>
+            </executions>
+            <dependencies>
+                <dependency>
+					<groupId>com.github.spotbugs</groupId>
+  					<artifactId>spotbugs-maven-plugin</artifactId>
+  					<version>4.2.0</version>
+                </dependency>
+            </dependencies>
+        </plugin>
 		</plugins>
 	</build>
 
