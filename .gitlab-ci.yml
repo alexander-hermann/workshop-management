@@ -15,17 +15,27 @@ cache:
   paths:
     - .m2/repository
 
-junit-tests:
+junit-testing:
   stage: test
   script:
-    - mvn verify spotbugs:spotbugs compile
+    - mvn verify
   artifacts:
     when: always
-    paths: 
-      - target/spotbugs/spotbugsXml.html
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
+
+#junit-tests:
+#  stage: test
+#  script:
+#    - mvn verify spotbugs:spotbugs compile
+#  artifacts:
+#    when: always
+#    paths: 
+#      - target/spotbugs/spotbugsXml.html
+#    reports:
+#      junit:
+#        - target/surefire-reports/TEST-*.xml
 
 #spotbugs:
 #   stage: test
