@@ -32,5 +32,5 @@ spotbugs:
    artifacts:
     when: always
     paths: 
-      - target/spotbugs/*.html
+      - target/spotbugs/spotbugsXml.html
 
