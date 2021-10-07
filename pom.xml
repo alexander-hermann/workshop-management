@@ -67,6 +67,31 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<!--  <version>3.0.0-M5</version> -->
             </plugin>
+            <plugin>
+  				<groupId>com.github.spotbugs</groupId>
+  				<artifactId>spotbugs-maven-plugin</artifactId>
+  				<version>4.2.0</version>
+ 				 <dependencies>
+    				<!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+    				<dependency>
+      				<groupId>com.github.spotbugs</groupId>
+      				<artifactId>spotbugs</artifactId>
+      				<version>4.4.1</version>
+    				</dependency>
+  				</dependencies>
+  				<configuration>
+                <!--
+                    Enables analysis which takes more memory but finds more bugs.
+                    If you run out of memory, changes the value of the effort element
+                    to 'low'.
+                -->
+                	<effort>low</effort>
+                	<!-- Reports all bugs (other values are medium and max) -->
+                	<threshold>max</threshold>
+                	<!-- Produces XML report -->
+                	<xmlOutput>true</xmlOutput>
+            	</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
