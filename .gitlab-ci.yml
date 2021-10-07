@@ -19,9 +19,12 @@ junit-testing:
   stage: test
   script:    
     - mkdir -p target/spotbugs
-    - mvn verify
+    - mvn verify spotbugs:spotbugs compile pmd:pmd
   artifacts:
     when: always
+    paths: 
+      - target/spotbugs/spotbugsXml.html    
+      - target/pmd.xml
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
