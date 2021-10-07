@@ -18,6 +18,7 @@ cache:
 junit-testing:
   stage: test
   script:
+    - mkdir target/spotbugs
     - mvn verify
   artifacts:
     when: always
