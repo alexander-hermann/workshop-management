@@ -1,3 +1,6 @@
+include:
+  - template: Code-Quality.gitlab-ci.yml
+
 variables:
   # This will suppress any download for dependencies and plugins or upload messages which would clutter the console log.
   # `showDateTime` will show the passed time in milliseconds. You need to specify `--batch-mode` to make this work.
@@ -12,14 +15,22 @@ cache:
   paths:
     - .m2/repository
 
-testing-and-spotbugs:
+junit-tests:
   stage: test
   script:
-    - mvn verify spotbugs:spotbugs
+    - mvn validate
   artifacts:
     when: always
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
-      spotbugs:
-        - target/spotbugs.xml
+
+spotbugs:
+   stage: test
+   script:
+    - mvn spotbugs:spotbugs compile
+   artifacts:
+    when: always
+    paths: 
+      - target/spotbugs/*.html
+
