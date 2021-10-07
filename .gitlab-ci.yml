@@ -12,12 +12,14 @@ cache:
   paths:
     - .m2/repository
 
-java:
+testing-and-spotbugs:
   stage: test
   script:
-    - mvn verify
+    - mvn verify spotbugs:spotbugs
   artifacts:
     when: always
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
+      spotbugs:
+        - target/spotbugs.xml
