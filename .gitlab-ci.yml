@@ -22,6 +22,7 @@ junit-testing:
     - mvn verify spotbugs:spotbugs compile pmd:pmd
   artifacts:
     when: always
+    expire_in: 1 week
     paths: 
       - target/spotbugs/spotbugsXml.html    
       - target/pmd.xml
