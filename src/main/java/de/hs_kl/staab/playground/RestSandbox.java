@@ -83,7 +83,7 @@ public class RestSandbox {
 		System.out.println(simpleClassParameter);
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String home(@RequestParam String name) {
 		String salutation = "Hallo " + name + "!";
 		return salutation;

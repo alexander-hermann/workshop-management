@@ -30,7 +30,7 @@ public class RestSandboxTests {
 	public void whenGetName_thenOk() throws Exception {
 		//@formatter:off
 		this.mockMvc
-			.perform(get("/sandbox/").param("name", "Frank"))
+			.perform(get("/sandbox/test/").param("name", "Frank"))
 			.andExpect(status().isOk());
 		//@formatter:on
 	}
@@ -38,7 +38,7 @@ public class RestSandboxTests {
 	@Test
 	public void whenPing_thenCorrectString() {
 		String body = this.restTemplate.getForObject("/sandbox/ping", String.class);
-		assertThat(body).isEqualTo("Sandbox is here!");
+		assertThat(body).isEqualTo("Heute ist ein wirklich toller Tag!");
 	}
 
 }
