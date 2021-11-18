@@ -1,4 +1,4 @@
-package de.hs_kl.staab;
+package de.hs_kl.staab.playground;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class SandboxTests {
+public class RestSandboxTests {
 
 	@Autowired
 	private MockMvc mockMvc;

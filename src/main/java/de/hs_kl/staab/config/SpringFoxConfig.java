@@ -9,6 +9,11 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+/**
+ * YOU SHOULD NOT EDIT THIS CLASS! :)
+ * 
+ * @author Staab
+ */
 @Configuration
 public class SpringFoxConfig {
 

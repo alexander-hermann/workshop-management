@@ -1,4 +1,4 @@
-package de.hs_kl.staab.assignment;
+package de.hs_kl.staab.playground;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,6 +9,9 @@ public class CalculatorTest {
 
 	public Calculator calculator;
 
+	/**
+	 * Wird vor jedem Test ausgeführt.
+	 */
 	@BeforeEach
 	void setUp() {
 		this.calculator = new Calculator();
