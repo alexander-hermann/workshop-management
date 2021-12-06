@@ -18,4 +18,42 @@ public class WorkingPlatform {
 		this.workshop = workshop;
 	}
 
+	public boolean isWorkingPlatformAvailable() {
+		return isWorkingPlatformAvailable;
+	}
+
+	public void setWorkingPlatformAvailable(boolean isWorkingPlatformAvailable) {
+		this.isWorkingPlatformAvailable = isWorkingPlatformAvailable;
+	}
+
+	public Workshop getWorkshop() {
+		return workshop;
+	}
+
+	public void setWorkshop(Workshop workshop) {
+		this.workshop = workshop;
+	}
+
+	public String getIdOfWorkingPlatform() {
+		return idOfWorkingPlatform;
+	}
+
+	public String getNameOfWorkingPlatform() {
+		return nameOfWorkingPlatform;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("WorkingPlatform [idOfWorkingPlatform=");
+		builder.append(idOfWorkingPlatform);
+		builder.append(", nameOfWorkingPlatform=");
+		builder.append(nameOfWorkingPlatform);
+		builder.append(", isWorkingPlatformAvailable=");
+		builder.append(isWorkingPlatformAvailable);
+		builder.append(", workshop=");
+		builder.append(workshop);
+		builder.append("]");
+		return builder.toString();
+	}
 }
