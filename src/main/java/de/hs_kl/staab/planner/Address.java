@@ -30,4 +30,19 @@ public class Address {
 	public String getCity() {
 		return city;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Address [streetName=");
+		builder.append(streetName);
+		builder.append(", streetNumber=");
+		builder.append(streetNumber);
+		builder.append(", zipCode=");
+		builder.append(zipCode);
+		builder.append(", city=");
+		builder.append(city);
+		builder.append("]");
+		return builder.toString();
+	}
 }
