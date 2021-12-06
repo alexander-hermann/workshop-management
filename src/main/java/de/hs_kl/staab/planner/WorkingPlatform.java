@@ -1,5 +1,7 @@
 package de.hs_kl.staab.planner;
 
+import java.util.ArrayList;
+
 public class WorkingPlatform {
 
 	private final static String WORKING_PLATFORM_PREFIX = "WKP-";
@@ -7,30 +9,13 @@ public class WorkingPlatform {
 
 	private final String idOfWorkingPlatform;
 	private final String nameOfWorkingPlatform;
-	private boolean isWorkingPlatformAvailable;
 	private Workshop workshop;
 
-	public WorkingPlatform(String nameOfWorkingPlatform, boolean isWorkingPlatformAvailable, Workshop workshop) {
+	private ArrayList<WorkingPlatform> listOfWorkingPlatforms;
+
+	public WorkingPlatform(Workshop workshop, String nameOfWorkingPlatform) {
 		this.idOfWorkingPlatform = WORKING_PLATFORM_PREFIX + WORKING_PLATFORM_ID_COUNTER;
-		WORKING_PLATFORM_ID_COUNTER++;
 		this.nameOfWorkingPlatform = nameOfWorkingPlatform;
-		this.isWorkingPlatformAvailable = isWorkingPlatformAvailable;
-		this.workshop = workshop;
-	}
-
-	public boolean isWorkingPlatformAvailable() {
-		return isWorkingPlatformAvailable;
-	}
-
-	public void setWorkingPlatformAvailable(boolean isWorkingPlatformAvailable) {
-		this.isWorkingPlatformAvailable = isWorkingPlatformAvailable;
-	}
-
-	public Workshop getWorkshop() {
-		return workshop;
-	}
-
-	public void setWorkshop(Workshop workshop) {
 		this.workshop = workshop;
 	}
 
@@ -49,11 +34,20 @@ public class WorkingPlatform {
 		builder.append(idOfWorkingPlatform);
 		builder.append(", nameOfWorkingPlatform=");
 		builder.append(nameOfWorkingPlatform);
-		builder.append(", isWorkingPlatformAvailable=");
-		builder.append(isWorkingPlatformAvailable);
-		builder.append(", workshop=");
-		builder.append(workshop);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public ArrayList<WorkingPlatform> getWorkingPlatforms() {
+		return listOfWorkingPlatforms;
+	}
+
+	public void createNewWorkingPlatform(WorkingPlatform workingPlatform) {
+		listOfWorkingPlatforms = new ArrayList<>();
+		listOfWorkingPlatforms.add(workingPlatform);
+	}
+
+	public Workshop getWorkshop() {
+		return workshop;
 	}
 }

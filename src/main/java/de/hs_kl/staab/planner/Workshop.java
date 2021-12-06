@@ -15,4 +15,18 @@ public class Workshop {
 		this.nameOfWorkshop = nameOfWorkshop;
 		this.addressOfWorkshop = addressOfWorkshop;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Workshop [idOfWorkshop=");
+		builder.append(idOfWorkshop);
+		builder.append(", nameOfWorkshop=");
+		builder.append(nameOfWorkshop);
+		builder.append(", addressOfWorkshop=");
+		builder.append(addressOfWorkshop);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }
