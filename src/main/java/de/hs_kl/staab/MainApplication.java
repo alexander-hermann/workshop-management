@@ -1,9 +1,9 @@
 package de.hs_kl.staab;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import de.hs_kl.staab.planner.Address;
+import de.hs_kl.staab.planner.WorkingPlatform;
 import de.hs_kl.staab.planner.Workshop;
 
 /**
@@ -28,7 +28,7 @@ public class MainApplication {
 		System.out.println("Now the application is started!");
 		// Wenn Sie OHNE REST arbeiten wollen, können Sie die folgende Zeile
 		// und die Klasse PlannerController löschen!
-		SpringApplication.run(MainApplication.class, args);
+		// SpringApplication.run(MainApplication.class, args);
 
 		// Wenn Sie MIT REST arbeiten wollen, können Sie die folgende Zeile
 		// und die entsprechende Methode löschen!
@@ -39,7 +39,10 @@ public class MainApplication {
 		Address addressOfWorkshop = new Address("Industriestraße", 20, 66000, "Zweibrücken");
 		Workshop workshop = new Workshop("Auto Werkstatt GmbH", addressOfWorkshop);
 
+		WorkingPlatform wkp1 = new WorkingPlatform("A", false, workshop);
+
 		System.out.println(workshop);
+		System.out.println(wkp1);
 	}
 
 }
