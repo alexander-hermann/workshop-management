@@ -10,4 +10,12 @@ public class WorkingPlatform {
 	private boolean isWorkingPlatformAvailable;
 	private Workshop workshop;
 
+	public WorkingPlatform(String nameOfWorkingPlatform, boolean isWorkingPlatformAvailable, Workshop workshop) {
+		this.idOfWorkingPlatform = WORKING_PLATFORM_PREFIX + WORKING_PLATFORM_ID_COUNTER;
+		WORKING_PLATFORM_ID_COUNTER++;
+		this.nameOfWorkingPlatform = nameOfWorkingPlatform;
+		this.isWorkingPlatformAvailable = isWorkingPlatformAvailable;
+		this.workshop = workshop;
+	}
+
 }
