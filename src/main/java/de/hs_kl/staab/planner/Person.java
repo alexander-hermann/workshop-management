@@ -35,4 +35,6 @@ public abstract class Person {
 		this.addressOfPerson = addressOfPerson;
 	}
 
+	protected abstract Object getCustomerId();
+
 }
