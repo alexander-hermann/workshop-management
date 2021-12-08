@@ -10,7 +10,7 @@ public abstract class Vehicle {
 	protected int yearOfConstruction;
 	protected LocalDate DateOfAdmission;
 	protected String licensePlate;
-	private ArrayList<Vehicle> listOfVehicles;
+	private static ArrayList<Vehicle> listOfVehicles = new ArrayList<>();
 
 	public Vehicle(String licensePlate, String brand, String model, int yearOfConstruction, LocalDate DateOfAdmission) {
 		this.licensePlate = licensePlate;
@@ -18,12 +18,30 @@ public abstract class Vehicle {
 		this.model = model;
 		this.yearOfConstruction = yearOfConstruction;
 		this.DateOfAdmission = DateOfAdmission;
+
 	}
 
-	public void createNewVehicle(Vehicle vehicle) {
-		listOfVehicles = new ArrayList<>();
+	public static void createNewVehicle(Vehicle vehicle) {
+
 		listOfVehicles.add(vehicle);
 
+	}
+
+	public static Vehicle getVehicleByLicensePlate(String licensePlate) {
+
+		for (Vehicle vehicle : listOfVehicles) {
+			if (vehicle.getLicensePlate().equals(licensePlate)) {
+				System.out.println("Gefunden");
+			}
+
+		}
+		System.out.println("Nichts gefunden");
+		return null;
+		// continue
+	}
+
+	public static ArrayList<Vehicle> getListOfVehicles() {
+		return listOfVehicles;
 	}
 
 	@Override

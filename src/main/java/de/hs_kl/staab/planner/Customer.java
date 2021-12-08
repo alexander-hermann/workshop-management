@@ -1,6 +1,7 @@
 package de.hs_kl.staab.planner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Customer extends Person {
 
@@ -10,28 +11,25 @@ public class Customer extends Person {
 	private String receiptData;
 	private String contactDetails;
 	private static ArrayList<Person> listOfCustomers = new ArrayList<>();
-	private ArrayList<Vehicle> listOfVehiclesForCustomer;
+	private ArrayList<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
 
-	public Customer(String fullName, Address addressOfPerson, String receiptData, String contactDetails) {
+	public Customer(String fullName, Address addressOfPerson, String receiptData, String contactDetails,
+			List<Vehicle> listOfVehicles) {
 		super(fullName, addressOfPerson);
 
 		this.customerId = CUSTOMER_PREFIX + CUSTOMER_ID_COUNTER;
 		CUSTOMER_ID_COUNTER++;
 		this.receiptData = receiptData;
 		this.contactDetails = contactDetails;
-
+		this.listOfVehiclesForCustomer.addAll(listOfVehicles);
 	}
 
-	public void createNewCustomer(Customer customer) {
-		listOfCustomers = new ArrayList<>();
+	public static void createNewCustomer(Customer customer) {
+
 		listOfCustomers.add(customer);
 	}
 
-	public void updateCustomer(Customer customer) {
-		this.receiptData = customer.receiptData;
-		this.fullName = customer.fullName;
-		this.contactDetails = customer.contactDetails;
-		this.addressOfPerson = customer.addressOfPerson;
+	public static void updateCustomer(Customer customer) {
 
 	}
 
@@ -51,8 +49,7 @@ public class Customer extends Person {
 	@Override
 	public String toString() {
 		return super.toString() + ", customerId=" + customerId + ", receiptData=" + receiptData + ", contactDetails="
-				+ contactDetails + ", listOfCustomers=" + listOfCustomers + ", listOfVehiclesForCustomer="
-				+ listOfVehiclesForCustomer + "]";
+				+ contactDetails + ", listOfVehiclesForCustomer=" + listOfVehiclesForCustomer + "]";
 	}
 
 	public String getReceiptData() {
@@ -75,7 +72,7 @@ public class Customer extends Person {
 		return customerId;
 	}
 
-	public ArrayList<Person> getListOfCustomers() {
+	public static ArrayList<Person> getListOfCustomers() {
 		return listOfCustomers;
 	}
 
