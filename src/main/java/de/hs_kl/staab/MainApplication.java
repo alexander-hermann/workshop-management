@@ -54,6 +54,7 @@ public class MainApplication {
 
 		// System.out.println(workshop);
 		System.out.println(wkp1);
+		System.out.println("fehler");
 	}
 
 }
