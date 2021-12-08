@@ -10,16 +10,14 @@ public class Service {
 	private final String idOfService;
 	private final String nameOfService;
 	private final double durationOfServiceInH;
-	private Workshop workshop;
 
 	private static ArrayList<Service> listOfServices = new ArrayList<>();
 
-	public Service(Workshop workshop, String nameOfService, double durationOfServiceInH) {
+	public Service(String nameOfService, double durationOfServiceInH) {
 		this.idOfService = SERVICE_PREFIX + SERVICE_ID_COUNTER;
 		SERVICE_ID_COUNTER++;
 		this.nameOfService = nameOfService;
 		this.durationOfServiceInH = durationOfServiceInH;
-		this.workshop = workshop;
 	}
 
 	public static void createNewService(Service newService) {

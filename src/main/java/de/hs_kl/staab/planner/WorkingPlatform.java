@@ -9,14 +9,12 @@ public class WorkingPlatform {
 
 	private final String idOfWorkingPlatform;
 	private final String nameOfWorkingPlatform;
-	private Workshop workshop;
 
 	private ArrayList<WorkingPlatform> listOfWorkingPlatforms;
 
-	public WorkingPlatform(Workshop workshop, String nameOfWorkingPlatform) {
+	public WorkingPlatform(String nameOfWorkingPlatform) {
 		this.idOfWorkingPlatform = WORKING_PLATFORM_PREFIX + WORKING_PLATFORM_ID_COUNTER;
 		this.nameOfWorkingPlatform = nameOfWorkingPlatform;
-		this.workshop = workshop;
 	}
 
 	public String getIdOfWorkingPlatform() {
@@ -45,9 +43,5 @@ public class WorkingPlatform {
 	public void createNewWorkingPlatform(WorkingPlatform workingPlatform) {
 		listOfWorkingPlatforms = new ArrayList<>();
 		listOfWorkingPlatforms.add(workingPlatform);
-	}
-
-	public Workshop getWorkshop() {
-		return workshop;
 	}
 }
