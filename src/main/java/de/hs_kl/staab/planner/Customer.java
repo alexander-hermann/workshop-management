@@ -9,7 +9,7 @@ public class Customer extends Person {
 	private String customerId;
 	private String receiptData;
 	private String contactDetails;
-	private ArrayList<Person> listOfCustomers;
+	private static ArrayList<Person> listOfCustomers = new ArrayList<>();
 	private ArrayList<Vehicle> listOfVehiclesForCustomer;
 
 	public Customer(String fullName, Address addressOfPerson, String receiptData, String contactDetails) {
@@ -33,6 +33,19 @@ public class Customer extends Person {
 		this.contactDetails = customer.contactDetails;
 		this.addressOfPerson = customer.addressOfPerson;
 
+	}
+
+	public static Customer getCusotmerById(int customerId) {
+		String test = CUSTOMER_PREFIX + customerId;
+		for (Person customer : listOfCustomers) {
+			if (customer.getCustomerId().equals(test)) {
+				System.out.println("Gefunden");
+			}
+
+		}
+		System.out.println("Nichts gefunden");
+		return null;
+		// continue
 	}
 
 	@Override
