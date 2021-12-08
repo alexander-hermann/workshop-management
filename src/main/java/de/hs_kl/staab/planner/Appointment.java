@@ -6,5 +6,6 @@ public class Appointment {
 	private String appointmentId;
 	private String dateOfAppointment;
 	private int calenderWeekOfAppointment;
+	private int test;
 
 }
