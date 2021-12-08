@@ -32,6 +32,7 @@ public abstract class Vehicle {
 		for (Vehicle vehicle : listOfVehicles) {
 			if (vehicle.getLicensePlate().equals(licensePlate)) {
 				System.out.println("Gefunden");
+				return vehicle;
 			}
 
 		}

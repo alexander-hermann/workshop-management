@@ -29,15 +29,12 @@ public class Customer extends Person {
 		listOfCustomers.add(customer);
 	}
 
-	public static void updateCustomer(Customer customer) {
+	public static Customer getCustomerById(String customerId) {
 
-	}
-
-	public static Customer getCusotmerById(int customerId) {
-		String test = CUSTOMER_PREFIX + customerId;
 		for (Person customer : listOfCustomers) {
-			if (customer.getCustomerId().equals(test)) {
+			if (customer.getCustomerId().equals(customerId)) {
 				System.out.println("Gefunden");
+				return (Customer) customer;
 			}
 
 		}
