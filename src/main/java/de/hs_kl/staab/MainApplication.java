@@ -1,7 +1,11 @@
 package de.hs_kl.staab;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import de.hs_kl.staab.planner.Address;
+import de.hs_kl.staab.planner.Service;
+import de.hs_kl.staab.planner.WorkingPlatform;
+import de.hs_kl.staab.planner.Workshop;
 
 /**
  * <p>
@@ -25,7 +29,7 @@ public class MainApplication {
 		System.out.println("Now the application is started!");
 		// Wenn Sie OHNE REST arbeiten wollen, können Sie die folgende Zeile
 		// und die Klasse PlannerController löschen!
-		SpringApplication.run(MainApplication.class, args);
+		// SpringApplication.run(MainApplication.class, args);
 
 		// Wenn Sie MIT REST arbeiten wollen, können Sie die folgende Zeile
 		// und die entsprechende Methode löschen!
@@ -33,9 +37,25 @@ public class MainApplication {
 	}
 
 	private static void runApplication() {
-		// Hier können Sie Ihren PlannerService aufrufen (nur wenn Sie ohne Rest
-		// arbeiten!)
-		System.out.println("Holla");
+		Address addressOfWorkshop = new Address("Industriestraße", 20, 66000, "Zweibrücken");
+		Workshop workshop = new Workshop("Auto Werkstatt GmbH", addressOfWorkshop);
+
+		WorkingPlatform wkp1 = new WorkingPlatform(workshop, "Arbeitsbühne1");
+		WorkingPlatform wkp2 = new WorkingPlatform(workshop, "Arbeitsbühne2");
+		WorkingPlatform wkp3 = new WorkingPlatform(workshop, "Arbeitsbühne3");
+
+		Service se1 = new Service(workshop, "Cleaning", 1.0);
+		Service se2 = new Service(workshop, "Consulting", 1.0);
+		Service se3 = new Service(workshop, "Working", 1.0);
+
+		Service.createNewService(se1);
+		Service.createNewService(se2);
+		Service.createNewService(se3);
+
+		System.out.println(Service.getServiceById(3));
+
+		// System.out.println(workshop);
+		System.out.println(wkp1);
 	}
 
 }

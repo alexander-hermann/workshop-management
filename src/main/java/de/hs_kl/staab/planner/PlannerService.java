@@ -38,5 +38,4 @@ public class PlannerService {
 	/* * werden, bevor Sie diese an den Kalender * */
 	/* * weitergeben. **************************** */
 	/* ******************************************* */
-
 }
