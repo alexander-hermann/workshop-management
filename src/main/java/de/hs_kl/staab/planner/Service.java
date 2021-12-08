@@ -46,4 +46,12 @@ public class Service {
 		return idOfService;
 	}
 
+	public String getNameOfService() {
+		return nameOfService;
+	}
+
+	public double getDurationOfServiceInH() {
+		return durationOfServiceInH;
+	}
+
 }
