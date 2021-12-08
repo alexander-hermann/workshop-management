@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import de.hs_kl.staab.planner.Address;
 import de.hs_kl.staab.planner.Service;
 import de.hs_kl.staab.planner.WorkingPlatform;
-import de.hs_kl.staab.planner.Workshop;
 
 /**
  * <p>
@@ -38,15 +37,14 @@ public class MainApplication {
 
 	private static void runApplication() {
 		Address addressOfWorkshop = new Address("Industriestraße", 20, 66000, "Zweibrücken");
-		Workshop workshop = new Workshop("Auto Werkstatt GmbH", addressOfWorkshop);
 
-		WorkingPlatform wkp1 = new WorkingPlatform(workshop, "Arbeitsbühne1");
-		WorkingPlatform wkp2 = new WorkingPlatform(workshop, "Arbeitsbühne2");
-		WorkingPlatform wkp3 = new WorkingPlatform(workshop, "Arbeitsbühne3");
+		WorkingPlatform wkp1 = new WorkingPlatform("Arbeitsbühne1");
+		WorkingPlatform wkp2 = new WorkingPlatform("Arbeitsbühne2");
+		WorkingPlatform wkp3 = new WorkingPlatform("Arbeitsbühne3");
 
-		Service se1 = new Service(workshop, "Cleaning", 1.0);
-		Service se2 = new Service(workshop, "Consulting", 1.0);
-		Service se3 = new Service(workshop, "Working", 1.0);
+		Service se1 = new Service("Cleaning", 1.0);
+		Service se2 = new Service("Consulting", 1.0);
+		Service se3 = new Service("Working", 1.0);
 
 		Service.createNewService(se1);
 		Service.createNewService(se2);
