@@ -27,14 +27,6 @@ public class Customer extends Person {
 		listOfCustomers.add(customer);
 	}
 
-	public void updateCustomer(Customer customer) {
-		this.receiptData = customer.receiptData;
-		this.fullName = customer.fullName;
-		this.contactDetails = customer.contactDetails;
-		this.addressOfPerson = customer.addressOfPerson;
-
-	}
-
 	public static Customer getCusotmerById(int customerId) {
 		String test = CUSTOMER_PREFIX + customerId;
 		for (Person customer : listOfCustomers) {
