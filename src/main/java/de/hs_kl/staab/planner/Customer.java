@@ -8,73 +8,37 @@ public class Customer extends Person {
 	private static final String CUSTOMER_PREFIX = "CS-";
 	private static int CUSTOMER_ID_COUNTER = 1;
 	private String customerId;
-	private String receiptData;
-	private String contactDetails;
-	private static ArrayList<Person> listOfCustomers = new ArrayList<>();
-	private ArrayList<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
 
-	public Customer(String fullName, Address addressOfPerson, String receiptData, String contactDetails,
-			List<Vehicle> listOfVehicles) {
+	private List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
+
+	public Customer(String fullName, Address addressOfPerson, List<Vehicle> listOfVehicles) {
 		super(fullName, addressOfPerson);
 
 		this.customerId = CUSTOMER_PREFIX + CUSTOMER_ID_COUNTER;
 		CUSTOMER_ID_COUNTER++;
-		this.receiptData = receiptData;
-		this.contactDetails = contactDetails;
 		this.listOfVehiclesForCustomer.addAll(listOfVehicles);
-	}
-
-	public static void createNewCustomer(Customer customer) {
-
-		listOfCustomers.add(customer);
-	}
-
-	public static Customer getCustomerById(String customerId) {
-
-		for (Person customer : listOfCustomers) {
-			if (customer.getCustomerId().equals(customerId)) {
-				System.out.println("Gefunden");
-				return (Customer) customer;
-			}
-
-		}
-		System.out.println("Nichts gefunden");
-		return null;
-		// continue
 	}
 
 	@Override
 	public String toString() {
-		return super.toString() + ", customerId=" + customerId + ", receiptData=" + receiptData + ", contactDetails="
-				+ contactDetails + ", listOfVehiclesForCustomer=" + listOfVehiclesForCustomer + "]";
-	}
-
-	public String getReceiptData() {
-		return receiptData;
-	}
-
-	public void setReceiptData(String receiptData) {
-		this.receiptData = receiptData;
-	}
-
-	public String getContactDetails() {
-		return contactDetails;
-	}
-
-	public void setContactDetails(String contactDetails) {
-		this.contactDetails = contactDetails;
+		return super.toString() + ", customerId=" + customerId + ", listOfVehiclesForCustomer="
+				+ listOfVehiclesForCustomer + "]";
 	}
 
 	public String getCustomerId() {
 		return customerId;
 	}
 
-	public static ArrayList<Person> getListOfCustomers() {
-		return listOfCustomers;
+	public List<Vehicle> getListOfVehiclesForCustomer() {
+		return listOfVehiclesForCustomer;
 	}
 
-	public ArrayList getListOfVehiclesForCustomer() {
-		return listOfVehiclesForCustomer;
+	public Address getAddress() {
+		return addressOfPerson;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
 
 }
