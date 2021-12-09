@@ -50,7 +50,7 @@ public class WorkingPlatform {
 				}
 			}
 		} else {
-			throw new IllegalArgumentException("The list of workingplatform is empty.");
+			throw new IllegalArgumentException("The list of workingplatforms is empty.");
 		}
 		throw new IllegalArgumentException("The workingplatform with the id " + workingPlatformId + " was not found.");
 	}
@@ -83,8 +83,8 @@ public class WorkingPlatform {
 				}
 			}
 		} else {
-			throw new IllegalArgumentException(
-					"The workingplatform " + this.getId() + " can not be updated, because the list is empty.");
+			throw new IllegalArgumentException("The workingplatform " + this.getId()
+					+ " can not be updated, because the list of workingplatforms is empty.");
 		}
 	}
 
@@ -92,10 +92,9 @@ public class WorkingPlatform {
 		if (!listOfWorkingPlatforms.isEmpty()) {
 			listOfWorkingPlatforms.remove(removeWorkingPlatform);
 			System.out.println("The workingplatform " + removeWorkingPlatform.getId() + "  was successfully deleted.");
-
 		} else {
 			throw new IllegalArgumentException("The workingplatform " + removeWorkingPlatform.getId()
-					+ " can't be deleted, because the list of workingplatform is empty.");
+					+ " can't be deleted, because the list of workingplatforms is empty.");
 		}
 	}
 }
