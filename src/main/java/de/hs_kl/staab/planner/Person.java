@@ -3,16 +3,16 @@ package de.hs_kl.staab.planner;
 public abstract class Person {
 
 	protected String fullName;
-	protected Contact contactOfPerson;
+	protected Address addressOfPerson;
 
-	public Person(String fullName, Contact contactOfPerson) {
+	public Person(String fullName, Address addressOfPerson) {
 		this.fullName = fullName;
-		this.contactOfPerson = contactOfPerson;
+		this.addressOfPerson = addressOfPerson;
 	}
 
 	@Override
 	public String toString() {
-		return "Person [fullName=" + fullName + ", contact of person= " + contactOfPerson;
+		return "Person [fullName=" + fullName + ", contact of person= " + addressOfPerson;
 	}
 
 	public String getFullName() {
@@ -25,14 +25,14 @@ public abstract class Person {
 		this.fullName = fullName;
 	}
 
-	public Address getContactOfPerson() {
-		return ContactOfPerson;
+	public Address getAddressOfPerson() {
+		return addressOfPerson;
 	}
 
 // If a person has moved
 
-	public void setContactOfPerson(Contact contactOfPerson) {
-		this.contactOfPerson = contactOfPerson;
+	public void setAddressOfPerson(Address addressOfPerson) {
+		this.addressOfPerson = addressOfPerson;
 	}
 
 	protected abstract Object getCustomerId();
