@@ -11,8 +11,8 @@ public class Customer extends Person {
 
 	private List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
 
-	public Customer(String fullName, Address addressOfPerson, List<Vehicle> listOfVehicles) {
-		super(fullName, addressOfPerson);
+	public Customer(String fullName, Contact contactOfPerson, List<Vehicle> listOfVehicles) {
+		super(fullName, contactOfPerson);
 
 		this.customerId = CUSTOMER_PREFIX + CUSTOMER_ID_COUNTER;
 		CUSTOMER_ID_COUNTER++;
@@ -33,8 +33,8 @@ public class Customer extends Person {
 		return listOfVehiclesForCustomer;
 	}
 
-	public Address getAddress() {
-		return addressOfPerson;
+	public Address getContact() {
+		return contactOfPerson;
 	}
 
 	public void setCustomerId(String customerId) {

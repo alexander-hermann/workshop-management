@@ -17,13 +17,24 @@ public class CustomerService {
 	// Return all vehicles
 
 	public List<Vehicle> getListOfVehicles() {
-		return listOfVehicles;
+		if (!listOfVehicles.isEmpty()) {
+			System.out.println(listOfVehicles);
+			return listOfVehicles;
+		} else {
+			throw new IllegalArgumentException("The list of vehicles is empty.");
+
+		}
 	}
 
 	// Return vehicles for specific customer
 
 	public List<Vehicle> getListOfVehiclesForCustomer() {
-		return listOfVehiclesForCustomer;
+		if (!listOfVehiclesForCustomer.isEmpty()) {
+			System.out.println(listOfVehiclesForCustomer);
+			return listOfVehiclesForCustomer;
+		} else {
+			throw new IllegalArgumentException("The list of vehicles for customer is empty.");
+		}
 	}
 
 	// create a new vehicle
@@ -93,7 +104,13 @@ public class CustomerService {
 	// Return all customers
 
 	public List<Customer> getListOfCustomers() {
-		return listOfCustomers;
+		if (!listOfCustomers.isEmpty()) {
+
+			System.out.println(listOfCustomers);
+			return listOfCustomers;
+		} else {
+			throw new IllegalArgumentException("The list of customers is empty.");
+		}
 	}
 
 	// create a new customer
