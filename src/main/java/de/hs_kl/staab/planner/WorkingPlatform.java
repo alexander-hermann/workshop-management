@@ -1,3 +1,6 @@
+/**
+ * @author Alexander Hermann
+ */
 package de.hs_kl.staab.planner;
 
 import java.util.ArrayList;
@@ -47,9 +50,9 @@ public class WorkingPlatform {
 				}
 			}
 		} else {
-			throw new IllegalArgumentException("The list of working platform is empty.");
+			throw new IllegalArgumentException("The list of workingplatforms is empty.");
 		}
-		throw new IllegalArgumentException("The workingplatform with the id " + workingPlatformId + " is not found.");
+		throw new IllegalArgumentException("The workingplatform with the id " + workingPlatformId + " was not found.");
 	}
 
 	public static void getWorkingPlatforms() {
@@ -64,13 +67,14 @@ public class WorkingPlatform {
 
 	public static void createNewWorkingPlatform(WorkingPlatform newWorkingPlatform) {
 		listOfWorkingPlatforms.add(newWorkingPlatform);
-		System.out.println("Erfolgreich");
+		System.out.println("The workingplatform " + newWorkingPlatform.getId() + "  was successfully added.");
 	}
 
 	public void updateWorkingPlatform(WorkingPlatform updateWorkingPlatform) {
 		if (!listOfWorkingPlatforms.isEmpty()) {
 			for (WorkingPlatform workingPlatform : listOfWorkingPlatforms) {
 				if (workingPlatform.equals(this)) {
+					// New object gets the id from the old object
 					updateWorkingPlatform.idOfWorkingPlatform = this.idOfWorkingPlatform;
 
 					System.out.println("Old object: " + workingPlatform);
@@ -79,13 +83,18 @@ public class WorkingPlatform {
 				}
 			}
 		} else {
-			throw new IllegalArgumentException("The workingplatform can not be updated, because the list is empty.");
+			throw new IllegalArgumentException("The workingplatform " + this.getId()
+					+ " can not be updated, because the list of workingplatforms is empty.");
 		}
 	}
 
-	public void removeWorkingPlatform(WorkingPlatform removeWorkingPlatform) {
+	public static void removeWorkingPlatform(WorkingPlatform removeWorkingPlatform) {
 		if (!listOfWorkingPlatforms.isEmpty()) {
-
+			listOfWorkingPlatforms.remove(removeWorkingPlatform);
+			System.out.println("The workingplatform " + removeWorkingPlatform.getId() + "  was successfully deleted.");
+		} else {
+			throw new IllegalArgumentException("The workingplatform " + removeWorkingPlatform.getId()
+					+ " can't be deleted, because the list of workingplatforms is empty.");
 		}
 	}
 }
