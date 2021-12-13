@@ -2,6 +2,7 @@ package de.hs_kl.staab;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import de.hs_kl.staab.planner.Appointment;
 import de.hs_kl.staab.planner.PlannerService;
 import de.hs_kl.staab.planner.Service;
 import de.hs_kl.staab.planner.WorkingPlatform;
@@ -56,9 +57,8 @@ public class MainApplication {
 
 		plannerService.getWorkingPlatforms();
 		plannerService.getServices();
-		System.out.println("lol");
-		System.out.println("Test");
-
+		Appointment termin1 = new Appointment(2016, 1, 5, 13, 15);
+		System.out.println(termin1);
 	}
 
 }

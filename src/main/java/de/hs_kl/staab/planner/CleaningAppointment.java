@@ -1,11 +1,9 @@
 package de.hs_kl.staab.planner;
 
-import java.time.LocalDateTime;
-
 public class CleaningAppointment extends Appointment {
 
-	public CleaningAppointment(LocalDateTime DateOfAppointment, int calenderWeekOfAppointment) {
-		super(DateOfAppointment, calenderWeekOfAppointment);
+	public CleaningAppointment(int year, int month, int day, int hour, int minute) {
+		super(year, month, day, hour, minute);
 		// TODO Auto-generated constructor stub
 	}
 
