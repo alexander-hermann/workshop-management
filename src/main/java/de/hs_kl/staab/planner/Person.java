@@ -12,7 +12,7 @@ public abstract class Person {
 
 	@Override
 	public String toString() {
-		return "Person [fullName=" + fullName + ", contact of person= " + contactOfPerson;
+		return "Person [fullName=" + fullName + ", " + contactOfPerson;
 	}
 
 	public String getFullName() {

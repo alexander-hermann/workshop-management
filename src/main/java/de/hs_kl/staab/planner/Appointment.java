@@ -1,21 +1,27 @@
 package de.hs_kl.staab.planner;
 
 import java.time.LocalDateTime;
+import java.time.temporal.IsoFields;
 import java.util.ArrayList;
 
-abstract class Appointment {
+public class Appointment {
 	protected static int APPOINTMENT_NUMBER_COUNTER = 0;
 	protected static final String APPOINTMENT_PREFIX = "AP-";
 	protected String appointmentId;
-	protected String dateOfAppointment;
+
 	protected LocalDateTime DateOfAppointment;
 	protected int calenderWeekOfAppointment;
-	protected int test;
+
 	protected static ArrayList<Appointment> listOfAppointment = new ArrayList();
 
-	public Appointment(LocalDateTime DateOfAppointment, int calenderWeekOfAppointment) {
-		this.DateOfAppointment = DateOfAppointment;
+	public Appointment(int year, int month, int day, int hour, int minute) {
+		this.DateOfAppointment = LocalDateTime.of(year, month, day, hour, minute);
+		this.calenderWeekOfAppointment = DateOfAppointment.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
 
+	}
+
+	public int getCalenderWeekOfAppointment() {
+		return calenderWeekOfAppointment;
 	}
 
 	public static void createNewAppointment(Appointment appointment) {
@@ -25,6 +31,12 @@ abstract class Appointment {
 
 	public static ArrayList<Appointment> listOfAppointment() {
 		return listOfAppointment;
+	}
+
+	@Override
+	public String toString() {
+		return "[appointmentId=" + appointmentId + ", DateOfAppointment=" + DateOfAppointment
+				+ ", calenderWeekOfAppointment=" + calenderWeekOfAppointment + "]";
 	}
 
 }
