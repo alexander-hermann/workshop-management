@@ -1,7 +1,5 @@
 package de.hs_kl.staab.planner;
 
-import java.util.ArrayList;
-
 public class Service {
 
 	private final static String SERVICE_PREFIX = "SE-";
@@ -11,8 +9,6 @@ public class Service {
 	private final String nameOfService;
 	private final double durationOfServiceInH;
 
-	private static ArrayList<Service> listOfServices = new ArrayList<>();
-
 	public Service(String nameOfService, double durationOfServiceInH) {
 		this.idOfService = SERVICE_PREFIX + SERVICE_ID_COUNTER;
 		SERVICE_ID_COUNTER++;
@@ -20,38 +16,28 @@ public class Service {
 		this.durationOfServiceInH = durationOfServiceInH;
 	}
 
-	public static void createNewService(Service newService) {
-		listOfServices.add(newService);
-		System.out.println("Erfolgreich");
-	}
-
-	public static Service getServiceById(int serviceId) {
-		String test = SERVICE_PREFIX + serviceId;
-		for (Service service : listOfServices) {
-			if (service.getIdOfService().equals(test)) {
-				System.out.println("Gefunden");
-				return service;
-			}
-		}
-		System.out.println("Nichts gefunden");
-		return null;
-		// continue
-	}
-
-	public static ArrayList<Service> getListOfServices() {
-		return listOfServices;
-	}
-
-	public String getIdOfService() {
+	public String getId() {
 		return idOfService;
 	}
 
-	public String getNameOfService() {
+	public String getName() {
 		return nameOfService;
 	}
 
-	public double getDurationOfServiceInH() {
+	public double getDurationInH() {
 		return durationOfServiceInH;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Service [idOfService=");
+		builder.append(idOfService);
+		builder.append(", nameOfService=");
+		builder.append(nameOfService);
+		builder.append(", durationOfServiceInH=");
+		builder.append(durationOfServiceInH);
+		builder.append("]");
+		return builder.toString();
+	}
 }
