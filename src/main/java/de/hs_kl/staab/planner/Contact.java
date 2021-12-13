@@ -5,13 +5,18 @@ public class Contact {
 	private final int streetNumber;
 	private final int zipCode;
 	private final String city;
+	private final int phoneNumber;
+	private final String emailAddress;
 
-	public Contact(String streetName, int streetNumber, int zipCode, String city) {
-		super();
+	public Contact(String streetName, int streetNumber, int zipCode, String city, int phoneNumber,
+			String emailAddress) {
 		this.streetName = streetName;
 		this.streetNumber = streetNumber;
 		this.zipCode = zipCode;
+
 		this.city = city;
+		this.phoneNumber = phoneNumber;
+		this.emailAddress = emailAddress;
 	}
 
 	public String getStreetName() {
@@ -28,6 +33,14 @@ public class Contact {
 
 	public String getCity() {
 		return city;
+	}
+
+	public int getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public String emailAddress() {
+		return emailAddress;
 	}
 
 	@Override
