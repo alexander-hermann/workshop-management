@@ -2,6 +2,7 @@ package de.hs_kl.staab;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import de.hs_kl.staab.planner.PlannerService;
 import de.hs_kl.staab.planner.Service;
 import de.hs_kl.staab.planner.WorkingPlatform;
 
@@ -35,6 +36,7 @@ public class MainApplication {
 	}
 
 	private static void runApplication() {
+		PlannerService plannerService = PlannerService.getInstance();
 
 		WorkingPlatform wkp1 = new WorkingPlatform("Arbeitsbühne1");
 		WorkingPlatform wkp2 = new WorkingPlatform("Arbeitsbühne2");
@@ -44,14 +46,16 @@ public class MainApplication {
 		Service se2 = new Service("Consulting", 1.0);
 		Service se3 = new Service("Working", 1.0);
 
-		Service.createNewService(se1);
-		Service.createNewService(se2);
-		Service.createNewService(se3);
+		plannerService.createNewWorkingPlatform(wkp1);
+		plannerService.createNewWorkingPlatform(wkp2);
+		plannerService.createNewWorkingPlatform(wkp3);
 
-		System.out.println(Service.getServiceById(3));
+		plannerService.createNewService(se1);
+		plannerService.createNewService(se2);
+		plannerService.createNewService(se3);
 
-		// System.out.println(workshop);
-		System.out.println(wkp1);
+		plannerService.getWorkingPlatforms();
+		plannerService.getServices();
 	}
 
 }
