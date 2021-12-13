@@ -57,6 +57,8 @@ public class MainApplication {
 		plannerService.getWorkingPlatforms();
 		plannerService.getServices();
 		System.out.println("lol");
+		System.out.println("Test");
+
 	}
 
 }
