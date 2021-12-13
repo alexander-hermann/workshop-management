@@ -7,17 +7,18 @@ public abstract class Vehicle {
 
 	protected String brand;
 	protected String model;
-	protected int yearOfConstruction;
 	protected LocalDate DateOfAdmission;
+	protected int yearOfConstruction;
 	protected String licensePlate;
 	private ArrayList<Vehicle> listOfVehicles;
 
-	public Vehicle(String licensePlate, String brand, String model, int yearOfConstruction, LocalDate DateOfAdmission) {
+	public Vehicle(String licensePlate, String brand, String model, int yearOfConstruction, int yearDateOfAdmission,
+			int monthDateOfAdmission, int dayDateOfAdmission) {
 		this.licensePlate = licensePlate;
 		this.brand = brand;
 		this.model = model;
 		this.yearOfConstruction = yearOfConstruction;
-		this.DateOfAdmission = DateOfAdmission;
+		this.DateOfAdmission = LocalDate.of(yearDateOfAdmission, monthDateOfAdmission, dayDateOfAdmission);
 	}
 
 	public void createNewVehicle(Vehicle vehicle) {
@@ -50,6 +51,10 @@ public abstract class Vehicle {
 
 	public String getLicensePlate() {
 		return licensePlate;
+	}
+
+	public void setLicensePlate(String licensePlate) {
+		this.licensePlate = licensePlate;
 	}
 
 }
