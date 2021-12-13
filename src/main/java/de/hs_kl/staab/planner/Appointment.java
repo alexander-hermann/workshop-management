@@ -20,6 +20,10 @@ public class Appointment {
 
 	}
 
+	public int getCalenderWeekOfAppointment() {
+		return calenderWeekOfAppointment;
+	}
+
 	public static void createNewAppointment(Appointment appointment) {
 
 		listOfAppointment.add(appointment);
@@ -31,8 +35,8 @@ public class Appointment {
 
 	@Override
 	public String toString() {
-		return "Appointment [appointmentId=" + appointmentId + ", DateOfAppointment=" + DateOfAppointment
-				+ ", calenderWeekOfAppointment=" + calenderWeekOfAppointment;
+		return "[appointmentId=" + appointmentId + ", DateOfAppointment=" + DateOfAppointment
+				+ ", calenderWeekOfAppointment=" + calenderWeekOfAppointment + "]";
 	}
 
 }
