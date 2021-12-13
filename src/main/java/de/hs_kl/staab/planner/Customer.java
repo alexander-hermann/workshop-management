@@ -11,18 +11,12 @@ public class Customer extends Person {
 
 	private List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
 
-	public Customer(String fullName, Address addressOfPerson, List<Vehicle> listOfVehicles) {
-		super(fullName, addressOfPerson);
+	public Customer(String fullName, Contact contactOfPerson, List<Vehicle> listOfVehicles) {
+		super(fullName, contactOfPerson);
 
 		this.customerId = CUSTOMER_PREFIX + CUSTOMER_ID_COUNTER;
 		CUSTOMER_ID_COUNTER++;
-		this.listOfVehiclesForCustomer.addAll(listOfVehicles);
-	}
 
-	@Override
-	public String toString() {
-		return super.toString() + ", customerId=" + customerId + ", listOfVehiclesForCustomer="
-				+ listOfVehiclesForCustomer + "]";
 	}
 
 	public String getCustomerId() {
@@ -31,10 +25,6 @@ public class Customer extends Person {
 
 	public List<Vehicle> getListOfVehiclesForCustomer() {
 		return listOfVehiclesForCustomer;
-	}
-
-	public Address getAddress() {
-		return addressOfPerson;
 	}
 
 	public void setCustomerId(String customerId) {

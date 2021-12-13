@@ -10,7 +10,7 @@ public abstract class Vehicle {
 	protected int yearOfConstruction;
 	protected LocalDate DateOfAdmission;
 	protected String licensePlate;
-	private ArrayList<Vehicle> listOfVehicles = new ArrayList<>();
+	private ArrayList<Vehicle> listOfVehicles;
 
 	public Vehicle(String licensePlate, String brand, String model, int yearOfConstruction, LocalDate DateOfAdmission) {
 		this.licensePlate = licensePlate;
@@ -18,60 +18,12 @@ public abstract class Vehicle {
 		this.model = model;
 		this.yearOfConstruction = yearOfConstruction;
 		this.DateOfAdmission = DateOfAdmission;
-
 	}
 
-	public void createNewVehicle(Vehicle newVehicle) {
+	public void createNewVehicle(Vehicle vehicle) {
+		listOfVehicles = new ArrayList<>();
+		listOfVehicles.add(vehicle);
 
-		this.listOfVehicles.add(newVehicle);
-
-	}
-
-	public Vehicle getVehicleByLicensePlate(String licensePlate) {
-		if (!listOfVehicles.isEmpty()) {
-			for (Vehicle vehicle : listOfVehicles) {
-				if (vehicle.getLicensePlate().equals(licensePlate)) {
-					System.out.println("Gefunden");
-					return vehicle;
-				}
-
-			}
-		} else {
-			throw new IllegalArgumentException(
-					"The list of vehicles for this license plate " + licensePlate + " is empty.");
-		}
-		throw new IllegalArgumentException("The vehicle with the license plate " + licensePlate + " is not found.");
-	}
-
-	public void updateVehicle(Vehicle updateVehicle) {
-		if (!listOfVehicles.isEmpty()) {
-			for (Vehicle vehicle : listOfVehicles) {
-				if (updateVehicle.equals(this)) {
-					updateVehicle.licensePlate = this.licensePlate;
-
-					System.out.println("Old object: " + vehicle);
-					listOfVehicles.set(listOfVehicles.indexOf(this), updateVehicle);
-					System.out.println("New object: " + updateVehicle);
-				}
-			}
-		} else {
-			throw new IllegalArgumentException(
-					"The vehilce can not be updated, because the list for the vehicle with the license plate "
-							+ licensePlate + " is empty.");
-		}
-	}
-
-	public void removeVehicle(Vehicle removeVehicle) {
-		if (!listOfVehicles.isEmpty()) {
-			removeVehicle.licensePlate = this.licensePlate;
-			listOfVehicles.remove(removeVehicle);
-			System.out.println("Vehicle with license plate " + licensePlate + " has been removed ");
-		} else {
-			throw new IllegalArgumentException(
-
-					"The vehicle can not be updated, because the list for the vehicles with the license plate "
-							+ licensePlate + " is empty.");
-		}
 	}
 
 	@Override
@@ -98,10 +50,6 @@ public abstract class Vehicle {
 
 	public String getLicensePlate() {
 		return licensePlate;
-	}
-
-	public void setLicensePlate(String licensePlate) {
-		this.licensePlate = licensePlate;
 	}
 
 }
