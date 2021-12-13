@@ -2,7 +2,6 @@ package de.hs_kl.staab;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import de.hs_kl.staab.planner.Address;
 import de.hs_kl.staab.planner.Service;
 import de.hs_kl.staab.planner.WorkingPlatform;
 
@@ -36,7 +35,6 @@ public class MainApplication {
 	}
 
 	private static void runApplication() {
-		Address addressOfWorkshop = new Address("Industriestraße", 20, 66000, "Zweibrücken");
 
 		WorkingPlatform wkp1 = new WorkingPlatform("Arbeitsbühne1");
 		WorkingPlatform wkp2 = new WorkingPlatform("Arbeitsbühne2");
