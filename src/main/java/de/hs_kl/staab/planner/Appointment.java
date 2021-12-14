@@ -2,40 +2,33 @@ package de.hs_kl.staab.planner;
 
 import java.time.LocalDateTime;
 import java.time.temporal.IsoFields;
-import java.util.ArrayList;
 
 public class Appointment {
 	protected static int APPOINTMENT_NUMBER_COUNTER = 0;
 	protected static final String APPOINTMENT_PREFIX = "AP-";
 	protected String appointmentId;
 
-	protected LocalDateTime DateOfAppointment;
+	protected LocalDateTime dateOfAppointment;
 	protected int calenderWeekOfAppointment;
-
-	protected static ArrayList<Appointment> listOfAppointment = new ArrayList();
+	protected int durationInH;
 
 	public Appointment(int year, int month, int day, int hour, int minute) {
-		this.DateOfAppointment = LocalDateTime.of(year, month, day, hour, minute);
-		this.calenderWeekOfAppointment = DateOfAppointment.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+		this.dateOfAppointment = LocalDateTime.of(year, month, day, hour, minute);
+		this.calenderWeekOfAppointment = dateOfAppointment.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
 
 	}
 
-	public int getCalenderWeekOfAppointment() {
+	public int getCalendarWeek() {
 		return calenderWeekOfAppointment;
 	}
 
-	public static void createNewAppointment(Appointment appointment) {
-
-		listOfAppointment.add(appointment);
-	}
-
-	public static ArrayList<Appointment> listOfAppointment() {
-		return listOfAppointment;
+	public int getYear() {
+		return dateOfAppointment.getYear();
 	}
 
 	@Override
 	public String toString() {
-		return "[appointmentId=" + appointmentId + ", DateOfAppointment=" + DateOfAppointment
+		return "[appointmentId=" + appointmentId + ", DateOfAppointment=" + dateOfAppointment
 				+ ", calenderWeekOfAppointment=" + calenderWeekOfAppointment + "]";
 	}
 

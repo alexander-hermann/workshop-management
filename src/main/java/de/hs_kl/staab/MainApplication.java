@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import de.hs_kl.staab.planner.CLEANINGPROGRAMM;
 import de.hs_kl.staab.planner.Car;
 import de.hs_kl.staab.planner.CleaningAppointment;
-import de.hs_kl.staab.planner.ConsultantAppointment;
+import de.hs_kl.staab.planner.ConsultingAppointment;
 import de.hs_kl.staab.planner.Contact;
 import de.hs_kl.staab.planner.Customer;
 import de.hs_kl.staab.planner.CustomerService;
@@ -76,7 +76,7 @@ public class MainApplication {
 		Customer customer2 = new Customer("Alexander Hermann", Ammar, listOfVehiclesForAmmar);
 		customerservice.createNewCustomer(customer1);
 		customer1.getListOfVehiclesForCustomer();
-		customerservice.updateCustomer("HoM", customer1);
+		// customerservice.updateCustomer("HoM", customer1);
 
 		plannerService.createNewWorkingPlatform(wkp1);
 		plannerService.createNewWorkingPlatform(wkp2);
@@ -89,12 +89,13 @@ public class MainApplication {
 
 		plannerService.getWorkingPlatforms();
 		plannerService.getServices();
-		ConsultantAppointment appointment1 = new ConsultantAppointment(2016, 2, 5, 13, 15, customer1, 1);
-		ConsultantAppointment appointment2 = new ConsultantAppointment(2016, 1, 5, 13, 15, customer1, 1);
-		ConsultantAppointment appointment3 = new ConsultantAppointment(2016, 1, 6, 13, 15, customer1, 1);
-		ConsultantAppointment appointment4 = new ConsultantAppointment(2016, 3, 5, 13, 15, customer1, 1);
+		ConsultingAppointment appointment1 = new ConsultingAppointment(2016, 2, 5, 13, 15, customer1, 1);
+		ConsultingAppointment appointment2 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1);
+		ConsultingAppointment appointment3 = new ConsultingAppointment(2016, 1, 6, 13, 15, customer1, 1);
+		ConsultingAppointment appointment4 = new ConsultingAppointment(2016, 3, 5, 13, 15, customer1, 1);
 		WorkingAppointment appointment5 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, oilChange);
 		CleaningAppointment appointment6 = new CleaningAppointment(2016, 1, 5, 13, 15, wkp3, CLEANINGPROGRAMM.FAST);
+		CleaningAppointment appointment7 = new CleaningAppointment(2022, 1, 5, 13, 15, wkp3, CLEANINGPROGRAMM.FAST);
 
 		// System.out.println(appointment1);
 		planningCalendar.createNewAppointment(appointment1);
@@ -103,8 +104,9 @@ public class MainApplication {
 		planningCalendar.createNewAppointment(appointment4);
 		planningCalendar.createNewAppointment(appointment5);
 		planningCalendar.createNewAppointment(appointment6);
+		planningCalendar.createNewAppointment(appointment7);
 
-		planningCalendar.getWeekOverview(1);
+		planningCalendar.getWeekOverview(1, 2016);
 
 	}
 

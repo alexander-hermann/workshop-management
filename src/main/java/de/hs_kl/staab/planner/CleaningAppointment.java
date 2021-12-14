@@ -2,8 +2,8 @@ package de.hs_kl.staab.planner;
 
 public class CleaningAppointment extends Appointment {
 
-	double durationOfCleaningInH;
-	WorkingPlatform workingPlatform;
+	private double durationOfCleaningInH;
+	private final WorkingPlatform workingPlatform;
 
 	public CleaningAppointment(int year, int month, int day, int hour, int minute, WorkingPlatform workingPlatform,
 			CLEANINGPROGRAMM cleaningProgramm) {
@@ -15,6 +15,14 @@ public class CleaningAppointment extends Appointment {
 		case INTENSE:
 			this.durationOfCleaningInH = 1.0;
 		}
+	}
+
+	public double getDurationOfCleaningInH() {
+		return durationOfCleaningInH;
+	}
+
+	public WorkingPlatform getWorkingPlatform() {
+		return workingPlatform;
 	}
 
 	@Override

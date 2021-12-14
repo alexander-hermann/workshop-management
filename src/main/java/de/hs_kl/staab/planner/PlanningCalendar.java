@@ -17,10 +17,10 @@ public class PlanningCalendar {
 
 	}
 
-	public void getWeekOverview(int calenderWeekOfAppointment) {
+	public void getWeekOverview(int calenderWeekOfAppointment, int year) {
 
 		for (Appointment appointment : listOfAppointments) {
-			if (appointment.getCalenderWeekOfAppointment() == calenderWeekOfAppointment) {
+			if (appointment.getCalendarWeek() == calenderWeekOfAppointment && appointment.getYear() == year) {
 				System.out.println(appointment);
 
 			}
