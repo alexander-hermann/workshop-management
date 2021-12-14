@@ -10,7 +10,6 @@ public class Appointment {
 
 	protected LocalDateTime dateOfAppointment;
 	protected int calenderWeekOfAppointment;
-	protected int durationInH;
 
 	public Appointment(int year, int month, int day, int hour, int minute) {
 		this.dateOfAppointment = LocalDateTime.of(year, month, day, hour, minute);
