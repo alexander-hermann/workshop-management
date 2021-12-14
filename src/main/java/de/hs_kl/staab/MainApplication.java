@@ -53,7 +53,7 @@ public class MainApplication {
 		Service se1 = new Service("Cleaning", 1.0);
 		Service se2 = new Service("Consulting", 1.0);
 		Service se3 = new Service("Working", 1.0);
-		Contact Ammar = new Contact("asd", 1, 2, "dsad");
+		Contact Ammar = new Contact("asd", 1, 2, "dsad", 1, "");
 
 		Customer customer1 = new Customer("Ammar Said", Ammar, null);
 
