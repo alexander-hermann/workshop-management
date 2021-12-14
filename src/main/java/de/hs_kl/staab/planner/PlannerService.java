@@ -69,27 +69,28 @@ public class PlannerService {
 	}
 
 	public void createNewWorkingPlatform(WorkingPlatform newWorkingPlatform) {
-		listOfWorkingPlatforms.add(newWorkingPlatform);
-		System.out.println("The workingplatform " + newWorkingPlatform.getId() + "  was successfully added.");
+		if (!listOfWorkingPlatforms.contains(newWorkingPlatform)) {
+			listOfWorkingPlatforms.add(newWorkingPlatform);
+			System.out.println("The workingplatform " + newWorkingPlatform.getId() + "  was successfully added.");
+		} else {
+			throw new IllegalArgumentException(
+					"The working platform cannot be added because it already exists in the list");
+		}
 	}
-
-	/*
-	 * public void updateWorkingPlatform(WorkingPlatform updateWorkingPlatform) { if
-	 * (!listOfWorkingPlatforms.isEmpty()) { for (WorkingPlatform workingPlatform :
-	 * listOfWorkingPlatforms) { if (workingPlatform.equals(this)) { // New object
-	 * gets the id from the old object //updateWorkingPlatform.set(this.getId());
-	 * 
-	 * System.out.println("Old object: " + workingPlatform);
-	 * listOfWorkingPlatforms.set(listOfWorkingPlatforms.indexOf(this),
-	 * updateWorkingPlatform); System.out.println("New object: " +
-	 * updateWorkingPlatform); } } } else { throw new
-	 * IllegalArgumentException("The workingplatform " + this +
-	 * " can not be updated, because the list of workingplatforms is empty."); } }
-	 */
 
 	public void updateWorkingPlatform(WorkingPlatform oldWorkingPlatform, WorkingPlatform newWorkingPlatform) {
 		if (!listOfWorkingPlatforms.isEmpty()) {
+			for (WorkingPlatform actualWorkingPlatform : listOfWorkingPlatforms) {
+				if (actualWorkingPlatform.equals(oldWorkingPlatform)) {
 
+					// Assigns the id of the old object to the new object
+					newWorkingPlatform.setId(oldWorkingPlatform.getId());
+					listOfWorkingPlatforms.set(listOfWorkingPlatforms.indexOf(oldWorkingPlatform), newWorkingPlatform);
+				}
+			}
+		} else {
+			throw new IllegalArgumentException(
+					"The working platform cannot be updated because the list of workingplatforms is empty.");
 		}
 	}
 
@@ -131,18 +132,20 @@ public class PlannerService {
 		System.out.println("The service " + newService.getId() + "  was successfully added.");
 	}
 
-	/*
-	 * public void updateService(Service updateService) { if
-	 * (!listOfServices.isEmpty()) { for (Service service : listOfServices) { if
-	 * (service.equals(this)) { // New object gets the id from the old object
-	 * updateService.idOfService = this.idOfService;
-	 * listOfServices.set(listOfServices.indexOf(this), updateService);
-	 * 
-	 * System.out.println("Old object: " + service);
-	 * System.out.println("New object: " + updateService); } } } else { throw new
-	 * IllegalArgumentException( "The service " + this.getId() +
-	 * " can not be updated, because the list of services is empty."); } }
-	 */
+	public void updateService(Service oldService, Service newService) {
+		if (!listOfServices.isEmpty()) {
+			for (Service actualService : listOfServices) {
+				if (actualService.equals(oldService)) {
+
+					// Assigns the id of the old object to the new object
+					newService.setId(oldService.getId());
+					listOfServices.set(listOfServices.indexOf(oldService), newService);
+				}
+			}
+		} else {
+			throw new IllegalArgumentException("The service cannot be updated because the list of services is empty.");
+		}
+	}
 
 	public void removeService(Service removeService) {
 		if (!listOfServices.isEmpty()) {

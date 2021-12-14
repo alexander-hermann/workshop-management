@@ -5,7 +5,7 @@ public class Service {
 	private final static String SERVICE_PREFIX = "SE-";
 	private static int SERVICE_ID_COUNTER = 1;
 
-	private final String idOfService;
+	private String idOfService;
 	private final String nameOfService;
 	private final double durationOfServiceInH;
 
@@ -18,6 +18,10 @@ public class Service {
 
 	public String getId() {
 		return idOfService;
+	}
+
+	public void setId(String idOfService) {
+		this.idOfService = idOfService;
 	}
 
 	public String getName() {

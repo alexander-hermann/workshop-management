@@ -5,7 +5,7 @@ public class WorkingPlatform {
 	private final static String WORKING_PLATFORM_PREFIX = "WKP-";
 	private static int WORKING_PLATFORM_ID_COUNTER = 1;
 
-	private final String idOfWorkingPlatform;
+	private String idOfWorkingPlatform;
 	private final String nameOfWorkingPlatform;
 
 	public WorkingPlatform(String nameOfWorkingPlatform) {
@@ -15,6 +15,10 @@ public class WorkingPlatform {
 
 	public String getId() {
 		return idOfWorkingPlatform;
+	}
+
+	public void setId(String idOfWorkingPlatform) {
+		this.idOfWorkingPlatform = idOfWorkingPlatform;
 	}
 
 	public String getName() {
