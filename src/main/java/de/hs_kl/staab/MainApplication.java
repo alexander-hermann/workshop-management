@@ -1,15 +1,21 @@
 package de.hs_kl.staab;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import de.hs_kl.staab.planner.CLEANINGPROGRAMM;
+import de.hs_kl.staab.planner.Car;
 import de.hs_kl.staab.planner.CleaningAppointment;
 import de.hs_kl.staab.planner.ConsultantAppointment;
 import de.hs_kl.staab.planner.Contact;
 import de.hs_kl.staab.planner.Customer;
+import de.hs_kl.staab.planner.CustomerService;
 import de.hs_kl.staab.planner.PlannerService;
 import de.hs_kl.staab.planner.PlanningCalendar;
 import de.hs_kl.staab.planner.Service;
+import de.hs_kl.staab.planner.Vehicle;
 import de.hs_kl.staab.planner.WorkingAppointment;
 import de.hs_kl.staab.planner.WorkingPlatform;
 
@@ -45,6 +51,7 @@ public class MainApplication {
 	private static void runApplication() {
 		PlannerService plannerService = PlannerService.getInstance();
 		PlanningCalendar planningCalendar = new PlanningCalendar();
+		CustomerService customerservice = new CustomerService();
 
 		WorkingPlatform wkp1 = new WorkingPlatform("Arbeitsbühne1");
 		WorkingPlatform wkp2 = new WorkingPlatform("Arbeitsbühne2");
@@ -53,10 +60,17 @@ public class MainApplication {
 		Service se1 = new Service("Cleaning", 1.0);
 		Service se2 = new Service("Consulting", 1.0);
 		Service se3 = new Service("Working", 1.0);
-		Contact Ammar = new Contact("asd", 1, 2, "dsad");
+		Contact Ammar = new Contact("asd", 1, 66448, "dsad", 01234567, "Ammar@web.de");
 
-		Customer customer1 = new Customer("Ammar Said", Ammar, null);
+		Vehicle car1 = new Car("HOM-SB-211", "BMW", "M1", 2016, 2018, 8, 1);
+		List<Vehicle> listOfVehiclesForAmmar = new ArrayList<>();
+		listOfVehiclesForAmmar.add(car1);
 
+		Customer customer1 = new Customer("Ammar Said", Ammar, listOfVehiclesForAmmar);
+
+		customerservice.createNewCustomer(customer1);
+		customer1.getListOfVehiclesForCustomer();
+		customerservice.updateCustomer("HoM", customer1);
 		plannerService.createNewWorkingPlatform(wkp1);
 		plannerService.createNewWorkingPlatform(wkp2);
 		plannerService.createNewWorkingPlatform(wkp3);
@@ -71,7 +85,7 @@ public class MainApplication {
 		ConsultantAppointment appointment2 = new ConsultantAppointment(2016, 1, 5, 13, 15, customer1, 1);
 		ConsultantAppointment appointment3 = new ConsultantAppointment(2016, 1, 6, 13, 15, customer1, 1);
 		ConsultantAppointment appointment4 = new ConsultantAppointment(2016, 3, 5, 13, 15, customer1, 1);
-		WorkingAppointment appointment5 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, null, se1);
+		WorkingAppointment appointment5 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, se1);
 		CleaningAppointment appointment6 = new CleaningAppointment(2016, 1, 5, 13, 15, wkp3, CLEANINGPROGRAMM.FAST);
 
 		// System.out.println(appointment1);

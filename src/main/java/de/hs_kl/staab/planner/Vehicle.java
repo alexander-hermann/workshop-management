@@ -1,7 +1,6 @@
 package de.hs_kl.staab.planner;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public abstract class Vehicle {
 
@@ -10,21 +9,14 @@ public abstract class Vehicle {
 	protected LocalDate DateOfAdmission;
 	protected int yearOfConstruction;
 	protected String licensePlate;
-	private ArrayList<Vehicle> listOfVehicles;
 
-	public Vehicle(String licensePlate, String brand, String model, int yearOfConstruction, int yearDateOfAdmission,
-			int monthDateOfAdmission, int dayDateOfAdmission) {
+	public Vehicle(String licensePlate, String brand, String model, int yearOfConstruction, int yearOfAdmission,
+			int monthOfAdmission, int dayOfAdmission) {
 		this.licensePlate = licensePlate;
 		this.brand = brand;
 		this.model = model;
 		this.yearOfConstruction = yearOfConstruction;
-		this.DateOfAdmission = LocalDate.of(yearDateOfAdmission, monthDateOfAdmission, dayDateOfAdmission);
-	}
-
-	public void createNewVehicle(Vehicle vehicle) {
-		listOfVehicles = new ArrayList<>();
-		listOfVehicles.add(vehicle);
-
+		this.DateOfAdmission = LocalDate.of(yearOfAdmission, monthOfAdmission, dayOfAdmission);
 	}
 
 	@Override

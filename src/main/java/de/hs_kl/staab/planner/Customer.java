@@ -8,15 +8,32 @@ public class Customer extends Person {
 	private static final String CUSTOMER_PREFIX = "CS-";
 	private static int CUSTOMER_ID_COUNTER = 1;
 	private String customerId;
+	private Contact contactOfPerson;
 
 	private List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
 
 	public Customer(String fullName, Contact contactOfPerson, List<Vehicle> listOfVehicles) {
-		super(fullName, contactOfPerson);
+		super(fullName);
 
 		this.customerId = CUSTOMER_PREFIX + CUSTOMER_ID_COUNTER;
 		CUSTOMER_ID_COUNTER++;
+		this.contactOfPerson = contactOfPerson;
+		this.listOfVehiclesForCustomer.addAll(listOfVehicles);
 
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + " customerId=" + customerId + ", contactOfPerson=" + contactOfPerson
+				+ ", listOfVehiclesForCustomer=" + listOfVehiclesForCustomer + "]";
+	}
+
+	public Contact getContactOfPerson() {
+		return contactOfPerson;
+	}
+
+	public void setListOfVehiclesForCustomer(List<Vehicle> listOfVehiclesForCustomer) {
+		this.listOfVehiclesForCustomer = listOfVehiclesForCustomer;
 	}
 
 	public String getCustomerId() {

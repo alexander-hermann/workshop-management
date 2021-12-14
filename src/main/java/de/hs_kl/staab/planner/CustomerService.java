@@ -10,7 +10,6 @@ public class CustomerService {
 
 	private List<Customer> listOfCustomers = new ArrayList<>();
 	private List<Vehicle> listOfVehicles = new ArrayList<>();
-	private List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
 
 	// MVP/030
 
@@ -24,17 +23,6 @@ public class CustomerService {
 
 			throw new IllegalArgumentException("The list of vehicles is empty.");
 
-		}
-	}
-
-	// Return vehicles for specific customer
-
-	public List<Vehicle> getListOfVehiclesForCustomer() {
-		if (!listOfVehiclesForCustomer.isEmpty()) {
-			System.out.println(listOfVehiclesForCustomer);
-			return listOfVehiclesForCustomer;
-		} else {
-			throw new IllegalArgumentException("The list of vehicles for customer is empty.");
 		}
 	}
 
