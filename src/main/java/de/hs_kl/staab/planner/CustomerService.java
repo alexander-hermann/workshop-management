@@ -119,10 +119,10 @@ public class CustomerService {
 
 	public Customer getCustomerById(String customerId) {
 		if (!listOfCustomers.isEmpty()) {
-			for (Person customer : listOfCustomers) {
+			for (Customer customer : listOfCustomers) {
 				if (customer.getCustomerId().equals(customerId)) {
 					System.out.println("Customer with customer ID " + customerId + "found.");
-					return (Customer) customer;
+					return customer;
 				}
 
 			}
@@ -138,12 +138,12 @@ public class CustomerService {
 	public void updateCustomer(String customerId, Customer updateCustomer) {
 		if (!listOfCustomers.isEmpty()) {
 			List<Customer> listOfUpdatedCustomer = new ArrayList<>();
-			for (Person customer : listOfCustomers) {
+			for (Customer customer : listOfCustomers) {
 				if (customerId.equals(customer.getCustomerId())) {
 					updateCustomer.setCustomerId(customerId);
 					System.out.println("Old object: " + customer);
 					listOfCustomers.set(listOfCustomers.indexOf(customer), updateCustomer);
-					listOfUpdatedCustomer.add((Customer) customer);
+					listOfUpdatedCustomer.add(customer);
 					System.out.println("New object: " + updateCustomer);
 
 				}

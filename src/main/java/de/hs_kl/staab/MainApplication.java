@@ -9,9 +9,9 @@ import de.hs_kl.staab.planner.CLEANINGPROGRAMM;
 import de.hs_kl.staab.planner.Car;
 import de.hs_kl.staab.planner.CleaningAppointment;
 import de.hs_kl.staab.planner.ConsultingAppointment;
-import de.hs_kl.staab.planner.Contact;
 import de.hs_kl.staab.planner.Customer;
 import de.hs_kl.staab.planner.CustomerService;
+import de.hs_kl.staab.planner.InvoiceAddress;
 import de.hs_kl.staab.planner.PlannerService;
 import de.hs_kl.staab.planner.PlanningCalendar;
 import de.hs_kl.staab.planner.Service;
@@ -62,7 +62,7 @@ public class MainApplication {
 		Service glassRepair = new Service("Glasreparatur", 2.0);
 		Service inspectionCar = new Service("KFZ-Inspektion", 1.5);
 
-		Contact Ammar = new Contact("asd", 1, 66448, "dsad", 01234567, "Ammar@web.de");
+		InvoiceAddress Ammar = new InvoiceAddress("Hauptstraße", 20, 66840, "Zweibrücken");
 
 		Vehicle car1 = new Car("HOM-SB-211", "BMW", "M1", 2016, 2018, 8, 1);
 		Vehicle car2 = new Car("SB-HO-333", "Mercedes", "CLA", 2010, 2013, 8, 1);
@@ -72,8 +72,10 @@ public class MainApplication {
 		listOfVehiclesForAmmar.add(car1);
 		customerservice.getListOfVehicles();
 
-		Customer customer1 = new Customer("Ammar Said", Ammar, listOfVehiclesForAmmar);
-		Customer customer2 = new Customer("Alexander Hermann", Ammar, listOfVehiclesForAmmar);
+		Customer customer1 = new Customer("Ammar Said", Ammar, "+49176 258484750", "ammar@web.de",
+				listOfVehiclesForAmmar);
+		Customer customer2 = new Customer("Alexander Hermann", null, "0176-5656556", "alex@web.de", null);
+		Customer customer3 = new Customer("Hendrik Treitz", null, "+49176-4548484", "hendrik@web.de", null);
 		customerservice.createNewCustomer(customer1);
 		customer1.getListOfVehiclesForCustomer();
 		// customerservice.updateCustomer("HoM", customer1);
