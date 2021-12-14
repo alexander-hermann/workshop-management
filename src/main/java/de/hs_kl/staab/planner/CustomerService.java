@@ -31,6 +31,7 @@ public class CustomerService {
 	public void createNewVehicle(Vehicle newVehicle) {
 
 		listOfVehicles.add(newVehicle);
+		System.out.println("New vehicle " + newVehicle.getLicensePlate() + " added.");
 
 	}
 
@@ -40,7 +41,7 @@ public class CustomerService {
 		if (!listOfVehicles.isEmpty()) {
 			for (Vehicle vehicle : listOfVehicles) {
 				if (vehicle.getLicensePlate().equals(licensePlate)) {
-					System.out.println("Gefunden");
+					System.out.println("Vehicle with licensePlate " + licensePlate + " found.");
 					return vehicle;
 				}
 
@@ -57,15 +58,19 @@ public class CustomerService {
 
 	public void updateVehicle(String licensePlate, Vehicle updateVehicle) {
 		if (!listOfVehicles.isEmpty()) {
+			List<Vehicle> listOfUpdatedVehicle = new ArrayList<>();
 			for (Vehicle vehicle : listOfVehicles) {
-				if (vehicle.licensePlate.equals(updateVehicle.getLicensePlate())) {
-					updateVehicle.setLicensePlate(vehicle.licensePlate);
-
+				if (licensePlate.equals(vehicle.getLicensePlate())) {
+					listOfUpdatedVehicle.add(vehicle);
+					System.out.println("Old object: " + vehicle);
+					listOfVehicles.set(listOfVehicles.indexOf(vehicle), updateVehicle);
+					System.out.println("New object: " + updateVehicle);
 				}
-				System.out.println("Old object: " + vehicle);
-				listOfVehicles.set(listOfVehicles.indexOf(vehicle), updateVehicle);
-				System.out.println("New object: " + updateVehicle);
 			}
+			if (listOfUpdatedVehicle.isEmpty()) {
+				throw new IllegalArgumentException("No vehicle with license plate " + licensePlate + " found");
+			}
+
 		} else {
 			throw new IllegalArgumentException(
 					"The vehilce can not be updated, because the list for the vehicle with the license plate "
@@ -79,7 +84,7 @@ public class CustomerService {
 		if (!listOfVehicles.isEmpty()) {
 
 			listOfVehicles.remove(removeVehicle);
-			System.out.println("Vehicle with license plate " + removeVehicle.getLicensePlate() + " has been removed ");
+			System.out.println("Vehicle with license plate " + removeVehicle.getLicensePlate() + " has been removed. ");
 		} else {
 			throw new IllegalArgumentException(
 
@@ -107,6 +112,7 @@ public class CustomerService {
 	public void createNewCustomer(Customer newCustomer) {
 
 		listOfCustomers.add(newCustomer);
+		System.out.println("Customer " + newCustomer.getCustomerId() + " added.");
 	}
 
 	// return the customer with the specific customer ID
@@ -115,7 +121,7 @@ public class CustomerService {
 		if (!listOfCustomers.isEmpty()) {
 			for (Person customer : listOfCustomers) {
 				if (customer.getCustomerId().equals(customerId)) {
-					System.out.println("Gefunden");
+					System.out.println("Customer with customer ID " + customerId + "found.");
 					return (Customer) customer;
 				}
 
@@ -131,15 +137,20 @@ public class CustomerService {
 
 	public void updateCustomer(String customerId, Customer updateCustomer) {
 		if (!listOfCustomers.isEmpty()) {
+			List<Customer> listOfUpdatedCustomer = new ArrayList<>();
 			for (Person customer : listOfCustomers) {
 				if (customerId.equals(customer.getCustomerId())) {
 					updateCustomer.setCustomerId(customerId);
 					System.out.println("Old object: " + customer);
-					System.out.println("New object: " + updateCustomer);
 					listOfCustomers.set(listOfCustomers.indexOf(customer), updateCustomer);
+					listOfUpdatedCustomer.add((Customer) customer);
+					System.out.println("New object: " + updateCustomer);
 
 				}
 
+			}
+			if (listOfUpdatedCustomer.isEmpty()) {
+				throw new IllegalArgumentException("No customer with customer ID " + customerId + " found");
 			}
 
 		} else {
