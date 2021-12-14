@@ -57,9 +57,11 @@ public class MainApplication {
 		WorkingPlatform wkp2 = new WorkingPlatform("Arbeitsbühne2");
 		WorkingPlatform wkp3 = new WorkingPlatform("Arbeitsbühne3");
 
-		Service se1 = new Service("Cleaning", 1.0);
-		Service se2 = new Service("Consulting", 1.0);
-		Service se3 = new Service("Working", 1.0);
+		Service oilChange = new Service("Ölwechsel", 0.5);
+		Service tireChange = new Service("Reifenwechsel", 1.0);
+		Service glassRepair = new Service("Glasreparatur", 2.0);
+		Service inspectionCar = new Service("KFZ-Inspektion", 1.5);
+
 		Contact Ammar = new Contact("asd", 1, 66448, "dsad", 01234567, "Ammar@web.de");
 
 		Vehicle car1 = new Car("HOM-SB-211", "BMW", "M1", 2016, 2018, 8, 1);
@@ -73,16 +75,17 @@ public class MainApplication {
 		Customer customer1 = new Customer("Ammar Said", Ammar, listOfVehiclesForAmmar);
 		Customer customer2 = new Customer("Alexander Hermann", Ammar, listOfVehiclesForAmmar);
 		customerservice.createNewCustomer(customer1);
+		customer1.getListOfVehiclesForCustomer();
+		customerservice.updateCustomer("HoM", customer1);
 
-		customerservice.updateCustomer("CS-1", customer2);
-		customerservice.updateVehicle("HOM-SB-211", car2);
 		plannerService.createNewWorkingPlatform(wkp1);
 		plannerService.createNewWorkingPlatform(wkp2);
 		plannerService.createNewWorkingPlatform(wkp3);
 
-		plannerService.createNewService(se1);
-		plannerService.createNewService(se2);
-		plannerService.createNewService(se3);
+		plannerService.createNewService(oilChange);
+		plannerService.createNewService(tireChange);
+		plannerService.createNewService(glassRepair);
+		plannerService.createNewService(inspectionCar);
 
 		plannerService.getWorkingPlatforms();
 		plannerService.getServices();
@@ -90,7 +93,7 @@ public class MainApplication {
 		ConsultantAppointment appointment2 = new ConsultantAppointment(2016, 1, 5, 13, 15, customer1, 1);
 		ConsultantAppointment appointment3 = new ConsultantAppointment(2016, 1, 6, 13, 15, customer1, 1);
 		ConsultantAppointment appointment4 = new ConsultantAppointment(2016, 3, 5, 13, 15, customer1, 1);
-		WorkingAppointment appointment5 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, se1);
+		WorkingAppointment appointment5 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, oilChange);
 		CleaningAppointment appointment6 = new CleaningAppointment(2016, 1, 5, 13, 15, wkp3, CLEANINGPROGRAMM.FAST);
 
 		// System.out.println(appointment1);

@@ -9,12 +9,12 @@ public class CleaningAppointment extends Appointment {
 			CLEANINGPROGRAMM cleaningProgramm) {
 		super(year, month, day, hour, minute);
 		this.workingPlatform = workingPlatform;
-		if (cleaningProgramm.equals(cleaningProgramm.FAST)) {
+		switch (cleaningProgramm) {
+		case FAST:
 			this.durationOfCleaningInH = 0.5;
-		} else if (cleaningProgramm.equals(cleaningProgramm.INTENSE)) {
+		case INTENSE:
 			this.durationOfCleaningInH = 1.0;
 		}
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
