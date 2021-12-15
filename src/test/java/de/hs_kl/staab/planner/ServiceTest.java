@@ -1,4 +1,4 @@
-package de.hs_kl.staab.playground;
+package de.hs_kl.staab.planner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
