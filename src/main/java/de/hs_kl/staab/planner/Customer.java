@@ -9,39 +9,33 @@ public class Customer extends Person {
 	private static int CUSTOMER_ID_COUNTER = 1;
 	private String customerId;
 	private InvoiceAddress invoiceAddressOfPerson;
+	List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
 
-	private List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
-
-	public Customer(String fullName, InvoiceAddress invoiceAddressOfPerson, String phoneNumber, String emailAddress,
-			List<Vehicle> listOfVehicles) {
+	public Customer(String fullName, InvoiceAddress invoiceAddressOfPerson, String phoneNumber, String emailAddress) {
 		super(fullName, phoneNumber, emailAddress);
 
 		this.customerId = CUSTOMER_PREFIX + CUSTOMER_ID_COUNTER;
 		CUSTOMER_ID_COUNTER++;
 		this.invoiceAddressOfPerson = invoiceAddressOfPerson;
-		this.listOfVehiclesForCustomer.addAll(listOfVehicles);
+		this.listOfVehiclesForCustomer = new ArrayList<>();
 
 	}
 
 	@Override
 	public String toString() {
 		return super.toString() + " customerId=" + customerId + ", invoiceAddressOfPerson=" + invoiceAddressOfPerson
-				+ ", listOfVehiclesForCustomer=" + listOfVehiclesForCustomer + "]";
+				+ "]";
 	}
 
 	public InvoiceAddress getInvoiceAddressOfPerson() {
 		return invoiceAddressOfPerson;
 	}
 
-	public void setListOfVehiclesForCustomer(List<Vehicle> listOfVehiclesForCustomer) {
-		this.listOfVehiclesForCustomer = listOfVehiclesForCustomer;
-	}
-
 	public String getCustomerId() {
 		return customerId;
 	}
 
-	public List<Vehicle> getListOfVehiclesForCustomer() {
+	public List<Vehicle> getListOfVehiclesForCustomer(Customer customer) {
 		return listOfVehiclesForCustomer;
 	}
 

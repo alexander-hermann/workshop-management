@@ -67,17 +67,22 @@ public class MainApplication {
 		Vehicle car1 = new Car("HOM-SB-211", "BMW", "M1", 2016, 2018, 8, 1);
 		Vehicle car2 = new Car("SB-HO-333", "Mercedes", "CLA", 2010, 2013, 8, 1);
 		customerservice.createNewVehicle(car1);
-		customerservice.createNewVehicle(car2);
+
 		List<Vehicle> listOfVehiclesForAmmar = new ArrayList<>();
 		listOfVehiclesForAmmar.add(car1);
 		customerservice.getListOfVehicles();
 
-		Customer customer1 = new Customer("Ammar Said", Ammar, "+49176 258484750", "ammar@web.de",
-				listOfVehiclesForAmmar);
-		Customer customer2 = new Customer("Alexander Hermann", null, "0176-5656556", "alex@web.de", null);
-		Customer customer3 = new Customer("Hendrik Treitz", null, "+49176-4548484", "hendrik@web.de", null);
+		Customer customer1 = new Customer("Ammar Said", Ammar, "+49176 258484750", "ammar@web.de");
+		Customer customer2 = new Customer("Alexander Hermann", null, "0176-5656556", "alex@web.de");
+		Customer customer3 = new Customer("Hendrik Treitz", null, "+49176-4548484", "hendrik@web.de");
 		customerservice.createNewCustomer(customer1);
-		customer1.getListOfVehiclesForCustomer();
+
+		customerservice.addVehicleForCustomer(customer3, car2);
+
+		customerservice.addVehicleForCustomer(customer2, car1);
+		customerservice.addVehicleForCustomer(customer3, car1);
+		customerservice.removeVehicleForCustomer(customer2, car2);
+		customerservice.getListOfVehiclesForCustomer(customer3);
 		// customerservice.updateCustomer("HoM", customer1);
 
 		plannerService.createNewWorkingPlatform(wkp1);
@@ -85,6 +90,7 @@ public class MainApplication {
 		plannerService.createNewWorkingPlatform(wkp3);
 
 		plannerService.createNewService(oilChange);
+
 		plannerService.createNewService(tireChange);
 		plannerService.createNewService(glassRepair);
 		plannerService.createNewService(inspectionCar);
