@@ -227,7 +227,8 @@ public class CustomerService {
 
 			customer.listOfVehiclesForCustomer.remove(vehicleToRemove);
 
-			System.out.println("Vehicle with license plate " + vehicleToRemove.getLicensePlate() + " removed");
+			System.out.println("Vehicle with license plate " + vehicleToRemove.getLicensePlate()
+					+ " removed from customer " + customer.getCustomerId());
 		}
 
 		else {
