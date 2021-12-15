@@ -70,13 +70,20 @@ public class MainApplication {
 		Customer customer2 = new Customer("Alexander Hermann", addressOfHermann, "0176-5656556", "alex@web.de", null);
 		Customer customer3 = new Customer("Hendrik Treitz", addressOfTreitz, "+49176-4548484", "hendrik@web.de", null);
 
-		ConsultingAppointment appointment1 = new ConsultingAppointment(2016, 2, 5, 13, 15, customer1, 1);
-		ConsultingAppointment appointment2 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1);
-		ConsultingAppointment appointment3 = new ConsultingAppointment(2016, 1, 6, 13, 15, customer1, 1);
-		ConsultingAppointment appointment4 = new ConsultingAppointment(2016, 3, 5, 13, 15, customer1, 1);
-		WorkingAppointment appointment5 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, oilChange);
-		CleaningAppointment appointment6 = new CleaningAppointment(2016, 1, 5, 13, 15, wkp3, CLEANINGPROGRAMM.FAST);
-		CleaningAppointment appointment7 = new CleaningAppointment(2022, 1, 5, 13, 15, wkp3, CLEANINGPROGRAMM.FAST);
+		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 2, 5, 13, 15, customer1, 1);
+		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1);
+		ConsultingAppointment consultingAppointment3 = new ConsultingAppointment(2016, 1, 6, 13, 15, customer1, 1);
+		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 3, 5, 13, 15, customer1, 1);
+
+		WorkingAppointment workingAppointment1 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, oilChange);
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, tireChange);
+		WorkingAppointment workingAppointment3 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, glassRepair);
+		WorkingAppointment workingAppointment4 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, inspectionCar);
+
+		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2016, 1, 5, 13, 15, wkp3,
+				CLEANINGPROGRAMM.FAST);
+		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2022, 1, 5, 13, 15, wkp3,
+				CLEANINGPROGRAMM.INTENSE);
 
 		customerService.createNewVehicle(car1);
 		customerService.createNewVehicle(car2);
@@ -96,14 +103,15 @@ public class MainApplication {
 		plannerService.getServices();
 
 		// System.out.println(appointment1);
-		planningCalendar.createNewAppointment(appointment1);
-		planningCalendar.createNewAppointment(appointment2);
-		planningCalendar.createNewAppointment(appointment3);
-		planningCalendar.createNewAppointment(appointment4);
-		planningCalendar.createNewAppointment(appointment5);
-		planningCalendar.createNewAppointment(appointment6);
-		planningCalendar.createNewAppointment(appointment7);
+		planningCalendar.createNewAppointment(consultingAppointment1);
 
+		planningCalendar.createNewAppointment(workingAppointment1);
+		planningCalendar.createNewAppointment(workingAppointment2);
+		planningCalendar.createNewAppointment(workingAppointment3);
+		planningCalendar.createNewAppointment(workingAppointment4);
+
+		planningCalendar.createNewAppointment(cleaningAppointment1);
+		planningCalendar.createNewAppointment(cleaningAppointment2);
 		planningCalendar.getWeekOverview(1, 2016);
 
 	}
