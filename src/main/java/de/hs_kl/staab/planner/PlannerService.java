@@ -128,8 +128,12 @@ public class PlannerService {
 	}
 
 	public void createNewService(Service newService) {
-		listOfServices.add(newService);
-		System.out.println("The service " + newService.getId() + "  was successfully added.");
+		if (!listOfServices.contains(newService)) {
+			listOfServices.add(newService);
+			System.out.println("The service " + newService.getId() + "  was successfully added.");
+		} else {
+			throw new IllegalArgumentException("The service cannot be added because it already exists in the list");
+		}
 	}
 
 	public void updateService(Service oldService, Service newService) {
