@@ -10,7 +10,6 @@ public class CustomerService {
 
 	private List<Customer> listOfCustomers = new ArrayList<>();
 	private List<Vehicle> listOfVehicles = new ArrayList<>();
-	List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
 
 	// MVP/030
 
