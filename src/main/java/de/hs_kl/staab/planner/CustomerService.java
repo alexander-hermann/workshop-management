@@ -10,6 +10,7 @@ public class CustomerService {
 
 	private List<Customer> listOfCustomers = new ArrayList<>();
 	private List<Vehicle> listOfVehicles = new ArrayList<>();
+	List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
 
 	// MVP/030
 
@@ -30,6 +31,12 @@ public class CustomerService {
 
 	public void createNewVehicle(Vehicle newVehicle) {
 
+		for (Vehicle vehicle : listOfVehicles) {
+			if (newVehicle.getLicensePlate().equals(vehicle.getLicensePlate())) {
+				throw new IllegalArgumentException("Vehicle with the license plate " + newVehicle.getLicensePlate()
+						+ " already exist. Search for the vehicle with license plate or update the vehicle.");
+			}
+		}
 		listOfVehicles.add(newVehicle);
 		System.out.println("New vehicle " + newVehicle.getLicensePlate() + " added.");
 
@@ -41,7 +48,7 @@ public class CustomerService {
 		if (!listOfVehicles.isEmpty()) {
 			for (Vehicle vehicle : listOfVehicles) {
 				if (vehicle.getLicensePlate().equals(licensePlate)) {
-					System.out.println("Vehicle with licensePlate " + licensePlate + " found.");
+					System.out.println(vehicle + " found.");
 					return vehicle;
 				}
 
@@ -81,15 +88,18 @@ public class CustomerService {
 	// remove a vehicle when entering the instance
 
 	public void removeVehicle(Vehicle removeVehicle) {
+
 		if (!listOfVehicles.isEmpty()) {
 
 			listOfVehicles.remove(removeVehicle);
 			System.out.println("Vehicle with license plate " + removeVehicle.getLicensePlate() + " has been removed. ");
-		} else {
+		}
+
+		else {
 			throw new IllegalArgumentException(
 
-					"The vehicle can not be updated, because the list for the vehicles with the license plate "
-							+ removeVehicle.getLicensePlate() + " is empty.");
+					"The vehicle can not be updated, because the list for the vehicles is empty.");
+
 		}
 	}
 
@@ -110,9 +120,16 @@ public class CustomerService {
 	// create a new customer
 
 	public void createNewCustomer(Customer newCustomer) {
+		for (Customer customer : listOfCustomers) {
+			if (customer.getCustomerId().equals(newCustomer.getCustomerId())) {
+				throw new IllegalArgumentException("Customer with the Customer Id " + newCustomer.getCustomerId()
+						+ " already exist. Search for Customer with Id or update Customer");
+			}
 
+		}
 		listOfCustomers.add(newCustomer);
-		System.out.println("Customer " + newCustomer.getCustomerId() + " added.");
+		System.out.println(newCustomer + " added.");
+
 	}
 
 	// return the customer with the specific customer ID
@@ -167,7 +184,9 @@ public class CustomerService {
 
 			listOfCustomers.remove(removeCustomer);
 			System.out.println("Customer with customer ID " + removeCustomer.getCustomerId() + " has been removed ");
-		} else {
+		}
+
+		else {
 			throw new IllegalArgumentException(
 
 					"The customer can not be updated, because the list for the customer with the customer ID "
@@ -175,4 +194,47 @@ public class CustomerService {
 		}
 	}
 
+	// add new vehicle to customer
+	public void addVehicleForCustomer(Customer customer, Vehicle vehicleToAdd) {
+
+		for (Vehicle vehicle : customer.listOfVehiclesForCustomer) {
+			if (vehicle.getLicensePlate().equals(vehicleToAdd.getLicensePlate())) {
+				throw new IllegalArgumentException("Vehicle with license plate " + vehicleToAdd.getLicensePlate()
+						+ " already exist in list of vehicles for customer with ID " + customer.getCustomerId());
+			}
+		}
+
+		customer.listOfVehiclesForCustomer.add(vehicleToAdd);
+		System.out.println("Customer " + customer.getCustomerId() + " add the vehicle: " + vehicleToAdd);
+	}
+
+	// get List of vehicles for a specific customer
+	public List<Vehicle> getListOfVehiclesForCustomer(Customer customer) {
+		if (!customer.listOfVehiclesForCustomer.isEmpty()) {
+			System.out.println("Customer with customer ID " + customer.getCustomerId() + " owns the vehicles: "
+					+ customer.listOfVehiclesForCustomer);
+			return customer.listOfVehiclesForCustomer;
+		} else {
+			throw new IllegalArgumentException(
+					"List of vehicles for customer with ID " + customer.getCustomerId() + " is empty");
+		}
+	}
+
+	// remove specific vehicle from list of vehicle for a specific customer
+
+	public void removeVehicleForCustomer(Customer customer, Vehicle vehicleToRemove) {
+		if (!customer.listOfVehiclesForCustomer.isEmpty()) {
+
+			customer.listOfVehiclesForCustomer.remove(vehicleToRemove);
+
+			System.out.println("Vehicle with license plate " + vehicleToRemove.getLicensePlate()
+					+ " removed from customer " + customer.getCustomerId());
+		}
+
+		else {
+			throw new IllegalArgumentException(
+					"List of vehicles for customer with ID " + customer.getCustomerId() + " is empty");
+		}
+
+	}
 }

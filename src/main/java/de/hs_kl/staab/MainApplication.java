@@ -95,6 +95,7 @@ public class MainApplication {
 		plannerService.createNewWorkingPlatform(wkp3);
 
 		plannerService.createNewService(oilChange);
+
 		plannerService.createNewService(tireChange);
 		plannerService.createNewService(glassRepair);
 		plannerService.createNewService(inspectionCar);

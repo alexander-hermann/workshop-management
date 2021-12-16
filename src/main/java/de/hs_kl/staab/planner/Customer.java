@@ -1,3 +1,4 @@
+
 package de.hs_kl.staab.planner;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class Customer extends Person {
 	private static int CUSTOMER_ID_COUNTER = 1;
 	private String customerId;
 	private InvoiceAddress invoiceAddressOfPerson;
-	private List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
+	List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
 
 	public Customer(String fullName, InvoiceAddress invoiceAddressOfPerson, String phoneNumber, String emailAddress) {
 		super(fullName, phoneNumber, emailAddress);
@@ -17,6 +18,7 @@ public class Customer extends Person {
 		this.customerId = CUSTOMER_PREFIX + CUSTOMER_ID_COUNTER;
 		CUSTOMER_ID_COUNTER++;
 		this.invoiceAddressOfPerson = invoiceAddressOfPerson;
+
 		this.listOfVehiclesForCustomer = new ArrayList<>();
 
 	}
@@ -31,16 +33,8 @@ public class Customer extends Person {
 		return invoiceAddressOfPerson;
 	}
 
-	public void setListOfVehiclesForCustomer(List<Vehicle> listOfVehiclesForCustomer) {
-		this.listOfVehiclesForCustomer = listOfVehiclesForCustomer;
-	}
-
 	public String getCustomerId() {
 		return customerId;
-	}
-
-	public List<Vehicle> getListOfVehiclesForCustomer() {
-		return listOfVehiclesForCustomer;
 	}
 
 	public void setCustomerId(String customerId) {
