@@ -17,6 +17,7 @@ public class Customer extends Person {
 		this.customerId = CUSTOMER_PREFIX + CUSTOMER_ID_COUNTER;
 		CUSTOMER_ID_COUNTER++;
 		this.invoiceAddressOfPerson = invoiceAddressOfPerson;
+
 		this.listOfVehiclesForCustomer = new ArrayList<>();
 
 	}
