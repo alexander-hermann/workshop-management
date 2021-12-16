@@ -1,8 +1,5 @@
 package de.hs_kl.staab;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import de.hs_kl.staab.planner.CLEANINGPROGRAMM;
@@ -51,7 +48,7 @@ public class MainApplication {
 	private static void runApplication() {
 		PlannerService plannerService = PlannerService.getInstance();
 		PlanningCalendar planningCalendar = new PlanningCalendar();
-		CustomerService customerservice = new CustomerService();
+		CustomerService customerService = new CustomerService();
 
 		WorkingPlatform wkp1 = new WorkingPlatform("Arbeitsbühne1");
 		WorkingPlatform wkp2 = new WorkingPlatform("Arbeitsbühne2");
@@ -62,27 +59,35 @@ public class MainApplication {
 		Service glassRepair = new Service("Glasreparatur", 2.0);
 		Service inspectionCar = new Service("KFZ-Inspektion", 1.5);
 
-		InvoiceAddress Ammar = new InvoiceAddress("Hauptstraße", 20, 66840, "Zweibrücken");
+		InvoiceAddress addressOfSaid = new InvoiceAddress("Hauptstraße", 20, 66840, "Zweibrücken");
+		InvoiceAddress addressOfTreitz = new InvoiceAddress("Hauptstraße", 15, 66820, "Bierbach");
+		InvoiceAddress addressOfHermann = new InvoiceAddress("Hauptstraße", 30, 66880, "Kaiserslautern");
 
 		Vehicle car1 = new Car("HOM-SB-211", "BMW", "M1", 2016, 2018, 8, 1);
 		Vehicle car2 = new Car("SB-HO-333", "Mercedes", "CLA", 2010, 2013, 8, 1);
-		customerservice.createNewVehicle(car1);
 
-		List<Vehicle> listOfVehiclesForAmmar = new ArrayList<>();
-		listOfVehiclesForAmmar.add(car1);
-		customerservice.getListOfVehicles();
+		Customer customer1 = new Customer("Ammar Said", addressOfSaid, "+49176 258484750", "ammar@web.de", null);
+		Customer customer2 = new Customer("Alexander Hermann", addressOfHermann, "0176-5656556", "alex@web.de", null);
+		Customer customer3 = new Customer("Hendrik Treitz", addressOfTreitz, "+49176-4548484", "hendrik@web.de", null);
 
-		Customer customer1 = new Customer("Ammar Said", Ammar, "+49176 258484750", "ammar@web.de");
-		Customer customer2 = new Customer("Alexander Hermann", null, "0176-5656556", "alex@web.de");
-		Customer customer3 = new Customer("Hendrik Treitz", null, "+49176-4548484", "hendrik@web.de");
-		customerservice.createNewCustomer(customer1);
+		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 2, 5, 13, 15, customer1, 1);
+		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1);
+		ConsultingAppointment consultingAppointment3 = new ConsultingAppointment(2016, 1, 6, 13, 15, customer1, 1);
+		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 3, 5, 13, 15, customer1, 1);
 
-		customerservice.addVehicleForCustomer(customer3, car2);
+		WorkingAppointment workingAppointment1 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, oilChange);
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, tireChange);
+		WorkingAppointment workingAppointment3 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, glassRepair);
+		WorkingAppointment workingAppointment4 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, inspectionCar);
 
-		customerservice.addVehicleForCustomer(customer2, car1);
-		customerservice.addVehicleForCustomer(customer3, car1);
-		customerservice.removeVehicleForCustomer(customer2, car2);
-		customerservice.getListOfVehiclesForCustomer(customer3);
+		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2016, 1, 5, 13, 15, wkp3,
+				CLEANINGPROGRAMM.FAST);
+		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2022, 1, 5, 13, 15, wkp3,
+				CLEANINGPROGRAMM.INTENSE);
+
+		customerService.createNewVehicle(car1);
+		customerService.createNewVehicle(car2);
+		customer1.getListOfVehiclesForCustomer();
 		// customerservice.updateCustomer("HoM", customer1);
 
 		plannerService.createNewWorkingPlatform(wkp1);
@@ -97,23 +102,17 @@ public class MainApplication {
 
 		plannerService.getWorkingPlatforms();
 		plannerService.getServices();
-		ConsultingAppointment appointment1 = new ConsultingAppointment(2016, 2, 5, 13, 15, customer1, 1);
-		ConsultingAppointment appointment2 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1);
-		ConsultingAppointment appointment3 = new ConsultingAppointment(2016, 1, 6, 13, 15, customer1, 1);
-		ConsultingAppointment appointment4 = new ConsultingAppointment(2016, 3, 5, 13, 15, customer1, 1);
-		WorkingAppointment appointment5 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, oilChange);
-		CleaningAppointment appointment6 = new CleaningAppointment(2016, 1, 5, 13, 15, wkp3, CLEANINGPROGRAMM.FAST);
-		CleaningAppointment appointment7 = new CleaningAppointment(2022, 1, 5, 13, 15, wkp3, CLEANINGPROGRAMM.FAST);
 
 		// System.out.println(appointment1);
-		planningCalendar.createNewAppointment(appointment1);
-		planningCalendar.createNewAppointment(appointment2);
-		planningCalendar.createNewAppointment(appointment3);
-		planningCalendar.createNewAppointment(appointment4);
-		planningCalendar.createNewAppointment(appointment5);
-		planningCalendar.createNewAppointment(appointment6);
-		planningCalendar.createNewAppointment(appointment7);
+		planningCalendar.createNewAppointment(consultingAppointment1);
 
+		planningCalendar.createNewAppointment(workingAppointment1);
+		planningCalendar.createNewAppointment(workingAppointment2);
+		planningCalendar.createNewAppointment(workingAppointment3);
+		planningCalendar.createNewAppointment(workingAppointment4);
+
+		planningCalendar.createNewAppointment(cleaningAppointment1);
+		planningCalendar.createNewAppointment(cleaningAppointment2);
 		planningCalendar.getWeekOverview(1, 2016);
 
 	}

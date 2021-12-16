@@ -117,19 +117,24 @@ public class PlannerService {
 		throw new IllegalArgumentException("The service with the id " + serviceId + " was not found.");
 	}
 
-	public void getServices() {
+	public Service getServices() {
 		if (!listOfServices.isEmpty()) {
 			for (Service service : listOfServices) {
-				System.out.println(service);
+				return service;
 			}
 		} else {
 			throw new IllegalArgumentException("The list of services is empty.");
 		}
+		throw new IllegalArgumentException("Error with service");
 	}
 
 	public void createNewService(Service newService) {
-		listOfServices.add(newService);
-		System.out.println("The service " + newService.getId() + "  was successfully added.");
+		if (!listOfServices.contains(newService)) {
+			listOfServices.add(newService);
+			System.out.println("The service " + newService.getId() + "  was successfully added.");
+		} else {
+			throw new IllegalArgumentException("The service cannot be added because it already exists in the list");
+		}
 	}
 
 	public void updateService(Service oldService, Service newService) {

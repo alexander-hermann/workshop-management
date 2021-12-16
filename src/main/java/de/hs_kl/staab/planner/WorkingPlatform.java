@@ -10,6 +10,7 @@ public class WorkingPlatform {
 
 	public WorkingPlatform(String nameOfWorkingPlatform) {
 		this.idOfWorkingPlatform = WORKING_PLATFORM_PREFIX + WORKING_PLATFORM_ID_COUNTER;
+		WORKING_PLATFORM_ID_COUNTER++;
 		this.nameOfWorkingPlatform = nameOfWorkingPlatform;
 	}
 
