@@ -87,7 +87,7 @@ public class MainApplication {
 
 		customerService.createNewVehicle(car1);
 		customerService.createNewVehicle(car2);
-		customer1.getListOfVehiclesForCustomer();
+
 		// customerservice.updateCustomer("HoM", customer1);
 
 		plannerService.createNewWorkingPlatform(wkp1);
