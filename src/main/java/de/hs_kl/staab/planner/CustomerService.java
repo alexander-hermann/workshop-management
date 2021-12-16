@@ -21,7 +21,7 @@ public class CustomerService {
 			return listOfVehicles;
 		} else {
 
-			throw new IllegalArgumentException("The list of vehicles is empty.");
+			throw new IllegalArgumentException("The list of vehicles is empty");
 
 		}
 	}
@@ -78,6 +78,7 @@ public class CustomerService {
 			}
 
 		} else {
+
 			throw new IllegalArgumentException(
 					"The vehilce can not be updated, because the list for the vehicle with the license plate "
 							+ licensePlate + " is empty.");
