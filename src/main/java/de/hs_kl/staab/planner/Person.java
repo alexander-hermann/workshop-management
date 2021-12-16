@@ -33,7 +33,7 @@ public abstract class Person {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Person [fullName=");
+		builder.append(" [fullName=");
 		builder.append(fullName);
 		builder.append(", phoneNumber=");
 		builder.append(phoneNumber);
