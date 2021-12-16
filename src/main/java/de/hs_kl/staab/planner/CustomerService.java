@@ -220,7 +220,7 @@ public class CustomerService {
 		}
 	}
 
-	// remove a specific vehicle from list of vehicle for a specific customer
+	// remove specific vehicle from list of vehicle for a specific customer
 
 	public void removeVehicleForCustomer(Customer customer, Vehicle vehicleToRemove) {
 		if (!customer.listOfVehiclesForCustomer.isEmpty()) {

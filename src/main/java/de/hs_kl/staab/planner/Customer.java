@@ -1,3 +1,4 @@
+
 package de.hs_kl.staab.planner;
 
 import java.util.ArrayList;
@@ -34,10 +35,6 @@ public class Customer extends Person {
 
 	public String getCustomerId() {
 		return customerId;
-	}
-
-	public List<Vehicle> getListOfVehiclesForCustomer(Customer customer) {
-		return listOfVehiclesForCustomer;
 	}
 
 	public void setCustomerId(String customerId) {
