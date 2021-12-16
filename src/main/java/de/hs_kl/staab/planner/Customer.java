@@ -9,24 +9,22 @@ public class Customer extends Person {
 	private static int CUSTOMER_ID_COUNTER = 1;
 	private String customerId;
 	private InvoiceAddress invoiceAddressOfPerson;
-
 	private List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
 
-	public Customer(String fullName, InvoiceAddress invoiceAddressOfPerson, String phoneNumber, String emailAddress,
-			List<Vehicle> listOfVehicles) {
+	public Customer(String fullName, InvoiceAddress invoiceAddressOfPerson, String phoneNumber, String emailAddress) {
 		super(fullName, phoneNumber, emailAddress);
 
 		this.customerId = CUSTOMER_PREFIX + CUSTOMER_ID_COUNTER;
 		CUSTOMER_ID_COUNTER++;
 		this.invoiceAddressOfPerson = invoiceAddressOfPerson;
-		this.listOfVehiclesForCustomer.addAll(listOfVehicles);
+		this.listOfVehiclesForCustomer = new ArrayList<>();
 
 	}
 
 	@Override
 	public String toString() {
 		return super.toString() + " customerId=" + customerId + ", invoiceAddressOfPerson=" + invoiceAddressOfPerson
-				+ ", listOfVehiclesForCustomer=" + listOfVehiclesForCustomer + "]";
+				+ "]";
 	}
 
 	public InvoiceAddress getInvoiceAddressOfPerson() {
