@@ -12,7 +12,8 @@ public class UserService {
 			listOfUsers.add(newUser);
 			System.out.println("The user " + newUser + "  was successfully added.");
 		} else {
-			throw new IllegalArgumentException("The user cannot be added because it already exists in the list");
+			throw new IllegalArgumentException(
+					"The user cannot be added because the user " + newUser + " already exists in the list");
 		}
 	}
 
@@ -63,7 +64,8 @@ public class UserService {
 		} else {
 			throw new IllegalArgumentException("The list of users is empty.");
 		}
-		throw new IllegalArgumentException("Error with user");
+		throw new IllegalArgumentException(
+				"The user with the user name " + userName + " does not exsit in the list for users");
 	}
 
 }
