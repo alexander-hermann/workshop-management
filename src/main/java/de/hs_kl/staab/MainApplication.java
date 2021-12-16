@@ -88,6 +88,12 @@ public class MainApplication {
 		customerService.createNewVehicle(car1);
 		customerService.createNewVehicle(car2);
 
+		customerService.addVehicleForCustomer(customer3, car2);
+		customerService.addVehicleForCustomer(customer2, car2);
+		customerService.addVehicleForCustomer(customer3, car1);
+		customerService.getListOfVehiclesForCustomer(customer3);
+		customerService.getVehicleForCustomer(customer3, car2);
+
 		// customerservice.updateCustomer("HoM", customer1);
 
 		plannerService.createNewWorkingPlatform(wkp1);

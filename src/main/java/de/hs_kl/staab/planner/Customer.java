@@ -10,7 +10,7 @@ public class Customer extends Person {
 	private static int CUSTOMER_ID_COUNTER = 1;
 	private String customerId;
 	private InvoiceAddress invoiceAddressOfPerson;
-	List<Vehicle> listOfVehiclesForCustomer = new ArrayList<>();
+	private List<Vehicle> listOfVehiclesForCustomer;
 
 	public Customer(String fullName, InvoiceAddress invoiceAddressOfPerson, String phoneNumber, String emailAddress) {
 		super(fullName, phoneNumber, emailAddress);
@@ -35,6 +35,18 @@ public class Customer extends Person {
 
 	public String getCustomerId() {
 		return customerId;
+	}
+
+	public List<Vehicle> getListOfVehiclesForCustomer() {
+		return listOfVehiclesForCustomer;
+	}
+
+	public void addVehicleToCustomer(Vehicle vehicle) {
+		this.listOfVehiclesForCustomer.add(vehicle);
+	}
+
+	public void removeVehicleForCustomer(Vehicle vehicle) {
+		this.listOfVehiclesForCustomer.remove(vehicle);
 	}
 
 	public void setCustomerId(String customerId) {
