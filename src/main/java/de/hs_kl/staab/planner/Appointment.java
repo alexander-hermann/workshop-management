@@ -21,6 +21,14 @@ public class Appointment {
 		return calenderWeekOfAppointment;
 	}
 
+	public int getDay() {
+		return dateOfAppointment.getDayOfYear();
+	}
+
+	public int getMonth() {
+		return dateOfAppointment.getMonthValue();
+	}
+
 	public int getYear() {
 		return dateOfAppointment.getYear();
 	}
