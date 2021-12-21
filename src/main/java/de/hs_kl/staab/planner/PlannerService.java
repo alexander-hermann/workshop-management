@@ -14,6 +14,7 @@ public class PlannerService {
 
 	private List<WorkingPlatform> listOfWorkingPlatforms = new ArrayList<>();
 	private List<Service> listOfServices = new ArrayList<>();
+	private List<ServiceHistory> listOfServiceHistoryWithAllVerhicles = new ArrayList<>();
 
 	/**
 	 * Singleton-Pattern: Der Konstruktor kann nicht aufgerufen werden, sondern
