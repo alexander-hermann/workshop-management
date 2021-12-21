@@ -15,6 +15,8 @@ public class CleaningAppointment extends Appointment {
 		case INTENSE:
 			this.durationOfCleaningInH = 1.0;
 		}
+		this.endOfAppointment = this.startOfAppointment
+				.plusMinutes((long) this.durationOfCleaningInH * TIME_CONVERSION_FAKTOR_IN_MINUTES);
 	}
 
 	public double getDurationOfCleaningInH() {

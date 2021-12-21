@@ -120,7 +120,5 @@ public class MainApplication {
 		planningCalendar.createNewAppointment(cleaningAppointment1);
 		planningCalendar.createNewAppointment(cleaningAppointment2);
 		planningCalendar.getWeekOverview(1, 2016);
-
 	}
-
 }

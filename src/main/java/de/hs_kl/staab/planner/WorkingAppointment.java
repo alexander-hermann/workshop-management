@@ -4,7 +4,6 @@ public class WorkingAppointment extends Appointment {
 	private final WorkingPlatform workingPlatform;
 	private final Vehicle vehicle;
 	private final Service service;
-	private final double durationInH;
 
 	public WorkingAppointment(int year, int month, int day, int hour, int minute, WorkingPlatform workingPlatform,
 			Vehicle vehicle, Service service) {
@@ -12,7 +11,8 @@ public class WorkingAppointment extends Appointment {
 		this.workingPlatform = workingPlatform;
 		this.vehicle = vehicle;
 		this.service = service;
-		this.durationInH = service.getDurationInH();
+		this.endOfAppointment = this.startOfAppointment
+				.plusMinutes((long) (service.getDurationInH() * TIME_CONVERSION_FAKTOR_IN_MINUTES));
 	}
 
 	public WorkingPlatform getWorkingPlatform() {
@@ -25,10 +25,6 @@ public class WorkingAppointment extends Appointment {
 
 	public Service getService() {
 		return service;
-	}
-
-	public double getDurationInH() {
-		return durationInH;
 	}
 
 	@Override

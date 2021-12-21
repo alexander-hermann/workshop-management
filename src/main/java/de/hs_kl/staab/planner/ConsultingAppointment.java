@@ -9,6 +9,8 @@ public class ConsultingAppointment extends Appointment {
 		super(year, month, day, hour, minute);
 		this.customer = customer;
 		this.durationInH = durationInH;
+
+		this.endOfAppointment = this.startOfAppointment.plusHours((long) this.durationInH);
 	}
 
 	public Customer getCustomer() {

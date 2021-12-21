@@ -4,17 +4,20 @@ import java.time.LocalDateTime;
 import java.time.temporal.IsoFields;
 
 public class Appointment {
+
+	protected final static int TIME_CONVERSION_FAKTOR_IN_MINUTES = 60;
+
 	protected static int APPOINTMENT_NUMBER_COUNTER = 0;
 	protected static final String APPOINTMENT_PREFIX = "AP-";
 	protected String appointmentId;
 
-	protected LocalDateTime dateOfAppointment;
+	protected LocalDateTime startOfAppointment;
+	protected LocalDateTime endOfAppointment;
 	protected int calenderWeekOfAppointment;
 
 	public Appointment(int year, int month, int day, int hour, int minute) {
-		this.dateOfAppointment = LocalDateTime.of(year, month, day, hour, minute);
-		this.calenderWeekOfAppointment = dateOfAppointment.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
-
+		this.startOfAppointment = LocalDateTime.of(year, month, day, hour, minute);
+		this.calenderWeekOfAppointment = startOfAppointment.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
 	}
 
 	public int getCalendarWeek() {
@@ -22,21 +25,29 @@ public class Appointment {
 	}
 
 	public int getDay() {
-		return dateOfAppointment.getDayOfYear();
+		return startOfAppointment.getDayOfYear();
 	}
 
 	public int getMonth() {
-		return dateOfAppointment.getMonthValue();
+		return startOfAppointment.getMonthValue();
 	}
 
 	public int getYear() {
-		return dateOfAppointment.getYear();
+		return startOfAppointment.getYear();
 	}
 
 	@Override
 	public String toString() {
-		return "[appointmentId=" + appointmentId + ", DateOfAppointment=" + dateOfAppointment
-				+ ", calenderWeekOfAppointment=" + calenderWeekOfAppointment + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Appointment [appointmentId=");
+		builder.append(appointmentId);
+		builder.append(", startOfAppointment=");
+		builder.append(startOfAppointment);
+		builder.append(", endOfAppointment=");
+		builder.append(endOfAppointment);
+		builder.append(", calenderWeekOfAppointment=");
+		builder.append(calenderWeekOfAppointment);
+		builder.append("]");
+		return builder.toString();
 	}
-
 }
