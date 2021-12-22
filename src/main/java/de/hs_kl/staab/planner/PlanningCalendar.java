@@ -34,6 +34,17 @@ public class PlanningCalendar {
 		}
 	}
 
+	public void getYesterdayWorkingAppointments(int year, int month, int day) {
+		// LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
+		for (Appointment appointment : listOfAppointments) {
+			if (appointment instanceof WorkingAppointment) {
+				if (appointment.getYear() == year && appointment.getMonth() == month && appointment.getDay() == day) {
+					System.out.println("example: " + appointment);
+				}
+			}
+		}
+	}
+
 	/* ******************************************************** */
 	/* * HIER KÖNNEN SIE IHREN PLANUNGSKALENDER PROGRAMMIEREN * */
 	/* * Der Planungskalender enthält den Kern ************** * */

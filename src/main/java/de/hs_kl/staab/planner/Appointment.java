@@ -14,6 +14,7 @@ public class Appointment {
 	protected LocalDateTime startOfAppointment;
 	protected LocalDateTime endOfAppointment;
 	protected int calenderWeekOfAppointment;
+	protected boolean isCompleted;
 
 	public Appointment(int year, int month, int day, int hour, int minute) {
 		this.startOfAppointment = LocalDateTime.of(year, month, day, hour, minute);

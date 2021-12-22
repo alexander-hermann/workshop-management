@@ -87,7 +87,7 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
 				user2);
 
-		WorkingAppointment workingAppointment1 = new WorkingAppointment(2016, 1, 5, 13, 15, wkp1, car1, oilChange,
+		WorkingAppointment workingAppointment1 = new WorkingAppointment(2016, 1, 4, 13, 15, wkp1, car1, oilChange,
 				user1);
 		WorkingAppointment workingAppointment2 = new WorkingAppointment(2016, 1, 6, 13, 15, wkp1, car1, tireChange,
 				user1);
@@ -144,6 +144,8 @@ public class MainApplication {
 		planningCalendar.getWeekOverview(1, 2016);
 
 		customerService.getVehicleHistory(car1);
+
+		planningCalendar.getYesterdayWorkingAppointments(2016, 01, 04);
 
 	}
 }

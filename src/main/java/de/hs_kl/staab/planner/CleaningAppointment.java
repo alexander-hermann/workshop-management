@@ -14,11 +14,13 @@ public class CleaningAppointment extends Appointment {
 		switch (cleaningProgramm) {
 		case FAST:
 			this.durationOfCleaningInH = 0.5;
+			break;
 		case INTENSE:
 			this.durationOfCleaningInH = 1.0;
+			break;
 		}
 		this.endOfAppointment = this.startOfAppointment
-				.plusMinutes((long) this.durationOfCleaningInH * TIME_CONVERSION_FAKTOR_IN_MINUTES);
+				.plusMinutes((long) (this.durationOfCleaningInH * TIME_CONVERSION_FAKTOR_IN_MINUTES));
 	}
 
 	public Dispatcher getDispatcher() {
@@ -35,8 +37,8 @@ public class CleaningAppointment extends Appointment {
 
 	@Override
 	public String toString() {
-		return "CleaningAppointment [durationOfCleaningInH=" + durationOfCleaningInH + ", workingPlatform="
-				+ workingPlatform + ", dispatcher=" + dispatcher + "]";
+		return super.toString() + "CleaningAppointment [durationOfCleaningInH=" + durationOfCleaningInH
+				+ ", workingPlatform=" + workingPlatform + ", dispatcher=" + dispatcher + "]";
 	}
 
 }
