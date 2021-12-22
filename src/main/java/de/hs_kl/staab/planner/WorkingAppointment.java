@@ -1,5 +1,7 @@
 package de.hs_kl.staab.planner;
 
+import java.time.LocalDateTime;
+
 public class WorkingAppointment extends Appointment {
 	private final WorkingPlatform workingPlatform;
 	private final Vehicle vehicle;
@@ -11,8 +13,10 @@ public class WorkingAppointment extends Appointment {
 		this.workingPlatform = workingPlatform;
 		this.vehicle = vehicle;
 		this.service = service;
+
 		this.endOfAppointment = this.startOfAppointment
 				.plusMinutes((long) (service.getDurationInH() * TIME_CONVERSION_FAKTOR_IN_MINUTES));
+		this.vehicle.listOfWorkingAppointmentForVehicle.add(this);
 	}
 
 	public WorkingPlatform getWorkingPlatform() {
@@ -25,6 +29,10 @@ public class WorkingAppointment extends Appointment {
 
 	public Service getService() {
 		return service;
+	}
+
+	public LocalDateTime getStartOfAppointment() {
+		return startOfAppointment;
 	}
 
 	@Override

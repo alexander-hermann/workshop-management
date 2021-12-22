@@ -7,6 +7,10 @@ public class UserService {
 
 	private List<User> listOfUsers = new ArrayList<>();
 
+	// MMP/01
+
+	// create a new user for the application
+
 	public void createNewUser(User newUser) {
 		if (!listOfUsers.contains(newUser)) {
 			listOfUsers.add(newUser);
@@ -17,16 +21,18 @@ public class UserService {
 		}
 	}
 
+	// update a user when entering the username
+
 	public void updateUser(String userName, User newUser) {
 		if (!listOfUsers.isEmpty()) {
 			List<User> listOfUpdatedUser = new ArrayList<>();
 			for (User user : listOfUsers) {
-				if (user.userName.equals(newUser.getUserName())) {
+				if (userName.equals(user.getUserName())) {
 					listOfUpdatedUser.add(user);
 
+					newUser.setUserName(user.getUserName());
 					// Assigns the id of the old object to the new object
 
-					newUser.setUserName(user.getUserName());
 					listOfUsers.set(listOfUsers.indexOf(user), newUser);
 				}
 			}
@@ -40,22 +46,24 @@ public class UserService {
 		}
 	}
 
-	public User getUsers() {
+	public List<User> getUsers() {
 		if (!listOfUsers.isEmpty()) {
 			for (User user : listOfUsers) {
 				System.out.println(user);
-				return user;
 			}
+			return listOfUsers;
 		} else {
 			throw new IllegalArgumentException("The list of users is empty.");
 		}
-		throw new IllegalArgumentException("Error with user");
+
 	}
 
 	public User getUserByUserName(String userName) {
 		if (!listOfUsers.isEmpty()) {
+
 			for (User user : listOfUsers) {
 				if (user.getUserName().equals(userName)) {
+
 					System.out.println(user);
 					return user;
 				}
