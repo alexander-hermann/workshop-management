@@ -6,17 +6,28 @@ public class WorkingAppointment extends Appointment {
 	private final WorkingPlatform workingPlatform;
 	private final Vehicle vehicle;
 	private final Service service;
+	private boolean isCompleted;
+	private final CarMechanic carMechanic;
 
 	public WorkingAppointment(int year, int month, int day, int hour, int minute, WorkingPlatform workingPlatform,
-			Vehicle vehicle, Service service) {
+			Vehicle vehicle, Service service, CarMechanic carMechanic) {
 		super(year, month, day, hour, minute);
 		this.workingPlatform = workingPlatform;
 		this.vehicle = vehicle;
 		this.service = service;
-
+		this.isCompleted = false;
+		this.carMechanic = carMechanic;
 		this.endOfAppointment = this.startOfAppointment
 				.plusMinutes((long) (service.getDurationInH() * TIME_CONVERSION_FAKTOR_IN_MINUTES));
 		this.vehicle.listOfWorkingAppointmentForVehicle.add(this);
+	}
+
+	public CarMechanic getCarMechanic() {
+		return carMechanic;
+	}
+
+	public boolean isCompleted() {
+		return isCompleted;
 	}
 
 	public WorkingPlatform getWorkingPlatform() {
@@ -38,7 +49,7 @@ public class WorkingAppointment extends Appointment {
 	@Override
 	public String toString() {
 		return "WorkingAppointment [workingPlatform=" + workingPlatform + ", vehicle=" + vehicle + ", service="
-				+ service + "]" + super.toString();
+				+ service + ", isCompleted=" + isCompleted + ", carMechanic=" + carMechanic + "]";
 	}
 
 }

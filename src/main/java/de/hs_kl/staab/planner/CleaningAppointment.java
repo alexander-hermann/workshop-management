@@ -4,11 +4,13 @@ public class CleaningAppointment extends Appointment {
 
 	private double durationOfCleaningInH;
 	private final WorkingPlatform workingPlatform;
+	private final Dispatcher dispatcher;
 
 	public CleaningAppointment(int year, int month, int day, int hour, int minute, WorkingPlatform workingPlatform,
-			CLEANINGPROGRAMM cleaningProgramm) {
+			CLEANINGPROGRAMM cleaningProgramm, Dispatcher dispatcher) {
 		super(year, month, day, hour, minute);
 		this.workingPlatform = workingPlatform;
+		this.dispatcher = dispatcher;
 		switch (cleaningProgramm) {
 		case FAST:
 			this.durationOfCleaningInH = 0.5;
@@ -17,6 +19,10 @@ public class CleaningAppointment extends Appointment {
 		}
 		this.endOfAppointment = this.startOfAppointment
 				.plusMinutes((long) this.durationOfCleaningInH * TIME_CONVERSION_FAKTOR_IN_MINUTES);
+	}
+
+	public Dispatcher getDispatcher() {
+		return dispatcher;
 	}
 
 	public double getDurationOfCleaningInH() {
@@ -30,7 +36,7 @@ public class CleaningAppointment extends Appointment {
 	@Override
 	public String toString() {
 		return "CleaningAppointment [durationOfCleaningInH=" + durationOfCleaningInH + ", workingPlatform="
-				+ workingPlatform + "]" + super.toString();
+				+ workingPlatform + ", dispatcher=" + dispatcher + "]";
 	}
 
 }
