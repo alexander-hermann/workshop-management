@@ -19,14 +19,19 @@ public class PlanningCalendar {
 
 	public void getWeekOverview(int calenderWeekOfAppointment, int year) {
 
-		for (Appointment appointment : listOfAppointments) {
-			if (appointment.getCalendarWeek() == calenderWeekOfAppointment && appointment.getYear() == year) {
-				System.out.println(appointment);
+		if ((calenderWeekOfAppointment >= 1 && calenderWeekOfAppointment <= 52) && (year > 0)) {
+			for (Appointment appointment : listOfAppointments) {
+				if (appointment.getCalendarWeek() == calenderWeekOfAppointment && appointment.getYear() == year) {
+					System.out.println(appointment);
 
+				} else {
+					System.err.println("There are no appointments in the calendar week: " + calenderWeekOfAppointment);
+				}
 			}
-
+		} else {
+			throw new IllegalArgumentException(
+					"The number of week must be between 1 and 52 and the number of year must be greater than 0");
 		}
-
 	}
 
 	/* ******************************************************** */
