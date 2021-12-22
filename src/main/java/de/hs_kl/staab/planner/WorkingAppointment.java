@@ -26,6 +26,10 @@ public class WorkingAppointment extends Appointment {
 		return carMechanic;
 	}
 
+	public void setCompleted(boolean isCompleted) {
+		this.isCompleted = isCompleted;
+	}
+
 	public boolean isCompleted() {
 		return isCompleted;
 	}
