@@ -38,8 +38,10 @@ public class PlanningCalendar {
 		// LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
 		for (Appointment appointment : listOfAppointments) {
 			if (appointment instanceof WorkingAppointment) {
-				if (appointment.getYear() == year && appointment.getMonth() == month && appointment.getDay() == day) {
+				if ((appointment.getYear() == year && appointment.getMonth() == month && appointment.getDay() == day)
+						&& ((WorkingAppointment) appointment).isCompleted() == true) {
 					System.out.println("example: " + appointment);
+					System.out.println(((WorkingAppointment) appointment).isCompleted());
 				}
 			}
 		}

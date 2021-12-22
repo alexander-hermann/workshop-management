@@ -25,12 +25,12 @@ public class WorkingAppointment extends Appointment {
 		return carMechanic;
 	}
 
-	public boolean isCompleted() {
-		return isCompleted;
-	}
-
 	public WorkingPlatform getWorkingPlatform() {
 		return workingPlatform;
+	}
+
+	public boolean isCompleted() {
+		return isCompleted;
 	}
 
 	public Vehicle getVehicle() {

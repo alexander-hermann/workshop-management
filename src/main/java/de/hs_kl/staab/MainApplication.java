@@ -146,6 +146,5 @@ public class MainApplication {
 		customerService.getVehicleHistory(car1);
 
 		planningCalendar.getYesterdayWorkingAppointments(2016, 01, 04);
-
 	}
 }
