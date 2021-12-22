@@ -36,6 +36,10 @@ public class Appointment {
 		return startOfAppointment.getYear();
 	}
 
+	public LocalDateTime getStartOfAppointment() {
+		return startOfAppointment;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

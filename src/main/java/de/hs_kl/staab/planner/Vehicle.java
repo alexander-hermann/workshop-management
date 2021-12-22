@@ -12,6 +12,7 @@ public abstract class Vehicle {
 	protected int yearOfConstruction;
 	protected String licensePlate;
 	protected List<Vehicle> listOfVehicles = new ArrayList<>();
+	protected List<WorkingAppointment> listOfWorkingAppointmentForVehicle;
 
 	public Vehicle(String licensePlate, String brand, String model, int yearOfConstruction, int yearOfAdmission,
 			int monthOfAdmission, int dayOfAdmission) {
@@ -20,6 +21,7 @@ public abstract class Vehicle {
 		this.model = model;
 		this.yearOfConstruction = yearOfConstruction;
 		this.DateOfAdmission = LocalDate.of(yearOfAdmission, monthOfAdmission, dayOfAdmission);
+		this.listOfWorkingAppointmentForVehicle = new ArrayList<>();
 	}
 
 	@Override

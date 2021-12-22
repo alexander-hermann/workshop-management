@@ -60,8 +60,10 @@ public class UserService {
 
 	public User getUserByUserName(String userName) {
 		if (!listOfUsers.isEmpty()) {
+
 			for (User user : listOfUsers) {
 				if (user.getUserName().equals(userName)) {
+
 					System.out.println(user);
 					return user;
 				}
