@@ -1,5 +1,6 @@
 package de.hs_kl.staab.planner;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class WorkingAppointment extends Appointment {
@@ -8,6 +9,7 @@ public class WorkingAppointment extends Appointment {
 	private final Service service;
 	private boolean isCompleted;
 	private final CarMechanic carMechanic;
+	private LocalDate dayOfAppointment;
 
 	public WorkingAppointment(int year, int month, int day, int hour, int minute, WorkingPlatform workingPlatform,
 			Vehicle vehicle, Service service, CarMechanic carMechanic) {
@@ -17,6 +19,7 @@ public class WorkingAppointment extends Appointment {
 		this.service = service;
 		this.isCompleted = false;
 		this.carMechanic = carMechanic;
+		this.dayOfAppointment = LocalDate.of(year, month, day);
 		this.endOfAppointment = this.startOfAppointment
 				.plusMinutes((long) (service.getDurationInH() * TIME_CONVERSION_FAKTOR_IN_MINUTES));
 		this.vehicle.listOfWorkingAppointmentForVehicle.add(this);
@@ -36,10 +39,12 @@ public class WorkingAppointment extends Appointment {
 
 	public boolean isCompleted() {
 		return isCompleted;
+
 	}
 
 	public void setCompleted(boolean isCompleted) {
 		this.isCompleted = isCompleted;
+
 	}
 
 	public CarMechanic getCarMechanic() {
@@ -48,6 +53,10 @@ public class WorkingAppointment extends Appointment {
 
 	public LocalDateTime getStartOfAppointment() {
 		return startOfAppointment;
+	}
+
+	public LocalDate getDayOfAppointment() {
+		return dayOfAppointment;
 	}
 
 	@Override

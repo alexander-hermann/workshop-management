@@ -323,9 +323,11 @@ public class CustomerService {
 
 		for (WorkingAppointment workingAppointment : vehicle.listOfWorkingAppointmentForVehicle) {
 
-			System.out.println("Vehicle with the license plate " + vehicle.getLicensePlate() + " got the service "
-					+ workingAppointment.getService() + ", start of appointment: "
-					+ workingAppointment.getStartOfAppointment());
+			if (((WorkingAppointment) workingAppointment).isCompleted() == true)
+				System.out.println("Vehicle with the license plate " + vehicle.getLicensePlate() + " got the service "
+						+ workingAppointment.getService() + ", start of appointment: "
+						+ workingAppointment.getStartOfAppointment());
+
 		}
 	}
 }
