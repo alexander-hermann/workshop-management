@@ -19,6 +19,7 @@ public class WorkingAppointment extends Appointment {
 		this.carMechanic = carMechanic;
 		this.endOfAppointment = this.startOfAppointment
 				.plusMinutes((long) (service.getDurationInH() * TIME_CONVERSION_FAKTOR_IN_MINUTES));
+		this.vehicle.listOfWorkingAppointmentForVehicle.add(this);
 	}
 
 	public CarMechanic getCarMechanic() {
