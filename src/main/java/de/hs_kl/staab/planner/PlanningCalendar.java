@@ -14,7 +14,6 @@ public class PlanningCalendar {
 		} else {
 			throw new IllegalArgumentException("bad");
 		}
-
 	}
 
 	public void getWeekOverview(int calenderWeekOfAppointment, int year) {
