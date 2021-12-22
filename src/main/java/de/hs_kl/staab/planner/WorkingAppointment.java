@@ -38,6 +38,10 @@ public class WorkingAppointment extends Appointment {
 		return isCompleted;
 	}
 
+	public void setCompleted(boolean isCompleted) {
+		this.isCompleted = isCompleted;
+	}
+
 	public CarMechanic getCarMechanic() {
 		return carMechanic;
 	}
@@ -51,5 +55,4 @@ public class WorkingAppointment extends Appointment {
 		return "WorkingAppointment [workingPlatform=" + workingPlatform + ", vehicle=" + vehicle + ", service="
 				+ service + ", isCompleted=" + isCompleted + ", carMechanic=" + carMechanic + "]";
 	}
-
 }

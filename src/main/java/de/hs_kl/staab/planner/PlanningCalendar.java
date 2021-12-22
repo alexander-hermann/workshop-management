@@ -46,6 +46,17 @@ public class PlanningCalendar {
 		}
 	}
 
+	public void setWorkingAppoinmentToCompleted(WorkingAppointment workingAppointment) {
+		for (Appointment appointment : listOfAppointments) {
+			if (appointment instanceof WorkingAppointment) {
+				if (appointment.equals(workingAppointment)) {
+					workingAppointment.setCompleted(true);
+					listOfAppointments.set(listOfAppointments.indexOf(appointment), workingAppointment);
+				}
+			}
+		}
+	}
+
 	/* ******************************************************** */
 	/* * HIER KÖNNEN SIE IHREN PLANUNGSKALENDER PROGRAMMIEREN * */
 	/* * Der Planungskalender enthält den Kern ************** * */
