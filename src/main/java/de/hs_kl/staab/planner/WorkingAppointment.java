@@ -22,16 +22,8 @@ public class WorkingAppointment extends Appointment {
 		this.vehicle.listOfWorkingAppointmentForVehicle.add(this);
 	}
 
-	public CarMechanic getCarMechanic() {
-		return carMechanic;
-	}
-
 	public WorkingPlatform getWorkingPlatform() {
 		return workingPlatform;
-	}
-
-	public boolean isCompleted() {
-		return isCompleted;
 	}
 
 	public Vehicle getVehicle() {
@@ -40,6 +32,14 @@ public class WorkingAppointment extends Appointment {
 
 	public Service getService() {
 		return service;
+	}
+
+	public boolean isCompleted() {
+		return isCompleted;
+	}
+
+	public CarMechanic getCarMechanic() {
+		return carMechanic;
 	}
 
 	public LocalDateTime getStartOfAppointment() {
