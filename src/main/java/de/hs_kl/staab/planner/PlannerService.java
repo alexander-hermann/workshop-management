@@ -121,15 +121,14 @@ public class PlannerService {
 		throw new IllegalArgumentException("The service with the id " + serviceId + " was not found.");
 	}
 
-	public Service getServices() {
+	public void getServices() {
 		if (!listOfServices.isEmpty()) {
 			for (Service service : listOfServices) {
-				return service;
+				System.out.println(service);
 			}
 		} else {
 			throw new IllegalArgumentException("The list of services is empty.");
 		}
-		throw new IllegalArgumentException("Error with service");
 	}
 
 	public void createNewService(Service newService) {

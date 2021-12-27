@@ -29,8 +29,17 @@ public class ConsultingAppointment extends Appointment {
 
 	@Override
 	public String toString() {
-		return "ConsultingAppointment [customer=" + customer + ", durationInH=" + durationInH + ", customerConsultant="
-				+ customerConsultant + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ConsultingAppointment");
+		builder.append(super.toString());
+		builder.append(", [customer=");
+		builder.append(customer);
+		builder.append(", durationInH=");
+		builder.append(durationInH);
+		builder.append(", customerConsultant=");
+		builder.append(customerConsultant);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

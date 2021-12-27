@@ -61,7 +61,22 @@ public class WorkingAppointment extends Appointment {
 
 	@Override
 	public String toString() {
-		return "WorkingAppointment [workingPlatform=" + workingPlatform + ", vehicle=" + vehicle + ", service="
-				+ service + ", isCompleted=" + isCompleted + ", carMechanic=" + carMechanic + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("WorkingAppointment");
+		builder.append(super.toString());
+		builder.append(", [workingPlatform=");
+		builder.append(workingPlatform);
+		builder.append(", vehicle=");
+		builder.append(vehicle);
+		builder.append(", service=");
+		builder.append(service);
+		builder.append(", isCompleted=");
+		builder.append(isCompleted);
+		builder.append(", carMechanic=");
+		builder.append(carMechanic);
+		builder.append(", dayOfAppointment=");
+		builder.append(dayOfAppointment);
+		builder.append("]");
+		return builder.toString();
 	}
 }

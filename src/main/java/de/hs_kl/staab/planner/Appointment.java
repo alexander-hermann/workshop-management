@@ -7,17 +7,25 @@ public class Appointment {
 
 	protected final static int TIME_CONVERSION_FAKTOR_IN_MINUTES = 60;
 
-	protected static int APPOINTMENT_NUMBER_COUNTER = 0;
 	protected static final String APPOINTMENT_PREFIX = "AP-";
-	protected String appointmentId;
+	protected static int APPOINTMENT_ID_COUNTER = 1;
+
+	protected String idOfAppointment;
 
 	protected LocalDateTime startOfAppointment;
 	protected LocalDateTime endOfAppointment;
 	protected int calenderWeekOfAppointment;
 
 	public Appointment(int year, int month, int day, int hour, int minute) {
+		this.idOfAppointment = APPOINTMENT_PREFIX + APPOINTMENT_ID_COUNTER;
+		APPOINTMENT_ID_COUNTER++;
+
 		this.startOfAppointment = LocalDateTime.of(year, month, day, hour, minute);
 		this.calenderWeekOfAppointment = startOfAppointment.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+	}
+
+	public String getId() {
+		return idOfAppointment;
 	}
 
 	public int getCalendarWeek() {
@@ -43,8 +51,8 @@ public class Appointment {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Appointment [appointmentId=");
-		builder.append(appointmentId);
+		builder.append(" [appointmentId=");
+		builder.append(idOfAppointment);
 		builder.append(", startOfAppointment=");
 		builder.append(startOfAppointment);
 		builder.append(", endOfAppointment=");

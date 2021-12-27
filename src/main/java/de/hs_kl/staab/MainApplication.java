@@ -88,9 +88,9 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
 				user2);
 
-		WorkingAppointment workingAppointment1 = new WorkingAppointment(2021, 12, 21, 13, 15, wkp1, car1, oilChange,
+		WorkingAppointment workingAppointment1 = new WorkingAppointment(2021, 12, 26, 13, 15, wkp1, car1, oilChange,
 				user1);
-		WorkingAppointment workingAppointment2 = new WorkingAppointment(2016, 1, 6, 13, 15, wkp1, car1, tireChange,
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2021, 12, 26, 10, 15, wkp1, car1, tireChange,
 				user1);
 		WorkingAppointment workingAppointment3 = new WorkingAppointment(2016, 1, 7, 13, 15, wkp1, car1, glassRepair,
 				user1);
@@ -156,6 +156,10 @@ public class MainApplication {
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment3);
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment4);
 
+		System.out.println("Appointments of yesterday:");
 		planningCalendar.getYesterdayWorkingAppointments();
+
+		planningCalendar.getAppointments();
+		planningCalendar.getAppointmentById("AP-14");
 	}
 }

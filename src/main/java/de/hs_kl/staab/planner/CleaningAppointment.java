@@ -37,8 +37,16 @@ public class CleaningAppointment extends Appointment {
 
 	@Override
 	public String toString() {
-		return super.toString() + "CleaningAppointment [durationOfCleaningInH=" + durationOfCleaningInH
-				+ ", workingPlatform=" + workingPlatform + ", dispatcher=" + dispatcher + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("CleaningAppointment");
+		builder.append(super.toString());
+		builder.append(", [durationOfCleaningInH");
+		builder.append(durationOfCleaningInH);
+		builder.append(", workingPlatform=");
+		builder.append(workingPlatform);
+		builder.append(", dispatcher=");
+		builder.append(dispatcher);
+		builder.append("]");
+		return builder.toString();
 	}
-
 }

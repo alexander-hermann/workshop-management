@@ -17,6 +17,30 @@ public class PlanningCalendar {
 		}
 	}
 
+	public void getAppointmentById(String appointmentId) {
+		if (!listOfAppointments.isEmpty()) {
+			for (Appointment appointment : listOfAppointments) {
+				if (appointment.getId().equals(appointmentId)) {
+					System.out.println(appointment);
+					return;
+				}
+			}
+		} else {
+			throw new IllegalArgumentException("The list of appointments is empty.");
+		}
+		System.err.println("The appointment with the id " + appointmentId + " was not found.");
+	}
+
+	public void getAppointments() {
+		if (!listOfAppointments.isEmpty()) {
+			for (Appointment appointment : listOfAppointments) {
+				System.out.println(appointment);
+			}
+		} else {
+			System.err.println("The list of appointments is empty.");
+		}
+	}
+
 	public void getWeekOverview(int calenderWeekOfAppointment, int year) {
 
 		if ((calenderWeekOfAppointment >= 1 && calenderWeekOfAppointment <= 52) && (year > 0)) {
@@ -36,7 +60,6 @@ public class PlanningCalendar {
 
 	public void getYesterdayWorkingAppointments() {
 		LocalDate yesterdayDay = LocalDate.now().minusDays(1);
-		// List<WorkingAppointment> listOfWorkingAppointments = new ArrayList<>();
 
 		for (Appointment appointment : listOfAppointments) {
 			if (appointment instanceof WorkingAppointment) {
@@ -47,18 +70,6 @@ public class PlanningCalendar {
 				}
 			}
 		}
-
-		/*
-		 * for (Appointment appointment : listOfAppointments) { if (appointment
-		 * instanceof WorkingAppointment) {
-		 * listOfWorkingAppointments.add((WorkingAppointment) appointment); } } for
-		 * (WorkingAppointment workingAppointment : listOfWorkingAppointments) { if
-		 * (((WorkingAppointment) workingAppointment).isCompleted() == true &&
-		 * workingAppointment.getDayOfAppointment().equals(yesterdayDay)) {
-		 * System.out.println(workingAppointment); } else {
-		 * System.err.println("Der Tag " + yesterdayDay + " hat keine Arbeitstermine.");
-		 * } }
-		 */
 	}
 
 	public void setWorkingAppoinmentToCompleted(WorkingAppointment workingAppointment) {
