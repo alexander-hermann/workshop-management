@@ -35,20 +35,30 @@ public class PlanningCalendar {
 	}
 
 	public void getYesterdayWorkingAppointments() {
-		// LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
-		List<WorkingAppointment> listOfWorkingAppointments = new ArrayList<>();
-		for (Appointment appointment : listOfAppointments) {
+		LocalDate yesterdayDay = LocalDate.now().minusDays(1);
+		// List<WorkingAppointment> listOfWorkingAppointments = new ArrayList<>();
 
+		for (Appointment appointment : listOfAppointments) {
 			if (appointment instanceof WorkingAppointment) {
-				listOfWorkingAppointments.add((WorkingAppointment) appointment);
+				if (((WorkingAppointment) appointment).isCompleted() == true
+						&& ((WorkingAppointment) appointment).getDayOfAppointment().equals(yesterdayDay)) {
+
+					System.out.println(appointment);
+				}
 			}
 		}
-		for (WorkingAppointment workingAppointment : listOfWorkingAppointments) {
-			if (((WorkingAppointment) workingAppointment).isCompleted() == true
-					&& LocalDate.now().minusDays(1).equals(workingAppointment.getDayOfAppointment())) {
-				System.out.println(workingAppointment);
-			}
-		}
+
+		/*
+		 * for (Appointment appointment : listOfAppointments) { if (appointment
+		 * instanceof WorkingAppointment) {
+		 * listOfWorkingAppointments.add((WorkingAppointment) appointment); } } for
+		 * (WorkingAppointment workingAppointment : listOfWorkingAppointments) { if
+		 * (((WorkingAppointment) workingAppointment).isCompleted() == true &&
+		 * workingAppointment.getDayOfAppointment().equals(yesterdayDay)) {
+		 * System.out.println(workingAppointment); } else {
+		 * System.err.println("Der Tag " + yesterdayDay + " hat keine Arbeitstermine.");
+		 * } }
+		 */
 	}
 
 	public void setWorkingAppoinmentToCompleted(WorkingAppointment workingAppointment) {

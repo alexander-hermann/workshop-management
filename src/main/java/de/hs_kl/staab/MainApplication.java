@@ -70,9 +70,10 @@ public class MainApplication {
 		InvoiceAddress addressOfTreitz = new InvoiceAddress("Hauptstraße", 15, 66820, "Bierbach");
 		InvoiceAddress addressOfHermann = new InvoiceAddress("Hauptstraße", 30, 66880, "Kaiserslautern");
 
-		Vehicle car1 = new Car("HOM-SB-211", "BMW", "M1", 2016, 2018, 8, 1);
-		Vehicle car2 = new Car("SB-HO-333", "Mercedes", "CLA", 2010, 2013, 8, 1);
-		Vehicle car3 = new Car("WIL-AM-24", "audi", "RS6", 2010, 2013, 8, 1);
+		Vehicle car1 = new Car("HOM-SB 211", "BMW", "M1", 2016, 2018, 8, 1);
+		Vehicle car2 = new Car("SB-HO 333", "Mercedes", "CLA", 2010, 2013, 8, 1);
+		Vehicle car3 = new Car("KUS-AM 24", "Audi", "RS6", 2010, 2013, 8, 1);
+		Vehicle car4 = new Car("KL-AX 500", "Porsche", "Taycan Turbo S", 2019, 2020, 8, 2);
 
 		Customer customer1 = new Customer("Ammar Said", addressOfSaid, "+49176 258484750", "ammar@web.de");
 		Customer customer2 = new Customer("Alexander Hermann", addressOfHermann, "0176-5656556", "alex@web.de");
@@ -101,26 +102,33 @@ public class MainApplication {
 		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2016, 1, 5, 13, 15, wkp3,
 				CLEANINGPROGRAMM.INTENSE, user3);
 
+		// ########################################################
 		customerService.createNewVehicle(car1);
 		customerService.createNewVehicle(car2);
-		customerService.createNewCustomer(customer3);
-		customerService.createNewCustomer(customer2);
+		customerService.createNewVehicle(car3);
+
 		customerService.createNewCustomer(customer1);
+		customerService.createNewCustomer(customer2);
+		customerService.createNewCustomer(customer3);
 
-		customerService.addVehicleForCustomer(customer3, car2);
+		customerService.addVehicleForCustomer(customer1, car1);
+		customerService.addVehicleForCustomer(customer1, car4);
 		customerService.addVehicleForCustomer(customer2, car2);
-		customerService.addVehicleForCustomer(customer3, car1);
+		customerService.addVehicleForCustomer(customer3, car3);
+
+		customerService.getListOfVehiclesForCustomer(customer1);
+		customerService.getListOfVehiclesForCustomer(customer2);
 		customerService.getListOfVehiclesForCustomer(customer3);
-		customerService.getVehicleForCustomer(customer3, car2);
 
-		// customerservice.updateCustomer("HoM", customer1);
+		customerService.getVehicleForCustomer(customer2, car2);
+		customerService.getVehicleHistory(car1);
 
+		// ########################################################
 		plannerService.createNewWorkingPlatform(wkp1);
 		plannerService.createNewWorkingPlatform(wkp2);
 		plannerService.createNewWorkingPlatform(wkp3);
 
 		plannerService.createNewService(oilChange);
-
 		plannerService.createNewService(tireChange);
 		plannerService.createNewService(glassRepair);
 		plannerService.createNewService(inspectionCar);
@@ -128,7 +136,7 @@ public class MainApplication {
 		plannerService.getWorkingPlatforms();
 		plannerService.getServices();
 
-		// System.out.println(appointment1);
+		// ########################################################
 		planningCalendar.createNewAppointment(consultingAppointment1);
 		planningCalendar.createNewAppointment(consultingAppointment2);
 		planningCalendar.createNewAppointment(consultingAppointment3);
@@ -145,9 +153,8 @@ public class MainApplication {
 
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment1);
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment2);
-		// planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment3);
+		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment3);
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment4);
-		customerService.getVehicleHistory(car1);
 
 		planningCalendar.getYesterdayWorkingAppointments();
 	}

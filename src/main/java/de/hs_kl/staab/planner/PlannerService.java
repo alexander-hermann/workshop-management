@@ -14,7 +14,6 @@ public class PlannerService {
 
 	private List<WorkingPlatform> listOfWorkingPlatforms = new ArrayList<>();
 	private List<Service> listOfServices = new ArrayList<>();
-	private List<ServiceHistory> listOfServiceHistoryWithAllVerhicles = new ArrayList<>();
 
 	/**
 	 * Singleton-Pattern: Der Konstruktor kann nicht aufgerufen werden, sondern
@@ -35,6 +34,10 @@ public class PlannerService {
 			INSTANCE = new PlannerService();
 		}
 		return INSTANCE;
+	}
+
+	public PlanningCalendar getPlanningCalendar() {
+		return planningCalendar;
 	}
 
 	/* ******************************************* */
@@ -162,5 +165,4 @@ public class PlannerService {
 					+ " can't be deleted, because the list of services is empty.");
 		}
 	}
-
 }
