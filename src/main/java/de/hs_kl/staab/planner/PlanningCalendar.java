@@ -1,5 +1,6 @@
 package de.hs_kl.staab.planner;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,15 +34,19 @@ public class PlanningCalendar {
 		}
 	}
 
-	public void getYesterdayWorkingAppointments(int year, int month, int day) {
+	public void getYesterdayWorkingAppointments() {
 		// LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
+		List<WorkingAppointment> listOfWorkingAppointments = new ArrayList<>();
 		for (Appointment appointment : listOfAppointments) {
+
 			if (appointment instanceof WorkingAppointment) {
-				if ((appointment.getYear() == year && appointment.getMonth() == month && appointment.getDay() == day)
-						&& ((WorkingAppointment) appointment).isCompleted() == true) {
-					System.out.println("example: " + appointment);
-					System.out.println(((WorkingAppointment) appointment).isCompleted());
-				}
+				listOfWorkingAppointments.add((WorkingAppointment) appointment);
+			}
+		}
+		for (WorkingAppointment workingAppointment : listOfWorkingAppointments) {
+			if (((WorkingAppointment) workingAppointment).isCompleted() == true
+					&& LocalDate.now().minusDays(1).equals(workingAppointment.getDayOfAppointment())) {
+				System.out.println(workingAppointment);
 			}
 		}
 	}
@@ -51,6 +56,7 @@ public class PlanningCalendar {
 			if (appointment instanceof WorkingAppointment) {
 				if (appointment.equals(workingAppointment)) {
 					workingAppointment.setCompleted(true);
+
 					listOfAppointments.set(listOfAppointments.indexOf(appointment), workingAppointment);
 				}
 			}
