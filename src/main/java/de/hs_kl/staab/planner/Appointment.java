@@ -28,6 +28,10 @@ public class Appointment {
 		return idOfAppointment;
 	}
 
+	public void setId(String idOfAppointment) {
+		this.idOfAppointment = idOfAppointment;
+	}
+
 	public int getCalendarWeek() {
 		return calenderWeekOfAppointment;
 	}

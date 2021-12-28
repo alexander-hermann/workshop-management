@@ -8,8 +8,14 @@ public class PlanningCalendar {
 
 	private List<Appointment> listOfAppointments = new ArrayList<>();
 
-	public void createNewAppointment(Appointment appointment) {
+	/* ******************************************************** */
+	/* * HIER KÖNNEN SIE IHREN PLANUNGSKALENDER PROGRAMMIEREN * */
+	/* * Der Planungskalender enthält den Kern ************** * */
+	/* * Ihrer Anwendung, und hält die Daten des Kalenders ** * */
+	/* * mit den Terminen, etc. ***************************** * */
+	/* ******************************************************** */
 
+	public void createNewAppointment(Appointment appointment) {
 		if (!listOfAppointments.contains(appointment)) {
 			listOfAppointments.add(appointment);
 		} else {
@@ -38,6 +44,23 @@ public class PlanningCalendar {
 			}
 		} else {
 			System.err.println("The list of appointments is empty.");
+		}
+	}
+
+	public void updateAppointment(Appointment oldAppointment, Appointment newAppointment) {
+		if (!listOfAppointments.isEmpty()) {
+			for (Appointment currentAppointment : listOfAppointments) {
+				if (currentAppointment.equals(oldAppointment)) {
+
+					// Assigns the id of the old object to the new object
+					newAppointment.setId(oldAppointment.getId());
+
+					int indexOfOldAppointmentInTheList = listOfAppointments.indexOf(oldAppointment);
+					listOfAppointments.set(indexOfOldAppointmentInTheList, newAppointment);
+				}
+			}
+		} else {
+			System.err.println("The appointment cannot be updated because the list of appointments is empty.");
 		}
 	}
 
@@ -101,12 +124,4 @@ public class PlanningCalendar {
 			}
 		}
 	}
-
-	/* ******************************************************** */
-	/* * HIER KÖNNEN SIE IHREN PLANUNGSKALENDER PROGRAMMIEREN * */
-	/* * Der Planungskalender enthält den Kern ************** * */
-	/* * Ihrer Anwendung, und hält die Daten des Kalenders ** * */
-	/* * mit den Terminen, etc. ***************************** * */
-	/* ******************************************************** */
-
 }

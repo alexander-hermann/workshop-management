@@ -161,5 +161,7 @@ public class MainApplication {
 
 		planningCalendar.getAppointments();
 		planningCalendar.getAppointmentById("AP-14");
+
+		planningCalendar.updateAppointment(cleaningAppointment1, cleaningAppointment2);
 	}
 }
