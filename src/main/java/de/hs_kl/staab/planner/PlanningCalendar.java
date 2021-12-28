@@ -64,9 +64,10 @@ public class PlanningCalendar {
 
 		for (Appointment appointment : listOfAppointments) {
 			if (appointment instanceof WorkingAppointment) {
-				if (((WorkingAppointment) appointment).isCompleted()
-						&& ((WorkingAppointment) appointment).getDayOfAppointment().equals(yesterdayDay)) {
+				boolean searchCondition = ((WorkingAppointment) appointment).isCompleted()
+						&& ((WorkingAppointment) appointment).getDayOfAppointment().equals(yesterdayDay);
 
+				if (searchCondition) {
 					listOfFoundWorkingAppointments.add((WorkingAppointment) appointment);
 				}
 			}
