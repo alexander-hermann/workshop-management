@@ -21,6 +21,7 @@ public class CleaningAppointment extends Appointment {
 		}
 		this.endOfAppointment = this.startOfAppointment
 				.plusMinutes((long) (this.durationOfCleaningInH * TIME_CONVERSION_FAKTOR_IN_MINUTES));
+
 	}
 
 	public Dispatcher getDispatcher() {

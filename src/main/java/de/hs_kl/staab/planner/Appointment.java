@@ -1,5 +1,6 @@
 package de.hs_kl.staab.planner;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.IsoFields;
 
@@ -12,9 +13,10 @@ public class Appointment {
 
 	protected String idOfAppointment;
 
-	protected LocalDateTime startOfAppointment;
+	protected final LocalDateTime startOfAppointment;
 	protected LocalDateTime endOfAppointment;
-	protected int calenderWeekOfAppointment;
+	protected final int calenderWeekOfAppointment;
+	protected final LocalDate dayOfAppointment;
 
 	public Appointment(int year, int month, int day, int hour, int minute) {
 		this.idOfAppointment = APPOINTMENT_PREFIX + APPOINTMENT_ID_COUNTER;
@@ -22,6 +24,7 @@ public class Appointment {
 
 		this.startOfAppointment = LocalDateTime.of(year, month, day, hour, minute);
 		this.calenderWeekOfAppointment = startOfAppointment.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+		this.dayOfAppointment = LocalDate.of(year, month, day);
 	}
 
 	public String getId() {
@@ -32,24 +35,16 @@ public class Appointment {
 		this.idOfAppointment = idOfAppointment;
 	}
 
+	public LocalDateTime getStartOfAppointment() {
+		return startOfAppointment;
+	}
+
 	public int getCalendarWeek() {
 		return calenderWeekOfAppointment;
 	}
 
-	public int getDay() {
-		return startOfAppointment.getDayOfYear();
-	}
-
-	public int getMonth() {
-		return startOfAppointment.getMonthValue();
-	}
-
-	public int getYear() {
-		return startOfAppointment.getYear();
-	}
-
-	public LocalDateTime getStartOfAppointment() {
-		return startOfAppointment;
+	public LocalDate getDay() {
+		return dayOfAppointment;
 	}
 
 	@Override
@@ -63,6 +58,8 @@ public class Appointment {
 		builder.append(endOfAppointment);
 		builder.append(", calenderWeekOfAppointment=");
 		builder.append(calenderWeekOfAppointment);
+		builder.append(", dayOfAppointment=");
+		builder.append(dayOfAppointment);
 		builder.append("]");
 		return builder.toString();
 	}

@@ -84,7 +84,8 @@ public class PlanningCalendar {
 
 		if ((calenderWeekOfAppointment >= 1 && calenderWeekOfAppointment <= 52) && (year > 0)) {
 			for (Appointment appointment : listOfAppointments) {
-				if (appointment.getCalendarWeek() == calenderWeekOfAppointment && appointment.getYear() == year) {
+				if (appointment.getCalendarWeek() == calenderWeekOfAppointment
+						&& appointment.getDay().getYear() == year) {
 					listOfFoundAppointmentsInWeekAndYear.add(appointment);
 				}
 			}
@@ -110,7 +111,7 @@ public class PlanningCalendar {
 		for (Appointment appointment : listOfAppointments) {
 			if (appointment instanceof WorkingAppointment) {
 				boolean searchCondition = ((WorkingAppointment) appointment).isCompleted()
-						&& ((WorkingAppointment) appointment).getDayOfAppointment().equals(yesterdayDay);
+						&& appointment.getDay().equals(yesterdayDay);
 
 				if (searchCondition) {
 					listOfFoundWorkingAppointments.add((WorkingAppointment) appointment);
