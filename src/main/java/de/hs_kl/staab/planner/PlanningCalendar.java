@@ -60,15 +60,24 @@ public class PlanningCalendar {
 
 	public void getYesterdayWorkingAppointments() {
 		LocalDate yesterdayDay = LocalDate.now().minusDays(1);
+		List<WorkingAppointment> listOfFoundWorkingAppointments = new ArrayList<>();
 
 		for (Appointment appointment : listOfAppointments) {
 			if (appointment instanceof WorkingAppointment) {
-				if (((WorkingAppointment) appointment).isCompleted() == true
+				if (((WorkingAppointment) appointment).isCompleted()
 						&& ((WorkingAppointment) appointment).getDayOfAppointment().equals(yesterdayDay)) {
 
-					System.out.println(appointment);
+					listOfFoundWorkingAppointments.add((WorkingAppointment) appointment);
 				}
 			}
+		}
+
+		if (listOfFoundWorkingAppointments.size() > 0) {
+			for (WorkingAppointment workingAppointment : listOfFoundWorkingAppointments) {
+				System.out.println(workingAppointment);
+			}
+		} else {
+			System.err.println("The day " + yesterdayDay + " has no working appointments.");
 		}
 	}
 
