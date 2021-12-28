@@ -64,6 +64,20 @@ public class PlanningCalendar {
 		}
 	}
 
+	public void removeAppointment(Appointment removeAppointment) {
+		if (!listOfAppointments.isEmpty()) {
+			if (listOfAppointments.contains(removeAppointment)) {
+				listOfAppointments.remove(removeAppointment);
+				System.out.println("The appointment " + removeAppointment.getId() + " was successfully deleted.");
+			} else {
+				System.err
+						.println("The appointment could not be deleted because the object was not found in the list.");
+			}
+		} else {
+			System.err.println("The appointment can't be deleted because the list of appointments is empty.");
+		}
+	}
+
 	public void getWeekOverview(int calenderWeekOfAppointment, int year) {
 
 		List<Appointment> listOfFoundAppointmentsInWeekAndYear = new ArrayList<>();
