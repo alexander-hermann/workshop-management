@@ -43,14 +43,23 @@ public class PlanningCalendar {
 
 	public void getWeekOverview(int calenderWeekOfAppointment, int year) {
 
+		List<Appointment> listOfFoundAppointmentsInWeekAndYear = new ArrayList<>();
+
 		if ((calenderWeekOfAppointment >= 1 && calenderWeekOfAppointment <= 52) && (year > 0)) {
 			for (Appointment appointment : listOfAppointments) {
 				if (appointment.getCalendarWeek() == calenderWeekOfAppointment && appointment.getYear() == year) {
-					System.out.println(appointment);
+					listOfFoundAppointmentsInWeekAndYear.add(appointment);
 
-				} else {
-					System.err.println("There are no appointments in the calendar week: " + calenderWeekOfAppointment);
 				}
+			}
+
+			if (listOfFoundAppointmentsInWeekAndYear.size() > 0) {
+				for (Appointment appointment : listOfFoundAppointmentsInWeekAndYear) {
+					System.out.println(appointment);
+				}
+			} else {
+				System.err.printf("There are no appointments in the calendar week: %d and the year: %d.%n",
+						calenderWeekOfAppointment, year);
 			}
 		} else {
 			throw new IllegalArgumentException(

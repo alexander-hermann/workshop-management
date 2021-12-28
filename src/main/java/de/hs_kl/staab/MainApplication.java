@@ -149,7 +149,7 @@ public class MainApplication {
 
 		planningCalendar.createNewAppointment(cleaningAppointment1);
 		planningCalendar.createNewAppointment(cleaningAppointment2);
-		planningCalendar.getWeekOverview(1, 2016);
+		planningCalendar.getWeekOverview(10, 2016);
 
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment1);
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment2);
