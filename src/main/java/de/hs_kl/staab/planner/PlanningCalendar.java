@@ -49,7 +49,6 @@ public class PlanningCalendar {
 			for (Appointment appointment : listOfAppointments) {
 				if (appointment.getCalendarWeek() == calenderWeekOfAppointment && appointment.getYear() == year) {
 					listOfFoundAppointmentsInWeekAndYear.add(appointment);
-
 				}
 			}
 
