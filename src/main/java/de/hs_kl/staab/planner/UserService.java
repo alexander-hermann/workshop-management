@@ -21,29 +21,19 @@ public class UserService {
 		}
 	}
 
-	// update a user when entering the username
-
-	public void updateUser(String userName, User newUser) {
+	public User getUserByUserName(String userName) {
 		if (!listOfUsers.isEmpty()) {
-			List<User> listOfUpdatedUser = new ArrayList<>();
 			for (User user : listOfUsers) {
-				if (userName.equals(user.getUserName())) {
-					listOfUpdatedUser.add(user);
-
-					newUser.setUserName(user.getUserName());
-					// Assigns the id of the old object to the new object
-
-					listOfUsers.set(listOfUsers.indexOf(user), newUser);
+				if (user.getName().equals(userName)) {
+					System.out.println(user);
+					return user;
 				}
 			}
-			if (listOfUpdatedUser.isEmpty()) {
-				throw new IllegalArgumentException(
-						"The userName " + userName + " does not exist in the list for users");
-			}
-
 		} else {
-			throw new IllegalArgumentException("The user cannot be updated because the list of users is empty.");
+			throw new IllegalArgumentException("The list of users is empty.");
 		}
+		throw new IllegalArgumentException(
+				"The user with the user name " + userName + " does not exsit in the list for users");
 	}
 
 	public List<User> getUsers() {
@@ -55,25 +45,44 @@ public class UserService {
 		} else {
 			throw new IllegalArgumentException("The list of users is empty.");
 		}
-
 	}
 
-	public User getUserByUserName(String userName) {
+	// update a user when entering the username
+	public void updateUser(User oldUser, User newUser) {
+		List<User> listOfUpdatedUser = new ArrayList<>();
+
 		if (!listOfUsers.isEmpty()) {
+			for (User currentUser : listOfUsers) {
+				if (currentUser.equals(oldUser)) {
 
-			for (User user : listOfUsers) {
-				if (user.getUserName().equals(userName)) {
+					listOfUpdatedUser.add(currentUser);
 
-					System.out.println(user);
-					return user;
+					// Assigns the id of the old object to the new object
+					newUser.setId(oldUser.getId());
+
+					int indexOfOldUserInTheList = listOfUsers.indexOf(oldUser);
+					listOfUsers.set(indexOfOldUserInTheList, newUser);
 				}
-
+			}
+			if (listOfUpdatedUser.isEmpty()) {
+				System.err.println("The user " + oldUser + " could not be found in the list");
 			}
 		} else {
-			throw new IllegalArgumentException("The list of users is empty.");
+			System.err.println("The user can't be updated because the list of users is empty.");
 		}
-		throw new IllegalArgumentException(
-				"The user with the user name " + userName + " does not exsit in the list for users");
+	}
+
+	public void removeUser(User removeUser) {
+		if (!listOfUsers.isEmpty()) {
+			if (listOfUsers.contains(removeUser)) {
+				listOfUsers.remove(removeUser);
+				System.out.println("The user " + removeUser.getId() + " was successfully deleted.");
+			} else {
+				System.err.println("The user could not be deleted because the object was not found in the list.");
+			}
+		} else {
+			System.err.println("The user can't be deleted because the list of users is empty.");
+		}
 	}
 
 }

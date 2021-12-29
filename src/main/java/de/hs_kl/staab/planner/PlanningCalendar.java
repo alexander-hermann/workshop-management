@@ -18,8 +18,10 @@ public class PlanningCalendar {
 	public void createNewAppointment(Appointment appointment) {
 		if (!listOfAppointments.contains(appointment)) {
 			listOfAppointments.add(appointment);
+			System.out.println("The Appointment " + appointment + " was successfully added.");
 		} else {
-			throw new IllegalArgumentException("bad");
+			System.err.println("The appointment can't be added, because the appointment " + appointment
+					+ " already exists in the list.");
 		}
 	}
 
