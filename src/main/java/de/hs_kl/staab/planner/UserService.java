@@ -24,7 +24,7 @@ public class UserService {
 	public User getUserByUserName(String userName) {
 		if (!listOfUsers.isEmpty()) {
 			for (User user : listOfUsers) {
-				if (user.getName().equals(userName)) {
+				if (user.getFullName().equals(userName)) {
 					System.out.println(user);
 					return user;
 				}
