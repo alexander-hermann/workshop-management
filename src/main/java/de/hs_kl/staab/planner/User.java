@@ -6,7 +6,6 @@ public class User extends Person {
 	protected static int USER_ID_COUNTER = 1;
 
 	protected String idOfUser;
-	protected String userName;
 
 	public User(String fullName, String phoneNumber, String emailAddress) {
 		super(fullName, phoneNumber, emailAddress);
@@ -22,12 +21,12 @@ public class User extends Person {
 		this.idOfUser = newIdOfUser;
 	}
 
-	public String getName() {
-		return userName;
-	}
-
 	@Override
 	public String toString() {
-		return super.toString() + " userName=" + userName + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [idOfUser=");
+		builder.append(idOfUser);
+		builder.append("]");
+		return builder.toString();
 	}
 }
