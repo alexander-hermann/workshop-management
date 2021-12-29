@@ -99,7 +99,7 @@ public class PlanningCalendar {
 						calenderWeekOfAppointment, year);
 			}
 		} else {
-			throw new IllegalArgumentException(
+			System.err.println(
 					"The number of week must be between 1 and 52 and the number of year must be greater than 0");
 		}
 	}
