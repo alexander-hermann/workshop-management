@@ -74,7 +74,6 @@ public class CustomerService {
 	public void removeVehicle(Vehicle removeVehicle) {
 		if (!listOfVehicles.isEmpty()) {
 			if (listOfVehicles.contains(removeVehicle)) {
-
 				listOfVehicles.remove(removeVehicle);
 				System.out.println(
 						"Vehicle with license plate " + removeVehicle.getLicensePlate() + " has been removed. ");
