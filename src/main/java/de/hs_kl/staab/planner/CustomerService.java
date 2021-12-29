@@ -11,107 +11,81 @@ public class CustomerService {
 	private List<Customer> listOfCustomers = new ArrayList<>();
 	private List<Vehicle> listOfVehicles = new ArrayList<>();
 
-	// MVP/030
-
-	// Return all vehicles
-
-	public List<Vehicle> getListOfVehicles() {
-		if (!listOfVehicles.isEmpty()) {
-			System.out.println(listOfVehicles);
-			return listOfVehicles;
-		} else {
-
-			throw new IllegalArgumentException("The list of vehicles is empty");
-
-		}
-	}
-
 	// create a new vehicle
-
 	public void createNewVehicle(Vehicle newVehicle) {
 		if (!listOfVehicles.contains(newVehicle)) {
-
 			listOfVehicles.add(newVehicle);
 			System.out.println("New vehicle " + newVehicle.getLicensePlate() + " added.");
-		}
-
-		else {
-			throw new IllegalArgumentException("Vehicle with the license plate " + newVehicle.getLicensePlate()
+		} else {
+			System.err.println("Vehicle with the license plate " + newVehicle.getLicensePlate()
 					+ " already exist. Search for the vehicle with license plate or update the vehicle.");
 		}
-
 	}
 
-	// return the vehicle with the specific license plate
-
-	public Vehicle getVehicleByLicensePlate(String licensePlate) {
+	public void getVehicleByLicensePlate(String licensePlate) {
 		if (!listOfVehicles.isEmpty()) {
 			for (Vehicle vehicle : listOfVehicles) {
 				if (vehicle.getLicensePlate().equals(licensePlate)) {
 					System.out.println(vehicle + " found.");
-					return vehicle;
+					return;
 				}
-
 			}
 		} else {
 			throw new IllegalArgumentException(
 					"The list of vehicles for this license plate " + licensePlate + " is empty.");
 		}
-		throw new IllegalArgumentException("The vehicle with the license plate " + licensePlate + " is not found.");
+		System.err.println("The vehicle with the license plate " + licensePlate + " is not found.");
 	}
 
-	// update a vehicle when entering the specific license plate and the new
-	// instance
-
-	public void updateVehicle(String licensePlate, Vehicle updateVehicle) {
+	// Return all vehicles
+	public void getVehicles() {
 		if (!listOfVehicles.isEmpty()) {
-			List<Vehicle> listOfUpdatedVehicle = new ArrayList<>();
 			for (Vehicle vehicle : listOfVehicles) {
-				if (licensePlate.equals(vehicle.getLicensePlate())) {
-					listOfUpdatedVehicle.add(vehicle);
-					System.out.println("Old object: " + vehicle);
-					listOfVehicles.set(listOfVehicles.indexOf(vehicle), updateVehicle);
-					System.out.println("New object: " + updateVehicle);
+				System.out.println(vehicle);
+			}
+			System.out.println(listOfVehicles);
+		} else {
+			System.err.println("The list of vehicles is empty.");
+		}
+	}
+
+	public void updateVehicle(Vehicle oldVehicle, Vehicle newVehicle) {
+		List<Vehicle> listOfUpdatedVehicle = new ArrayList<>();
+
+		if (!listOfVehicles.isEmpty()) {
+			for (Vehicle currentVehicle : listOfVehicles) {
+				if (currentVehicle.equals(oldVehicle)) {
+					listOfUpdatedVehicle.add(currentVehicle);
+
+					int indexOfOldVehicleInTheList = listOfVehicles.indexOf(oldVehicle);
+					listOfVehicles.set(indexOfOldVehicleInTheList, newVehicle);
 				}
 			}
 			if (listOfUpdatedVehicle.isEmpty()) {
-				throw new IllegalArgumentException("No vehicle with license plate " + licensePlate + " found");
+				System.err.println("The vehicle " + oldVehicle + " could not be found in the list of vehicles.");
 			}
-
 		} else {
-
-			throw new IllegalArgumentException(
-					"The vehilce can not be updated, because the list for the vehicle with the license plate "
-							+ licensePlate + " is empty.");
+			System.err.println("The vehicle can#t be updated because the list of vehicles is empty.");
 		}
 	}
 
 	// remove a vehicle when entering the instance
 
 	public void removeVehicle(Vehicle removeVehicle) {
-
 		if (!listOfVehicles.isEmpty()) {
 			if (listOfVehicles.contains(removeVehicle)) {
 
 				listOfVehicles.remove(removeVehicle);
 				System.out.println(
 						"Vehicle with license plate " + removeVehicle.getLicensePlate() + " has been removed. ");
-			}
-
-			else {
+			} else {
 				throw new IllegalArgumentException(
-
 						"The vehicle can not be removed, because the vehicle with the license plate "
 								+ removeVehicle.getLicensePlate() + " does not exist int the lsit for vehicles");
-
 			}
-		}
-
-		else {
+		} else {
 			throw new IllegalArgumentException(
-
 					"The vehicle can not be removed, because the list for the vehicles is empty.");
-
 		}
 	}
 
