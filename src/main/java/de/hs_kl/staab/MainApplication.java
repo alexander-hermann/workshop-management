@@ -57,9 +57,9 @@ public class MainApplication {
 		WorkingPlatform wkp2 = new WorkingPlatform("Arbeitsbühne2");
 		WorkingPlatform wkp3 = new WorkingPlatform("Arbeitsbühne3");
 
-		CarMechanic user1 = new CarMechanic("Auto Meschaniker", "1234567890", "Otto@ATU.de");
-		CustomerConsultant user2 = new CustomerConsultant("Kunden Berater", "1234547890", "Ralph@ATU.de");
-		Dispatcher user3 = new Dispatcher("Dispo Person", "1232567890", "Herbert@ATU.de");
+		CarMechanic carMechanic1 = new CarMechanic("Auto Meschaniker", "1234567890", "Otto@ATU.de");
+		CustomerConsultant customerConsultant1 = new CustomerConsultant("Kunden Berater", "1234547890", "Ralph@ATU.de");
+		Dispatcher dispatcher1 = new Dispatcher("Dispo Person", "1232567890", "Herbert@ATU.de");
 
 		Service oilChange = new Service("Ölwechsel", 0.5);
 		Service tireChange = new Service("Reifenwechsel", 1.0);
@@ -80,27 +80,27 @@ public class MainApplication {
 		Customer customer3 = new Customer("Hendrik Treitz", addressOfTreitz, "+49176-4548484", "hendrik@web.de");
 
 		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
-				user2);
+				customerConsultant1);
 		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
-				user2);
+				customerConsultant1);
 		ConsultingAppointment consultingAppointment3 = new ConsultingAppointment(2016, 1, 6, 13, 15, customer1, 1,
-				user2);
+				customerConsultant1);
 		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
-				user2);
+				customerConsultant1);
 
 		WorkingAppointment workingAppointment1 = new WorkingAppointment(2021, 12, 27, 13, 15, wkp1, car1, oilChange,
-				user1);
+				carMechanic1);
 		WorkingAppointment workingAppointment2 = new WorkingAppointment(2021, 12, 27, 10, 15, wkp1, car1, tireChange,
-				user1);
+				carMechanic1);
 		WorkingAppointment workingAppointment3 = new WorkingAppointment(2016, 1, 7, 13, 15, wkp1, car1, glassRepair,
-				user1);
+				carMechanic1);
 		WorkingAppointment workingAppointment4 = new WorkingAppointment(2016, 1, 8, 13, 15, wkp1, car1, inspectionCar,
-				user1);
+				carMechanic1);
 
 		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2016, 1, 5, 13, 15, wkp3,
-				CLEANINGPROGRAMM.FAST, user3);
+				CLEANINGPROGRAMM.FAST, dispatcher1);
 		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2016, 1, 5, 13, 15, wkp3,
-				CLEANINGPROGRAMM.INTENSE, user3);
+				CLEANINGPROGRAMM.INTENSE, dispatcher1);
 
 		// ########################################################
 		customerService.createNewVehicle(car1);
