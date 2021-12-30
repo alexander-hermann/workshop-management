@@ -13,12 +13,16 @@ public class CustomerService {
 
 	// create a new vehicle
 	public void createNewVehicle(Vehicle newVehicle) {
-		if (!listOfVehicles.contains(newVehicle)) {
-			listOfVehicles.add(newVehicle);
-			System.out.println("New vehicle succesfully added -> " + newVehicle);
+		if (newVehicle != null) {
+			if (!listOfVehicles.contains(newVehicle)) {
+				listOfVehicles.add(newVehicle);
+				System.out.println("New vehicle succesfully added -> " + newVehicle);
+			} else {
+				System.err.println("Vehicle with the license plate " + newVehicle.getLicensePlate()
+						+ " already exist. Search for the vehicle with license plate or update the vehicle.");
+			}
 		} else {
-			System.err.println("Vehicle with the license plate " + newVehicle.getLicensePlate()
-					+ " already exist. Search for the vehicle with license plate or update the vehicle.");
+			System.err.println("You have not entered a vehicle.");
 		}
 	}
 
@@ -90,12 +94,16 @@ public class CustomerService {
 
 	// create a new customer
 	public void createNewCustomer(Customer newCustomer) {
-		if (!listOfCustomers.contains(newCustomer)) {
-			listOfCustomers.add(newCustomer);
-			System.out.println(newCustomer + " added.");
+		if (newCustomer != null) {
+			if (!listOfCustomers.contains(newCustomer)) {
+				listOfCustomers.add(newCustomer);
+				System.out.println(newCustomer + " added.");
+			} else {
+				throw new IllegalArgumentException("Customer with the Customer Id " + newCustomer.getId()
+						+ " already exist. Search for Customer with Id or update Customer");
+			}
 		} else {
-			throw new IllegalArgumentException("Customer with the Customer Id " + newCustomer.getId()
-					+ " already exist. Search for Customer with Id or update Customer");
+			System.err.println("You have not entered a customer.");
 		}
 	}
 
@@ -256,6 +264,9 @@ public class CustomerService {
 	}
 
 	public void getVehicleForCustomer(Customer searchCustomer, Vehicle searchVehicle) {
+		// Avoid NullPointerException
+		String checkCustomerHasValue = (searchCustomer != null) ? searchCustomer.getId() : "null";
+
 		List<Vehicle> listWithFoundCustomerVehicles = new ArrayList<>();
 
 		if (listOfCustomers.contains(searchCustomer) && searchCustomer != null) {
@@ -275,16 +286,20 @@ public class CustomerService {
 							"The customer " + searchCustomer.getId() + " does not have the vehicle " + searchVehicle);
 				}
 			} else {
-				System.err.println("The customer has no vehicles or you have not entered a vehicle.");
+				System.err.println("The customer " + checkCustomerHasValue
+						+ " has no vehicles or you have not entered a vehicle.");
 			}
 		} else {
-			System.err
-					.println("The costumer was not found in the list of costumers or you have not entered a customer.");
+			System.err.println("The costumer " + checkCustomerHasValue
+					+ " was not found in the list of costumers or you have not entered a customer.");
 		}
 	}
 
 	// MMP/050
 	public void getVehicleHistory(Vehicle vehicle) {
+		// Avoid NullPointerException
+		String checkVehicleHasValue = (vehicle != null) ? vehicle.getId() : "null";
+
 		List<WorkingAppointment> listOfFoundWorkingAppointmentsForVehicle = new ArrayList<>();
 
 		if (listOfVehicles.contains(vehicle) && vehicle != null) {
@@ -303,8 +318,8 @@ public class CustomerService {
 						+ vehicle.getId());
 			}
 		} else {
-			System.err.println(
-					"The history of the vehicle cannot be viewed because it is not in the vehicle list or you have not entered a vehicle.");
+			System.err.println("The history of the vehicle " + checkVehicleHasValue
+					+ " cannot be viewed because it is not in the vehicle list or you have not entered a vehicle.");
 		}
 	}
 }
