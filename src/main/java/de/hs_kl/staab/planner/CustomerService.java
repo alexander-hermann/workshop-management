@@ -88,22 +88,7 @@ public class CustomerService {
 		}
 	}
 
-	// MVP/040
-
-	// Return all customers
-
-	public List<Customer> getListOfCustomers() {
-		if (!listOfCustomers.isEmpty()) {
-
-			System.out.println(listOfCustomers);
-			return listOfCustomers;
-		} else {
-			throw new IllegalArgumentException("The list of customers is empty.");
-		}
-	}
-
 	// create a new customer
-
 	public void createNewCustomer(Customer newCustomer) {
 		if (!listOfCustomers.contains(newCustomer)) {
 			listOfCustomers.add(newCustomer);
@@ -115,7 +100,6 @@ public class CustomerService {
 	}
 
 	// return the customer with the specific customer ID
-
 	public Customer getCustomerById(String customerId) {
 		if (!listOfCustomers.isEmpty()) {
 			for (Customer customer : listOfCustomers) {
@@ -132,30 +116,40 @@ public class CustomerService {
 		throw new IllegalArgumentException("The customer with the id " + customerId + " is not found.");
 	}
 
-	// update a customer when entering the specific customer ID and the new instance
-
-	public void updateCustomer(String customerId, Customer updateCustomer) {
+	// Return all customers
+	public List<Customer> getListOfCustomers() {
 		if (!listOfCustomers.isEmpty()) {
-			List<Customer> listOfUpdatedCustomer = new ArrayList<>();
-			for (Customer customer : listOfCustomers) {
-				if (customerId.equals(customer.getCustomerId())) {
-					updateCustomer.setCustomerId(customerId);
-					System.out.println("Old object: " + customer);
-					listOfCustomers.set(listOfCustomers.indexOf(customer), updateCustomer);
-					listOfUpdatedCustomer.add(customer);
-					System.out.println("New object: " + updateCustomer);
+			System.out.println(listOfCustomers);
+			return listOfCustomers;
+		} else {
+			throw new IllegalArgumentException("The list of customers is empty.");
+		}
+	}
 
+	// update a customer when entering the specific customer ID and the new instance
+	public void updateCustomer(Customer oldCustomer, Customer newCustomer) {
+		List<Customer> listOfUpdatedCustomer = new ArrayList<>();
+
+		if (!listOfCustomers.isEmpty()) {
+			for (Customer currentCustomer : listOfCustomers) {
+				if (currentCustomer.equals(oldCustomer)) {
+					listOfUpdatedCustomer.add(currentCustomer);
+
+					// Assigns the id of the old object to the new object
+					newCustomer.setCustomerId(oldCustomer.getCustomerId());
+
+					int indexOfOldCustomerInTheList = listOfCustomers.indexOf(oldCustomer);
+					listOfCustomers.set(indexOfOldCustomerInTheList, newCustomer);
 				}
-
 			}
 			if (listOfUpdatedCustomer.isEmpty()) {
-				throw new IllegalArgumentException("No customer with customer ID " + customerId + " found");
+				throw new IllegalArgumentException("No customer with customer ID " + oldCustomer + " found");
 			}
 
 		} else {
 			throw new IllegalArgumentException(
 					"The customer can not be updated, because the list for the customer with the customer ID "
-							+ updateCustomer.getCustomerId() + " is empty.");
+							+ oldCustomer + " is empty.");
 		}
 	}
 
