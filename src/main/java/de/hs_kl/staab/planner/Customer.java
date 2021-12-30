@@ -33,7 +33,7 @@ public class Customer extends Person {
 		return invoiceAddressOfPerson;
 	}
 
-	public String getCustomerId() {
+	public String getId() {
 		return customerId;
 	}
 
