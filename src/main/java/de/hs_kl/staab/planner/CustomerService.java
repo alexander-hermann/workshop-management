@@ -173,21 +173,30 @@ public class CustomerService {
 
 	// add new vehicle to customer
 	public void addVehicleForCustomer(Customer customer, Vehicle vehicleToAdd) {
-		if (!listOfCustomers.isEmpty()) {
-			if (listOfCustomers.contains(customer)) {
-				for (Vehicle vehicle : customer.getListOfVehiclesForCustomer()) {
-					if (vehicle.getLicensePlate().equals(vehicleToAdd.getLicensePlate())) {
-						throw new IllegalArgumentException("Vehicle with license plate "
-								+ vehicleToAdd.getLicensePlate()
-								+ " already exist in list of vehicles for customer with ID " + customer.getId());
-					}
-				}
+		// Avoid NullPointerException
+		String checkCustomerHasValue = (customer != null) ? customer.getId() : "null";
 
-				customer.addVehicleToCustomer(vehicleToAdd);
-				System.out.println("Customer " + customer.getId() + " add the vehicle: " + vehicleToAdd);
+		if (!listOfCustomers.isEmpty()) {
+			if (listOfCustomers.contains(customer) && customer != null) {
+				if (vehicleToAdd != null) {
+
+					for (Vehicle vehicle : customer.getListOfVehiclesForCustomer()) {
+						if (vehicle.getLicensePlate().equals(vehicleToAdd.getLicensePlate())) {
+							throw new IllegalArgumentException("Vehicle with license plate "
+									+ vehicleToAdd.getLicensePlate()
+									+ " already exist in list of vehicles for customer with ID " + customer.getId());
+						}
+					}
+
+					customer.addVehicleToCustomer(vehicleToAdd);
+					System.out.println("Customer " + customer.getId() + " add the vehicle: " + vehicleToAdd);
+				} else {
+					System.err.println("The vehicle cannot be added to the customer " + customer.getId()
+							+ " because you have not entered a vehicle.");
+				}
 			} else {
-				throw new IllegalArgumentException(
-						"The customer with the ID" + customer.getId() + " does not exist in the list for customers.");
+				System.err.println("The customer with the ID " + checkCustomerHasValue
+						+ " does not exist in the list for customers or you have not entered a customer.");
 			}
 		} else {
 			throw new IllegalArgumentException(
@@ -197,27 +206,25 @@ public class CustomerService {
 	}
 
 	// get List of vehicles for a specific customer
-	public List<Vehicle> getListOfVehiclesForCustomer(Customer customer) {
-		if (!listOfCustomers.isEmpty()) {
+	public void getListOfVehiclesForCustomer(Customer customer) {
+		if (!listOfCustomers.isEmpty() && customer != null) {
 			if (listOfCustomers.contains(customer)) {
 				if (!customer.getListOfVehiclesForCustomer().isEmpty()) {
-					System.out.println("Customer with customer ID " + customer.getId() + " owns the vehicles: "
-							+ customer.getListOfVehiclesForCustomer());
-					return customer.getListOfVehiclesForCustomer();
+					for (Vehicle currentVehicle : customer.getListOfVehiclesForCustomer()) {
+						System.out.println("The customer " + customer.getId() + " is the owner of vehicle "
+								+ currentVehicle.getId());
+					}
+
 				} else {
-					throw new IllegalArgumentException(
-							"List of vehicles for customer with ID " + customer.getId() + " is empty");
+					System.err.println("The customer " + customer.getId() + " has no vehicles.");
 				}
 			} else {
-				throw new IllegalArgumentException(
+				System.err.println(
 						"The customer with ID " + customer.getId() + " does not exist in the list of customers.");
 			}
 		} else {
-			throw new IllegalArgumentException(
-
-					"The list of customers is empty.");
+			System.err.println("The list of customers is empty or you have not entered a customer.");
 		}
-
 	}
 
 	// remove specific vehicle from list of vehicle for a specific customer
@@ -251,7 +258,7 @@ public class CustomerService {
 	public void getVehicleForCustomer(Customer searchCustomer, Vehicle searchVehicle) {
 		List<Vehicle> listWithFoundCustomerVehicles = new ArrayList<>();
 
-		if (listOfCustomers.contains(searchCustomer)) {
+		if (listOfCustomers.contains(searchCustomer) && searchCustomer != null) {
 			if (!searchCustomer.getListOfVehiclesForCustomer().isEmpty() && searchVehicle != null) {
 				for (Vehicle currentVehicle : searchCustomer.getListOfVehiclesForCustomer()) {
 					if (currentVehicle.equals(searchVehicle)) {
@@ -268,11 +275,11 @@ public class CustomerService {
 							"The customer " + searchCustomer.getId() + " does not have the vehicle " + searchVehicle);
 				}
 			} else {
-				System.err.println(
-						"The customer " + searchCustomer.getId() + " has no vehicles or you must enter a vehicle.");
+				System.err.println("The customer has no vehicles or you have not entered a vehicle.");
 			}
 		} else {
-			System.err.println("The costumer " + searchCustomer.getId() + " was not found in the list of costumers.");
+			System.err
+					.println("The costumer was not found in the list of costumers or you have not entered a customer.");
 		}
 	}
 
@@ -280,20 +287,24 @@ public class CustomerService {
 	public void getVehicleHistory(Vehicle vehicle) {
 		List<WorkingAppointment> listOfFoundWorkingAppointmentsForVehicle = new ArrayList<>();
 
-		for (WorkingAppointment currentWorkingAppointment : vehicle.listOfWorkingAppointmentForVehicle) {
-			if (currentWorkingAppointment.isCompleted() == true) {
-				listOfFoundWorkingAppointmentsForVehicle.add(currentWorkingAppointment);
+		if (listOfVehicles.contains(vehicle) && vehicle != null) {
+			for (WorkingAppointment currentWorkingAppointment : vehicle.listOfWorkingAppointmentForVehicle) {
+				if (currentWorkingAppointment.isCompleted() == true) {
+					listOfFoundWorkingAppointmentsForVehicle.add(currentWorkingAppointment);
+				}
 			}
-		}
 
-		if (listOfFoundWorkingAppointmentsForVehicle.size() > 0) {
-			for (WorkingAppointment currentWorkingAppointment : listOfFoundWorkingAppointmentsForVehicle) {
-				System.out.println("Vehicle with the license plate " + vehicle.getLicensePlate() + " got the service "
-						+ currentWorkingAppointment.getService() + ", start of appointment: "
-						+ currentWorkingAppointment.getStartOfAppointment());
+			if (listOfFoundWorkingAppointmentsForVehicle.size() > 0) {
+				for (WorkingAppointment currentWorkingAppointment : listOfFoundWorkingAppointmentsForVehicle) {
+					System.out.println(currentWorkingAppointment);
+				}
+			} else {
+				System.err.println("There are no working appointments in the history of the vehicle with the id "
+						+ vehicle.getId());
 			}
 		} else {
-			System.err.println("There are no working appointments in the history of the vehicle " + vehicle);
+			System.err.println(
+					"The history of the vehicle cannot be viewed because it is not in the vehicle list or you have not entered a vehicle.");
 		}
 	}
 }
