@@ -11,7 +11,6 @@ public abstract class Vehicle {
 	protected LocalDate DateOfAdmission;
 	protected int yearOfConstruction;
 	protected String licensePlate;
-	// protected List<Vehicle> listOfVehicles = new ArrayList<>();
 	protected List<WorkingAppointment> listOfWorkingAppointmentForVehicle;
 
 	public Vehicle(String licensePlate, String brand, String model, int yearOfConstruction, int yearOfAdmission,

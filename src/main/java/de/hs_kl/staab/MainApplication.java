@@ -127,7 +127,7 @@ public class MainApplication {
 		customerService.getVehicleForCustomer(customer4, car2);
 		customerService.getVehicleHistory(car1);
 
-		customerService.getListOfVehiclesForCustomer(customer4);
+		// customerService.getListOfVehiclesForCustomer(customer4);
 
 		// ########################################################
 		plannerService.createNewWorkingPlatform(wkp1);
