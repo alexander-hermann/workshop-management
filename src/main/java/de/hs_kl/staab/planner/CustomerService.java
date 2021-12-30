@@ -250,34 +250,28 @@ public class CustomerService {
 
 	}
 
-	public void getVehicleForCustomer(Customer customer, Vehicle vehicleToSearch) {
-		if (!listOfCustomers.isEmpty()) {
-			if (listOfCustomers.contains(customer)) {
-				if (!customer.getListOfVehiclesForCustomer().isEmpty()) {
-					if (customer.getListOfVehiclesForCustomer().contains(vehicleToSearch)) {
-						System.out.println("Found " + vehicleToSearch + " for customer " + customer);
-					}
+	public void getVehicleForCustomer(Customer searchCustomer, Vehicle searchVehicle) {
+		List<Vehicle> listWithFoundCustomerVehicles = new ArrayList<>();
 
-					else {
-						throw new IllegalArgumentException(vehicleToSearch.getLicensePlate()
-								+ " not found in list of vehicles for customer " + customer.getCustomerId());
-					}
-				} else {
+		if (!searchCustomer.getListOfVehiclesForCustomer().isEmpty() && searchVehicle != null) {
+			for (Vehicle currentVehicle : searchCustomer.getListOfVehiclesForCustomer()) {
+				if (currentVehicle.equals(searchVehicle)) {
+					listWithFoundCustomerVehicles.add(currentVehicle);
+				}
+			}
 
-					throw new IllegalArgumentException(
-							"The list of vehicles for customer " + customer.getCustomerId() + " is empty");
+			if (!listWithFoundCustomerVehicles.isEmpty()) {
+				for (Vehicle vehicle : listWithFoundCustomerVehicles) {
+					System.out.println(vehicle);
 				}
 			} else {
-
-				throw new IllegalArgumentException(
-						"The customer " + customer.getCustomerId() + " does not exist in the list of customers.");
+				System.err.println("The customer " + searchCustomer.getCustomerId() + " does not have the vehicle "
+						+ searchVehicle);
 			}
 		} else {
-			throw new IllegalArgumentException(
-
-					"The list of customers is empty.");
+			System.err.println(
+					"The customer " + searchCustomer.getCustomerId() + " has no vehicles or you must enter a vehicle.");
 		}
-
 	}
 
 	// MMP/050
@@ -297,7 +291,7 @@ public class CustomerService {
 						+ currentWorkingAppointment.getStartOfAppointment());
 			}
 		} else {
-			System.err.println("There are no working appointments in the history of the vehicle.");
+			System.err.println("There are no working appointments in the history of the vehicle " + vehicle);
 		}
 	}
 }

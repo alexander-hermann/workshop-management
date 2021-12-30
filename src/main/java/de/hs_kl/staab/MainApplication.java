@@ -80,6 +80,7 @@ public class MainApplication {
 				"alex@web.de");
 		Customer customer3 = new Customer("Hendrik Treitz", invoiceAddressOfCustomer3, "+49176-4548484",
 				"hendrik@web.de");
+		Customer customer4 = new Customer("Max Müller", null, "+490176-99988874", "max@web.de");
 
 		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
 				customerConsultant1);
@@ -122,7 +123,7 @@ public class MainApplication {
 		customerService.getListOfVehiclesForCustomer(customer2);
 		customerService.getListOfVehiclesForCustomer(customer3);
 
-		customerService.getVehicleForCustomer(customer2, car2);
+		customerService.getVehicleForCustomer(customer1, car2);
 		customerService.getVehicleHistory(car1);
 
 		customerService.getListOfVehiclesForCustomer(customer1);
