@@ -154,18 +154,15 @@ public class CustomerService {
 	}
 
 	// remove a customer when entering the instance
-
 	public void removeCustomer(Customer removeCustomer) {
 		if (!listOfCustomers.isEmpty()) {
 			if (listOfCustomers.contains(removeCustomer)) {
-
 				listOfCustomers.remove(removeCustomer);
 				System.out
 						.println("Customer with customer ID " + removeCustomer.getCustomerId() + " has been removed ");
 			} else {
 				throw new IllegalArgumentException(
-
-						"The customer can not be removed, because the customer with the customer ID "
+						"The customer can not be removed, because the " + "customer with the customer ID "
 								+ removeCustomer.getCustomerId() + " does not exist in the list of customers.");
 			}
 		} else {
@@ -173,7 +170,6 @@ public class CustomerService {
 
 					"The customer can not be removed, because the list of customers is empty.");
 		}
-
 	}
 
 	// add new vehicle to customer
@@ -227,7 +223,6 @@ public class CustomerService {
 	}
 
 	// remove specific vehicle from list of vehicle for a specific customer
-
 	public void removeVehicleForCustomer(Customer customer, Vehicle vehicleToRemove) {
 		if (!listOfCustomers.isEmpty()) {
 			if (listOfCustomers.contains(customer)) {
@@ -287,14 +282,22 @@ public class CustomerService {
 
 	// MMP/050
 	public void getVehicleHistory(Vehicle vehicle) {
+		List<WorkingAppointment> listOfFoundWorkingAppointmentsForVehicle = new ArrayList<>();
 
-		for (WorkingAppointment workingAppointment : vehicle.listOfWorkingAppointmentForVehicle) {
+		for (WorkingAppointment currentWorkingAppointment : vehicle.listOfWorkingAppointmentForVehicle) {
+			if (currentWorkingAppointment.isCompleted() == true) {
+				listOfFoundWorkingAppointmentsForVehicle.add(currentWorkingAppointment);
+			}
+		}
 
-			if (((WorkingAppointment) workingAppointment).isCompleted() == true)
+		if (listOfFoundWorkingAppointmentsForVehicle.size() > 0) {
+			for (WorkingAppointment currentWorkingAppointment : listOfFoundWorkingAppointmentsForVehicle) {
 				System.out.println("Vehicle with the license plate " + vehicle.getLicensePlate() + " got the service "
-						+ workingAppointment.getService() + ", start of appointment: "
-						+ workingAppointment.getStartOfAppointment());
-
+						+ currentWorkingAppointment.getService() + ", start of appointment: "
+						+ currentWorkingAppointment.getStartOfAppointment());
+			}
+		} else {
+			System.err.println("There are no working appointments in the history of the vehicle.");
 		}
 	}
 }
