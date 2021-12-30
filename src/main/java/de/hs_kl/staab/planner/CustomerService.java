@@ -15,7 +15,7 @@ public class CustomerService {
 	public void createNewVehicle(Vehicle newVehicle) {
 		if (!listOfVehicles.contains(newVehicle)) {
 			listOfVehicles.add(newVehicle);
-			System.out.println("New vehicle " + newVehicle.getLicensePlate() + " added.");
+			System.out.println("New vehicle succesfully added -> " + newVehicle);
 		} else {
 			System.err.println("Vehicle with the license plate " + newVehicle.getLicensePlate()
 					+ " already exist. Search for the vehicle with license plate or update the vehicle.");
@@ -251,24 +251,28 @@ public class CustomerService {
 	public void getVehicleForCustomer(Customer searchCustomer, Vehicle searchVehicle) {
 		List<Vehicle> listWithFoundCustomerVehicles = new ArrayList<>();
 
-		if (!searchCustomer.getListOfVehiclesForCustomer().isEmpty() && searchVehicle != null) {
-			for (Vehicle currentVehicle : searchCustomer.getListOfVehiclesForCustomer()) {
-				if (currentVehicle.equals(searchVehicle)) {
-					listWithFoundCustomerVehicles.add(currentVehicle);
+		if (listOfCustomers.contains(searchCustomer)) {
+			if (!searchCustomer.getListOfVehiclesForCustomer().isEmpty() && searchVehicle != null) {
+				for (Vehicle currentVehicle : searchCustomer.getListOfVehiclesForCustomer()) {
+					if (currentVehicle.equals(searchVehicle)) {
+						listWithFoundCustomerVehicles.add(currentVehicle);
+					}
 				}
-			}
 
-			if (!listWithFoundCustomerVehicles.isEmpty()) {
-				for (Vehicle vehicle : listWithFoundCustomerVehicles) {
-					System.out.println(vehicle);
+				if (!listWithFoundCustomerVehicles.isEmpty()) {
+					for (Vehicle vehicle : listWithFoundCustomerVehicles) {
+						System.out.println(vehicle);
+					}
+				} else {
+					System.err.println(
+							"The customer " + searchCustomer.getId() + " does not have the vehicle " + searchVehicle);
 				}
 			} else {
 				System.err.println(
-						"The customer " + searchCustomer.getId() + " does not have the vehicle " + searchVehicle);
+						"The customer " + searchCustomer.getId() + " has no vehicles or you must enter a vehicle.");
 			}
 		} else {
-			System.err.println(
-					"The customer " + searchCustomer.getId() + " has no vehicles or you must enter a vehicle.");
+			System.err.println("The costumer " + searchCustomer.getId() + " was not found in the list of costumers.");
 		}
 	}
 

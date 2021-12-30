@@ -107,13 +107,14 @@ public class MainApplication {
 
 		// ########################################################
 		customerService.createNewVehicle(car1);
+		customerService.createNewVehicle(car1);
 		customerService.createNewVehicle(car2);
 		customerService.createNewVehicle(car3);
 
 		customerService.createNewCustomer(customer1);
 		customerService.createNewCustomer(customer2);
 		customerService.createNewCustomer(customer3);
-		// customerService.createNewCustomer(customer4);
+		customerService.createNewCustomer(customer4);
 
 		customerService.addVehicleForCustomer(customer1, car1);
 		customerService.addVehicleForCustomer(customer1, car4);
@@ -124,7 +125,7 @@ public class MainApplication {
 		customerService.getListOfVehiclesForCustomer(customer2);
 		customerService.getListOfVehiclesForCustomer(customer3);
 
-		customerService.getVehicleForCustomer(customer4, car2);
+		customerService.getVehicleForCustomer(customer3, car3);
 		customerService.getVehicleHistory(car1);
 
 		// customerService.getListOfVehiclesForCustomer(customer4);
