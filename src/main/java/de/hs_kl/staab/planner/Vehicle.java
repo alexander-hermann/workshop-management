@@ -6,6 +6,10 @@ import java.util.List;
 
 public abstract class Vehicle {
 
+	protected final static String VEHICLE_PREFIX = "VH-";
+	protected static int VEHICLE_ID_COUNTER = 1;
+
+	protected String idOfVehicle;
 	protected String brand;
 	protected String model;
 	protected LocalDate DateOfAdmission;
@@ -15,6 +19,9 @@ public abstract class Vehicle {
 
 	public Vehicle(String licensePlate, String brand, String model, int yearOfConstruction, int yearOfAdmission,
 			int monthOfAdmission, int dayOfAdmission) {
+		this.idOfVehicle = VEHICLE_PREFIX + VEHICLE_ID_COUNTER;
+		VEHICLE_ID_COUNTER++;
+
 		this.licensePlate = licensePlate;
 		this.brand = brand;
 		this.model = model;
@@ -23,10 +30,8 @@ public abstract class Vehicle {
 		this.listOfWorkingAppointmentForVehicle = new ArrayList<>();
 	}
 
-	@Override
-	public String toString() {
-		return "Vehicle [brand=" + brand + ", model=" + model + ", yearOfConstruction=" + yearOfConstruction
-				+ ", DateOfAdmission=" + DateOfAdmission + ", licensePlate=" + licensePlate + "]";
+	public String getId() {
+		return idOfVehicle;
 	}
 
 	public String getBrand() {
@@ -37,16 +42,34 @@ public abstract class Vehicle {
 		return model;
 	}
 
-	public int getYearOfConstruction() {
-		return yearOfConstruction;
-	}
-
 	public LocalDate getDateOfAdmission() {
 		return DateOfAdmission;
+	}
+
+	public int getYearOfConstruction() {
+		return yearOfConstruction;
 	}
 
 	public String getLicensePlate() {
 		return licensePlate;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Vehicle [idOfVehicle=");
+		builder.append(idOfVehicle);
+		builder.append(", brand=");
+		builder.append(brand);
+		builder.append(", model=");
+		builder.append(model);
+		builder.append(", DateOfAdmission=");
+		builder.append(DateOfAdmission);
+		builder.append(", yearOfConstruction=");
+		builder.append(yearOfConstruction);
+		builder.append(", licensePlate=");
+		builder.append(licensePlate);
+		builder.append("]");
+		return builder.toString();
+	}
 }
