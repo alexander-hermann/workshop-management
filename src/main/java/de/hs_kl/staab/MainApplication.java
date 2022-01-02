@@ -15,6 +15,7 @@ import de.hs_kl.staab.planner.InvoiceAddress;
 import de.hs_kl.staab.planner.PlannerService;
 import de.hs_kl.staab.planner.PlanningCalendar;
 import de.hs_kl.staab.planner.Service;
+import de.hs_kl.staab.planner.UserService;
 import de.hs_kl.staab.planner.Vehicle;
 import de.hs_kl.staab.planner.WorkingAppointment;
 import de.hs_kl.staab.planner.WorkingPlatform;
@@ -52,6 +53,7 @@ public class MainApplication {
 		PlannerService plannerService = PlannerService.getInstance();
 		PlanningCalendar planningCalendar = new PlanningCalendar();
 		CustomerService customerService = new CustomerService();
+		UserService userService = new UserService();
 
 		WorkingPlatform wkp1 = new WorkingPlatform("Arbeitsbühne1");
 		WorkingPlatform wkp2 = new WorkingPlatform("Arbeitsbühne2");
@@ -173,5 +175,8 @@ public class MainApplication {
 		planningCalendar.getAppointmentById("AP-14");
 
 		planningCalendar.updateAppointment(cleaningAppointment1, cleaningAppointment2);
+
+		// #############################################################
+		userService.getOverviewOfPlannedWorks(wkp1);
 	}
 }
