@@ -126,7 +126,7 @@ public class MainApplication {
 		customerService.getListOfVehiclesForCustomer(null);
 
 		customerService.getVehicleByLicensePlate(null);
-		customerService.updateVehicle(null, car4);
+		customerService.updateVehicle(null, null);
 
 		customerService.getVehicleForCustomer(customer4, null);
 		customerService.getVehicleHistory(null);
