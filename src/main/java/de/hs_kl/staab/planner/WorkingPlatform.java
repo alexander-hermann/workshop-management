@@ -36,6 +36,10 @@ public class WorkingPlatform {
 		return listOfPlannedWorks;
 	}
 
+	public void addPlannedWork(WorkingAppointment workingAppointment) {
+		this.listOfPlannedWorks.add(workingAppointment);
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
