@@ -84,19 +84,4 @@ public class UserService {
 			System.err.println("The user can't be deleted because the list of users is empty.");
 		}
 	}
-
-	public void getOverviewOfPlannedWorks(WorkingPlatform workingPlatform) {
-		if (workingPlatform != null) {
-			if (!workingPlatform.getListOfPlannedWorks().isEmpty()) {
-				for (WorkingAppointment currentWorkingAppointment : workingPlatform.getListOfPlannedWorks()) {
-					System.out.println(currentWorkingAppointment);
-				}
-			} else {
-				System.err.println("The working platform " + workingPlatform.getId() + " has no planned works.");
-			}
-		} else {
-			System.err.println("You have not entered a working platform.");
-		}
-	}
-
 }

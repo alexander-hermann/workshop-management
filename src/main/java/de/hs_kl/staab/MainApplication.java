@@ -93,9 +93,9 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
 				customerConsultant1);
 
-		WorkingAppointment workingAppointment1 = new WorkingAppointment(2021, 12, 27, 13, 15, wkp1, car1, oilChange,
+		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 02, 13, 15, wkp1, car1, oilChange,
 				carMechanic1);
-		WorkingAppointment workingAppointment2 = new WorkingAppointment(2021, 12, 27, 10, 15, wkp1, car1, tireChange,
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 02, 10, 15, wkp1, car1, tireChange,
 				carMechanic1);
 		WorkingAppointment workingAppointment3 = new WorkingAppointment(2016, 1, 7, 13, 15, wkp1, car1, glassRepair,
 				carMechanic1);
@@ -135,6 +135,9 @@ public class MainApplication {
 
 		// customerService.getListOfVehiclesForCustomer(customer4);
 
+		// #############################################################
+		userService.createNewUser(dispatcher1);
+
 		// ########################################################
 		plannerService.createNewWorkingPlatform(wkp1);
 		plannerService.createNewWorkingPlatform(wkp2);
@@ -147,6 +150,8 @@ public class MainApplication {
 
 		plannerService.getWorkingPlatforms();
 		plannerService.getServices();
+
+		plannerService.getOverviewOfPlannedWorks(wkp1);
 
 		// ########################################################
 		planningCalendar.createNewAppointment(consultingAppointment1);
@@ -175,8 +180,5 @@ public class MainApplication {
 		planningCalendar.getAppointmentById("AP-14");
 
 		planningCalendar.updateAppointment(cleaningAppointment1, cleaningAppointment2);
-
-		// #############################################################
-		userService.getOverviewOfPlannedWorks(wkp1);
 	}
 }

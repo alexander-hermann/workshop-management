@@ -1,6 +1,9 @@
 package de.hs_kl.staab.planner;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -162,6 +165,43 @@ public class PlannerService {
 		} else {
 			throw new IllegalArgumentException("The service " + removeService.getId()
 					+ " can't be deleted, because the list of services is empty.");
+		}
+	}
+
+	public void getOverviewOfPlannedWorks(WorkingPlatform workingPlatform) {
+		LocalDate todayDay = LocalDate.now();
+		List<WorkingAppointment> listOfFoundPlannedWorks = new ArrayList<>();
+
+		if (workingPlatform != null) {
+			if (listOfWorkingPlatforms.contains(workingPlatform) && workingPlatform != null) {
+				for (WorkingAppointment currentWorkingAppointment : workingPlatform.getListOfPlannedWorks()) {
+					if (currentWorkingAppointment.getDay().equals(todayDay)
+							&& currentWorkingAppointment.isCompleted() == false) {
+						listOfFoundPlannedWorks.add(currentWorkingAppointment);
+					}
+				}
+			} else {
+				System.err.println("You have not entered a working platform.");
+			}
+
+			if (listOfFoundPlannedWorks.size() > 0) {
+				Collections.sort(listOfFoundPlannedWorks, new Comparator<Appointment>() {
+
+					@Override
+					public int compare(Appointment firstAppointment, Appointment secondAppointment) {
+						return firstAppointment.getStart().compareTo(secondAppointment.getStart());
+					}
+				});
+
+				for (WorkingAppointment workingAppointment : listOfFoundPlannedWorks) {
+					System.out.println(workingAppointment);
+				}
+			} else {
+				System.err.println(
+						"The working platform " + workingPlatform.getId() + " has no services for today: " + todayDay);
+			}
+		} else {
+			System.err.println("You have not entered a working platform.");
 		}
 	}
 }

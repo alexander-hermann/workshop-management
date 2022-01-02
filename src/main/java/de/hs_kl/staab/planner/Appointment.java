@@ -2,6 +2,7 @@ package de.hs_kl.staab.planner;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.IsoFields;
 
 public class Appointment {
@@ -35,8 +36,12 @@ public class Appointment {
 		this.idOfAppointment = idOfAppointment;
 	}
 
-	public LocalDateTime getStartOfAppointment() {
-		return startOfAppointment;
+	public LocalTime getStart() {
+		return startOfAppointment.toLocalTime();
+	}
+
+	public LocalTime getEnd() {
+		return endOfAppointment.toLocalTime();
 	}
 
 	public int getCalendarWeek() {
@@ -53,9 +58,9 @@ public class Appointment {
 		builder.append(" [appointmentId=");
 		builder.append(idOfAppointment);
 		builder.append(", startOfAppointment=");
-		builder.append(startOfAppointment);
+		builder.append(this.getStart());
 		builder.append(", endOfAppointment=");
-		builder.append(endOfAppointment);
+		builder.append(this.getEnd());
 		builder.append(", calenderWeekOfAppointment=");
 		builder.append(calenderWeekOfAppointment);
 		builder.append(", dayOfAppointment=");
