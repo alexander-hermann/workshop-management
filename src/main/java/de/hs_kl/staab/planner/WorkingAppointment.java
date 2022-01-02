@@ -1,7 +1,5 @@
 package de.hs_kl.staab.planner;
 
-import java.time.LocalDate;
-
 public class WorkingAppointment extends Appointment {
 	private final WorkingPlatform workingPlatform;
 	private final Vehicle vehicle;
@@ -50,10 +48,6 @@ public class WorkingAppointment extends Appointment {
 
 	public CarMechanic getCarMechanic() {
 		return carMechanic;
-	}
-
-	public LocalDate getDayOfAppointment() {
-		return dayOfAppointment;
 	}
 
 	@Override

@@ -12,7 +12,8 @@ public class ConsultingAppointment extends Appointment {
 		this.durationInH = durationInH;
 		this.customerConsultant = customerConsultant;
 
-		this.endOfAppointment = this.startOfAppointment.plusHours((long) this.durationInH);
+		this.endOfAppointment = this.startOfAppointment
+				.plusMinutes((long) (this.durationInH * TIME_CONVERSION_FAKTOR_IN_MINUTES));
 	}
 
 	public CustomerConsultant getCustomerConsultant() {

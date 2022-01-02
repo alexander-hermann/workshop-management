@@ -84,7 +84,7 @@ public class MainApplication {
 				"hendrik@web.de");
 		Customer customer4 = new Customer("Max Müller", null, "+490176-99988874", "max@web.de");
 
-		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
+		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 0.5,
 				customerConsultant1);
 		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
 				customerConsultant1);
@@ -102,9 +102,9 @@ public class MainApplication {
 		WorkingAppointment workingAppointment4 = new WorkingAppointment(2016, 1, 8, 13, 15, wkp1, car1, inspectionCar,
 				carMechanic1);
 
-		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2016, 1, 5, 13, 15, wkp3,
-				CLEANINGPROGRAMM.FAST, dispatcher1);
-		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2016, 1, 5, 13, 15, wkp3,
+		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2016, 1, 05, 13, 0, wkp3,
+				CLEANINGPROGRAMM.INTENSE, dispatcher1);
+		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2016, 1, 05, 13, 15, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
 
 		// ########################################################
@@ -179,6 +179,7 @@ public class MainApplication {
 		planningCalendar.getAppointments();
 		planningCalendar.getAppointmentById("AP-14");
 
-		planningCalendar.updateAppointment(cleaningAppointment1, cleaningAppointment2);
+		System.out.println(planningCalendar.getDurationInMin(cleaningAppointment1));
+		System.out.println(planningCalendar.getTotalHoursOfDay(2016, 01, 5));
 	}
 }

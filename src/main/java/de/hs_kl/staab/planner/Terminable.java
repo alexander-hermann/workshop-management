@@ -2,7 +2,9 @@ package de.hs_kl.staab.planner;
 
 public interface Terminable {
 
-	int getDuration();
+	long getDurationInMin(Appointment appointment);
+
+	long getTotalHoursOfDay(int year, int month, int day);
 
 	boolean isAppointmentAvailableInPeriode(Appointment appointment);
 

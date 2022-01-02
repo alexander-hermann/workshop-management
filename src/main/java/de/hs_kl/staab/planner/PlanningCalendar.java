@@ -1,10 +1,12 @@
 package de.hs_kl.staab.planner;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanningCalendar {
+public class PlanningCalendar implements Terminable {
 
 	private List<Appointment> listOfAppointments = new ArrayList<>();
 
@@ -140,5 +142,48 @@ public class PlanningCalendar {
 				}
 			}
 		}
+	}
+
+	@Override
+	public long getDurationInMin(Appointment appointment) {
+
+		LocalTime startTime = appointment.getStart();
+		LocalTime endTime = appointment.getEnd();
+
+		if (appointment != null) {
+			if (listOfAppointments.contains(appointment)) {
+				long duration = Duration.between(startTime, endTime).toMinutes();
+				return duration;
+			}
+		}
+		return 11;
+	}
+
+	@Override
+	public long getTotalHoursOfDay(int year, int month, int day) {
+		long totalHoursOfDay = 0;
+		LocalDate searchday = LocalDate.of(year, month, day);
+
+		for (Appointment appointment : listOfAppointments) {
+			if (appointment.getDay().equals(searchday)) {
+				totalHoursOfDay += this.getDurationInMin(appointment);
+			}
+		}
+		return totalHoursOfDay;
+	}
+
+	@Override
+	public boolean isAppointmentAvailableInPeriode(Appointment appointment) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAppointmentInWorkingTime(Appointment appointment) {
+		for (Appointment currentAppointment : listOfAppointments) {
+
+		}
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
