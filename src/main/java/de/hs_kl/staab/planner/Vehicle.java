@@ -54,6 +54,10 @@ public abstract class Vehicle {
 		return licensePlate;
 	}
 
+	public String getIdOfVehicle() {
+		return idOfVehicle;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

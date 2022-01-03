@@ -95,11 +95,11 @@ public class MainApplication {
 
 		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 02, 13, 15, wkp1, car1, oilChange,
 				carMechanic1);
-		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 02, 10, 15, wkp1, car1, tireChange,
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 03, 10, 15, wkp1, car1, tireChange,
 				carMechanic1);
-		WorkingAppointment workingAppointment3 = new WorkingAppointment(2016, 1, 7, 13, 15, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment3 = new WorkingAppointment(2016, 1, 7, 13, 15, wkp1, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment4 = new WorkingAppointment(2016, 1, 8, 13, 15, wkp1, car1, inspectionCar,
+		WorkingAppointment workingAppointment4 = new WorkingAppointment(2016, 1, 8, 13, 15, wkp1, car2, inspectionCar,
 				carMechanic1);
 
 		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2016, 1, 05, 13, 0, wkp3,
@@ -111,9 +111,10 @@ public class MainApplication {
 		customerService.createNewVehicle(car1);
 		customerService.createNewVehicle(car1);
 		customerService.createNewVehicle(car2);
-		customerService.createNewVehicle(null);
+		customerService.createNewVehicle(car3);
 
 		customerService.createNewCustomer(customer1);
+		customerService.createNewCustomer(customer2);
 		customerService.createNewCustomer(customer2);
 		customerService.createNewCustomer(customer3);
 		customerService.createNewCustomer(null);
@@ -123,15 +124,18 @@ public class MainApplication {
 		customerService.addVehicleForCustomer(customer2, car2);
 		customerService.addVehicleForCustomer(customer2, null);
 
+		customerService.getCustomerById("CS-1");
+
 		customerService.getListOfVehiclesForCustomer(customer1);
 		customerService.getListOfVehiclesForCustomer(customer2);
 		customerService.getListOfVehiclesForCustomer(null);
 
-		customerService.getVehicleByLicensePlate(null);
+		customerService.getVehicleByLicensePlate("HOM-SB 211");
+		customerService.getVehicleByLicensePlate("HOM-SH 212");
 		customerService.updateVehicle(null, null);
 
-		customerService.getVehicleForCustomer(customer4, null);
-		customerService.getVehicleHistory(null);
+		customerService.getVehicleForCustomer(customer3, car2);
+		customerService.getServiceHistoryForVehicle(null);
 
 		// customerService.getListOfVehiclesForCustomer(customer4);
 
@@ -169,14 +173,18 @@ public class MainApplication {
 		planningCalendar.getWeekOverview(10, 2016);
 
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment1);
-		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment2);
+		// planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment2);
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment3);
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment4);
+		System.out.println("Service history for car1: ");
+
+		// Check if all finished work is issued for car1
+		customerService.getServiceHistoryForVehicle(car1);
 
 		System.out.println("Appointments of yesterday:");
 		planningCalendar.getYesterdayWorkingAppointments();
 
-		planningCalendar.getAppointments();
+		// planningCalendar.getAppointments();
 		planningCalendar.getAppointmentById("AP-14");
 
 		System.out.println(planningCalendar.getDurationInMin(cleaningAppointment1));
