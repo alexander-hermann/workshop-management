@@ -187,9 +187,6 @@ public class MainApplication {
 		// planningCalendar.getAppointments();
 		planningCalendar.getAppointmentById("AP-14");
 
-		System.out.println(planningCalendar.getDurationInMin(cleaningAppointment1));
-		System.out.println(planningCalendar.getTotalHoursOfDay(2016, 01, 5));
-
 		System.out.println("The list of working appointments for the car mechanic 1 of today:");
 		plannerService.getServiceForCarMechanicForToday(carMechanic1);
 	}
