@@ -1,6 +1,7 @@
 package de.hs_kl.staab.planner;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -209,13 +210,13 @@ public class PlannerService {
 		// Avoid NullPointerException
 		String checkVehicleHasValue = (carMechanic != null) ? carMechanic.getId() : "null";
 
-		LocalDate today = LocalDate.now();
+		LocalDateTime today = LocalDateTime.now();
 
 		List<WorkingAppointment> listOfCompletedWorkingAppointmentsForCarMechanic = new ArrayList<>();
 
 		if (carMechanic != null) {
 			for (Appointment currentWorkingAppointment : carMechanic.listOfWorkingAppointmentForCarMechanic) {
-				if (currentWorkingAppointment.getDay().equals(today)) {
+				if (currentWorkingAppointment.getStartOfAppointment().compareTo(today) > 0) {
 					listOfCompletedWorkingAppointmentsForCarMechanic
 							.add((WorkingAppointment) currentWorkingAppointment);
 				}
