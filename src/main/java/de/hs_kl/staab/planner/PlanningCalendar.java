@@ -18,39 +18,23 @@ public class PlanningCalendar {
 	/* ******************************************************** */
 
 	public void createNewAppointment(Appointment appointment) {
+		if (appointment != null) {
+			if (!listOfAppointments.contains(appointment)) {
+				if (appointment.isAppointmentInWorkingTime()) {
 
-		/*
-		 * long totalHours = 0; LocalDate day = appointment.getDay();
-		 * 
-		 * for (Appointment currentAppointment : listOfAppointments) { if
-		 * (currentAppointment.getDay().equals(day)) { if (currentAppointment instanceof
-		 * WorkingAppointment) { if (((WorkingAppointment)
-		 * currentAppointment).getWorkingPlatform() .equals(((WorkingAppointment)
-		 * currentAppointment).getWorkingPlatform())) { System.out.println("WK"); } }
-		 * else if (currentAppointment instanceof CleaningAppointment) { if
-		 * (((CleaningAppointment) currentAppointment).getWorkingPlatform()
-		 * .equals(((CleaningAppointment) currentAppointment).getWorkingPlatform())) {
-		 * System.out.println("CLeaning"); } } else if (currentAppointment instanceof
-		 * ConsultingAppointment) { System.out.println("Consulting"); }
-		 * 
-		 * totalHours += appointment.getDurationInMin(); System.out.println("HH" +
-		 * totalHours); }
-		 * 
-		 * }
-		 */
-
-		if (!listOfAppointments.contains(appointment)) {
-			if (appointment.isAppointmentInWorkingTime()) {
-
-				listOfAppointments.add(appointment);
-				System.out.println("The Appointment " + appointment + " was successfully added.");
+					listOfAppointments.add(appointment);
+					System.out.println("The Appointment " + appointment + " was successfully added.");
+				} else {
+					System.err.println("The appointment is outside of working hours.");
+				}
 			} else {
-				System.err.println("The appointment is outside of working hours.");
+				System.err.println("The appointment can't be added, because the appointment " + appointment
+						+ " already exists in the list.");
 			}
 		} else {
-			System.err.println("The appointment can't be added, because the appointment " + appointment
-					+ " already exists in the list.");
+			System.err.println("You must entered an appointment.");
 		}
+
 	}
 
 	public void getAppointmentById(String appointmentId) {

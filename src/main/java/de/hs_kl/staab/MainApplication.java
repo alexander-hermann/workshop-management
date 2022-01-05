@@ -84,7 +84,7 @@ public class MainApplication {
 				"hendrik@web.de");
 		Customer customer4 = new Customer("Max Müller", null, "+490176-99988874", "max@web.de");
 
-		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 1, 5, 16, 31, customer1, 0.5,
+		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 1, 5, 16, 30, customer1, 0.5,
 				customerConsultant1);
 		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
 				customerConsultant1);

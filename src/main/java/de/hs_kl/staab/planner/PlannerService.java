@@ -216,7 +216,7 @@ public class PlannerService {
 
 		if (carMechanic != null) {
 			for (Appointment currentWorkingAppointment : carMechanic.listOfWorkingAppointmentForCarMechanic) {
-				if (currentWorkingAppointment.getStartOfAppointment().compareTo(today) > 0) {
+				if (currentWorkingAppointment.getDayWithStartTime().compareTo(today) > 0) {
 					listOfCompletedWorkingAppointmentsForCarMechanic
 							.add((WorkingAppointment) currentWorkingAppointment);
 				}
