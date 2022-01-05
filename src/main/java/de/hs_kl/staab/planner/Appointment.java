@@ -1,11 +1,15 @@
 package de.hs_kl.staab.planner;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.IsoFields;
 
-public class Appointment {
+public class Appointment implements Terminable {
+
+	protected final static LocalTime OPENING_TIME_START = LocalTime.of(8, 00);
+	protected final static LocalTime OPENING_TIME_END = LocalTime.of(17, 00);
 
 	protected final static int TIME_CONVERSION_FAKTOR_IN_MINUTES = 60;
 
@@ -52,6 +56,14 @@ public class Appointment {
 		return dayOfAppointment;
 	}
 
+	public LocalDateTime getDayWithStartTime() {
+		return startOfAppointment;
+	}
+
+	public LocalDateTime getDayWithEndTime() {
+		return endOfAppointment;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -67,5 +79,41 @@ public class Appointment {
 		builder.append(dayOfAppointment);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public long getDurationInMin() {
+		LocalTime startTime = this.getStart();
+		LocalTime endTime = this.getEnd();
+		long duration = 0;
+
+		duration = Duration.between(startTime, endTime).toMinutes();
+		return duration;
+	}
+
+	@Override
+	public long getTotalHoursOfDay(LocalDate date) {
+		long totalHours = 0;
+		totalHours += totalHours;
+
+		return totalHours;
+	}
+
+	@Override
+	public boolean isAppointmentAvailableInPeriode(Appointment appointment) {
+
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAppointmentInWorkingTime() {
+		LocalTime timePeriod = OPENING_TIME_END.minusMinutes(this.getDurationInMin());
+
+		if (this.getStart().isAfter(OPENING_TIME_START.minusSeconds(1))
+				&& this.getStart().isBefore(timePeriod.plusSeconds(1))) {
+			return true;
+		}
+		return false;
 	}
 }
