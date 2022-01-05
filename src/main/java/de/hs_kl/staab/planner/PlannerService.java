@@ -173,7 +173,7 @@ public class PlannerService {
 		List<WorkingAppointment> listOfFoundPlannedWorks = new ArrayList<>();
 
 		if (workingPlatform != null) {
-			if (listOfWorkingPlatforms.contains(workingPlatform) && workingPlatform != null) {
+			if (listOfWorkingPlatforms.contains(workingPlatform)) {
 				for (WorkingAppointment currentWorkingAppointment : workingPlatform.getListOfPlannedWorks()) {
 					if (currentWorkingAppointment.getDay().equals(todayDay)
 							&& currentWorkingAppointment.isCompleted() == false) {

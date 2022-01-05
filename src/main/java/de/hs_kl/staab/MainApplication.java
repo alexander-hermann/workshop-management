@@ -84,7 +84,7 @@ public class MainApplication {
 				"hendrik@web.de");
 		Customer customer4 = new Customer("Max Müller", null, "+490176-99988874", "max@web.de");
 
-		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 0.5,
+		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 1, 5, 16, 31, customer1, 0.5,
 				customerConsultant1);
 		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
 				customerConsultant1);
@@ -93,7 +93,7 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
 				customerConsultant1);
 
-		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 02, 13, 15, wkp1, car1, oilChange,
+		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 05, 13, 15, wkp1, car1, oilChange,
 				carMechanic1);
 		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 03, 10, 15, wkp1, car1, tireChange,
 				carMechanic1);
@@ -155,8 +155,6 @@ public class MainApplication {
 		plannerService.getWorkingPlatforms();
 		plannerService.getServices();
 
-		plannerService.getOverviewOfPlannedWorks(wkp1);
-
 		// ########################################################
 		planningCalendar.createNewAppointment(consultingAppointment1);
 		planningCalendar.createNewAppointment(consultingAppointment2);
@@ -172,7 +170,9 @@ public class MainApplication {
 		planningCalendar.createNewAppointment(cleaningAppointment2);
 		planningCalendar.getWeekOverview(10, 2016);
 
-		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment1);
+		planningCalendar.getAppointments();
+
+		// planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment1);
 		// planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment2);
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment3);
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment4);
@@ -187,7 +187,6 @@ public class MainApplication {
 		// planningCalendar.getAppointments();
 		planningCalendar.getAppointmentById("AP-14");
 
-		System.out.println(planningCalendar.getDurationInMin(cleaningAppointment1));
-		System.out.println(planningCalendar.getTotalHoursOfDay(2016, 01, 5));
+		plannerService.getOverviewOfPlannedWorks(wkp1);
 	}
 }
