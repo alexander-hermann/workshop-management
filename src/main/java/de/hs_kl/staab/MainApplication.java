@@ -84,7 +84,7 @@ public class MainApplication {
 				"hendrik@web.de");
 		Customer customer4 = new Customer("Max Müller", null, "+490176-99988874", "max@web.de");
 
-		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 0.5,
+		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2022, 1, 4, 13, 15, customer1, 0.5,
 				customerConsultant1);
 		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
 				customerConsultant1);
@@ -93,13 +93,13 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 1, 5, 13, 15, customer1, 1,
 				customerConsultant1);
 
-		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 02, 13, 15, wkp1, car1, oilChange,
+		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 04, 13, 15, wkp1, car1, oilChange,
 				carMechanic1);
-		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 03, 10, 15, wkp1, car1, tireChange,
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 04, 10, 15, wkp1, car1, tireChange,
 				carMechanic1);
-		WorkingAppointment workingAppointment3 = new WorkingAppointment(2016, 1, 7, 13, 15, wkp1, car2, glassRepair,
+		WorkingAppointment workingAppointment3 = new WorkingAppointment(2022, 1, 05, 13, 15, wkp1, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment4 = new WorkingAppointment(2016, 1, 8, 13, 15, wkp1, car2, inspectionCar,
+		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 05, 9, 15, wkp1, car2, inspectionCar,
 				carMechanic1);
 
 		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2016, 1, 05, 13, 0, wkp3,
@@ -173,7 +173,7 @@ public class MainApplication {
 		planningCalendar.getWeekOverview(10, 2016);
 
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment1);
-		// planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment2);
+		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment2);
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment3);
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment4);
 		System.out.println("Service history for car1: ");
@@ -189,5 +189,8 @@ public class MainApplication {
 
 		System.out.println(planningCalendar.getDurationInMin(cleaningAppointment1));
 		System.out.println(planningCalendar.getTotalHoursOfDay(2016, 01, 5));
+
+		System.out.println("The list of working appointments for the car mechanic 1 of today:");
+		plannerService.getServiceForCarMechanicForToday(carMechanic1);
 	}
 }
