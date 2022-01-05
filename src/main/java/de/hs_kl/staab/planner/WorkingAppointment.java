@@ -22,6 +22,7 @@ public class WorkingAppointment extends Appointment {
 
 		this.vehicle.listOfWorkingAppointmentForVehicle.add(this);
 		this.workingPlatform.addPlannedWork(this);
+		this.carMechanic.listOfWorkingAppointmentForCarMechanic.add(this);
 	}
 
 	public WorkingPlatform getWorkingPlatform() {

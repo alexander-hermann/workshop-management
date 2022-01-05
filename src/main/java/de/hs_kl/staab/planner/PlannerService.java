@@ -1,6 +1,7 @@
 package de.hs_kl.staab.planner;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -202,6 +203,38 @@ public class PlannerService {
 			}
 		} else {
 			System.err.println("You have not entered a working platform.");
+		}
+	}
+
+	public void getServiceForCarMechanicForToday(CarMechanic carMechanic) {
+		// Avoid NullPointerException
+		String checkVehicleHasValue = (carMechanic != null) ? carMechanic.getId() : "null";
+
+		LocalDateTime today = LocalDateTime.now();
+
+		List<WorkingAppointment> listOfCompletedWorkingAppointmentsForCarMechanic = new ArrayList<>();
+
+		if (carMechanic != null) {
+			for (Appointment currentWorkingAppointment : carMechanic.listOfWorkingAppointmentForCarMechanic) {
+				if (currentWorkingAppointment.getStartOfAppointment().compareTo(today) > 0) {
+					listOfCompletedWorkingAppointmentsForCarMechanic
+							.add((WorkingAppointment) currentWorkingAppointment);
+				}
+			}
+
+			if (listOfCompletedWorkingAppointmentsForCarMechanic.size() > 0) {
+				for (WorkingAppointment currentWorkingAppointment : listOfCompletedWorkingAppointmentsForCarMechanic) {
+					System.out.println("The " + carMechanic + " has the " + currentWorkingAppointment.getService()
+							+ " on the date and time " + currentWorkingAppointment.startOfAppointment
+							+ " and on the working platform " + currentWorkingAppointment.getWorkingPlatform());
+				}
+			} else {
+				System.err.println("There are no working appointments for the car mechanic with the id "
+						+ carMechanic.getId() + " of today");
+			}
+		} else {
+			System.err.println("The working appointments for the car mechanic " + checkVehicleHasValue
+					+ " cannot be viewed because it is not in the list of working appointments for the car mechanic or you have not entered a car mechanic.");
 		}
 	}
 }

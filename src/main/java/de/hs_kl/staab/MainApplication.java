@@ -95,11 +95,11 @@ public class MainApplication {
 
 		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 05, 13, 15, wkp1, car1, oilChange,
 				carMechanic1);
-		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 03, 10, 15, wkp1, car1, tireChange,
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 04, 10, 15, wkp1, car1, tireChange,
 				carMechanic1);
-		WorkingAppointment workingAppointment3 = new WorkingAppointment(2016, 1, 7, 13, 15, wkp1, car2, glassRepair,
+		WorkingAppointment workingAppointment3 = new WorkingAppointment(2022, 1, 05, 13, 15, wkp1, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment4 = new WorkingAppointment(2016, 1, 8, 13, 15, wkp1, car2, inspectionCar,
+		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 05, 9, 15, wkp1, car2, inspectionCar,
 				carMechanic1);
 
 		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2016, 1, 05, 13, 0, wkp3,
@@ -187,6 +187,10 @@ public class MainApplication {
 		// planningCalendar.getAppointments();
 		planningCalendar.getAppointmentById("AP-14");
 
-		plannerService.getOverviewOfPlannedWorks(wkp1);
+		System.out.println(planningCalendar.getDurationInMin(cleaningAppointment1));
+		System.out.println(planningCalendar.getTotalHoursOfDay(2016, 01, 5));
+
+		System.out.println("The list of working appointments for the car mechanic 1 of today:");
+		plannerService.getServiceForCarMechanicForToday(carMechanic1);
 	}
 }

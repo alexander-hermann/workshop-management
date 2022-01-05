@@ -40,6 +40,10 @@ public class Appointment implements Terminable {
 		this.idOfAppointment = idOfAppointment;
 	}
 
+	public LocalDateTime getStartOfAppointment() {
+		return startOfAppointment;
+	}
+
 	public LocalTime getStart() {
 		return startOfAppointment.toLocalTime();
 	}
