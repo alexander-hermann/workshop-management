@@ -1,12 +1,12 @@
 package de.hs_kl.staab.planner;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class PlanningCalendar implements Terminable {
+public class PlanningCalendar {
 
 	private List<Appointment> listOfAppointments = new ArrayList<>();
 
@@ -18,9 +18,35 @@ public class PlanningCalendar implements Terminable {
 	/* ******************************************************** */
 
 	public void createNewAppointment(Appointment appointment) {
+
+		/*
+		 * long totalHours = 0; LocalDate day = appointment.getDay();
+		 * 
+		 * for (Appointment currentAppointment : listOfAppointments) { if
+		 * (currentAppointment.getDay().equals(day)) { if (currentAppointment instanceof
+		 * WorkingAppointment) { if (((WorkingAppointment)
+		 * currentAppointment).getWorkingPlatform() .equals(((WorkingAppointment)
+		 * currentAppointment).getWorkingPlatform())) { System.out.println("WK"); } }
+		 * else if (currentAppointment instanceof CleaningAppointment) { if
+		 * (((CleaningAppointment) currentAppointment).getWorkingPlatform()
+		 * .equals(((CleaningAppointment) currentAppointment).getWorkingPlatform())) {
+		 * System.out.println("CLeaning"); } } else if (currentAppointment instanceof
+		 * ConsultingAppointment) { System.out.println("Consulting"); }
+		 * 
+		 * totalHours += appointment.getDurationInMin(); System.out.println("HH" +
+		 * totalHours); }
+		 * 
+		 * }
+		 */
+
 		if (!listOfAppointments.contains(appointment)) {
-			listOfAppointments.add(appointment);
-			System.out.println("The Appointment " + appointment + " was successfully added.");
+			if (appointment.isAppointmentInWorkingTime()) {
+
+				listOfAppointments.add(appointment);
+				System.out.println("The Appointment " + appointment + " was successfully added.");
+			} else {
+				System.err.println("The appointment is outside of working hours.");
+			}
 		} else {
 			System.err.println("The appointment can't be added, because the appointment " + appointment
 					+ " already exists in the list.");
@@ -43,6 +69,14 @@ public class PlanningCalendar implements Terminable {
 
 	public void getAppointments() {
 		if (!listOfAppointments.isEmpty()) {
+			Collections.sort(listOfAppointments, new Comparator<Appointment>() {
+
+				@Override
+				public int compare(Appointment firstAppointment, Appointment secondAppointment) {
+					return firstAppointment.getDayWithStartTime().compareTo(secondAppointment.getDayWithStartTime());
+				}
+
+			});
 			for (Appointment appointment : listOfAppointments) {
 				System.out.println(appointment);
 			}
@@ -142,48 +176,5 @@ public class PlanningCalendar implements Terminable {
 				}
 			}
 		}
-	}
-
-	@Override
-	public long getDurationInMin(Appointment appointment) {
-
-		LocalTime startTime = appointment.getStart();
-		LocalTime endTime = appointment.getEnd();
-
-		if (appointment != null) {
-			if (listOfAppointments.contains(appointment)) {
-				long duration = Duration.between(startTime, endTime).toMinutes();
-				return duration;
-			}
-		}
-		return 11;
-	}
-
-	@Override
-	public long getTotalHoursOfDay(int year, int month, int day) {
-		long totalHoursOfDay = 0;
-		LocalDate searchday = LocalDate.of(year, month, day);
-
-		for (Appointment appointment : listOfAppointments) {
-			if (appointment.getDay().equals(searchday)) {
-				totalHoursOfDay += this.getDurationInMin(appointment);
-			}
-		}
-		return totalHoursOfDay;
-	}
-
-	@Override
-	public boolean isAppointmentAvailableInPeriode(Appointment appointment) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isAppointmentInWorkingTime(Appointment appointment) {
-		for (Appointment currentAppointment : listOfAppointments) {
-
-		}
-		// TODO Auto-generated method stub
-		return false;
 	}
 }
