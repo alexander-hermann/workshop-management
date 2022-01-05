@@ -1,12 +1,14 @@
 package de.hs_kl.staab.planner;
 
+import java.time.LocalDate;
+
 public interface Terminable {
 
-	long getDurationInMin(Appointment appointment);
+	long getDurationInMin();
 
-	long getTotalHoursOfDay(int year, int month, int day);
+	long getTotalHoursOfDay(LocalDate day);
 
 	boolean isAppointmentAvailableInPeriode(Appointment appointment);
 
-	boolean isAppointmentInWorkingTime(Appointment appointment);
+	boolean isAppointmentInWorkingTime();
 }
