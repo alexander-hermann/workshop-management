@@ -10,8 +10,6 @@ public class PlanningCalendar {
 
 	private List<Appointment> listOfAppointments = new ArrayList<>();
 
-	private final static float MAX_WORKING_TIME_PER_WORKING_PLATFORM_IN_MIN = 420; // Bzw. 7 Stunden
-
 	/* ******************************************************** */
 	/* * HIER KÖNNEN SIE IHREN PLANUNGSKALENDER PROGRAMMIEREN * */
 	/* * Der Planungskalender enthält den Kern ************** * */
@@ -21,7 +19,8 @@ public class PlanningCalendar {
 
 	public void createNewAppointment(Appointment appointment) {
 		List<WorkingAppointment> listOfFoundWorkingAppointments = new ArrayList<>();
-		List<CleaningAppointment> listOfFoundCleaningApointments = new ArrayList<>();
+		List<CleaningAppointment> listOfFoundCleaningAppointments = new ArrayList<>();
+		List<ConsultingAppointment> listOfFoundConsultingAppointments = new ArrayList<>();
 
 		if (appointment != null) {
 			for (Appointment cappointment : listOfAppointments) {
@@ -54,12 +53,26 @@ public class PlanningCalendar {
 					// The found elements are saved in the list with cleaning appointments.
 					if (cappointment.getDay().equals(appointment.getDay())
 							&& getWorkingPlatformFromList.equals(getWorkingPlatformFromAppointment)) {
-						listOfFoundCleaningApointments.add(castTheObjectFromListToCleaningAppointment);
+						listOfFoundCleaningAppointments.add(castTheObjectFromListToCleaningAppointment);
 					}
-				} else if (cappointment instanceof ConsultingAppointment) {
+				} else if (appointment instanceof ConsultingAppointment) {
 
+					// Cast the object appointment to cleaning appointment
+					ConsultingAppointment castAppointmentToConsultingAppointment = ((ConsultingAppointment) appointment);
+					CustomerConsultant getCustomerConsultantFromAppointment = castAppointmentToConsultingAppointment
+							.getCustomerConsultant();
+
+					ConsultingAppointment castAppointmentFromListToConsultingAppointment = ((ConsultingAppointment) cappointment);
+					CustomerConsultant getCustomerConsultantFromList = castAppointmentFromListToConsultingAppointment
+							.getCustomerConsultant();
+
+					if (cappointment.getDay().equals(appointment.getDay())
+							&& getCustomerConsultantFromList.equals(getCustomerConsultantFromAppointment)) {
+						listOfFoundConsultingAppointments.add(castAppointmentToConsultingAppointment);
+					}
 				}
 			}
+
 			if (!listOfAppointments.contains(appointment)) {
 				if (appointment.isAppointmentInWorkingTime()) {
 					if (appointment instanceof WorkingAppointment) {
@@ -73,6 +86,7 @@ public class PlanningCalendar {
 										.compareTo(secondAppointment.getDayWithEndTime());
 							}
 						});
+
 						if (!listOfFoundWorkingAppointments.isEmpty()) {
 							int sizeList = listOfFoundWorkingAppointments.size();
 							WorkingAppointment firstObjectFromList = listOfFoundWorkingAppointments.get(0);
@@ -96,7 +110,7 @@ public class PlanningCalendar {
 
 					} else if (appointment instanceof CleaningAppointment) {
 						// The list with cleaning appointments is sorted
-						Collections.sort(listOfFoundCleaningApointments, new Comparator<CleaningAppointment>() {
+						Collections.sort(listOfFoundCleaningAppointments, new Comparator<CleaningAppointment>() {
 
 							@Override
 							public int compare(CleaningAppointment firstAppointment,
@@ -106,10 +120,43 @@ public class PlanningCalendar {
 							}
 						});
 
-						if (!listOfFoundCleaningApointments.isEmpty()) {
-							int sizeList = listOfFoundCleaningApointments.size();
-							CleaningAppointment firstObjectFromList = listOfFoundCleaningApointments.get(0);
-							CleaningAppointment lastObjectFromList = listOfFoundCleaningApointments.get(sizeList - 1);
+						if (!listOfFoundCleaningAppointments.isEmpty()) {
+							int sizeList = listOfFoundCleaningAppointments.size();
+							CleaningAppointment firstObjectFromList = listOfFoundCleaningAppointments.get(0);
+							CleaningAppointment lastObjectFromList = listOfFoundCleaningAppointments.get(sizeList - 1);
+
+							boolean appointmentDaygreaterLastObject = !(appointment.getDayWithStartTime()
+									.isBefore(lastObjectFromList.getDayWithEndTime()));
+							boolean less = !(appointment.getDayWithEndTime()
+									.isAfter(firstObjectFromList.getDayWithStartTime()));
+
+							if (appointmentDaygreaterLastObject || less) {
+								listOfAppointments.add(appointment);
+								System.out.println("The Appointment " + appointment + " was successfully added.");
+							} else {
+								System.err.println("Termin kollidiert mit einem anderen Termin auf dieser Bühne");
+							}
+						} else {
+							listOfAppointments.add(appointment);
+							System.out.println("The Appointment " + appointment + " was successfully added.");
+						}
+					} else if (appointment instanceof ConsultingAppointment) {
+						// The list with consulting appointments is sorted
+						Collections.sort(listOfFoundConsultingAppointments, new Comparator<ConsultingAppointment>() {
+
+							@Override
+							public int compare(ConsultingAppointment firstAppointment,
+									ConsultingAppointment secondAppointment) {
+								return firstAppointment.getDayWithEndTime()
+										.compareTo(secondAppointment.getDayWithEndTime());
+							}
+						});
+
+						if (!listOfFoundConsultingAppointments.isEmpty()) {
+							int sizeList = listOfFoundConsultingAppointments.size();
+							ConsultingAppointment firstObjectFromList = listOfFoundConsultingAppointments.get(0);
+							ConsultingAppointment lastObjectFromList = listOfFoundConsultingAppointments
+									.get(sizeList - 1);
 
 							boolean appointmentDaygreaterLastObject = !(appointment.getDayWithStartTime()
 									.isBefore(lastObjectFromList.getDayWithEndTime()));
@@ -137,7 +184,6 @@ public class PlanningCalendar {
 		} else {
 			System.err.println("You must entered an appointment.");
 		}
-
 	}
 
 	public void getAppointmentById(String appointmentId) {

@@ -86,11 +86,11 @@ public class MainApplication {
 
 		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 1, 5, 8, 00, customer1, 0.5,
 				customerConsultant1);
-		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2016, 1, 5, 8, 00, customer1, 0.5,
+		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2016, 1, 5, 9, 30, customer1, 0.5,
 				customerConsultant1);
 		ConsultingAppointment consultingAppointment3 = new ConsultingAppointment(2016, 1, 6, 13, 15, customer1, 1,
 				customerConsultant1);
-		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 1, 5, 13, 20, customer1, 1,
+		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 1, 5, 14, 20, customer1, 1,
 				customerConsultant1);
 
 		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 05, 8, 00, wkp1, car1, glassRepair,
@@ -104,9 +104,11 @@ public class MainApplication {
 
 		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2016, 1, 05, 13, 00, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
-		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2016, 1, 05, 14, 15, wkp3,
+		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2016, 1, 05, 14, 00, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
 		CleaningAppointment cleaningAppointment3 = new CleaningAppointment(2016, 1, 05, 12, 00, wkp3,
+				CLEANINGPROGRAMM.INTENSE, dispatcher1);
+		CleaningAppointment cleaningAppointment4 = new CleaningAppointment(2016, 1, 05, 15, 00, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
 
 		// ########################################################
@@ -171,6 +173,7 @@ public class MainApplication {
 		planningCalendar.createNewAppointment(cleaningAppointment1);
 		planningCalendar.createNewAppointment(cleaningAppointment2);
 		planningCalendar.createNewAppointment(cleaningAppointment3);
+		planningCalendar.createNewAppointment(cleaningAppointment4);
 		planningCalendar.getWeekOverview(10, 2016);
 
 		planningCalendar.getAppointments();
