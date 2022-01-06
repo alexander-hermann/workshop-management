@@ -24,44 +24,44 @@ public class PlanningCalendar {
 		List<CleaningAppointment> listOfFoundCleaningApointments = new ArrayList<>();
 
 		if (appointment != null) {
+			for (Appointment cappointment : listOfAppointments) {
+				if (appointment instanceof WorkingAppointment) {
+
+					// Cast the object appointment to working appointment
+					WorkingAppointment castTheObject = ((WorkingAppointment) appointment);
+					WorkingPlatform getWorkingPlatform = castTheObject.getWorkingPlatform();
+
+					// All elements from the appointments list are filtered with the date and with
+					// the working platform from the appointment.
+					// The found elements are saved in the list with working appointments.
+					if (cappointment.getDay().equals(appointment.getDay())
+							&& ((WorkingAppointment) cappointment).getWorkingPlatform().equals(getWorkingPlatform)) {
+						listOfFoundWorkingAppointments.add(((WorkingAppointment) cappointment));
+					}
+				} else if (cappointment instanceof CleaningAppointment) {
+
+					// Cast the object appointment to cleaning appointment
+					CleaningAppointment castTheObjectToCleaningAppointment = ((CleaningAppointment) appointment);
+					WorkingPlatform getWorkingPlatformFromAppointment = castTheObjectToCleaningAppointment
+							.getWorkingPlatform();
+
+					CleaningAppointment castTheObjectFromListToCleaningAppointment = ((CleaningAppointment) cappointment);
+					WorkingPlatform getWorkingPlatformFromList = castTheObjectFromListToCleaningAppointment
+							.getWorkingPlatform();
+
+					// All elements from the appointments list are filtered with the date and with
+					// the working platform from the appointment.
+					// The found elements are saved in the list with cleaning appointments.
+					if (cappointment.getDay().equals(appointment.getDay())
+							&& getWorkingPlatformFromList.equals(getWorkingPlatformFromAppointment)) {
+						listOfFoundCleaningApointments.add(castTheObjectFromListToCleaningAppointment);
+					}
+				} else if (cappointment instanceof ConsultingAppointment) {
+
+				}
+			}
 			if (!listOfAppointments.contains(appointment)) {
 				if (appointment.isAppointmentInWorkingTime()) {
-					for (Appointment cappointment : listOfAppointments) {
-						if (cappointment instanceof WorkingAppointment) {
-
-							// Cast the object appointment to working appointment
-							WorkingAppointment castTheObject = ((WorkingAppointment) appointment);
-							WorkingPlatform getWorkingPlatform = castTheObject.getWorkingPlatform();
-
-							// All elements from the appointments list are filtered with the date and with
-							// the working platform from the appointment.
-							// The found elements are saved in the list with working appointments.
-							if (cappointment.getDay().equals(appointment.getDay())
-									&& ((WorkingAppointment) cappointment).getWorkingPlatform()
-											.equals(getWorkingPlatform)) {
-								listOfFoundWorkingAppointments.add(((WorkingAppointment) cappointment));
-							}
-						} else if (cappointment instanceof CleaningAppointment) {
-
-							// Cast the object appointment to cleaning appointment
-							CleaningAppointment castTheObjectToCleaningAppointment = ((CleaningAppointment) appointment);
-							WorkingPlatform getWorkingPlatformFromAppointment = castTheObjectToCleaningAppointment
-									.getWorkingPlatform();
-
-							CleaningAppointment castTheObjectFromListToCleaningAppointment = ((CleaningAppointment) cappointment);
-							WorkingPlatform getWorkingPlatformFromList = castTheObjectFromListToCleaningAppointment
-									.getWorkingPlatform();
-
-							// All elements from the appointments list are filtered with the date and with
-							// the working platform from the appointment.
-							// The found elements are saved in the list with cleaning appointments.
-							if (cappointment.getDay().equals(appointment.getDay())
-									&& getWorkingPlatformFromList.equals(getWorkingPlatformFromAppointment)) {
-								listOfFoundCleaningApointments.add(castTheObjectFromListToCleaningAppointment);
-							}
-						}
-					}
-
 					if (appointment instanceof WorkingAppointment) {
 						// The list with working appointments is sorted
 						Collections.sort(listOfFoundWorkingAppointments, new Comparator<WorkingAppointment>() {
@@ -73,6 +73,21 @@ public class PlanningCalendar {
 										.compareTo(secondAppointment.getDayWithEndTime());
 							}
 						});
+						if (!listOfFoundWorkingAppointments.isEmpty()) {
+							int sizeList = listOfFoundWorkingAppointments.size();
+							WorkingAppointment lastObjectFromList = listOfFoundWorkingAppointments.get(sizeList - 1);
+
+							if (!(appointment.getDayWithStartTime().isBefore(lastObjectFromList.getDayWithEndTime()))) {
+								listOfAppointments.add(appointment);
+								System.out.println("The Appointment " + appointment + " was successfully added.");
+							} else {
+								System.err.println("Termin kollidiert mit einem anderen Termin auf dieser Bühne");
+							}
+						} else {
+							listOfAppointments.add(appointment);
+							System.out.println("The Appointment " + appointment + " was successfully added.");
+						}
+
 					} else if (appointment instanceof CleaningAppointment) {
 						// The list with cleaning appointments is sorted
 						Collections.sort(listOfFoundCleaningApointments, new Comparator<CleaningAppointment>() {
@@ -84,9 +99,14 @@ public class PlanningCalendar {
 										.compareTo(secondAppointment.getDayWithEndTime());
 							}
 						});
+
+						if (!listOfFoundCleaningApointments.isEmpty()) {
+
+						} else {
+							listOfAppointments.add(appointment);
+							System.out.println("The Appointment " + appointment + " was successfully added.");
+						}
 					}
-					listOfAppointments.add(appointment);
-					System.out.println("The Appointment " + appointment + " was successfully added.");
 				} else {
 					System.err.println("The appointment is outside of working hours.");
 				}

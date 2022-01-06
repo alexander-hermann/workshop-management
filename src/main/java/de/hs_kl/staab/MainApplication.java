@@ -95,7 +95,7 @@ public class MainApplication {
 
 		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 05, 8, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 05, 10, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 05, 9, 00, wkp1, car1, glassRepair,
 				carMechanic1);
 		WorkingAppointment workingAppointment3 = new WorkingAppointment(2022, 1, 05, 12, 00, wkp1, car2, glassRepair,
 				carMechanic1);

@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.time.temporal.IsoFields;
 import java.util.Objects;
 
-public class Appointment implements Terminable {
+public abstract class Appointment implements Terminable {
 
 	private final static LocalTime OPENING_TIME_START = LocalTime.of(8, 00);
 	private final static LocalTime OPENING_TIME_END = LocalTime.of(16, 00);
