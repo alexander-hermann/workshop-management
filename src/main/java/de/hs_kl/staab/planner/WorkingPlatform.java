@@ -36,8 +36,8 @@ public class WorkingPlatform {
 		return listOfPlannedWorks;
 	}
 
-	public void addPlannedWork(WorkingAppointment workingAppointment) {
-		this.listOfPlannedWorks.add(workingAppointment);
+	public void addPlannedWork(Appointment appointment) {
+		this.listOfPlannedWorks.add(appointment);
 	}
 
 	@Override

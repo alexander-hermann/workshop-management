@@ -58,6 +58,7 @@ public class PlanningCalendar {
 									.isAfter(firstObjectFromList.getDayWithStartTime()));
 
 							if (appointmentDaygreaterLastObject) {
+								inputAppointment.getWorkingPlatform().addPlannedWork(inputAppointment);
 								listOfAppointments.add(inputAppointment);
 								System.out.println(
 										"The Appointment " + inputAppointment.getId() + " was successfully added.");
@@ -67,6 +68,7 @@ public class PlanningCalendar {
 										+ inputAppointment.getWorkingPlatform());
 							}
 						} else {
+							inputAppointment.getWorkingPlatform().addPlannedWork(inputAppointment);
 							listOfAppointments.add(inputAppointment);
 							System.out.println(
 									"The Appointment " + inputAppointment.getId() + " was successfully added.");
