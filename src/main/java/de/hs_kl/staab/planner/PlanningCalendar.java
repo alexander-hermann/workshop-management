@@ -23,10 +23,36 @@ public class PlanningCalendar {
 
 	public void createNewAppointment(Appointment appointment) {
 		List<Appointment> listOfFoundAppointments = new ArrayList<>();
-
 		if (appointment != null) {
-			if (appointment instanceof WorkingAppointment || appointment instanceof CleaningAppointment) {
+			if (!listOfAppointments.contains(appointment)) {
+				listOfAppointments.add(appointment);
+				for (Appointment cappointment : listOfAppointments) {
+					if ((appointment instanceof WorkingAppointment || appointment instanceof CleaningAppointment)
+							&& (cappointment instanceof WorkingAppointment
+									|| cappointment instanceof CleaningAppointment)) {
 
+						if (!appointment.getId().equals(cappointment.getId()))
+
+							if ((appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
+									&& appointment.getDayWithStartTime().isAfter(cappointment.getDayWithStartTime())
+									&& appointment.getDayWithStartTime().isBefore(cappointment.getDayWithEndTime()))
+									|| ((appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform()))
+											&& (appointment.getDayWithEndTime()
+													.isAfter(cappointment.getDayWithStartTime()))
+											&& appointment.getDayWithEndTime()
+													.isBefore(cappointment.getDayWithEndTime()))
+									|| (appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
+											&& appointment.getDayWithStartTime()
+													.equals(cappointment.getDayWithStartTime()))) {
+
+								System.err.println(" The appointment " + appointment.getId() + " "
+										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
+										+ " collides with the appointment " + cappointment.getId() + " "
+										+ cappointment.getWorkingPlatform() + " " + cappointment.getDayWithStartTime());
+							}
+
+					}
+				}
 			}
 		} else {
 			System.err.println("You must entered an appointment.");
