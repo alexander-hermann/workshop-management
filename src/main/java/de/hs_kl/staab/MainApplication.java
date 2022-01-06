@@ -95,16 +95,18 @@ public class MainApplication {
 
 		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 05, 8, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 05, 9, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 05, 10, 00, wkp1, car1, glassRepair,
 				carMechanic1);
 		WorkingAppointment workingAppointment3 = new WorkingAppointment(2022, 1, 05, 12, 00, wkp1, car2, glassRepair,
 				carMechanic1);
 		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 05, 14, 00, wkp1, car2, inspectionCar,
 				carMechanic1);
 
-		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2016, 1, 05, 13, 0, wkp3,
+		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2016, 1, 05, 13, 00, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
-		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2016, 1, 05, 13, 15, wkp3,
+		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2016, 1, 05, 14, 15, wkp3,
+				CLEANINGPROGRAMM.INTENSE, dispatcher1);
+		CleaningAppointment cleaningAppointment3 = new CleaningAppointment(2016, 1, 05, 12, 00, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
 
 		// ########################################################
@@ -168,6 +170,7 @@ public class MainApplication {
 
 		planningCalendar.createNewAppointment(cleaningAppointment1);
 		planningCalendar.createNewAppointment(cleaningAppointment2);
+		planningCalendar.createNewAppointment(cleaningAppointment3);
 		planningCalendar.getWeekOverview(10, 2016);
 
 		planningCalendar.getAppointments();

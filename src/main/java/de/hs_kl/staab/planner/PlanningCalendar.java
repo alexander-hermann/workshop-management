@@ -75,9 +75,15 @@ public class PlanningCalendar {
 						});
 						if (!listOfFoundWorkingAppointments.isEmpty()) {
 							int sizeList = listOfFoundWorkingAppointments.size();
+							WorkingAppointment firstObjectFromList = listOfFoundWorkingAppointments.get(0);
 							WorkingAppointment lastObjectFromList = listOfFoundWorkingAppointments.get(sizeList - 1);
 
-							if (!(appointment.getDayWithStartTime().isBefore(lastObjectFromList.getDayWithEndTime()))) {
+							boolean appointmentDaygreaterLastObject = (!(appointment.getDayWithStartTime()
+									.isBefore(lastObjectFromList.getDayWithEndTime())));
+							boolean less = !(appointment.getDayWithEndTime()
+									.isAfter(firstObjectFromList.getDayWithStartTime()));
+
+							if (appointmentDaygreaterLastObject || less) {
 								listOfAppointments.add(appointment);
 								System.out.println("The Appointment " + appointment + " was successfully added.");
 							} else {
@@ -101,7 +107,21 @@ public class PlanningCalendar {
 						});
 
 						if (!listOfFoundCleaningApointments.isEmpty()) {
+							int sizeList = listOfFoundCleaningApointments.size();
+							CleaningAppointment firstObjectFromList = listOfFoundCleaningApointments.get(0);
+							CleaningAppointment lastObjectFromList = listOfFoundCleaningApointments.get(sizeList - 1);
 
+							boolean appointmentDaygreaterLastObject = !(appointment.getDayWithStartTime()
+									.isBefore(lastObjectFromList.getDayWithEndTime()));
+							boolean less = !(appointment.getDayWithEndTime()
+									.isAfter(firstObjectFromList.getDayWithStartTime()));
+
+							if (appointmentDaygreaterLastObject || less) {
+								listOfAppointments.add(appointment);
+								System.out.println("The Appointment " + appointment + " was successfully added.");
+							} else {
+								System.err.println("Termin kollidiert mit einem anderen Termin auf dieser Bühne");
+							}
 						} else {
 							listOfAppointments.add(appointment);
 							System.out.println("The Appointment " + appointment + " was successfully added.");
