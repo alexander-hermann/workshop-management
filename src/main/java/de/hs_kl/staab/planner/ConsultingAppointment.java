@@ -43,4 +43,10 @@ public class ConsultingAppointment extends Appointment {
 		return builder.toString();
 	}
 
+	@Override
+	public WorkingPlatform getWorkingPlatform() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
