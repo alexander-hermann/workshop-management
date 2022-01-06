@@ -17,12 +17,68 @@ public class PlanningCalendar {
 	/* * mit den Terminen, etc. ***************************** * */
 	/* ******************************************************** */
 
-	public void createNewAppointment(Appointment appointment) {
+	public void createNewAppointment(Appointment inputAppointment) {
 		List<Appointment> listOfFoundAppointments = new ArrayList<>();
 
-		if (appointment != null) {
-			if (appointment instanceof WorkingAppointment || appointment instanceof CleaningAppointment) {
+		if (inputAppointment != null) {
+			if (!listOfAppointments.contains(inputAppointment)) {
+				if (inputAppointment.isAppointmentInWorkingTime()) {
+					if (inputAppointment instanceof WorkingAppointment
+							|| inputAppointment instanceof CleaningAppointment) {
+						for (Appointment currentAppointment : listOfAppointments) {
 
+							// All elements from the appointments list are filtered with the date and with
+							// the working platform from the input appointment.
+							// The found elements are saved in the list with working appointments.
+							if (currentAppointment.getDay().equals(inputAppointment.getDay()) && currentAppointment
+									.getWorkingPlatform().equals(inputAppointment.getWorkingPlatform())) {
+								listOfFoundAppointments.add(inputAppointment);
+							}
+						}
+						// The list with working appointments is sorted
+						Collections.sort(listOfFoundAppointments, new Comparator<Appointment>() {
+
+							@Override
+							public int compare(Appointment firstAppointment, Appointment secondAppointment) {
+								return firstAppointment.getDayWithEndTime()
+										.compareTo(secondAppointment.getDayWithEndTime());
+							}
+						});
+
+						if (!listOfFoundAppointments.isEmpty()) {
+							int sizeList = listOfFoundAppointments.size();
+							Appointment firstObjectFromList = listOfFoundAppointments.get(0);
+							Appointment lastObjectFromList = listOfFoundAppointments.get(sizeList - 1);
+
+							boolean appointmentDaygreaterLastObject = (!(inputAppointment.getDayWithStartTime()
+									.isBefore(lastObjectFromList.getDayWithEndTime())));
+							boolean less = !(inputAppointment.getDayWithEndTime()
+									.isAfter(firstObjectFromList.getDayWithStartTime()));
+
+							if (appointmentDaygreaterLastObject || less) {
+								listOfAppointments.add(inputAppointment);
+								System.out.println(
+										"The Appointment " + inputAppointment.getId() + " was successfully added.");
+							} else {
+								System.out.println("Termin " + inputAppointment.getId()
+										+ " kollidiert mit einem anderen Termin auf dieser Bühne "
+										+ inputAppointment.getWorkingPlatform());
+							}
+						} else {
+							listOfAppointments.add(inputAppointment);
+							System.out.println(
+									"The Appointment " + inputAppointment.getId() + " was successfully added.");
+						}
+					} else {
+						listOfAppointments.add(inputAppointment);
+						System.out.println("The Appointment " + inputAppointment.getId() + " was successfully added.");
+					}
+				} else {
+					System.err.println("The appointment is outside of working hours.");
+				}
+			} else {
+				System.err.println("The appointment can't be added, because the appointment " + inputAppointment.getId()
+						+ " already exists in the list.");
 			}
 		} else {
 			System.err.println("You must entered an appointment.");
