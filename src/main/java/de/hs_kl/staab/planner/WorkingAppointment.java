@@ -71,4 +71,5 @@ public class WorkingAppointment extends Appointment {
 		builder.append("]");
 		return builder.toString();
 	}
+
 }

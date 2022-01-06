@@ -10,6 +10,8 @@ public class PlanningCalendar {
 
 	private List<Appointment> listOfAppointments = new ArrayList<>();
 
+	private final static float MAX_WORKING_TIME_PER_WORKING_PLATFORM_IN_MIN = 420; // Bzw. 7 Stunden
+
 	/* ******************************************************** */
 	/* * HIER KÖNNEN SIE IHREN PLANUNGSKALENDER PROGRAMMIEREN * */
 	/* * Der Planungskalender enthält den Kern ************** * */
@@ -18,10 +20,71 @@ public class PlanningCalendar {
 	/* ******************************************************** */
 
 	public void createNewAppointment(Appointment appointment) {
+		List<WorkingAppointment> listOfFoundWorkingAppointments = new ArrayList<>();
+		List<CleaningAppointment> listOfFoundCleaningApointments = new ArrayList<>();
+
 		if (appointment != null) {
 			if (!listOfAppointments.contains(appointment)) {
 				if (appointment.isAppointmentInWorkingTime()) {
+					for (Appointment cappointment : listOfAppointments) {
+						if (cappointment instanceof WorkingAppointment) {
 
+							// Cast the object appointment to working appointment
+							WorkingAppointment castTheObject = ((WorkingAppointment) appointment);
+							WorkingPlatform getWorkingPlatform = castTheObject.getWorkingPlatform();
+
+							// All elements from the appointments list are filtered with the date and with
+							// the working platform from the appointment.
+							// The found elements are saved in the list with working appointments.
+							if (cappointment.getDay().equals(appointment.getDay())
+									&& ((WorkingAppointment) cappointment).getWorkingPlatform()
+											.equals(getWorkingPlatform)) {
+								listOfFoundWorkingAppointments.add(((WorkingAppointment) cappointment));
+							}
+						} else if (cappointment instanceof CleaningAppointment) {
+
+							// Cast the object appointment to cleaning appointment
+							CleaningAppointment castTheObjectToCleaningAppointment = ((CleaningAppointment) appointment);
+							WorkingPlatform getWorkingPlatformFromAppointment = castTheObjectToCleaningAppointment
+									.getWorkingPlatform();
+
+							CleaningAppointment castTheObjectFromListToCleaningAppointment = ((CleaningAppointment) cappointment);
+							WorkingPlatform getWorkingPlatformFromList = castTheObjectFromListToCleaningAppointment
+									.getWorkingPlatform();
+
+							// All elements from the appointments list are filtered with the date and with
+							// the working platform from the appointment.
+							// The found elements are saved in the list with cleaning appointments.
+							if (cappointment.getDay().equals(appointment.getDay())
+									&& getWorkingPlatformFromList.equals(getWorkingPlatformFromAppointment)) {
+								listOfFoundCleaningApointments.add(castTheObjectFromListToCleaningAppointment);
+							}
+						}
+					}
+
+					if (appointment instanceof WorkingAppointment) {
+						// The list with working appointments is sorted
+						Collections.sort(listOfFoundWorkingAppointments, new Comparator<WorkingAppointment>() {
+
+							@Override
+							public int compare(WorkingAppointment firstAppointment,
+									WorkingAppointment secondAppointment) {
+								return firstAppointment.getDayWithEndTime()
+										.compareTo(secondAppointment.getDayWithEndTime());
+							}
+						});
+					} else if (appointment instanceof CleaningAppointment) {
+						// The list with cleaning appointments is sorted
+						Collections.sort(listOfFoundCleaningApointments, new Comparator<CleaningAppointment>() {
+
+							@Override
+							public int compare(CleaningAppointment firstAppointment,
+									CleaningAppointment secondAppointment) {
+								return firstAppointment.getDayWithEndTime()
+										.compareTo(secondAppointment.getDayWithEndTime());
+							}
+						});
+					}
 					listOfAppointments.add(appointment);
 					System.out.println("The Appointment " + appointment + " was successfully added.");
 				} else {
@@ -161,4 +224,26 @@ public class PlanningCalendar {
 			}
 		}
 	}
+
+	public long getTotalHoursOfDay(Appointment appointment, WorkingPlatform workingPlatform) {
+		long totalHoursOfDay = 0;
+
+		if (appointment instanceof WorkingAppointment)
+			for (Appointment currentAppointment : listOfAppointments) {
+				if (appointment.getDay().equals(appointment.getDay())
+						&& ((WorkingAppointment) appointment).getWorkingPlatform().equals(workingPlatform)) {
+					totalHoursOfDay += currentAppointment.getDurationInMin();
+				}
+			}
+		else if (appointment instanceof CleaningAppointment) {
+			for (Appointment currentAppointment : listOfAppointments) {
+				if (appointment.getDay().equals(appointment.getDay())
+						&& ((CleaningAppointment) appointment).getWorkingPlatform().equals(workingPlatform)) {
+					totalHoursOfDay += currentAppointment.getDurationInMin();
+				}
+			}
+		}
+		return totalHoursOfDay;
+	}
+
 }

@@ -5,11 +5,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.IsoFields;
+import java.util.Objects;
 
 public class Appointment implements Terminable {
 
-	protected final static LocalTime OPENING_TIME_START = LocalTime.of(8, 00);
-	protected final static LocalTime OPENING_TIME_END = LocalTime.of(17, 00);
+	private final static LocalTime OPENING_TIME_START = LocalTime.of(8, 00);
+	private final static LocalTime OPENING_TIME_END = LocalTime.of(16, 00);
 
 	protected final static int TIME_CONVERSION_FAKTOR_IN_MINUTES = 60;
 
@@ -79,6 +80,21 @@ public class Appointment implements Terminable {
 		builder.append(dayOfAppointment);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Appointment other = (Appointment) obj;
+		return calenderWeekOfAppointment == other.calenderWeekOfAppointment
+				&& Objects.equals(dayOfAppointment, other.dayOfAppointment)
+				&& Objects.equals(endOfAppointment, other.endOfAppointment)
+				&& Objects.equals(startOfAppointment, other.startOfAppointment);
 	}
 
 	@Override
