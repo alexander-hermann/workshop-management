@@ -84,13 +84,13 @@ public class MainApplication {
 				"hendrik@web.de");
 		Customer customer4 = new Customer("Max Müller", null, "+490176-99988874", "max@web.de");
 
-		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2016, 1, 5, 8, 00, customer1, 0.5,
+		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2021, 12, 20, 8, 00, customer1, 0.5,
 				customerConsultant1);
-		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2016, 1, 5, 9, 30, customer1, 0.5,
+		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2021, 12, 20, 8, 35, customer1, 0.5,
 				customerConsultant1);
 		ConsultingAppointment consultingAppointment3 = new ConsultingAppointment(2016, 1, 6, 13, 15, customer1, 1,
 				customerConsultant1);
-		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 1, 5, 14, 20, customer1, 1,
+		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 1, 6, 14, 20, customer1, 1,
 				customerConsultant1);
 
 		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 05, 8, 00, wkp1, car1, glassRepair,

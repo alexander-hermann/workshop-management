@@ -108,21 +108,6 @@ public abstract class Appointment implements Terminable {
 	}
 
 	@Override
-	public long getTotalHoursOfDay(LocalDate date) {
-		long totalHours = 0;
-		totalHours += totalHours;
-
-		return totalHours;
-	}
-
-	@Override
-	public boolean isAppointmentAvailableInPeriode(Appointment appointment) {
-
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean isAppointmentInWorkingTime() {
 		LocalTime timePeriod = OPENING_TIME_END.minusMinutes(this.getDurationInMin());
 

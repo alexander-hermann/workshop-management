@@ -158,8 +158,8 @@ public class PlanningCalendar {
 							ConsultingAppointment lastObjectFromList = listOfFoundConsultingAppointments
 									.get(sizeList - 1);
 
-							boolean appointmentDaygreaterLastObject = !(appointment.getDayWithStartTime()
-									.isBefore(lastObjectFromList.getDayWithEndTime()));
+							boolean appointmentDaygreaterLastObject = (!(appointment.getDayWithStartTime()
+									.isBefore(lastObjectFromList.getDayWithEndTime())));
 							boolean less = !(appointment.getDayWithEndTime()
 									.isAfter(firstObjectFromList.getDayWithStartTime()));
 
