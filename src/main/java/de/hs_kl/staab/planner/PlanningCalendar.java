@@ -20,28 +20,30 @@ public class PlanningCalendar {
 	public void createNewAppointment(Appointment inputAppointment) {
 		List<Appointment> listOfFoundAppointments = new ArrayList<>();
 
+		if (inputAppointment instanceof WorkingAppointment || inputAppointment instanceof CleaningAppointment) {
+			for (Appointment currentAppointment : listOfAppointments) {
+				// All elements from the appointments list are filtered with the date and with
+				// the working platform from the input appointment.
+				// The found elements are saved in the list with working appointments.
+				if (currentAppointment.getDay().equals(inputAppointment.getDay())
+						&& currentAppointment.getWorkingPlatform().equals(inputAppointment.getWorkingPlatform())) {
+					listOfFoundAppointments.add(inputAppointment);
+				}
+			}
+		}
+
 		if (inputAppointment != null) {
 			if (!listOfAppointments.contains(inputAppointment)) {
 				if (inputAppointment.isAppointmentInWorkingTime()) {
 					if (inputAppointment instanceof WorkingAppointment
 							|| inputAppointment instanceof CleaningAppointment) {
-						for (Appointment currentAppointment : listOfAppointments) {
-
-							// All elements from the appointments list are filtered with the date and with
-							// the working platform from the input appointment.
-							// The found elements are saved in the list with working appointments.
-							if (currentAppointment.getDay().equals(inputAppointment.getDay()) && currentAppointment
-									.getWorkingPlatform().equals(inputAppointment.getWorkingPlatform())) {
-								listOfFoundAppointments.add(inputAppointment);
-							}
-						}
 						// The list with working appointments is sorted
 						Collections.sort(listOfFoundAppointments, new Comparator<Appointment>() {
 
 							@Override
 							public int compare(Appointment firstAppointment, Appointment secondAppointment) {
-								return firstAppointment.getDayWithEndTime()
-										.compareTo(secondAppointment.getDayWithEndTime());
+								return firstAppointment.getDayWithStartTime()
+										.compareTo(secondAppointment.getDayWithStartTime());
 							}
 						});
 
@@ -50,12 +52,12 @@ public class PlanningCalendar {
 							Appointment firstObjectFromList = listOfFoundAppointments.get(0);
 							Appointment lastObjectFromList = listOfFoundAppointments.get(sizeList - 1);
 
-							boolean appointmentDaygreaterLastObject = (!(inputAppointment.getDayWithStartTime()
-									.isBefore(lastObjectFromList.getDayWithEndTime())));
+							boolean appointmentDaygreaterLastObject = (inputAppointment.getDayWithStartTime()
+									.isBefore(lastObjectFromList.getDayWithEndTime()));
 							boolean less = !(inputAppointment.getDayWithEndTime()
 									.isAfter(firstObjectFromList.getDayWithStartTime()));
 
-							if (appointmentDaygreaterLastObject || less) {
+							if (appointmentDaygreaterLastObject) {
 								listOfAppointments.add(inputAppointment);
 								System.out.println(
 										"The Appointment " + inputAppointment.getId() + " was successfully added.");

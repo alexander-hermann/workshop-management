@@ -102,7 +102,7 @@ public class MainApplication {
 		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 06, 14, 00, wkp1, car2, tireChange,
 				carMechanic1);
 
-		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 1, 07, 13, 00, wkp1,
+		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 1, 06, 13, 00, wkp1,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
 		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2016, 1, 07, 14, 00, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
