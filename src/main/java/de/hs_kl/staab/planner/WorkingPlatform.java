@@ -10,7 +10,7 @@ public class WorkingPlatform {
 
 	private String idOfWorkingPlatform;
 	private final String nameOfWorkingPlatform;
-	private List<WorkingAppointment> listOfPlannedWorks;
+	private List<Appointment> listOfPlannedWorks;
 
 	public WorkingPlatform(String nameOfWorkingPlatform) {
 		this.idOfWorkingPlatform = WORKING_PLATFORM_PREFIX + WORKING_PLATFORM_ID_COUNTER;
@@ -32,7 +32,7 @@ public class WorkingPlatform {
 		return nameOfWorkingPlatform;
 	}
 
-	public List<WorkingAppointment> getListOfPlannedWorks() {
+	public List<Appointment> getListOfPlannedWorks() {
 		return listOfPlannedWorks;
 	}
 

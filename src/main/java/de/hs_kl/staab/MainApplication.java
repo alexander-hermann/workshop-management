@@ -93,16 +93,16 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 1, 6, 14, 20, customer1, 1,
 				customerConsultant1);
 
-		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 05, 8, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 06, 8, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 05, 10, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 06, 10, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment3 = new WorkingAppointment(2022, 1, 05, 12, 00, wkp1, car2, glassRepair,
+		WorkingAppointment workingAppointment3 = new WorkingAppointment(2022, 1, 06, 12, 00, wkp1, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 05, 14, 00, wkp1, car2, inspectionCar,
+		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 06, 14, 00, wkp1, car2, tireChange,
 				carMechanic1);
 
-		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2016, 1, 05, 13, 00, wkp3,
+		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 1, 06, 13, 00, wkp1,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
 		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2016, 1, 05, 14, 00, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
@@ -195,5 +195,6 @@ public class MainApplication {
 
 		System.out.println("The list of working appointments for the car mechanic 1 of today:");
 		plannerService.getServiceForCarMechanicForToday(carMechanic1);
+		plannerService.getOverviewOfPlannedWorks(wkp1);
 	}
 }

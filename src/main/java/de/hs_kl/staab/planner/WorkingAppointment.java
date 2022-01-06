@@ -25,6 +25,7 @@ public class WorkingAppointment extends Appointment {
 		this.carMechanic.listOfWorkingAppointmentForCarMechanic.add(this);
 	}
 
+	@Override
 	public WorkingPlatform getWorkingPlatform() {
 		return workingPlatform;
 	}

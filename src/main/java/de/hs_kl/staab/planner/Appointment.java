@@ -65,6 +65,8 @@ public abstract class Appointment implements Terminable {
 		return endOfAppointment;
 	}
 
+	public abstract WorkingPlatform getWorkingPlatform();
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

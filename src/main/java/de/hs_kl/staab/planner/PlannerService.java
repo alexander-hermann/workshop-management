@@ -171,13 +171,12 @@ public class PlannerService {
 
 	public void getOverviewOfPlannedWorks(WorkingPlatform workingPlatform) {
 		LocalDate todayDay = LocalDate.now();
-		List<WorkingAppointment> listOfFoundPlannedWorks = new ArrayList<>();
+		List<Appointment> listOfFoundPlannedWorks = new ArrayList<>();
 
 		if (workingPlatform != null) {
 			if (listOfWorkingPlatforms.contains(workingPlatform)) {
-				for (WorkingAppointment currentWorkingAppointment : workingPlatform.getListOfPlannedWorks()) {
-					if (currentWorkingAppointment.getDay().equals(todayDay)
-							&& currentWorkingAppointment.isCompleted() == false) {
+				for (Appointment currentWorkingAppointment : workingPlatform.getListOfPlannedWorks()) {
+					if (currentWorkingAppointment.getDay().equals(todayDay)) {
 						listOfFoundPlannedWorks.add(currentWorkingAppointment);
 					}
 				}
@@ -194,7 +193,7 @@ public class PlannerService {
 					}
 				});
 
-				for (WorkingAppointment workingAppointment : listOfFoundPlannedWorks) {
+				for (Appointment workingAppointment : listOfFoundPlannedWorks) {
 					System.out.println(workingAppointment);
 				}
 			} else {
