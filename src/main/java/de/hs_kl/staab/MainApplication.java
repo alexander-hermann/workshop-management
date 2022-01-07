@@ -95,11 +95,11 @@ public class MainApplication {
 
 		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 06, 8, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 06, 10, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 06, 10, 01, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment3 = new WorkingAppointment(2022, 1, 06, 12, 00, wkp1, car2, glassRepair,
+		WorkingAppointment workingAppointment3 = new WorkingAppointment(2022, 1, 06, 12, 01, wkp1, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 06, 14, 00, wkp1, car2, tireChange,
+		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 06, 14, 03, wkp1, car2, tireChange,
 				carMechanic1);
 
 		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 1, 06, 13, 00, wkp1,
