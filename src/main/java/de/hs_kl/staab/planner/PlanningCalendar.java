@@ -1,9 +1,13 @@
 package de.hs_kl.staab.planner;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class PlanningCalendar {
@@ -17,72 +21,38 @@ public class PlanningCalendar {
 	/* * mit den Terminen, etc. ***************************** * */
 	/* ******************************************************** */
 
-	public void createNewAppointment(Appointment inputAppointment) {
+	public void createNewAppointment(Appointment appointment) {
 		List<Appointment> listOfFoundAppointments = new ArrayList<>();
+		if (appointment != null) {
+			if (!listOfAppointments.contains(appointment)) {
+				listOfAppointments.add(appointment);
+				for (Appointment cappointment : listOfAppointments) {
+					if ((appointment instanceof WorkingAppointment || appointment instanceof CleaningAppointment)
+							&& (cappointment instanceof WorkingAppointment
+									|| cappointment instanceof CleaningAppointment)) {
 
-		if (inputAppointment instanceof WorkingAppointment || inputAppointment instanceof CleaningAppointment) {
-			for (Appointment currentAppointment : listOfAppointments) {
-				// All elements from the appointments list are filtered with the date and with
-				// the working platform from the input appointment.
-				// The found elements are saved in the list with working appointments.
-				if (currentAppointment.getDay().equals(inputAppointment.getDay())
-						&& currentAppointment.getWorkingPlatform().equals(inputAppointment.getWorkingPlatform())) {
-					listOfFoundAppointments.add(inputAppointment);
-				}
-			}
-		}
+						if (!appointment.getId().equals(cappointment.getId()))
 
-		if (inputAppointment != null) {
-			if (!listOfAppointments.contains(inputAppointment)) {
-				if (inputAppointment.isAppointmentInWorkingTime()) {
-					if (inputAppointment instanceof WorkingAppointment
-							|| inputAppointment instanceof CleaningAppointment) {
-						// The list with working appointments is sorted
-						Collections.sort(listOfFoundAppointments, new Comparator<Appointment>() {
+							if ((appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
+									&& appointment.getDayWithStartTime().isAfter(cappointment.getDayWithStartTime())
+									&& appointment.getDayWithStartTime().isBefore(cappointment.getDayWithEndTime()))
+									|| ((appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform()))
+											&& (appointment.getDayWithEndTime()
+													.isAfter(cappointment.getDayWithStartTime()))
+											&& appointment.getDayWithEndTime()
+													.isBefore(cappointment.getDayWithEndTime()))
+									|| (appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
+											&& appointment.getDayWithStartTime()
+													.equals(cappointment.getDayWithStartTime()))) {
 
-							@Override
-							public int compare(Appointment firstAppointment, Appointment secondAppointment) {
-								return firstAppointment.getDayWithStartTime()
-										.compareTo(secondAppointment.getDayWithStartTime());
+								System.err.println(" The appointment " + appointment.getId() + " "
+										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
+										+ " collides with the appointment " + cappointment.getId() + " "
+										+ cappointment.getWorkingPlatform() + " " + cappointment.getDayWithStartTime());
 							}
-						});
 
-						if (!listOfFoundAppointments.isEmpty()) {
-							int sizeList = listOfFoundAppointments.size();
-							Appointment firstObjectFromList = listOfFoundAppointments.get(0);
-							Appointment lastObjectFromList = listOfFoundAppointments.get(sizeList - 1);
-
-							boolean appointmentDaygreaterLastObject = (inputAppointment.getDayWithStartTime()
-									.isBefore(lastObjectFromList.getDayWithEndTime()));
-							boolean less = !(inputAppointment.getDayWithEndTime()
-									.isAfter(firstObjectFromList.getDayWithStartTime()));
-
-							if (appointmentDaygreaterLastObject) {
-								inputAppointment.getWorkingPlatform().addPlannedWork(inputAppointment);
-								listOfAppointments.add(inputAppointment);
-								System.out.println(
-										"The Appointment " + inputAppointment.getId() + " was successfully added.");
-							} else {
-								System.out.println("Termin " + inputAppointment.getId()
-										+ " kollidiert mit einem anderen Termin auf dieser Bühne "
-										+ inputAppointment.getWorkingPlatform());
-							}
-						} else {
-							inputAppointment.getWorkingPlatform().addPlannedWork(inputAppointment);
-							listOfAppointments.add(inputAppointment);
-							System.out.println(
-									"The Appointment " + inputAppointment.getId() + " was successfully added.");
-						}
-					} else {
-						listOfAppointments.add(inputAppointment);
-						System.out.println("The Appointment " + inputAppointment.getId() + " was successfully added.");
 					}
-				} else {
-					System.err.println("The appointment is outside of working hours.");
 				}
-			} else {
-				System.err.println("The appointment can't be added, because the appointment " + inputAppointment.getId()
-						+ " already exists in the list.");
 			}
 		} else {
 			System.err.println("You must entered an appointment.");
@@ -235,8 +205,43 @@ public class PlanningCalendar {
 		return totalHoursOfDay;
 	}
 
-	public void setAutomaticallyCleaningAppointment(CLEANINGPROGRAMM cleaningProgram, WorkingPlatform workingPlatform,
+	public void setAutomaticallyCleaningAppointment(WorkingPlatform workingPlatform, CLEANINGPROGRAMM cleaningProgram,
 			Dispatcher dispatcher) {
+		// Methode für die nächstbeste Zeit finden
+
+		LocalDateTime timeAfterDuration = LocalDateTime.now().plusMinutes(100);
+
+		Appointment nextAppointmentForWorkingPlatform = workingPlatform.getListOfPlannedWorks().get(0);
+
+		if (timeAfterDuration.isBefore(nextAppointmentForWorkingPlatform.getDayWithStartTime())) {
+
+			Date date = new Date();
+
+			Calendar calendar = Calendar.getInstance();
+
+			calendar.setTime(date);
+			int dateYear = calendar.get(Calendar.YEAR);
+			int dateMonth = calendar.get(Calendar.MONTH);
+			int dateDay = calendar.get(Calendar.DAY_OF_MONTH);
+			int dateHour = calendar.get(Calendar.HOUR);
+			int dateMinute = calendar.get(Calendar.MINUTE);
+
+			CleaningAppointment automaticAppointment = new CleaningAppointment(dateYear, dateMonth, dateDay, dateHour,
+					dateMinute, workingPlatform, cleaningProgram, dispatcher);
+			createNewAppointment(automaticAppointment);
+
+		} else {
+			Iterator<Appointment> iterator = workingPlatform.getListOfPlannedWorks().iterator();
+
+			while (iterator.hasNext()) // überprüfen, ob noch ein Element folgt
+			{
+				Appointment nextAppointment = iterator.next(); // nächstes Element
+				// Appointment thisAppointment = this;
+				// if(nextAppointment.getDayWithStartTime() - appointment.getDayWithEndTime()) {
+
+			}
+
+		}
 
 	}
 
