@@ -196,5 +196,6 @@ public class MainApplication {
 		System.out.println("The list of working appointments for the car mechanic 1 of today:");
 		plannerService.getServiceForCarMechanicForToday(carMechanic1);
 		plannerService.getOverviewOfPlannedWorks(wkp1);
+		plannerService.getOverviewOfPlannedWorks(wkp2);
 	}
 }

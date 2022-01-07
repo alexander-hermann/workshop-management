@@ -31,7 +31,6 @@ public class CleaningAppointment extends Appointment {
 		return durationOfCleaningInH;
 	}
 
-	@Override
 	public WorkingPlatform getWorkingPlatform() {
 		return workingPlatform;
 	}
