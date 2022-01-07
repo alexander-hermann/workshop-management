@@ -40,6 +40,13 @@ public class PlanningCalendar {
 										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
 										+ " equals with the start time of appointment " + cappointment.getId() + " "
 										+ cappointment.getWorkingPlatform() + " " + cappointment.getDayWithStartTime());
+							} else if (appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
+									&& appointment.getDayWithStartTime().equals(cappointment.getDayWithEndTime())) {
+
+								System.err.println(" The start time of appointment " + appointment.getId() + " "
+										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
+										+ " equals with the end time of appointment " + cappointment.getId() + " "
+										+ cappointment.getWorkingPlatform() + " " + cappointment.getDayWithStartTime());
 							}
 
 							else if ((appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
@@ -67,9 +74,9 @@ public class PlanningCalendar {
 					}
 
 				}
+			} else {
+				System.err.println("You must entered an appointment.");
 			}
-		} else {
-			System.err.println("You must entered an appointment.");
 		}
 	}
 
