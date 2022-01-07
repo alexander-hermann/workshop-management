@@ -165,10 +165,15 @@ public class MainApplication {
 		planningCalendar.createNewAppointment(consultingAppointment3);
 		planningCalendar.createNewAppointment(consultingAppointment4);
 
-		planningCalendar.createNewAppointment(workingAppointment1);
-		planningCalendar.createNewAppointment(workingAppointment2);
-		planningCalendar.createNewAppointment(workingAppointment3);
-		planningCalendar.createNewAppointment(workingAppointment4);
+		// planningCalendar.createNewAppointment(workingAppointment1);
+		// planningCalendar.createNewAppointment(workingAppointment2);
+		// planningCalendar.createNewAppointment(workingAppointment3);
+		// planningCalendar.createNewAppointment(workingAppointment4);
+
+		planningCalendar.createAppointmentBeta(workingAppointment1);
+		planningCalendar.createAppointmentBeta(workingAppointment2);
+		planningCalendar.createAppointmentBeta(workingAppointment3);
+		planningCalendar.createAppointmentBeta(workingAppointment4);
 
 		planningCalendar.createNewAppointment(cleaningAppointment1);
 		planningCalendar.createNewAppointment(cleaningAppointment2);

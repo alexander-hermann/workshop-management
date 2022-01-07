@@ -22,61 +22,134 @@ public class PlanningCalendar {
 	/* ******************************************************** */
 
 	public void createNewAppointment(Appointment appointment) {
-		List<Appointment> listOfFoundAppointments = new ArrayList<>();
 		if (appointment != null) {
 			if (!listOfAppointments.contains(appointment)) {
+
 				listOfAppointments.add(appointment);
-				for (Appointment cappointment : listOfAppointments) {
-					if ((appointment instanceof WorkingAppointment || appointment instanceof CleaningAppointment)
-							&& (cappointment instanceof WorkingAppointment
-									|| cappointment instanceof CleaningAppointment)) {
+				System.out.println("The Appointment " + appointment.getId() + " was successfully added.");
+				if (appointment.isAppointmentInWorkingTime()) {
+					for (Appointment cappointment : listOfAppointments) {
+						if ((appointment instanceof WorkingAppointment || appointment instanceof CleaningAppointment)) {
 
-						if (!appointment.getId().equals(cappointment.getId()))
+							if (!appointment.getId().equals(cappointment.getId())) {
+								if (appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
+										&& appointment.getDayWithStartTime()
+												.equals(cappointment.getDayWithStartTime())) {
 
-							if (appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
-									&& appointment.getDayWithStartTime().equals(cappointment.getDayWithStartTime())) {
+									System.err.println(" The appointment " + appointment.getId() + " "
+											+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
+											+ " equals with the start time of appointment " + cappointment.getId() + " "
+											+ cappointment.getWorkingPlatform() + " "
+											+ cappointment.getDayWithStartTime());
 
-								System.err.println(" The appointment " + appointment.getId() + " "
-										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
-										+ " equals with the start time of appointment " + cappointment.getId() + " "
-										+ cappointment.getWorkingPlatform() + " " + cappointment.getDayWithStartTime());
-							} else if (appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
-									&& appointment.getDayWithStartTime().equals(cappointment.getDayWithEndTime())) {
+								} else if (appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
+										&& appointment.getDayWithStartTime().equals(cappointment.getDayWithEndTime())) {
 
-								System.err.println(" The start time of appointment " + appointment.getId() + " "
-										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
-										+ " equals with the end time of appointment " + cappointment.getId() + " "
-										+ cappointment.getWorkingPlatform() + " " + cappointment.getDayWithEndTime());
+									System.err.println(" The start time of appointment " + appointment.getId() + " "
+											+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
+											+ " equals with the end time of appointment " + cappointment.getId() + " "
+											+ cappointment.getWorkingPlatform() + " "
+											+ cappointment.getDayWithStartTime());
+
+								}
+
+								else if ((appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
+										&& appointment.getDayWithStartTime().isAfter(cappointment.getDayWithStartTime())
+										&& appointment.getDayWithStartTime()
+												.isBefore(cappointment.getDayWithEndTime()))) {
+
+									System.err.println(" The start time of appointment " + appointment.getId() + " "
+											+ appointment.getWorkingPlatform() + " " + appointment.getDayWithEndTime()
+											+ " is between the start and end time of appointment "
+											+ cappointment.getId() + " " + cappointment.getWorkingPlatform() + " "
+											+ cappointment.getDayWithStartTime() + " "
+											+ cappointment.getDayWithEndTime());
+
+								} else if ((appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform()))
+										&& (appointment.getDayWithEndTime().isAfter(cappointment.getDayWithStartTime()))
+										&& appointment.getDayWithEndTime().isBefore(cappointment.getDayWithEndTime())) {
+
+									System.err.println(" The end time of appointment " + appointment.getId() + " "
+											+ appointment.getWorkingPlatform() + " " + appointment.getDayWithEndTime()
+											+ " is between the start and end time of appointment "
+											+ cappointment.getId() + " " + cappointment.getWorkingPlatform() + " "
+											+ cappointment.getDayWithStartTime() + " "
+											+ cappointment.getDayWithEndTime());
+
+								}
 							}
-
-							else if ((appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
-									&& appointment.getDayWithStartTime().isAfter(cappointment.getDayWithStartTime())
-									&& appointment.getDayWithStartTime().isBefore(cappointment.getDayWithEndTime()))) {
-
-								System.err.println(" The start time of appointment " + appointment.getId() + " "
-										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
-										+ " is between the start and end time of appointment " + cappointment.getId()
-										+ " " + cappointment.getWorkingPlatform() + " "
-										+ cappointment.getDayWithStartTime() + " " + cappointment.getDayWithEndTime());
-
-							} else if ((appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform()))
-									&& (appointment.getDayWithEndTime().isAfter(cappointment.getDayWithStartTime()))
-									&& appointment.getDayWithEndTime().isBefore(cappointment.getDayWithEndTime())) {
-
-								System.err.println(" The end time of appointment " + appointment.getId() + " "
-										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithEndTime()
-										+ " is between the start and end time of appointment " + cappointment.getId()
-										+ " " + cappointment.getWorkingPlatform() + " "
-										+ cappointment.getDayWithStartTime() + " " + cappointment.getDayWithEndTime());
-
-							}
-
+						}
 					}
-
+				} else {
+					System.err.println("The appointment is outside of working hours.");
 				}
 			} else {
-				System.err.println("You must entered an appointment.");
+				System.err.println("The appointment can't be added, because the appointment " + appointment.getId()
+						+ " already exists in the list.");
 			}
+		} else {
+			System.err.println("You must entered an appointment.");
+		}
+	}
+
+	public void createAppointmentBeta(Appointment appointment) {
+		if (appointment != null) {
+
+			if (appointment.isAppointmentInWorkingTime()) {
+				for (Appointment currentAppointment : listOfAppointments) {
+
+					if (appointment instanceof WorkingAppointment || appointment instanceof CleaningAppointment) {
+
+						if (currentAppointment.getDay().equals(appointment.getDay())
+								&& currentAppointment.getWorkingPlatform().equals(appointment.getWorkingPlatform())) {
+							// @formatter:off
+							boolean cond1 = appointment.getDayWithStartTime().equals(currentAppointment.getDayWithStartTime());
+							boolean cond2 = appointment.getDayWithStartTime().equals(currentAppointment.getDayWithEndTime());
+							boolean cond3 = appointment.getDayWithStartTime().isAfter(currentAppointment.getDayWithStartTime()) && appointment.getDayWithStartTime()
+									.isBefore(currentAppointment.getDayWithEndTime());
+							boolean cond4 = (appointment.getDayWithEndTime().isAfter(currentAppointment.getDayWithStartTime()))&& appointment.getDayWithEndTime()
+									.isBefore(currentAppointment.getDayWithEndTime());
+							
+							if(cond1) {
+								System.err.println("1. The appointment " + appointment.getId() + " "
+										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
+										+ " equals with the start time of appointment " + currentAppointment.getId() + " "
+										+ currentAppointment.getWorkingPlatform() + " "
+										+ currentAppointment.getDayWithStartTime());
+								break;
+							} else if(cond2) {
+								System.err.println("2. The appointment " + appointment.getId() + " "
+										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
+										+ " equals with the start time of appointment " + currentAppointment.getId() + " "
+										+ currentAppointment.getWorkingPlatform() + " "
+										+ currentAppointment.getDayWithStartTime());
+								return;
+							} else if(cond3) {
+								System.err.println("3. The appointment " + appointment.getId() + " "
+										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
+										+ " equals with the start time of appointment " + currentAppointment.getId() + " "
+										+ currentAppointment.getWorkingPlatform() + " "
+										+ currentAppointment.getDayWithStartTime());
+								return;
+							} else if(cond4) {
+								System.err.println("4. The appointment " + appointment.getId() + " "
+										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
+										+ " equals with the start time of appointment " + currentAppointment.getId() + " "
+										+ currentAppointment.getWorkingPlatform() + " "
+										+ currentAppointment.getDayWithStartTime());
+								return;
+							} else {
+								
+								System.out.println("The Appointment " + appointment.getId() + " was successfully added.");
+							}
+						}
+					}
+				}
+			} else {
+				System.err.println("The appointment is outside of working hours.");
+			}
+		} else {
+			System.err.println("You must entered an appointment.");
 		}
 	}
 
