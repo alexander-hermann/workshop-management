@@ -46,7 +46,7 @@ public class PlanningCalendar {
 								System.err.println(" The start time of appointment " + appointment.getId() + " "
 										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
 										+ " equals with the end time of appointment " + cappointment.getId() + " "
-										+ cappointment.getWorkingPlatform() + " " + cappointment.getDayWithStartTime());
+										+ cappointment.getWorkingPlatform() + " " + cappointment.getDayWithEndTime());
 							}
 
 							else if ((appointment.getWorkingPlatform().equals(cappointment.getWorkingPlatform())
@@ -54,7 +54,7 @@ public class PlanningCalendar {
 									&& appointment.getDayWithStartTime().isBefore(cappointment.getDayWithEndTime()))) {
 
 								System.err.println(" The start time of appointment " + appointment.getId() + " "
-										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithEndTime()
+										+ appointment.getWorkingPlatform() + " " + appointment.getDayWithStartTime()
 										+ " is between the start and end time of appointment " + cappointment.getId()
 										+ " " + cappointment.getWorkingPlatform() + " "
 										+ cappointment.getDayWithStartTime() + " " + cappointment.getDayWithEndTime());
