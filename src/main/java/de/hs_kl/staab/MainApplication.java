@@ -194,8 +194,8 @@ public class MainApplication {
 		planningCalendar.getAppointmentById("AP-14");
 
 		System.out.println("The list of working appointments for the car mechanic 1 of today:");
-		plannerService.getServiceForCarMechanicForToday(carMechanic1);
-		plannerService.getOverviewOfPlannedWorks(wkp1);
-		plannerService.getOverviewOfPlannedWorks(wkp2);
+
+		plannerService.getOverviewOfTodayWorks(carMechanic1, wkp1);
+		plannerService.getOverviewOfTodayWorks(carMechanic1, wkp2);
 	}
 }

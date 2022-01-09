@@ -21,6 +21,18 @@ public class PlanningCalendar {
 	/* * mit den Terminen, etc. ***************************** * */
 	/* ******************************************************** */
 
+	public List<Appointment> getListOfAppointments() {
+		Collections.sort(listOfAppointments, new Comparator<Appointment>() {
+
+			@Override
+			public int compare(Appointment firstAppointment, Appointment secondAppointment) {
+				return firstAppointment.getDayWithStartTime().compareTo(secondAppointment.getDayWithStartTime());
+			}
+		});
+
+		return listOfAppointments;
+	}
+
 	public void createNewAppointment(Appointment inputAppointment) {
 		List<Appointment> listOfFoundAppointments = new ArrayList<>();
 
@@ -69,7 +81,7 @@ public class PlanningCalendar {
 
 						// problem: view again
 						boolean cond5 = inputAppointment.getDayWithEndTime()
-								.isBefore(lastObjectFromList.getDayWithStartTime());
+								.isAfter(lastObjectFromList.getDayWithEndTime());
 						boolean cond6 = inputAppointment.getDayWithEndTime()
 								.isBefore(firstObjectFromList.getDayWithStartTime());
 
@@ -81,7 +93,7 @@ public class PlanningCalendar {
 						} else if (cond3 && cond4) {
 							System.err.println("Fehler " + inputAppointment.getWorkingPlatform());
 							return; // cancel
-						} else if (cond6) {
+						} else if (cond5 && cond6) {
 							System.err.println("Fehler " + inputAppointment.getWorkingPlatform());
 							return; // cancel
 						}

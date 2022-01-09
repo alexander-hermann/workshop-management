@@ -1,10 +1,7 @@
 package de.hs_kl.staab.planner;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -169,71 +166,38 @@ public class PlannerService {
 		}
 	}
 
-	public void getOverviewOfPlannedWorks(WorkingPlatform workingPlatform) {
-		LocalDate todayDay = LocalDate.now();
+	public void getOverviewOfTodayWorks(CarMechanic carMechanic, WorkingPlatform workingPlatform) {
+
+		// text
+		LocalDateTime todayWithTime = LocalDateTime.now();
 		List<Appointment> listOfFoundPlannedWorks = new ArrayList<>();
 
-		if (workingPlatform != null) {
-			if (listOfWorkingPlatforms.contains(workingPlatform)) {
-				for (Appointment currentWorkingAppointment : workingPlatform.getListOfPlannedWorks()) {
-					if (currentWorkingAppointment.getDay().equals(todayDay)) {
-						listOfFoundPlannedWorks.add(currentWorkingAppointment);
-					}
-				}
-			} else {
-				System.err.println("You have not entered a working platform.");
-			}
+		if (carMechanic != null && workingPlatform != null) {
+			for (Appointment currentWorkingAppointment : planningCalendar.getListOfAppointments()) {
 
+				// @formatter:off
+				boolean greaterOrEqualTime = currentWorkingAppointment.getDayWithStartTime().compareTo(todayWithTime) > 0;
+				boolean equalWorkingPlatform = currentWorkingAppointment.getWorkingPlatform().equals(workingPlatform);
+				boolean equalCarMechanic = ((WorkingAppointment) currentWorkingAppointment).getCarMechanic().equals(carMechanic);
+				boolean equalStatus = ((WorkingAppointment) currentWorkingAppointment).isCompleted() == false;
+
+				if (greaterOrEqualTime && equalWorkingPlatform && equalCarMechanic && equalStatus) {
+					listOfFoundPlannedWorks.add(currentWorkingAppointment);
+				}
+			}
 			if (listOfFoundPlannedWorks.size() > 0) {
-				Collections.sort(listOfFoundPlannedWorks, new Comparator<Appointment>() {
-
-					@Override
-					public int compare(Appointment firstAppointment, Appointment secondAppointment) {
-						return firstAppointment.getStart().compareTo(secondAppointment.getStart());
-					}
-				});
-
-				for (Appointment workingAppointment : listOfFoundPlannedWorks) {
-					System.out.println(workingAppointment);
+				for (Appointment currentWorkingAppointment : listOfFoundPlannedWorks) {
+					System.out.println("The " + carMechanic + " has the "
+							+ ((WorkingAppointment) currentWorkingAppointment).getService() + " on the date and time "
+							+ currentWorkingAppointment.startOfAppointment + " and on the working platform "
+							+ currentWorkingAppointment.getWorkingPlatform());
 				}
 			} else {
-				System.err.println(
-						"The working platform " + workingPlatform.getId() + " has no services for today: " + todayDay);
+				System.err.println("The car mechanic " + carMechanic.getId() + " has on the working platform "
+						+ workingPlatform.getId() + " no services for today: " + todayWithTime);
 			}
 		} else {
-			System.err.println("You have not entered a working platform.");
-		}
-	}
-
-	public void getServiceForCarMechanicForToday(CarMechanic carMechanic) {
-		// Avoid NullPointerException
-		String checkVehicleHasValue = (carMechanic != null) ? carMechanic.getId() : "null";
-
-		LocalDateTime today = LocalDateTime.now();
-
-		List<WorkingAppointment> listOfCompletedWorkingAppointmentsForCarMechanic = new ArrayList<>();
-
-		if (carMechanic != null) {
-			for (Appointment currentWorkingAppointment : carMechanic.listOfWorkingAppointmentForCarMechanic) {
-				if (currentWorkingAppointment.getDayWithStartTime().compareTo(today) > 0) {
-					listOfCompletedWorkingAppointmentsForCarMechanic
-							.add((WorkingAppointment) currentWorkingAppointment);
-				}
-			}
-
-			if (listOfCompletedWorkingAppointmentsForCarMechanic.size() > 0) {
-				for (WorkingAppointment currentWorkingAppointment : listOfCompletedWorkingAppointmentsForCarMechanic) {
-					System.out.println("The " + carMechanic + " has the " + currentWorkingAppointment.getService()
-							+ " on the date and time " + currentWorkingAppointment.startOfAppointment
-							+ " and on the working platform " + currentWorkingAppointment.getWorkingPlatform());
-				}
-			} else {
-				System.err.println("There are no working appointments for the car mechanic with the id "
-						+ carMechanic.getId() + " of today");
-			}
-		} else {
-			System.err.println("The working appointments for the car mechanic " + checkVehicleHasValue
-					+ " cannot be viewed because it is not in the list of working appointments for the car mechanic or you have not entered a car mechanic.");
+			System.err.println("You have not entered a car mechanic or working platform.");
 		}
 	}
 }
