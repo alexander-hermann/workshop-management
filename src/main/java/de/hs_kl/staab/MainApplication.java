@@ -84,31 +84,31 @@ public class MainApplication {
 				"hendrik@web.de");
 		Customer customer4 = new Customer("Max Müller", null, "+490176-99988874", "max@web.de");
 
-		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2021, 12, 20, 8, 00, customer1, 0.5,
+		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2021, 12, 20, 8, 00, customer1, 1,
 				customerConsultant1);
-		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2021, 12, 20, 8, 35, customer1, 0.5,
+		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2021, 12, 20, 15, 00, customer1, 0.5,
 				customerConsultant1);
-		ConsultingAppointment consultingAppointment3 = new ConsultingAppointment(2016, 1, 6, 13, 15, customer1, 1,
+		ConsultingAppointment consultingAppointment3 = new ConsultingAppointment(2021, 12, 20, 9, 00, customer1, 1,
 				customerConsultant1);
-		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2016, 1, 6, 14, 20, customer1, 1,
+		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1,
 				customerConsultant1);
 
 		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 06, 8, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 06, 10, 01, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 06, 10, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment3 = new WorkingAppointment(2022, 1, 06, 12, 01, wkp1, car2, glassRepair,
+		WorkingAppointment workingAppointment3 = new WorkingAppointment(2022, 1, 06, 12, 00, wkp1, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 06, 14, 03, wkp1, car2, tireChange,
+		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 06, 11, 59, wkp1, car2, tireChange,
 				carMechanic1);
 
-		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 1, 06, 13, 00, wkp1,
+		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 1, 06, 14, 00, wkp1,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
-		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2016, 1, 07, 14, 00, wkp3,
+		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2022, 1, 07, 12, 00, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
-		CleaningAppointment cleaningAppointment3 = new CleaningAppointment(2016, 1, 07, 12, 00, wkp3,
+		CleaningAppointment cleaningAppointment3 = new CleaningAppointment(2022, 1, 07, 13, 00, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
-		CleaningAppointment cleaningAppointment4 = new CleaningAppointment(2016, 1, 07, 13, 01, wkp3,
+		CleaningAppointment cleaningAppointment4 = new CleaningAppointment(2022, 1, 07, 11, 25, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
 
 		// ########################################################
