@@ -47,59 +47,51 @@ public class PlanningCalendar {
 							listOfFoundAppointments.add(searchAppointment);
 						}
 					} else if (searchAppointment instanceof ConsultingAppointment) {
-						listOfFoundAppointments.add(searchAppointment);
+						if (((ConsultingAppointment) searchAppointment).getCustomerConsultant()
+								.equals(((ConsultingAppointment) inputAppointment).getCustomerConsultant())) {
+							listOfFoundAppointments.add(searchAppointment);
+						}
 					}
 				}
 			}
-
-			// The list with working appointments is sorted
-			Collections.sort(listOfFoundAppointments, new Comparator<Appointment>() {
-
-				@Override
-				public int compare(Appointment firstAppointment, Appointment secondAppointment) {
-					return firstAppointment.getDayWithStartTime().compareTo(secondAppointment.getDayWithStartTime());
-				}
-			});
 
 			if (!listOfAppointments.contains(inputAppointment)) {
 				if (inputAppointment.isAppointmentInWorkingTime()) {
 
 					if (!listOfFoundAppointments.isEmpty()) {
-						int sizeList = listOfFoundAppointments.size();
-						Appointment firstObjectFromList = listOfFoundAppointments.get(0);
-						Appointment lastObjectFromList = listOfFoundAppointments.get(sizeList - 1);
+						boolean conditionAddAppointment = false;
+						for (Appointment appointment : listOfFoundAppointments) {
 
-						boolean cond1 = inputAppointment.getDayWithStartTime()
-								.isAfter(lastObjectFromList.getDayWithStartTime());
-						boolean cond2 = inputAppointment.getDayWithStartTime()
-								.isBefore(lastObjectFromList.getDayWithEndTime());
+							boolean cond1 = inputAppointment.getDayWithStartTime()
+									.equals(appointment.getDayWithStartTime());
 
-						boolean cond3 = inputAppointment.getDayWithStartTime()
-								.isAfter(firstObjectFromList.getDayWithStartTime());
-						boolean cond4 = inputAppointment.getDayWithStartTime()
-								.isBefore(firstObjectFromList.getDayWithEndTime());
+							boolean cond3 = inputAppointment.getDayWithStartTime()
+									.isAfter(appointment.getDayWithStartTime());
+							boolean cond4 = inputAppointment.getDayWithStartTime()
+									.isBefore(appointment.getDayWithEndTime());
 
-						// problem: view again
-						boolean cond5 = inputAppointment.getDayWithEndTime()
-								.isAfter(lastObjectFromList.getDayWithEndTime());
-						boolean cond6 = inputAppointment.getDayWithEndTime()
-								.isBefore(firstObjectFromList.getDayWithStartTime());
+							boolean cond5 = inputAppointment.getDayWithEndTime()
+									.isAfter(appointment.getDayWithStartTime());
+							boolean cond6 = inputAppointment.getDayWithEndTime()
+									.isBefore(appointment.getDayWithEndTime());
 
-						if (cond1 && cond2) {
-							System.err.println("Termin " + inputAppointment.getId()
-									+ " kollidiert mit einem anderen Termin auf dieser Bühne "
-									+ inputAppointment.getWorkingPlatform());
-							return; // cancel
-						} else if (cond3 && cond4) {
-							System.err.println("Fehler " + inputAppointment.getWorkingPlatform());
-							return; // cancel
-						} else if (cond5 && cond6) {
-							System.err.println("Fehler " + inputAppointment.getWorkingPlatform());
-							return; // cancel
+							if (cond1) {
+								System.err.println(inputAppointment.getId() + "Fehler 1 equals");
+								return;
+							} else if (cond3 && cond4) {
+								System.err.println(inputAppointment.getId() + "Fehler 2 startdatum liegt zwischen");
+								return;
+							} else if (cond5 && cond6) {
+								System.err.println(inputAppointment.getId() + "Fehler 3 enddatum liegt zwischen");
+								return;
+							}
+							conditionAddAppointment = true;
 						}
-						listOfAppointments.add(inputAppointment);
-						System.out.println("The Appointment " + inputAppointment.getId() + " was successfully added.");
-
+						if (conditionAddAppointment) {
+							listOfAppointments.add(inputAppointment);
+							System.out.println(
+									"The Appointment " + inputAppointment.getId() + " was successfully added.");
+						}
 					} else {
 						listOfAppointments.add(inputAppointment);
 						System.out.println("The Appointment " + inputAppointment.getId() + " was successfully added.");

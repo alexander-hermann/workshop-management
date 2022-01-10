@@ -47,5 +47,4 @@ public class ConsultingAppointment extends Appointment {
 	public WorkingPlatform getWorkingPlatform() {
 		return null;
 	}
-
 }

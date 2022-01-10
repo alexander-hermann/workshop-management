@@ -77,8 +77,7 @@ public class PlannerService {
 			listOfWorkingPlatforms.add(newWorkingPlatform);
 			System.out.println("The workingplatform " + newWorkingPlatform.getId() + "  was successfully added.");
 		} else {
-			throw new IllegalArgumentException(
-					"The working platform cannot be added because it already exists in the list");
+			System.err.println("The working platform cannot be added because it already exists in the list");
 		}
 	}
 
