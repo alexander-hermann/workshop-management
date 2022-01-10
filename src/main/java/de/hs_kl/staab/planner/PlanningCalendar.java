@@ -298,9 +298,43 @@ public class PlanningCalendar {
 				// if(nextAppointment.getDayWithStartTime() - appointment.getDayWithEndTime()) {
 
 			}
-
 		}
-
 	}
 
+	public void getOverviewOfTodayWorks(CarMechanic carMechanic, WorkingPlatform workingPlatform) {
+
+		// text
+		LocalDateTime todayWithTime = LocalDateTime.now();
+		List<Appointment> listOfFoundPlannedWorks = new ArrayList<>();
+
+		if (carMechanic != null && workingPlatform != null) {
+			for (Appointment currentWorkingAppointment : listOfAppointments) {
+				if (currentWorkingAppointment instanceof WorkingAppointment) {
+
+					// @formatter:off
+					boolean greaterOrEqualTime = currentWorkingAppointment.getDayWithStartTime().compareTo(todayWithTime) > 0;
+					boolean equalWorkingPlatform = currentWorkingAppointment.getWorkingPlatform().equals(workingPlatform);
+					boolean equalCarMechanic = ((WorkingAppointment) currentWorkingAppointment).getCarMechanic().equals(carMechanic);
+					boolean equalStatus = ((WorkingAppointment) currentWorkingAppointment).isCompleted() == false;
+					
+					if (greaterOrEqualTime && equalWorkingPlatform && equalCarMechanic && equalStatus) {
+						listOfFoundPlannedWorks.add(currentWorkingAppointment);
+					}	
+				}
+			}
+			if (listOfFoundPlannedWorks.size() > 0) {
+				for (Appointment currentWorkingAppointment : listOfFoundPlannedWorks) {
+					System.out.println("The " + carMechanic.getId() + " has the "
+							+ ((WorkingAppointment) currentWorkingAppointment).getService().getId() + " on the date and time "
+							+ currentWorkingAppointment.startOfAppointment + " and on the working platform "
+							+ currentWorkingAppointment.getWorkingPlatform().getId());
+				}
+			} else {
+				System.err.println("The car mechanic " + carMechanic.getId() + " has on the working platform "
+						+ workingPlatform.getId() + " no services for today: " + todayWithTime);
+			}
+		} else {
+			System.err.println("You have not entered a car mechanic or working platform.");
+		}
+	}
 }
