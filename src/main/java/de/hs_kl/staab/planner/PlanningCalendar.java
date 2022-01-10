@@ -76,13 +76,24 @@ public class PlanningCalendar {
 									.isBefore(appointment.getDayWithEndTime());
 
 							if (cond1) {
-								System.err.println(inputAppointment.getId() + "Fehler 1 equals");
+								System.err.println("The start time " + appointment.getDayWithStartTime()
+										+ " of the appointment " + appointment.getId() + " equals with the start time "
+										+ inputAppointment.getDayWithStartTime() + " of the appointment "
+										+ inputAppointment.getId());
 								return;
 							} else if (cond3 && cond4) {
-								System.err.println(inputAppointment.getId() + "Fehler 2 startdatum liegt zwischen");
+								System.err.println("The start time " + inputAppointment.getDayWithStartTime()
+										+ " of the appointment " + inputAppointment.getId()
+										+ " is between the start time " + appointment.getDayWithStartTime()
+										+ " and end time " + appointment.getDayWithEndTime() + " of the appointment "
+										+ appointment.getId());
 								return;
 							} else if (cond5 && cond6) {
-								System.err.println(inputAppointment.getId() + "Fehler 3 enddatum liegt zwischen");
+								System.err.println("The end time " + inputAppointment.getDayWithEndTime()
+										+ " of the appointment " + inputAppointment.getId()
+										+ " is between the start time " + appointment.getDayWithStartTime()
+										+ " and end time " + appointment.getDayWithEndTime() + " of the appointment "
+										+ appointment.getId());
 								return;
 							}
 							conditionAddAppointment = true;
