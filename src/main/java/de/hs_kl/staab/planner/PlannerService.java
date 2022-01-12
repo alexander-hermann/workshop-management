@@ -12,6 +12,10 @@ public class PlannerService {
 
 	private final PlanningCalendar planningCalendar;
 
+	public void setListOfWorkingPlatforms(List<WorkingPlatform> listOfWorkingPlatforms) {
+		this.listOfWorkingPlatforms = listOfWorkingPlatforms;
+	}
+
 	private List<WorkingPlatform> listOfWorkingPlatforms = new ArrayList<>();
 
 	private List<Service> listOfServices = new ArrayList<>();
@@ -49,6 +53,9 @@ public class PlannerService {
 	/* * werden, bevor Sie diese an den Kalender * */
 	/* * weitergeben. **************************** */
 	/* ******************************************* */
+	public List<WorkingPlatform> getListOfWorkingPlatforms() {
+		return listOfWorkingPlatforms;
+	}
 
 	public WorkingPlatform getWorkingPlatformById(String workingPlatformId) {
 		if (!listOfWorkingPlatforms.isEmpty()) {
