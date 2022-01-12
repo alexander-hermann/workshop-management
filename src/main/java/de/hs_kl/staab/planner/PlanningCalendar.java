@@ -513,6 +513,7 @@ public class PlanningCalendar {
 										
 										System.out.println(appointment);
 										counter++;
+										counter+= 2;
 									}
 								}
 							}
