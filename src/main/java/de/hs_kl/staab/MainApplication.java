@@ -232,5 +232,6 @@ public class MainApplication {
 		planningCalendar.getOverviewOfTodayWorks(carMechanic1, wkp1);
 		// plannerService.getOverviewOfTodayWorks(carMechanic1, wkp2);
 
+		planningCalendar.getSuggestThreeWorkingAppointments(inspectionCar);
 	}
 }
