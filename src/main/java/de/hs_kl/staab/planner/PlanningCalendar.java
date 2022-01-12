@@ -299,7 +299,7 @@ public class PlanningCalendar {
 			Dispatcher dispatcher) {
 		// Methode für die nächstbeste Zeit finden
 
-		LocalDateTime timeAfterDuration = LocalDateTime.now().plusMinutes(100);
+		LocalDateTime timeAfterDuration = LocalDateTime.now().plusMinutes(80);
 		LocalDateTime now = LocalDateTime.now();
 
 		List<Appointment> listOfPlannedWorksForWorkingPlatformAfterNow = new ArrayList<>();
@@ -318,10 +318,10 @@ public class PlanningCalendar {
 			}
 		});
 
-		int sizeList = listOfPlannedWorksForWorkingPlatformAfterNow.size();
+		int sizeListAppointmentsAfterNow = listOfPlannedWorksForWorkingPlatformAfterNow.size();
 		Appointment nextAppointmentForWorkingPlatform = listOfPlannedWorksForWorkingPlatformAfterNow.get(0);
 
-		if (sizeList >= 2) {
+		if (sizeListAppointmentsAfterNow >= 2) {
 
 			if (timeAfterDuration.isBefore(nextAppointmentForWorkingPlatform.getDayWithStartTime())) {
 
@@ -337,16 +337,16 @@ public class PlanningCalendar {
 
 			} else {
 
-				int lengthOfList = listOfPlannedWorksForWorkingPlatformAfterNow.size();
 				int listElementCounter;
-				for (listElementCounter = 0; listElementCounter < lengthOfList; listElementCounter++) {
+				for (listElementCounter = 0; listElementCounter < sizeListAppointmentsAfterNow; listElementCounter++) {
 
 					Appointment thisObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
 							.get(listElementCounter);
 					Appointment nextObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
 							.get(listElementCounter + 1);
 
-					Appointment lastObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow.get(sizeList - 1);
+					Appointment lastObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
+							.get(sizeListAppointmentsAfterNow - 1);
 
 					int differenceBetweenAppointments = (int) ChronoUnit.MINUTES
 							.between(thisObjectFromList.getDayWithEndTime(), nextObjectFromList.getDayWithStartTime());
@@ -405,7 +405,7 @@ public class PlanningCalendar {
 
 			}
 
-		} else if (sizeList == 1) {
+		} else if (sizeListAppointmentsAfterNow == 1) {
 
 			int year = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getYear();
 			int month = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getMonthValue();
