@@ -13,6 +13,7 @@ public class PlannerService {
 	private final PlanningCalendar planningCalendar;
 
 	private List<WorkingPlatform> listOfWorkingPlatforms = new ArrayList<>();
+
 	private List<Service> listOfServices = new ArrayList<>();
 
 	/**

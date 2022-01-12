@@ -371,4 +371,8 @@ public class PlanningCalendar {
 			System.err.println("You have not entered a car mechanic or working platform.");
 		}
 	}
+	
+	public void getSuggestThreeWorkingAppointments() {
+		
+	}
 }
