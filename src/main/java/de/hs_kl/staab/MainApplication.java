@@ -98,13 +98,29 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment5 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1,
 				customerConsultant2);
 
-		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 06, 8, 30, wkp1, car1, tireChange,
+		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 06, 8, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 06, 8, 15, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 1, 06, 10, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment3 = new WorkingAppointment(2022, 1, 06, 14, 00, wkp1, car2, glassRepair,
+		WorkingAppointment workingAppointment03 = new WorkingAppointment(2022, 1, 06, 12, 00, wkp1, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 11, 15, 00, wkp1, car2, tireChange,
+		WorkingAppointment workingAppointment04 = new WorkingAppointment(2022, 1, 06, 14, 00, wkp1, car2, glassRepair,
+				carMechanic1);
+		WorkingAppointment workingAppointment05 = new WorkingAppointment(2022, 1, 06, 8, 00, wkp2, car2, glassRepair,
+				carMechanic1);
+		WorkingAppointment workingAppointment06 = new WorkingAppointment(2022, 1, 06, 10, 00, wkp2, car2, glassRepair,
+				carMechanic1);
+		WorkingAppointment workingAppointment07 = new WorkingAppointment(2022, 1, 06, 12, 00, wkp2, car2, glassRepair,
+				carMechanic1);
+		WorkingAppointment workingAppointment08 = new WorkingAppointment(2022, 1, 06, 14, 00, wkp2, car2, glassRepair,
+				carMechanic1);
+		WorkingAppointment workingAppointment09 = new WorkingAppointment(2022, 1, 06, 8, 00, wkp3, car2, glassRepair,
+				carMechanic1);
+		WorkingAppointment workingAppointment10 = new WorkingAppointment(2022, 1, 06, 10, 00, wkp3, car2, glassRepair,
+				carMechanic1);
+		WorkingAppointment workingAppointment11 = new WorkingAppointment(2022, 1, 06, 12, 00, wkp3, car2, glassRepair,
+				carMechanic1);
+		WorkingAppointment workingAppointment12 = new WorkingAppointment(2022, 1, 06, 14, 00, wkp3, car2, glassRepair,
 				carMechanic1);
 
 		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 1, 06, 14, 00, wkp1,
@@ -173,10 +189,18 @@ public class MainApplication {
 		planningCalendar.createNewAppointment(consultingAppointment4);
 		planningCalendar.createNewAppointment(consultingAppointment5);
 
-		planningCalendar.createNewAppointment(workingAppointment1);
-		planningCalendar.createNewAppointment(workingAppointment2);
-		planningCalendar.createNewAppointment(workingAppointment3);
-		planningCalendar.createNewAppointment(workingAppointment4);
+		planningCalendar.createNewAppointment(workingAppointment01);
+		planningCalendar.createNewAppointment(workingAppointment02);
+		planningCalendar.createNewAppointment(workingAppointment03);
+		planningCalendar.createNewAppointment(workingAppointment04);
+		planningCalendar.createNewAppointment(workingAppointment05);
+		planningCalendar.createNewAppointment(workingAppointment06);
+		planningCalendar.createNewAppointment(workingAppointment07);
+		planningCalendar.createNewAppointment(workingAppointment08);
+		planningCalendar.createNewAppointment(workingAppointment09);
+		planningCalendar.createNewAppointment(workingAppointment10);
+		planningCalendar.createNewAppointment(workingAppointment11);
+		planningCalendar.createNewAppointment(workingAppointment12);
 
 		planningCalendar.createNewAppointment(cleaningAppointment1);
 		planningCalendar.createNewAppointment(cleaningAppointment2);
@@ -189,9 +213,9 @@ public class MainApplication {
 		planningCalendar.getAppointments();
 
 		// planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment1);
-		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment2);
-		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment3);
-		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment4);
+		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment02);
+		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment03);
+		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment04);
 		System.out.println("Service history for car1: ");
 
 		// Check if all finished work is issued for car1
