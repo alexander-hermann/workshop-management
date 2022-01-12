@@ -98,7 +98,7 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment5 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1,
 				customerConsultant2);
 
-		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 06, 8, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 07, 8, 00, wkp1, car1, glassRepair,
 				carMechanic1);
 		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 1, 06, 10, 00, wkp1, car1, glassRepair,
 				carMechanic1);
@@ -114,13 +114,13 @@ public class MainApplication {
 				carMechanic1);
 		WorkingAppointment workingAppointment08 = new WorkingAppointment(2022, 1, 06, 14, 00, wkp2, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment09 = new WorkingAppointment(2022, 1, 06, 8, 00, wkp3, car2, glassRepair,
+		WorkingAppointment workingAppointment09 = new WorkingAppointment(2022, 1, 14, 8, 00, wkp3, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment10 = new WorkingAppointment(2022, 1, 06, 10, 00, wkp3, car2, glassRepair,
+		WorkingAppointment workingAppointment10 = new WorkingAppointment(2022, 1, 14, 10, 00, wkp3, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment11 = new WorkingAppointment(2022, 1, 06, 12, 00, wkp3, car2, glassRepair,
+		WorkingAppointment workingAppointment11 = new WorkingAppointment(2022, 1, 14, 12, 00, wkp3, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment12 = new WorkingAppointment(2022, 1, 06, 14, 00, wkp3, car2, glassRepair,
+		WorkingAppointment workingAppointment12 = new WorkingAppointment(2022, 1, 14, 14, 00, wkp3, car2, glassRepair,
 				carMechanic1);
 
 		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 1, 06, 14, 00, wkp1,
@@ -208,7 +208,8 @@ public class MainApplication {
 		planningCalendar.createNewAppointment(cleaningAppointment4);
 		planningCalendar.getWeekOverview(10, 2016);
 
-		planningCalendar.setAutomaticallyCleaningAppointment(wkp3, CLEANINGPROGRAMM.INTENSE, dispatcher1);
+		// planningCalendar.setAutomaticallyCleaningAppointment(wkp3,
+		// CLEANINGPROGRAMM.INTENSE, dispatcher1);
 
 		planningCalendar.getAppointments();
 
@@ -232,6 +233,6 @@ public class MainApplication {
 		planningCalendar.getOverviewOfTodayWorks(carMechanic1, wkp1);
 		// plannerService.getOverviewOfTodayWorks(carMechanic1, wkp2);
 
-		planningCalendar.getSuggestThreeWorkingAppointments(inspectionCar);
+		planningCalendar.getSuggestThreeWorkingAppointments(oilChange);
 	}
 }
