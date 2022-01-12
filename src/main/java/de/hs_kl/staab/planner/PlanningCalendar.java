@@ -300,7 +300,7 @@ public class PlanningCalendar {
 			Dispatcher dispatcher) {
 		// Methode für die nächstbeste Zeit finden
 
-		LocalDateTime timeAfterDuration = LocalDateTime.now().plusMinutes(100);
+		LocalDateTime timeAfterDuration = LocalDateTime.now().plusMinutes(80);
 		LocalDateTime now = LocalDateTime.now();
 
 		List<Appointment> listOfPlannedWorksForWorkingPlatformAfterNow = new ArrayList<>();
@@ -319,8 +319,10 @@ public class PlanningCalendar {
 			}
 		});
 
-		if (!listOfPlannedWorksForWorkingPlatformAfterNow.isEmpty()) {
-			Appointment nextAppointmentForWorkingPlatform = listOfPlannedWorksForWorkingPlatformAfterNow.get(0);
+		int sizeListAppointmentsAfterNow = listOfPlannedWorksForWorkingPlatformAfterNow.size();
+		Appointment nextAppointmentForWorkingPlatform = listOfPlannedWorksForWorkingPlatformAfterNow.get(0);
+
+		if (sizeListAppointmentsAfterNow >= 2) {
 
 			if (timeAfterDuration.isBefore(nextAppointmentForWorkingPlatform.getDayWithStartTime())) {
 
@@ -336,17 +338,16 @@ public class PlanningCalendar {
 
 			} else {
 
-				int lengthOfList = listOfPlannedWorksForWorkingPlatformAfterNow.size();
 				int listElementCounter;
-				for (listElementCounter = 0; listElementCounter < lengthOfList; listElementCounter++) {
+				for (listElementCounter = 0; listElementCounter < sizeListAppointmentsAfterNow; listElementCounter++) {
 
 					Appointment thisObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
 							.get(listElementCounter);
 					Appointment nextObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
 							.get(listElementCounter + 1);
 
-					int sizeList = listOfPlannedWorksForWorkingPlatformAfterNow.size();
-					Appointment lastObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow.get(sizeList - 1);
+					Appointment lastObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
+							.get(sizeListAppointmentsAfterNow - 1);
 
 					int differenceBetweenAppointments = (int) ChronoUnit.MINUTES
 							.between(thisObjectFromList.getDayWithEndTime(), nextObjectFromList.getDayWithStartTime());
@@ -404,6 +405,18 @@ public class PlanningCalendar {
 				}
 
 			}
+
+		} else if (sizeListAppointmentsAfterNow == 1) {
+
+			int year = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getYear();
+			int month = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getMonthValue();
+			int day = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getDayOfMonth();
+			int hour = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getHour();
+			int minute = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getMinute();
+
+			CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour, minute,
+					workingPlatform, cleaningProgram, dispatcher);
+			createNewAppointment(automaticAppointment);
 
 		} else {
 
