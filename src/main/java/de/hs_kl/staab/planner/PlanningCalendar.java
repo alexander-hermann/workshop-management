@@ -373,6 +373,19 @@ public class PlanningCalendar {
 	}
 	
 	public void getSuggestThreeWorkingAppointments() {
+		// Connection is established to access the method of the class
+		PlannerService test = PlannerService.getInstance();
+		List<WorkingPlatform> listOfWorkingPlatform = test.getListOfWorkingPlatforms();
 		
+		for (Appointment appointment : listOfAppointments) {
+			if(appointment instanceof WorkingAppointment) {
+				
+				for(int i = 0; i < listOfWorkingPlatform.size(); i++) {
+					if(appointment.getWorkingPlatform().equals(listOfWorkingPlatform.get(i))) {
+						System.out.println(appointment);
+					}
+				}
+			}
+		}
 	}
 }
