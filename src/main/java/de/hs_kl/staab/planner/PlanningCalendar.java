@@ -337,7 +337,7 @@ public class PlanningCalendar {
 
 				int lengthOfList = listOfPlannedWorksForWorkingPlatformAfterNow.size();
 				int listElementCounter;
-				for (listElementCounter = 0; listElementCounter <= lengthOfList; listElementCounter++) {
+				for (listElementCounter = 0; listElementCounter < lengthOfList; listElementCounter++) {
 
 					Appointment thisObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
 							.get(listElementCounter);
@@ -379,9 +379,7 @@ public class PlanningCalendar {
 						System.err.println("2");
 						return;
 
-					} else if (differenceBetweenAppointments <= 50) {
-						System.err.println("check for next appointment");
-					} else {
+					} else if (nextObjectFromList.getId().equals(lastObjectFromList.getId())) {
 						int year = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getYear();
 						int month = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getMonthValue();
 						int day = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getDayOfMonth();
@@ -392,6 +390,13 @@ public class PlanningCalendar {
 						createNewAppointment(automaticAppointment);
 						System.err.println("4");
 						return;
+
+					} else if (differenceBetweenAppointments <= 50 && cleaningProgram.equals(CLEANINGPROGRAMM.FAST)
+							|| differenceBetweenAppointments <= 80
+									&& cleaningProgram.equals(CLEANINGPROGRAMM.INTENSE)) {
+
+						System.err.println("check for the next appointments in the list");
+						System.err.println("5");
 
 					}
 
