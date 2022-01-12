@@ -98,22 +98,22 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment5 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1,
 				customerConsultant2);
 
-		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 06, 8, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment1 = new WorkingAppointment(2022, 1, 06, 8, 30, wkp1, car1, tireChange,
 				carMechanic1);
-		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 06, 9, 50, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment2 = new WorkingAppointment(2022, 1, 06, 8, 15, wkp1, car1, glassRepair,
 				carMechanic1);
 		WorkingAppointment workingAppointment3 = new WorkingAppointment(2022, 1, 06, 14, 00, wkp1, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 06, 15, 00, wkp1, car2, tireChange,
+		WorkingAppointment workingAppointment4 = new WorkingAppointment(2022, 1, 11, 15, 00, wkp1, car2, tireChange,
 				carMechanic1);
 
 		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 1, 06, 14, 00, wkp1,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
-		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2022, 1, 07, 12, 00, wkp3,
+		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2022, 1, 12, 12, 00, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
-		CleaningAppointment cleaningAppointment3 = new CleaningAppointment(2022, 1, 07, 13, 00, wkp3,
+		CleaningAppointment cleaningAppointment3 = new CleaningAppointment(2022, 1, 12, 15, 00, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
-		CleaningAppointment cleaningAppointment4 = new CleaningAppointment(2022, 1, 07, 11, 25, wkp3,
+		CleaningAppointment cleaningAppointment4 = new CleaningAppointment(2022, 1, 12, 13, 05, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
 
 		// ########################################################
@@ -184,12 +184,14 @@ public class MainApplication {
 		planningCalendar.createNewAppointment(cleaningAppointment4);
 		planningCalendar.getWeekOverview(10, 2016);
 
+		planningCalendar.setAutomaticallyCleaningAppointment(wkp3, CLEANINGPROGRAMM.INTENSE, dispatcher1);
+
 		planningCalendar.getAppointments();
 
 		// planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment1);
-		// planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment2);
-		// planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment3);
-		// planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment4);
+		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment2);
+		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment3);
+		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment4);
 		System.out.println("Service history for car1: ");
 
 		// Check if all finished work is issued for car1
@@ -205,5 +207,6 @@ public class MainApplication {
 
 		planningCalendar.getOverviewOfTodayWorks(carMechanic1, wkp1);
 		// plannerService.getOverviewOfTodayWorks(carMechanic1, wkp2);
+
 	}
 }
