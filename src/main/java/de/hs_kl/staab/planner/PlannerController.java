@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/planner")
 public class PlannerController {
 
-	private final PlannerService plannerService = PlannerService.getInstance();
-
 	/* ************************************************ */
 	/* * HIER KÖNNEN SIE IHRE REST-METHODEN SCHREIBEN * */
 	/* * Siehe RestSandbox für Beispiele ************** */
