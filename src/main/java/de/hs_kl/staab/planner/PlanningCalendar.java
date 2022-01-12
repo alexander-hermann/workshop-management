@@ -456,7 +456,7 @@ public class PlanningCalendar {
 		}
 	}
 	
-	public void getSuggestThreeWorkingAppointments() {
+	public void getSuggestThreeWorkingAppointments(Service service) {
 		// Connection is established to access the method of the class
 		PlannerService test = PlannerService.getInstance();
 		List<WorkingPlatform> listOfWorkingPlatform = test.getListOfWorkingPlatforms();
