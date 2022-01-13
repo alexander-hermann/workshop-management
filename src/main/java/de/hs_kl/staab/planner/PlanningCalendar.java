@@ -491,14 +491,14 @@ public class PlanningCalendar {
 		
 		LocalTime startTimeOfService;
 		LocalTime endTimeOfService;
-		LocalTime end222 = END_TIME_OF_DAY.minusMinutes((long) (service.getDurationInH() * 60));
+		LocalTime lastPossibleAppointmentOfDay = END_TIME_OF_DAY.minusMinutes((long) (service.getDurationInH() * 60));
 
-		long five3 = ChronoUnit.MINUTES.between(START_TIME_OF_DAY, end222);
+		long durationInMinutes = ChronoUnit.MINUTES.between(START_TIME_OF_DAY, lastPossibleAppointmentOfDay);
 		
 		// 1. Create time
 		List<LocalDate> workingDays = this.getWorkingDays(planningTime, planningTime.plusWeeks(1));
 		for (LocalDate localDate : workingDays) {
-			for(long minutes = 0; minutes <= five3; minutes += 10) {
+			for(long minutes = 0; minutes <= durationInMinutes; minutes += 10) {
 				
 				startTimeOfService = START_TIME_OF_DAY.plusMinutes(minutes);
 				endTimeOfService = startTimeOfService.plusMinutes((long) (service.getDurationInH() * 60));
