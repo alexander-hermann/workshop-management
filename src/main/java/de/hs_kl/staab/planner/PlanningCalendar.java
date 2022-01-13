@@ -513,6 +513,7 @@ public class PlanningCalendar {
 						test222.add(convert1);
 						System.out.println(convert1 + " - " + convert2);
 						break;
+						// Shows 3 elements
 					}
 				}
 			}
