@@ -1,5 +1,6 @@
 package de.hs_kl.staab.planner;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class PlanningCalendar {
 
@@ -475,11 +478,11 @@ public class PlanningCalendar {
 		final int PREPARATION_TIME_IN_DAY = 2;
 		final int APPOINTMENT_NUMBER_FAKTOR = 3;
 		
+		// Today + Preparation time to prepare the work on the vehicle (2 day)
+		final LocalDate planningTime = LocalDate.now().plusDays(PREPARATION_TIME_IN_DAY);
+		
 		final LocalTime START_TIME_OF_DAY = LocalTime.of(8, 00);
 		final LocalTime END_TIME_OF_DAY = LocalTime.of(16, 00);
-		
-		// Today + Preparation time to prepare the work on the vehicle (2 day)
-		LocalDate planningTime = LocalDate.now().plusDays(PREPARATION_TIME_IN_DAY);
 		
 		// Connection is established to access the method of the class
 		PlannerService test = PlannerService.getInstance();
@@ -489,84 +492,28 @@ public class PlanningCalendar {
 		LocalTime startTimeOfService;
 		LocalTime endTimeOfService;
 		LocalTime end222 = END_TIME_OF_DAY.minusMinutes((long) (service.getDurationInH() * 60));
+
+		long five3 = ChronoUnit.MINUTES.between(START_TIME_OF_DAY, end222);
 		
-		int counter = 1;
-		boolean testCondition = false;
-		while(counter <= APPOINTMENT_NUMBER_FAKTOR) {
-			
-			for(long hours = 0; hours <= 8; hours++) {
-				for(long minutes = 0; minutes <= 59; minutes += 10) {
-			
-					startTimeOfService = START_TIME_OF_DAY.plusHours(hours).plusMinutes(minutes);
-					endTimeOfService = startTimeOfService.plusMinutes((long) (service.getDurationInH() * 60));
-					
-					LocalDateTime daystart = planningTime.atTime(startTimeOfService);
-					LocalDateTime dayend = planningTime.atTime(endTimeOfService);
-					System.out.println(daystart + " - " + dayend);
-					
-					for (Appointment appointment : listOfAppointments) {
-						if(appointment instanceof WorkingAppointment) {
-							
-							for(int i = 0; i < listOfWorkingPlatform.size(); i++) {
-								if(appointment.getWorkingPlatform().equals(listOfWorkingPlatform.get(i))) {
-									if(appointment.getDayWithStartTime().equals(daystart)) {
-										
-										System.out.println(appointment);
-										counter++;
-										counter+= 2;
-									}
-								}
-							}
-						}
-					}
-					
-					/*for (Appointment appointment : listOfAppointments) {
-						if(appointment instanceof WorkingAppointment) {
-							System.out.println("hhdhddh");
-							for(int i = 0; i < listOfWorkingPlatform.size(); i++) {
-								if(appointment.getWorkingPlatform().equals(listOfWorkingPlatform.get(i))) {
-									System.err.println("JDJD");
-									
-									boolean cond1 = startTimeOfService.equals(appointment.getStart());
-									
-									boolean cond3 = startTimeOfService.isAfter(appointment.getStart());
-									boolean cond4 = startTimeOfService.isBefore(appointment.getEnd());
-									
-									boolean cond5 = endTimeOfService.isAfter(appointment.getStart());
-									boolean cond6 = endTimeOfService.isBefore(appointment.getEnd());
-									
-									boolean cond7 = appointment.getStart().isAfter(startTimeOfService);
-									
-									boolean cond8 = appointment.getStart().isBefore(endTimeOfService);
-									
-									boolean cond9 = appointment.getEnd().isBefore(endTimeOfService);
-									
-									boolean cond10 = appointment.getEnd().isAfter(startTimeOfService);
-									
-									if (cond1) { return; } 
-									else if (cond3 && cond4) { return; } 
-									else if (cond5 && cond6) { return; } 
-									else if (cond7 && cond8) { return; }
-									else if (cond9 && cond10) { return; }
-									
-									testCondition = true;
-								}
-							}
-							if (testCondition) {
-								System.out.println("Test");
-								counter++;
-							}
-						}
-					}*/
-					
-					if(startTimeOfService.compareTo(end222) == 0) {
-						return;
-					}
-					
-				}
+		// 1. Create time
+		List<LocalDate> workingDays = this.getWorkingDays(planningTime, planningTime.plusWeeks(1));
+		for (LocalDate localDate : workingDays) {
+			for(long minutes = 0; minutes <= five3; minutes += 10) {
+				
+				startTimeOfService = START_TIME_OF_DAY.plusMinutes(minutes);
+				endTimeOfService = startTimeOfService.plusMinutes((long) (service.getDurationInH() * 60));
+				
+				System.out.println(localDate + ": " + startTimeOfService + " - " + endTimeOfService);
+				
 			}
-			
-		}
-		listtets.stream().forEach(s -> System.out.println(s));
+		}			
+	}
+	
+	public List<LocalDate> getWorkingDays(LocalDate start, LocalDate end) {
+		// Monday until Saturday, without Sunday
+		Predicate<LocalDate> isNotSunday = day -> day.getDayOfWeek() != DayOfWeek.SUNDAY;
+		
+		List<LocalDate> allDay = start.datesUntil(end).filter(isNotSunday).collect(Collectors.toList());
+		return allDay;
 	}
 }
