@@ -512,6 +512,7 @@ public class PlanningCalendar {
 						
 						test222.add(convert1);
 						System.out.println(convert1 + " - " + convert2);
+						break;
 						
 						/*boolean cond1 = convert1.equals(appointment.getDayWithStartTime());
 						boolean cond2 = convert2.equals(appointment.getDayWithEndTime());
