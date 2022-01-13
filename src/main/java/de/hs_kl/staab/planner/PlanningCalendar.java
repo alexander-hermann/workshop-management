@@ -478,7 +478,7 @@ public class PlanningCalendar {
 	public void getSuggestThreeWorkingAppointments(Service service) {
 		
 		final int PREPARATION_TIME_IN_DAY = 2;
-		final int APPOINTMENT_NUMBER_FAKTOR = 3;
+		//final int APPOINTMENT_NUMBER_FAKTOR = 3;
 		
 		// Today + Preparation time to prepare the work on the vehicle (2 day)
 		final LocalDate planningTime = LocalDate.now().plusDays(PREPARATION_TIME_IN_DAY);
