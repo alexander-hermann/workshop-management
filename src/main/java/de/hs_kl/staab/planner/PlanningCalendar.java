@@ -513,38 +513,6 @@ public class PlanningCalendar {
 						test222.add(convert1);
 						System.out.println(convert1 + " - " + convert2);
 						break;
-						
-						/*boolean cond1 = convert1.equals(appointment.getDayWithStartTime());
-						boolean cond2 = convert2.equals(appointment.getDayWithEndTime());
-						
-						boolean cond3 = convert1.isAfter(appointment.getDayWithStartTime());
-						boolean cond4 = convert1.isBefore(appointment.getDayWithEndTime());
-						
-						boolean cond5 = convert2.isAfter(appointment.getDayWithStartTime());
-						boolean cond6 = convert2.isBefore(appointment.getDayWithEndTime());
-						
-						boolean cond7 = appointment.getDayWithStartTime().isAfter(convert1);
-						boolean cond8 = appointment.getDayWithStartTime().isBefore(convert2);
-						
-						boolean cond9 = appointment.getDayWithEndTime().isBefore(convert2);
-						boolean cond10 = appointment.getDayWithEndTime().isAfter(convert1);
-						
-						if(cond1 && cond2) {
-							System.out.println("1Termin belegt " + appointment.getId() + " # " + appointment.getWorkingPlatform().getId());
-							
-						} else if (cond3 && cond4) {
-							System.out.println("2Termin belegt " + appointment.getId()  + " # " + appointment.getWorkingPlatform().getId());
-							
-						} else if (cond5 && cond6) {
-							System.out.println("3Termin belegt " + appointment.getId()  + " # " + appointment.getWorkingPlatform().getId());
-						
-						} else if (cond7 && cond8) {
-							System.out.println("4Termin belegt " + appointment.getId() + " # " + appointment.getWorkingPlatform().getId());
-							
-						} else if (cond9 && cond10) {
-							System.out.println("5Termin belegt " + appointment.getId()  + " # " + appointment.getWorkingPlatform().getId());
-							
-						}*/
 					}
 				}
 			}
