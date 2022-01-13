@@ -98,29 +98,29 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment5 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1,
 				customerConsultant2);
 
-		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 07, 8, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 15, 8, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 1, 06, 10, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 1, 15, 10, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment03 = new WorkingAppointment(2022, 1, 06, 12, 00, wkp1, car2, glassRepair,
+		WorkingAppointment workingAppointment03 = new WorkingAppointment(2022, 1, 15, 12, 00, wkp1, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment04 = new WorkingAppointment(2022, 1, 06, 14, 00, wkp1, car2, glassRepair,
+		WorkingAppointment workingAppointment04 = new WorkingAppointment(2022, 1, 15, 14, 00, wkp1, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment05 = new WorkingAppointment(2022, 1, 06, 8, 00, wkp2, car2, glassRepair,
+		WorkingAppointment workingAppointment05 = new WorkingAppointment(2022, 1, 15, 8, 00, wkp2, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment06 = new WorkingAppointment(2022, 1, 06, 10, 00, wkp2, car2, glassRepair,
+		WorkingAppointment workingAppointment06 = new WorkingAppointment(2022, 1, 15, 10, 00, wkp2, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment07 = new WorkingAppointment(2022, 1, 06, 12, 00, wkp2, car2, glassRepair,
+		WorkingAppointment workingAppointment07 = new WorkingAppointment(2022, 1, 15, 12, 00, wkp2, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment08 = new WorkingAppointment(2022, 1, 06, 14, 00, wkp2, car2, glassRepair,
+		WorkingAppointment workingAppointment08 = new WorkingAppointment(2022, 1, 15, 14, 00, wkp2, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment09 = new WorkingAppointment(2022, 1, 14, 8, 00, wkp3, car2, glassRepair,
+		WorkingAppointment workingAppointment09 = new WorkingAppointment(2022, 1, 15, 8, 00, wkp3, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment10 = new WorkingAppointment(2022, 1, 14, 10, 00, wkp3, car2, glassRepair,
+		WorkingAppointment workingAppointment10 = new WorkingAppointment(2022, 1, 15, 10, 00, wkp3, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment11 = new WorkingAppointment(2022, 1, 14, 12, 00, wkp3, car2, glassRepair,
+		WorkingAppointment workingAppointment11 = new WorkingAppointment(2022, 1, 15, 12, 00, wkp3, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment12 = new WorkingAppointment(2022, 1, 14, 14, 00, wkp3, car2, glassRepair,
+		WorkingAppointment workingAppointment12 = new WorkingAppointment(2022, 1, 15, 14, 00, wkp3, car2, glassRepair,
 				carMechanic1);
 
 		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 1, 06, 14, 00, wkp1,
@@ -233,6 +233,6 @@ public class MainApplication {
 		planningCalendar.getOverviewOfTodayWorks(carMechanic1, wkp1);
 		// plannerService.getOverviewOfTodayWorks(carMechanic1, wkp2);
 
-		planningCalendar.getSuggestThreeWorkingAppointments(tireChange);
+		planningCalendar.getSuggestThreeWorkingAppointments(glassRepair);
 	}
 }

@@ -492,21 +492,65 @@ public class PlanningCalendar {
 		LocalTime startTimeOfService;
 		LocalTime endTimeOfService;
 		LocalTime lastPossibleAppointmentOfDay = END_TIME_OF_DAY.minusMinutes((long) (service.getDurationInH() * 60));
+		
+		int counter = 0;
 
 		long durationInMinutes = ChronoUnit.MINUTES.between(START_TIME_OF_DAY, lastPossibleAppointmentOfDay);
 		
 		// 1. Create time
 		List<LocalDate> workingDays = this.getWorkingDays(planningTime, planningTime.plusWeeks(1));
+		
 		for (LocalDate localDate : workingDays) {
 			for(long minutes = 0; minutes <= durationInMinutes; minutes += 10) {
 				
 				startTimeOfService = START_TIME_OF_DAY.plusMinutes(minutes);
 				endTimeOfService = startTimeOfService.plusMinutes((long) (service.getDurationInH() * 60));
 				
-				System.out.println(localDate + ": " + startTimeOfService + " - " + endTimeOfService);
+				LocalDateTime convert1 = localDate.atTime(startTimeOfService);
+				LocalDateTime convert2 = localDate.atTime(endTimeOfService);
+				
+				for (Appointment appointment : listOfAppointments) {
+					if(appointment instanceof WorkingAppointment) {
+						
+						boolean cond3 = convert1.isAfter(appointment.getDayWithStartTime());
+						boolean cond4 = convert1.isBefore(appointment.getDayWithEndTime());
+						
+						boolean cond5 = convert2.isAfter(appointment.getDayWithStartTime());
+						boolean cond6 = convert2.isBefore(appointment.getDayWithEndTime());
+						
+						boolean cond7 = appointment.getDayWithStartTime().isAfter(convert1);
+						boolean cond8 = appointment.getDayWithStartTime().isBefore(convert2);
+						
+						boolean cond9 = appointment.getDayWithEndTime().isBefore(convert2);
+						boolean cond10 = appointment.getDayWithEndTime().isAfter(convert1);
+						
+						if(appointment.getDayWithStartTime().equals(convert1) && appointment.getDayWithEndTime().equals(convert2)) {
+							System.out.println("1Termin belegt " + appointment.getId() + " # " + appointment.getWorkingPlatform().getId());
+							continue;
+						} else if (cond3 && cond4) {
+							System.out.println("2Termin belegt " + appointment.getId()  + " # " + appointment.getWorkingPlatform().getId());
+							continue;
+						} else if (cond5 && cond6) {
+							System.out.println("3Termin belegt " + appointment.getId()  + " # " + appointment.getWorkingPlatform().getId());
+							continue;
+						} else if (cond7 && cond8) {
+							System.out.println("4Termin belegt " + appointment.getId() + " # " + appointment.getWorkingPlatform().getId());
+							continue;
+						} else if (cond9 && cond10) {
+							System.out.println("5Termin belegt " + appointment.getId()  + " # " + appointment.getWorkingPlatform().getId());
+							continue;
+						} else {
+							continue;
+						}
+					}
+				}
+				if(counter == 5) {
+					System.out.println(convert1 + " - " + convert2);
+					return;
+				}
 				
 			}
-		}			
+		}
 	}
 	
 	public List<LocalDate> getWorkingDays(LocalDate start, LocalDate end) {
