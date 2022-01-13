@@ -8,7 +8,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -484,24 +486,20 @@ public class PlanningCalendar {
 		final LocalTime START_TIME_OF_DAY = LocalTime.of(8, 00);
 		final LocalTime END_TIME_OF_DAY = LocalTime.of(16, 00);
 		
-		// Connection is established to access the method of the class
-		PlannerService test = PlannerService.getInstance();
-		List<WorkingPlatform> listOfWorkingPlatform = test.getListOfWorkingPlatforms();
-		List<WorkingAppointment> listtets = new ArrayList<>();
+		List<LocalDate> workingDays = this.getWorkingDays(planningTime, planningTime.plusWeeks(1));
 		
 		LocalTime startTimeOfService;
 		LocalTime endTimeOfService;
-		LocalTime lastPossibleAppointmentOfDay = END_TIME_OF_DAY.minusMinutes((long) (service.getDurationInH() * 60));
-		
-		int counter = 0;
-
+		int serviceDurationInMin = (int) (service.getDurationInH() * 60);
+		LocalTime lastPossibleAppointmentOfDay = END_TIME_OF_DAY.minusMinutes((long) serviceDurationInMin);
 		long durationInMinutes = ChronoUnit.MINUTES.between(START_TIME_OF_DAY, lastPossibleAppointmentOfDay);
 		
-		// 1. Create time
-		List<LocalDate> workingDays = this.getWorkingDays(planningTime, planningTime.plusWeeks(1));
+		Set<LocalDateTime> test222 = new HashSet<>();
+		test222.stream().forEach(s -> System.err.println(s));
 		
+		// 1. Create time
 		for (LocalDate localDate : workingDays) {
-			for(long minutes = 0; minutes <= durationInMinutes; minutes += 10) {
+			for(long minutes = 0; minutes <= durationInMinutes; minutes += serviceDurationInMin) {
 				
 				startTimeOfService = START_TIME_OF_DAY.plusMinutes(minutes);
 				endTimeOfService = startTimeOfService.plusMinutes((long) (service.getDurationInH() * 60));
@@ -510,7 +508,13 @@ public class PlanningCalendar {
 				LocalDateTime convert2 = localDate.atTime(endTimeOfService);
 				
 				for (Appointment appointment : listOfAppointments) {
-					if(appointment instanceof WorkingAppointment) {
+					if(appointment instanceof WorkingAppointment && !appointment.getDay().equals(localDate)) {
+						
+						test222.add(convert1);
+						System.out.println(convert1 + " - " + convert2);
+						
+						/*boolean cond1 = convert1.equals(appointment.getDayWithStartTime());
+						boolean cond2 = convert2.equals(appointment.getDayWithEndTime());
 						
 						boolean cond3 = convert1.isAfter(appointment.getDayWithStartTime());
 						boolean cond4 = convert1.isBefore(appointment.getDayWithEndTime());
@@ -524,31 +528,24 @@ public class PlanningCalendar {
 						boolean cond9 = appointment.getDayWithEndTime().isBefore(convert2);
 						boolean cond10 = appointment.getDayWithEndTime().isAfter(convert1);
 						
-						if(appointment.getDayWithStartTime().equals(convert1) && appointment.getDayWithEndTime().equals(convert2)) {
+						if(cond1 && cond2) {
 							System.out.println("1Termin belegt " + appointment.getId() + " # " + appointment.getWorkingPlatform().getId());
-							continue;
+							
 						} else if (cond3 && cond4) {
 							System.out.println("2Termin belegt " + appointment.getId()  + " # " + appointment.getWorkingPlatform().getId());
-							continue;
+							
 						} else if (cond5 && cond6) {
 							System.out.println("3Termin belegt " + appointment.getId()  + " # " + appointment.getWorkingPlatform().getId());
-							continue;
+						
 						} else if (cond7 && cond8) {
 							System.out.println("4Termin belegt " + appointment.getId() + " # " + appointment.getWorkingPlatform().getId());
-							continue;
+							
 						} else if (cond9 && cond10) {
 							System.out.println("5Termin belegt " + appointment.getId()  + " # " + appointment.getWorkingPlatform().getId());
-							continue;
-						} else {
-							continue;
-						}
+							
+						}*/
 					}
 				}
-				if(counter == 5) {
-					System.out.println(convert1 + " - " + convert2);
-					return;
-				}
-				
 			}
 		}
 	}
