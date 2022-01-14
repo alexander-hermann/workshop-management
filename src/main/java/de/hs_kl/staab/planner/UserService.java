@@ -13,24 +13,24 @@ public class UserService {
 
 	public void createNewUser(User newUser) {
 		if (!listOfUsers.contains(newUser)) {
+
 			listOfUsers.add(newUser);
 			System.out.println("The user " + newUser + "  was successfully added.");
 		} else {
-			throw new IllegalArgumentException(
-					"The user cannot be added because the user " + newUser + " already exists in the list");
+			System.err.println("The user cannot be added because the user " + newUser + " already exists in the list");
 		}
 	}
 
 	public User getUserByUserName(String userName) {
 		if (!listOfUsers.isEmpty()) {
 			for (User user : listOfUsers) {
-				if (user.getFullName().equals(userName)) {
-					System.out.println(user);
+				if (user.getId().equals(userName)) {
+					System.out.println(user + " found.");
 					return user;
 				}
 			}
 		} else {
-			throw new IllegalArgumentException("The list of users is empty.");
+			System.out.println("The list of users is empty.");
 		}
 		throw new IllegalArgumentException(
 				"The user with the user name " + userName + " does not exsit in the list for users");

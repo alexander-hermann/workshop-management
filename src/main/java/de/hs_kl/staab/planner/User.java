@@ -3,7 +3,7 @@ package de.hs_kl.staab.planner;
 public class User extends Person {
 
 	protected static final String USER_PREFIX = "User-";
-	protected static int USER_ID_COUNTER = 1;
+	protected static int USER_ID_COUNTER = 0;
 
 	protected String idOfUser;
 
@@ -11,6 +11,7 @@ public class User extends Person {
 		super(fullName, phoneNumber, emailAddress);
 		this.idOfUser = USER_PREFIX + USER_ID_COUNTER;
 		USER_ID_COUNTER++;
+
 	}
 
 	public String getId() {
@@ -24,7 +25,8 @@ public class User extends Person {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("User [idOfUser=");
+		builder.append(super.toString());
+		builder.append(" [idOfUser=");
 		builder.append(idOfUser);
 		builder.append("]");
 		return builder.toString();
