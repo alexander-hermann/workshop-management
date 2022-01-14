@@ -315,116 +315,124 @@ public class PlanningCalendar {
 				listOfPlannedWorksForWorkingPlatformAfterNow.add(appointment);
 			}
 		}
+		if (!listOfPlannedWorksForWorkingPlatformAfterNow.isEmpty()) {
 
-		Collections.sort(listOfPlannedWorksForWorkingPlatformAfterNow, new Comparator<Appointment>() {
+			Collections.sort(listOfPlannedWorksForWorkingPlatformAfterNow, new Comparator<Appointment>() {
 
-			@Override
-			public int compare(Appointment firstAppointment, Appointment secondAppointment) {
-				return firstAppointment.getDayWithStartTime().compareTo(secondAppointment.getDayWithStartTime());
-			}
-		});
+				@Override
+				public int compare(Appointment firstAppointment, Appointment secondAppointment) {
+					return firstAppointment.getDayWithStartTime().compareTo(secondAppointment.getDayWithStartTime());
+				}
+			});
 
-		int sizeListAppointmentsAfterNow = listOfPlannedWorksForWorkingPlatformAfterNow.size();
-		Appointment nextAppointmentForWorkingPlatform = listOfPlannedWorksForWorkingPlatformAfterNow.get(0);
+			int sizeListAppointmentsAfterNow = listOfPlannedWorksForWorkingPlatformAfterNow.size();
+			Appointment nextAppointmentForWorkingPlatform = listOfPlannedWorksForWorkingPlatformAfterNow.get(0);
 
-		if (sizeListAppointmentsAfterNow >= 2) {
+			if (sizeListAppointmentsAfterNow >= 2) {
 
-			if (timeAfterDuration.isBefore(nextAppointmentForWorkingPlatform.getDayWithStartTime())) {
+				if (timeAfterDuration.isBefore(nextAppointmentForWorkingPlatform.getDayWithStartTime())
+						&& now.getHour() >= 8 && now.getHour() < 16) {
 
-				int year = (int) now.plusMinutes(10).getYear();
-				int month = (int) now.plusMinutes(10).getMonthValue();
-				int day = (int) now.plusMinutes(10).getDayOfMonth();
-				int hour = (int) now.plusMinutes(10).getHour();
-				int minute = (int) now.plusMinutes(10).getMinute();
+					int year = (int) now.plusMinutes(10).getYear();
+					int month = (int) now.plusMinutes(10).getMonthValue();
+					int day = (int) now.plusMinutes(10).getDayOfMonth();
+					int hour = (int) now.plusMinutes(10).getHour();
+					int minute = (int) now.plusMinutes(10).getMinute();
 
-				CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour, minute,
-						workingPlatform, cleaningProgram, dispatcher);
-				createNewAppointment(automaticAppointment);
+					CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour, minute,
+							workingPlatform, cleaningProgram, dispatcher);
 
-			} else {
+					createNewAppointment(automaticAppointment);
+					System.err.println("1");
 
-				int listElementCounter;
-				for (listElementCounter = 0; listElementCounter < sizeListAppointmentsAfterNow; listElementCounter++) {
+				} else {
 
-					Appointment thisObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
-							.get(listElementCounter);
-					Appointment nextObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
-							.get(listElementCounter + 1);
+					int listElementCounter;
+					for (listElementCounter = 0; listElementCounter < sizeListAppointmentsAfterNow; listElementCounter++) {
 
-					Appointment lastObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
-							.get(sizeListAppointmentsAfterNow - 1);
+						Appointment thisObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
+								.get(listElementCounter);
+						Appointment nextObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
+								.get(listElementCounter + 1);
 
-					int differenceBetweenAppointments = (int) ChronoUnit.MINUTES
-							.between(thisObjectFromList.getDayWithEndTime(), nextObjectFromList.getDayWithStartTime());
+						Appointment lastObjectFromList = listOfPlannedWorksForWorkingPlatformAfterNow
+								.get(sizeListAppointmentsAfterNow - 1);
 
-					System.err.println("Difference between the end of appointment " + thisObjectFromList.getId()
-							+ " and next appointment " + nextObjectFromList.getId() + " is "
-							+ differenceBetweenAppointments + " Minutes." + lastObjectFromList.getId());
+						int differenceBetweenAppointments = (int) ChronoUnit.MINUTES.between(
+								thisObjectFromList.getDayWithEndTime(), nextObjectFromList.getDayWithStartTime());
 
-					if (nextObjectFromList.getId().equals(lastObjectFromList.getId())) {
+						System.err.println("Difference between the end of appointment " + thisObjectFromList.getId()
+								+ " and next appointment " + nextObjectFromList.getId() + " is "
+								+ differenceBetweenAppointments + " Minutes." + lastObjectFromList.getId());
 
-						int year = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getYear();
-						int month = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getMonthValue();
-						int day = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getDayOfMonth();
-						int hour = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getHour();
-						int minute = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getMinute();
-						CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour,
-								minute, workingPlatform, cleaningProgram, dispatcher);
-						if (automaticAppointment.isAppointmentInWorkingTime()) {
+						if (nextObjectFromList.getId().equals(lastObjectFromList.getId())) {
 
-							createNewAppointment(automaticAppointment);
-							System.err.println("1");
-							return;
-						} else {
-							// create appointment for next day 8:00
-							int year2 = (int) lastObjectFromList.getDayWithEndTime().getYear();
-							int month2 = (int) lastObjectFromList.getDayWithEndTime().getMonthValue();
-							int day2 = (int) lastObjectFromList.getDayWithEndTime().plusDays(1).getDayOfMonth();
-							int hour2 = 8;
-							int minute2 = 0;
-							CleaningAppointment automaticAppointment2 = new CleaningAppointment(year2, month2, day2,
-									hour2, minute2, workingPlatform, cleaningProgram, dispatcher);
-							createNewAppointment(automaticAppointment2);
-							System.err.println("2");
-							return;
+							int year = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getYear();
+							int month = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getMonthValue();
+							int day = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getDayOfMonth();
+							int hour = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getHour();
+							int minute = (int) lastObjectFromList.getDayWithEndTime().plusMinutes(5).getMinute();
+							CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour,
+									minute, workingPlatform, cleaningProgram, dispatcher);
+							if (automaticAppointment.isAppointmentInWorkingTime()) {
+
+								createNewAppointment(automaticAppointment);
+								System.err.println("1");
+								return;
+							} else {
+								// create appointment for next day 8:00
+								int year2 = (int) lastObjectFromList.getDayWithEndTime().getYear();
+								int month2 = (int) lastObjectFromList.getDayWithEndTime().getMonthValue();
+								int day2 = (int) lastObjectFromList.getDayWithEndTime().plusDays(1).getDayOfMonth();
+								int hour2 = 8;
+								int minute2 = 0;
+								CleaningAppointment automaticAppointment2 = new CleaningAppointment(year2, month2, day2,
+										hour2, minute2, workingPlatform, cleaningProgram, dispatcher);
+								createNewAppointment(automaticAppointment2);
+								System.err.println("2");
+								return;
+							}
+
+						} else if (differenceBetweenAppointments > 50
+								&& cleaningProgram.equals(CLEANINGPROGRAMM.FAST)) {
+							int year = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getYear();
+							int month = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getMonthValue();
+							int day = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getDayOfMonth();
+							int hour = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getHour();
+							int minute = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getMinute();
+
+							CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour,
+									minute, workingPlatform, cleaningProgram, dispatcher);
+							if (automaticAppointment.isAppointmentInWorkingTime()) {
+								createNewAppointment(automaticAppointment);
+								System.err.println("3");
+								return;
+							}
+
+						} else if (differenceBetweenAppointments > 80
+								&& cleaningProgram.equals(CLEANINGPROGRAMM.INTENSE)) {
+							int year = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getYear();
+							int month = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getMonthValue();
+							int day = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getDayOfMonth();
+							int hour = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getHour();
+							int minute = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getMinute();
+
+							CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour,
+									minute, workingPlatform, cleaningProgram, dispatcher);
+							if (automaticAppointment.isAppointmentInWorkingTime()) {
+								createNewAppointment(automaticAppointment);
+								System.err.println("4");
+								return;
+							}
+
+						} else if (differenceBetweenAppointments <= 50 && cleaningProgram.equals(CLEANINGPROGRAMM.FAST)
+								|| differenceBetweenAppointments <= 80
+										&& cleaningProgram.equals(CLEANINGPROGRAMM.INTENSE)) {
+
+							System.err.println("check for the next appointments in the list");
+							System.err.println("5");
+
 						}
-
-					} else if (differenceBetweenAppointments > 50 && cleaningProgram.equals(CLEANINGPROGRAMM.FAST)) {
-						int year = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getYear();
-						int month = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getMonthValue();
-						int day = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getDayOfMonth();
-						int hour = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getHour();
-						int minute = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getMinute();
-
-						CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour,
-								minute, workingPlatform, cleaningProgram, dispatcher);
-						if (automaticAppointment.isAppointmentInWorkingTime()) {
-							createNewAppointment(automaticAppointment);
-							System.err.println("3");
-							return;
-						}
-
-					} else if (differenceBetweenAppointments > 80 && cleaningProgram.equals(CLEANINGPROGRAMM.INTENSE)) {
-						int year = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getYear();
-						int month = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getMonthValue();
-						int day = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getDayOfMonth();
-						int hour = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getHour();
-						int minute = (int) thisObjectFromList.getDayWithEndTime().plusMinutes(10).getMinute();
-
-						CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour,
-								minute, workingPlatform, cleaningProgram, dispatcher);
-						if (automaticAppointment.isAppointmentInWorkingTime()) {
-							createNewAppointment(automaticAppointment);
-							System.err.println("4");
-							return;
-						}
-
-					} else if (differenceBetweenAppointments <= 50 && cleaningProgram.equals(CLEANINGPROGRAMM.FAST)
-							|| differenceBetweenAppointments <= 80
-									&& cleaningProgram.equals(CLEANINGPROGRAMM.INTENSE)) {
-
-						System.err.println("check for the next appointments in the list");
-						System.err.println("5");
 
 					}
 
@@ -432,18 +440,56 @@ public class PlanningCalendar {
 
 			}
 
-		} else if (sizeListAppointmentsAfterNow == 1) {
+			else if (sizeListAppointmentsAfterNow == 1) {
 
-			int year = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getYear();
-			int month = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getMonthValue();
-			int day = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getDayOfMonth();
-			int hour = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getHour();
-			int minute = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getMinute();
+				if (timeAfterDuration.isBefore(nextAppointmentForWorkingPlatform.getDayWithStartTime())
+						&& now.getHour() >= 8 && now.getHour() < 16) {
 
-			CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour, minute,
-					workingPlatform, cleaningProgram, dispatcher);
-			createNewAppointment(automaticAppointment);
+					int year = (int) now.plusMinutes(10).getYear();
+					int month = (int) now.plusMinutes(10).getMonthValue();
+					int day = (int) now.plusMinutes(10).getDayOfMonth();
+					int hour = (int) now.plusMinutes(10).getHour();
+					int minute = (int) now.plusMinutes(10).getMinute();
 
+					CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour, minute,
+							workingPlatform, cleaningProgram, dispatcher);
+
+					createNewAppointment(automaticAppointment);
+					System.err.println("1");
+
+				} else {
+					int year = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getYear();
+					int month = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5)
+							.getMonthValue();
+					int day = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5)
+							.getDayOfMonth();
+					int hour = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getHour();
+					int minute = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusMinutes(5).getMinute();
+
+					CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour, minute,
+							workingPlatform, cleaningProgram, dispatcher);
+					if (automaticAppointment.isAppointmentInWorkingTime()) {
+
+						createNewAppointment(automaticAppointment);
+						System.err.println("6");
+
+					} else {
+						// create appointment for next day 8:00
+						int year2 = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().getYear();
+						int month2 = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().getMonthValue();
+						int day2 = (int) nextAppointmentForWorkingPlatform.getDayWithEndTime().plusDays(1)
+								.getDayOfMonth();
+						int hour2 = 8;
+						int minute2 = 0;
+						CleaningAppointment automaticAppointment2 = new CleaningAppointment(year2, month2, day2, hour2,
+								minute2, workingPlatform, cleaningProgram, dispatcher);
+						createNewAppointment(automaticAppointment2);
+						System.err.println("7");
+
+					}
+
+				}
+			}
 		} else {
 
 			int year = (int) now.plusMinutes(5).getYear();
@@ -454,8 +500,25 @@ public class PlanningCalendar {
 
 			CleaningAppointment automaticAppointment = new CleaningAppointment(year, month, day, hour, minute,
 					workingPlatform, cleaningProgram, dispatcher);
-			createNewAppointment(automaticAppointment);
 
+			if (automaticAppointment.isAppointmentInWorkingTime()) {
+
+				createNewAppointment(automaticAppointment);
+				System.err.println("8");
+
+			} else {
+				// create appointment for next day 8:00
+				int year2 = (int) now.getYear();
+				int month2 = (int) now.getMonthValue();
+				int day2 = (int) now.plusDays(1).getDayOfMonth();
+				int hour2 = 8;
+				int minute2 = 0;
+				CleaningAppointment automaticAppointment2 = new CleaningAppointment(year2, month2, day2, hour2, minute2,
+						workingPlatform, cleaningProgram, dispatcher);
+				createNewAppointment(automaticAppointment2);
+				System.err.println("9");
+
+			}
 		}
 	}
 
