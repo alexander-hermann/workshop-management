@@ -301,6 +301,21 @@ public class PlanningCalendar {
 		return totalHoursOfDay;
 	}
 
+	public void createAppointmentWithLocalDateTime(LocalDateTime localDateTime, WorkingPlatform workingPlatform,
+			CLEANINGPROGRAMM cleaningProgram, Dispatcher dispatcher) {
+		int year = (int) localDateTime.plusMinutes(10).getYear();
+		int month = (int) localDateTime.plusMinutes(10).getMonthValue();
+		int day = (int) localDateTime.plusMinutes(10).getDayOfMonth();
+		int hour = (int) localDateTime.plusMinutes(10).getHour();
+		int minute = (int) localDateTime.plusMinutes(10).getMinute();
+
+		CleaningAppointment newAppointment = new CleaningAppointment(year, month, day, hour, minute, workingPlatform,
+				cleaningProgram, dispatcher);
+
+		createNewAppointment(newAppointment);
+
+	}
+
 	public void setAutomaticallyCleaningAppointment(WorkingPlatform workingPlatform, CLEANINGPROGRAMM cleaningProgram,
 			Dispatcher dispatcher) {
 
@@ -337,16 +352,7 @@ public class PlanningCalendar {
 				if (timeAfterDuration.isBefore(nextAppointmentForWorkingPlatform.getDayWithStartTime())
 						&& now.getHour() >= 8 && now.getHour() < 15) {
 
-					int year = (int) now.plusMinutes(10).getYear();
-					int month = (int) now.plusMinutes(10).getMonthValue();
-					int day = (int) now.plusMinutes(10).getDayOfMonth();
-					int hour = (int) now.plusMinutes(10).getHour();
-					int minute = (int) now.plusMinutes(10).getMinute();
-
-					CleaningAppointment newAppointment = new CleaningAppointment(year, month, day, hour, minute,
-							workingPlatform, cleaningProgram, dispatcher);
-
-					createNewAppointment(newAppointment);
+					createAppointmentWithLocalDateTime(now, workingPlatform, cleaningProgram, dispatcher);
 					System.err.println("1");
 
 				} else {
@@ -468,16 +474,7 @@ public class PlanningCalendar {
 				if (timeAfterDuration.isBefore(nextAppointmentForWorkingPlatform.getDayWithStartTime())
 						&& now.getHour() >= 8 && now.getHour() < 16) {
 
-					int year = (int) now.plusMinutes(10).getYear();
-					int month = (int) now.plusMinutes(10).getMonthValue();
-					int day = (int) now.plusMinutes(10).getDayOfMonth();
-					int hour = (int) now.plusMinutes(10).getHour();
-					int minute = (int) now.plusMinutes(10).getMinute();
-
-					CleaningAppointment newAppointment = new CleaningAppointment(year, month, day, hour, minute,
-							workingPlatform, cleaningProgram, dispatcher);
-
-					createNewAppointment(newAppointment);
+					createAppointmentWithLocalDateTime(now, workingPlatform, cleaningProgram, dispatcher);
 					System.err.println("1");
 
 				} else {
