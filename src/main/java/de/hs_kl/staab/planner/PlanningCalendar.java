@@ -8,9 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -522,46 +520,50 @@ public class PlanningCalendar {
 	
 	public void getSuggestThreeWorkingAppointments(Service service) {
 		
-		final int PREPARATION_TIME_IN_DAY = 2;
-		//final int APPOINTMENT_NUMBER_FAKTOR = 3;
-		
-		// Today + Preparation time to prepare the work on the vehicle (2 day)
-		final LocalDate planningTime = LocalDate.now().plusDays(PREPARATION_TIME_IN_DAY);
-		
-		final LocalTime START_TIME_OF_DAY = LocalTime.of(8, 00);
-		final LocalTime END_TIME_OF_DAY = LocalTime.of(16, 00);
-		
-		List<LocalDate> workingDays = this.getWorkingDays(planningTime, planningTime.plusWeeks(1));
-		
-		LocalTime startTimeOfService;
-		LocalTime endTimeOfService;
-		int serviceDurationInMin = (int) (service.getDurationInH() * 60);
-		LocalTime lastPossibleAppointmentOfDay = END_TIME_OF_DAY.minusMinutes((long) serviceDurationInMin);
-		long durationInMinutes = ChronoUnit.MINUTES.between(START_TIME_OF_DAY, lastPossibleAppointmentOfDay);
-		
-		Set<LocalDateTime> test222 = new HashSet<>();
-		test222.stream().forEach(s -> System.err.println(s));
-		
-		// 1. Create time
-		for (LocalDate localDate : workingDays) {
-			for(long minutes = 0; minutes <= durationInMinutes; minutes += serviceDurationInMin) {
-				
-				startTimeOfService = START_TIME_OF_DAY.plusMinutes(minutes);
-				endTimeOfService = startTimeOfService.plusMinutes((long) (service.getDurationInH() * 60));
-				
-				LocalDateTime convert1 = localDate.atTime(startTimeOfService);
-				LocalDateTime convert2 = localDate.atTime(endTimeOfService);
-				
-				for (Appointment appointment : listOfAppointments) {
-					if(appointment instanceof WorkingAppointment && !appointment.getDay().equals(localDate)) {
-						
-						test222.add(convert1);
-						System.out.println(convert1 + " - " + convert2);
-						break;
-						// Shows 3 elements
+		if(service != null) {
+			final int PREPARATION_TIME_IN_DAY = 2;
+			final int APPOINTMENT_NUMBER_FAKTOR = 3;
+			
+			// Today + Preparation time to prepare the work on the vehicle (2 day)
+			final LocalDate planningTime = LocalDate.now().plusDays(PREPARATION_TIME_IN_DAY);
+			
+			final LocalTime START_TIME_OF_DAY = LocalTime.of(8, 00);
+			final LocalTime END_TIME_OF_DAY = LocalTime.of(16, 00);
+			
+			List<LocalDate> workingDays = this.getWorkingDays(planningTime, planningTime.plusWeeks(1));
+			
+			LocalTime startTimeOfService;
+			LocalTime endTimeOfService;
+			int serviceDurationInMin = (int) (service.getDurationInH() * 60);
+			LocalTime lastPossibleAppointmentOfDay = END_TIME_OF_DAY.minusMinutes((long) serviceDurationInMin);
+			long durationInMinutes = ChronoUnit.MINUTES.between(START_TIME_OF_DAY, lastPossibleAppointmentOfDay);
+			
+			int counter = 0;
+			
+			// 1. Create time
+			for (LocalDate localDate : workingDays) {
+				for(long minutes = 0; minutes <= durationInMinutes; minutes += serviceDurationInMin) {
+					counter++;
+					
+					startTimeOfService = START_TIME_OF_DAY.plusMinutes(minutes);
+					endTimeOfService = startTimeOfService.plusMinutes((long) (service.getDurationInH() * 60));
+					
+					LocalDateTime convert1 = localDate.atTime(startTimeOfService);
+					LocalDateTime convert2 = localDate.atTime(endTimeOfService);
+					
+					for (Appointment appointment : listOfAppointments) {
+						if(appointment instanceof WorkingAppointment) {
+							
+							System.out.println(convert1 + " - " + convert2);
+							break;
+							// Shows 3 elements
+						}
 					}
+					if(counter == APPOINTMENT_NUMBER_FAKTOR) return;
 				}
 			}
+		} else {
+			System.err.println("Du musst ein Service eintippen.");
 		}
 	}
 	
