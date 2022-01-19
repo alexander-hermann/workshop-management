@@ -98,15 +98,15 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment5 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1,
 				customerConsultant2);
 
-		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 15, 8, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 21, 8, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 1, 15, 10, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 1, 21, 10, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment03 = new WorkingAppointment(2022, 1, 15, 12, 00, wkp1, car2, glassRepair,
+		WorkingAppointment workingAppointment03 = new WorkingAppointment(2022, 1, 21, 12, 00, wkp1, car2, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment04 = new WorkingAppointment(2022, 1, 15, 14, 00, wkp1, car2, glassRepair,
+		WorkingAppointment workingAppointment04 = new WorkingAppointment(2022, 1, 27, 14, 00, wkp1, car2, oilChange,
 				carMechanic1);
-		WorkingAppointment workingAppointment05 = new WorkingAppointment(2022, 1, 15, 8, 00, wkp2, car2, glassRepair,
+		WorkingAppointment workingAppointment05 = new WorkingAppointment(2022, 1, 22, 8, 00, wkp2, car2, glassRepair,
 				carMechanic1);
 		WorkingAppointment workingAppointment06 = new WorkingAppointment(2022, 1, 15, 10, 00, wkp2, car2, glassRepair,
 				carMechanic1);
@@ -233,9 +233,9 @@ public class MainApplication {
 		planningCalendar.getOverviewOfTodayWorks(carMechanic1, wkp1);
 		// plannerService.getOverviewOfTodayWorks(carMechanic1, wkp2);
 
-		// planningCalendar.getSuggestThreeWorkingAppointments(glassRepair);
-		// planningCalendar.getSuggestThreeWorkingAppointments(inspectionCar);
-		// planningCalendar.getSuggestThreeWorkingAppointments(oilChange);
-		// planningCalendar.getSuggestThreeWorkingAppointments(tireChange);
+		planningCalendar.getSuggestThreeWorkingAppointments(glassRepair, wkp1);
+		// planningCalendar.getSuggestThreeWorkingAppointments(null, null);
+		// planningCalendar.getSuggestThreeWorkingAppointments(oilChange, wkp1);
+		// planningCalendar.getSuggestThreeWorkingAppointments(tireChange, wkp1);
 	}
 }

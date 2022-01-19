@@ -561,16 +561,52 @@ public class PlanningCalendar {
 					if(appointment instanceof WorkingAppointment) {
 						if(appointment.getDay().compareTo(planningTime) >= 0) {
 							if(appointment.getWorkingPlatform().equals(workingPlatform)) {
-								if(appointment.getDayWithStartTime().equals(suggestionDate.getStart()) && appointment.getDayWithEndTime().equals(suggestionDate.getEnd())) {
-									listOfRemoveSuggestionDates.add(suggestionDate);
-								}
+								
+								boolean cond01 = suggestionDate.getStart()
+										.equals(appointment.getDayWithStartTime());
+
+								boolean cond03 = suggestionDate.getStart()
+										.isAfter(appointment.getDayWithStartTime());
+								boolean cond04 = suggestionDate.getStart()
+										.isBefore(appointment.getDayWithEndTime());
+
+								boolean cond05 = suggestionDate.getEnd()
+										.isAfter(appointment.getDayWithStartTime());
+								boolean cond06 = suggestionDate.getEnd()
+										.isBefore(appointment.getDayWithEndTime());
+
+								boolean cond07 = appointment.getDayWithStartTime()
+										.isAfter(suggestionDate.getStart());
+
+								boolean cond08 = appointment.getDayWithStartTime()
+										.isBefore(suggestionDate.getEnd());
+
+								boolean cond09 = appointment.getDayWithEndTime()
+										.isBefore(suggestionDate.getEnd());
+
+								boolean cond10 = appointment.getDayWithEndTime()
+										.isAfter(suggestionDate.getStart());
+								
+								if(cond01) { listOfRemoveSuggestionDates.add(suggestionDate);
+								} else if(cond03 && cond04) {	listOfRemoveSuggestionDates.add(suggestionDate); 
+								} else if(cond05 && cond06) {	listOfRemoveSuggestionDates.add(suggestionDate); 
+								} else if(cond07 && cond08) {	listOfRemoveSuggestionDates.add(suggestionDate); 
+								} else if(cond09 && cond10) {	listOfRemoveSuggestionDates.add(suggestionDate); 
+								} 
 							}
 						}
 					}
 				}
 			}
 			listOfSuggestionDates.removeAll(listOfRemoveSuggestionDates);
-			listOfSuggestionDates.stream().forEach(s -> System.out.println(s));
+			//listOfSuggestionDates.stream().forEach(s -> System.out.println(s));
+			int counter = 0;
+			
+			for (SuggestionDate suggestionDate : listOfSuggestionDates) {
+				System.out.println(suggestionDate);
+				counter++;
+				if(counter == APPOINTMENT_NUMBER_FAKTOR) break;
+			}
 		} else {
 			System.err.println("Du musst ein Service eintippen.");
 		}
