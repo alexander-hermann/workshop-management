@@ -518,9 +518,9 @@ public class PlanningCalendar {
 		}
 	}
 	
-	public void getSuggestThreeWorkingAppointments(Service service) {
+	public void getSuggestThreeWorkingAppointments(Service service, WorkingPlatform workingPlatform) {
 		
-		if(service != null) {
+		if(service != null && workingPlatform != null) {
 			final int PREPARATION_TIME_IN_DAY = 2;
 			final int APPOINTMENT_NUMBER_FAKTOR = 3;
 			
@@ -531,6 +531,8 @@ public class PlanningCalendar {
 			final LocalTime END_TIME_OF_DAY = LocalTime.of(16, 00);
 			
 			List<LocalDate> workingDays = this.getWorkingDays(planningTime, planningTime.plusWeeks(1));
+			List<SuggestionDate> listOfSuggestionDates = new ArrayList<>();
+			List<SuggestionDate> listOfRemoveSuggestionDates = new ArrayList<>();
 			
 			LocalTime startTimeOfService;
 			LocalTime endTimeOfService;
@@ -538,30 +540,37 @@ public class PlanningCalendar {
 			LocalTime lastPossibleAppointmentOfDay = END_TIME_OF_DAY.minusMinutes((long) serviceDurationInMin);
 			long durationInMinutes = ChronoUnit.MINUTES.between(START_TIME_OF_DAY, lastPossibleAppointmentOfDay);
 			
-			int counter = 0;
-			
-			// 1. Create time
-			for (LocalDate localDate : workingDays) {
+			// 1. Creates future appointments for the customer
+			for(LocalDate localDate : workingDays) {
 				for(long minutes = 0; minutes <= durationInMinutes; minutes += serviceDurationInMin) {
-					counter++;
 					
 					startTimeOfService = START_TIME_OF_DAY.plusMinutes(minutes);
 					endTimeOfService = startTimeOfService.plusMinutes((long) (service.getDurationInH() * 60));
 					
-					LocalDateTime convert1 = localDate.atTime(startTimeOfService);
-					LocalDateTime convert2 = localDate.atTime(endTimeOfService);
+					LocalDateTime startOfSuggestionDate = localDate.atTime(startTimeOfService);
+					LocalDateTime endOfSuggestionDate = localDate.atTime(endTimeOfService);
 					
-					for (Appointment appointment : listOfAppointments) {
-						if(appointment instanceof WorkingAppointment) {
-							
-							System.out.println(convert1 + " - " + convert2);
-							break;
-							// Shows 3 elements
-						}
-					}
-					if(counter == APPOINTMENT_NUMBER_FAKTOR) return;
+					listOfSuggestionDates.add(new SuggestionDate(startOfSuggestionDate, endOfSuggestionDate));
 				}
 			}
+			
+			// 2. Checks if there is an appointment on that day and removes the existing suggestion date
+			for(SuggestionDate suggestionDate : listOfSuggestionDates) {
+				for(Appointment appointment : listOfAppointments) {
+					// Filters out all working appointments
+					if(appointment instanceof WorkingAppointment) {
+						if(appointment.getDay().compareTo(planningTime) >= 0) {
+							if(appointment.getWorkingPlatform().equals(workingPlatform)) {
+								if(appointment.getDayWithStartTime().equals(suggestionDate.getStart()) && appointment.getDayWithEndTime().equals(suggestionDate.getEnd())) {
+									listOfRemoveSuggestionDates.add(suggestionDate);
+								}
+							}
+						}
+					}
+				}
+			}
+			listOfSuggestionDates.removeAll(listOfRemoveSuggestionDates);
+			listOfSuggestionDates.stream().forEach(s -> System.out.println(s));
 		} else {
 			System.err.println("Du musst ein Service eintippen.");
 		}
