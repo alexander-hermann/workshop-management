@@ -18,15 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlannerController {
 
 	private final PlannerService plannerService = PlannerService.getInstance();
-	private final CustomerService customerService = CustomerService.getInstance();
 
 	/* ************************************************ */
 	/* * HIER KÖNNEN SIE IHRE REST-METHODEN SCHREIBEN * */
 	/* * Siehe RestSandbox für Beispiele ************** */
 	/* ************************************************ */
 
-	@RequestMapping(value = "/customers", method = RequestMethod.GET)
-	public List<Customer> getAllCustomers() {
-		return customerService.getListOfCustomers();
+	@RequestMapping(value = "/services", method = RequestMethod.GET)
+	public List<Service> getAllServices() {
+		return plannerService.getListOfServices();
+	}
+
+	@RequestMapping(value = "/workingplatforms", method = RequestMethod.GET)
+	public List<WorkingPlatform> getAllWorkingPlatforms() {
+		return plannerService.getListOfWorkingPlatforms();
 	}
 }

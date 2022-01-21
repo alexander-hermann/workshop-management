@@ -46,16 +46,15 @@ public class PlannerService {
 	/* * weitergeben. **************************** */
 	/* ******************************************* */
 
-	public void setListOfWorkingPlatforms(List<WorkingPlatform> listOfWorkingPlatforms) {
-		this.listOfWorkingPlatforms = listOfWorkingPlatforms;
-	}
-
 	private List<WorkingPlatform> listOfWorkingPlatforms = new ArrayList<>();
-
 	private List<Service> listOfServices = new ArrayList<>();
 
 	public List<WorkingPlatform> getListOfWorkingPlatforms() {
 		return listOfWorkingPlatforms;
+	}
+
+	public List<Service> getListOfServices() {
+		return listOfServices;
 	}
 
 	public WorkingPlatform getWorkingPlatformById(String workingPlatformId) {

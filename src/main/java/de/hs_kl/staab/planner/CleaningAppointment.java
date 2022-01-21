@@ -11,7 +11,7 @@ public class CleaningAppointment extends Appointment {
 		super(year, month, day, hour, minute);
 		this.workingPlatform = workingPlatform;
 		this.dispatcher = dispatcher;
-		this.workingPlatform.addPlannedWork(this);
+
 		switch (cleaningProgramm) {
 		case FAST:
 			this.durationOfCleaningInH = 0.5;

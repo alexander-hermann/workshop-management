@@ -1,8 +1,5 @@
 package de.hs_kl.staab.planner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class WorkingPlatform {
 
 	private final static String WORKING_PLATFORM_PREFIX = "WKP-";
@@ -10,14 +7,11 @@ public class WorkingPlatform {
 
 	private String idOfWorkingPlatform;
 	private final String nameOfWorkingPlatform;
-	private List<Appointment> listOfPlannedWorks;
 
 	public WorkingPlatform(String nameOfWorkingPlatform) {
 		this.idOfWorkingPlatform = WORKING_PLATFORM_PREFIX + WORKING_PLATFORM_ID_COUNTER;
 		WORKING_PLATFORM_ID_COUNTER++;
 		this.nameOfWorkingPlatform = nameOfWorkingPlatform;
-
-		this.listOfPlannedWorks = new ArrayList<>();
 	}
 
 	public String getId() {
@@ -30,14 +24,6 @@ public class WorkingPlatform {
 
 	public String getName() {
 		return nameOfWorkingPlatform;
-	}
-
-	public List<Appointment> getListOfPlannedWorks() {
-		return listOfPlannedWorks;
-	}
-
-	public void addPlannedWork(Appointment appointment) {
-		this.listOfPlannedWorks.add(appointment);
 	}
 
 	@Override

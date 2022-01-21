@@ -1,6 +1,5 @@
 package de.hs_kl.staab;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import de.hs_kl.staab.planner.CLEANINGPROGRAMM;
@@ -43,7 +42,7 @@ public class MainApplication {
 		System.out.println("Now the application is started!");
 		// Wenn Sie OHNE REST arbeiten wollen, können Sie die folgende Zeile
 		// und die Klasse PlannerController löschen!
-		SpringApplication.run(MainApplication.class, args);
+		// SpringApplication.run(MainApplication.class, args);
 
 		// Wenn Sie MIT REST arbeiten wollen, können Sie die folgende Zeile
 		// und die entsprechende Methode löschen!
@@ -99,9 +98,9 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment5 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1,
 				customerConsultant2);
 
-		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 21, 8, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 23, 14, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 1, 21, 10, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 1, 24, 10, 00, wkp1, car1, glassRepair,
 				carMechanic1);
 		WorkingAppointment workingAppointment03 = new WorkingAppointment(2022, 1, 21, 12, 00, wkp1, car2, glassRepair,
 				carMechanic1);
@@ -209,8 +208,7 @@ public class MainApplication {
 		planningCalendar.createNewAppointment(cleaningAppointment4);
 		planningCalendar.getWeekOverview(10, 2016);
 
-		// planningCalendar.setAutomaticallyCleaningAppointment(wkp3,
-		// CLEANINGPROGRAMM.INTENSE, dispatcher1);
+		planningCalendar.setAutomaticallyCleaningAppointment(wkp3, CLEANINGPROGRAMM.INTENSE, dispatcher1);
 
 		planningCalendar.getAppointments();
 

@@ -388,7 +388,7 @@ public class PlanningCalendar {
 
 		List<Appointment> listOfPlannedWorksForWorkingPlatformAfterNow = new ArrayList<>();
 
-		for (Appointment appointment : workingPlatform.getListOfPlannedWorks()) {
+		for (Appointment appointment : listOfAppointments) {
 			if (appointment.getDayWithEndTime().isAfter(now)) {
 				listOfPlannedWorksForWorkingPlatformAfterNow.add(appointment);
 			}

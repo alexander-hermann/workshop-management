@@ -15,13 +15,11 @@ public class WorkingAppointment extends Appointment {
 		this.service = service;
 		this.isCompleted = false;
 		this.carMechanic = carMechanic;
-		// this.dayOfAppointment = LocalDate.of(year, month, day);
 
 		this.endOfAppointment = this.startOfAppointment
 				.plusMinutes((long) (service.getDurationInH() * TIME_CONVERSION_FAKTOR_IN_MINUTES));
 
 		this.vehicle.listOfWorkingAppointmentForVehicle.add(this);
-		this.workingPlatform.addPlannedWork(this);
 		this.carMechanic.listOfWorkingAppointmentForCarMechanic.add(this);
 	}
 
