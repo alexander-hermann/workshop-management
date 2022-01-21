@@ -1,5 +1,6 @@
 package de.hs_kl.staab;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import de.hs_kl.staab.planner.CLEANINGPROGRAMM;
@@ -42,7 +43,7 @@ public class MainApplication {
 		System.out.println("Now the application is started!");
 		// Wenn Sie OHNE REST arbeiten wollen, können Sie die folgende Zeile
 		// und die Klasse PlannerController löschen!
-		// SpringApplication.run(MainApplication.class, args);
+		SpringApplication.run(MainApplication.class, args);
 
 		// Wenn Sie MIT REST arbeiten wollen, können Sie die folgende Zeile
 		// und die entsprechende Methode löschen!
@@ -52,7 +53,7 @@ public class MainApplication {
 	private static void runApplication() {
 		PlannerService plannerService = PlannerService.getInstance();
 		PlanningCalendar planningCalendar = new PlanningCalendar();
-		CustomerService customerService = new CustomerService();
+		CustomerService customerService = CustomerService.getInstance();
 		UserService userService = new UserService();
 
 		WorkingPlatform wkp1 = new WorkingPlatform("Arbeitsbühne1");
