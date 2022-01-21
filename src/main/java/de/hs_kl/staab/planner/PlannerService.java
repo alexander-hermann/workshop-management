@@ -12,14 +12,6 @@ public class PlannerService {
 
 	private final PlanningCalendar planningCalendar;
 
-	public void setListOfWorkingPlatforms(List<WorkingPlatform> listOfWorkingPlatforms) {
-		this.listOfWorkingPlatforms = listOfWorkingPlatforms;
-	}
-
-	private List<WorkingPlatform> listOfWorkingPlatforms = new ArrayList<>();
-
-	private List<Service> listOfServices = new ArrayList<>();
-
 	/**
 	 * Singleton-Pattern: Der Konstruktor kann nicht aufgerufen werden, sondern
 	 * {@link #getInstance()} muss aufgerufen werden. So kann sichergestellt werden,
@@ -53,6 +45,15 @@ public class PlannerService {
 	/* * werden, bevor Sie diese an den Kalender * */
 	/* * weitergeben. **************************** */
 	/* ******************************************* */
+
+	public void setListOfWorkingPlatforms(List<WorkingPlatform> listOfWorkingPlatforms) {
+		this.listOfWorkingPlatforms = listOfWorkingPlatforms;
+	}
+
+	private List<WorkingPlatform> listOfWorkingPlatforms = new ArrayList<>();
+
+	private List<Service> listOfServices = new ArrayList<>();
+
 	public List<WorkingPlatform> getListOfWorkingPlatforms() {
 		return listOfWorkingPlatforms;
 	}
