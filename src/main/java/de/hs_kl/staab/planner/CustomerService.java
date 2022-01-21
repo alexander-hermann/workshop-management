@@ -8,6 +8,25 @@ import java.util.List;
  */
 public class CustomerService {
 
+	private static CustomerService INSTANCE;
+
+	private final PlanningCalendar planningCalendar;
+
+	private CustomerService() {
+		planningCalendar = new PlanningCalendar();
+	}
+
+	public static CustomerService getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new CustomerService();
+		}
+		return INSTANCE;
+	}
+
+	public PlanningCalendar getPlanningCalendar() {
+		return planningCalendar;
+	}
+
 	private List<Customer> listOfCustomers = new ArrayList<>();
 	private List<Vehicle> listOfVehicles = new ArrayList<>();
 
