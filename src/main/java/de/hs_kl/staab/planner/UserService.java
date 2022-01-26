@@ -5,6 +5,31 @@ import java.util.List;
 
 public class UserService {
 
+	/**
+	 * Singleton-Pattern: Der Konstruktor kann nicht aufgerufen werden, sondern
+	 * {@link #getInstance()} muss aufgerufen werden. So kann sichergestellt werden,
+	 * dass nur eine einzige Instanz dieser Klasse erstellt wird.
+	 */
+
+	private static UserService INSTANCE;
+
+	private final PlanningCalendar planningCalendar;
+
+	private UserService() {
+		planningCalendar = new PlanningCalendar();
+	}
+
+	public static UserService getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new UserService();
+		}
+		return INSTANCE;
+	}
+
+	public PlanningCalendar getPlanningCalendar() {
+		return planningCalendar;
+	}
+
 	private List<User> listOfUsers = new ArrayList<>();
 
 	// MMP/01

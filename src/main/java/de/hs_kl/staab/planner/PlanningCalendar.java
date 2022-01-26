@@ -618,6 +618,8 @@ public class PlanningCalendar {
 								
 								boolean cond01 = suggestionDate.getStart()
 										.equals(appointment.getDayWithStartTime());
+								boolean cond02 = suggestionDate.getEnd()
+										.equals(appointment.getDayWithEndTime());
 
 								boolean cond03 = suggestionDate.getStart()
 										.isAfter(appointment.getDayWithStartTime());
@@ -641,7 +643,7 @@ public class PlanningCalendar {
 								boolean cond10 = appointment.getDayWithEndTime()
 										.isAfter(suggestionDate.getStart());
 								
-								if(cond01) { listOfRemoveSuggestionDates.add(suggestionDate);
+								if(cond01 && cond02) { listOfRemoveSuggestionDates.add(suggestionDate);
 								} else if(cond03 && cond04) {	listOfRemoveSuggestionDates.add(suggestionDate); 
 								} else if(cond05 && cond06) {	listOfRemoveSuggestionDates.add(suggestionDate); 
 								} else if(cond07 && cond08) {	listOfRemoveSuggestionDates.add(suggestionDate); 

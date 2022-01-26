@@ -53,7 +53,7 @@ public class MainApplication {
 		PlannerService plannerService = PlannerService.getInstance();
 		PlanningCalendar planningCalendar = new PlanningCalendar();
 		CustomerService customerService = CustomerService.getInstance();
-		UserService userService = new UserService();
+		UserService userService = UserService.getInstance();
 
 		WorkingPlatform wkp1 = new WorkingPlatform("Arbeitsbühne1");
 		WorkingPlatform wkp2 = new WorkingPlatform("Arbeitsbühne2");
@@ -98,9 +98,9 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment5 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1,
 				customerConsultant2);
 
-		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 23, 14, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 24, 8, 00, wkp1, car1, glassRepair,
 				carMechanic1);
-		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 1, 24, 10, 00, wkp1, car1, glassRepair,
+		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 1, 24, 10, 00, wkp1, car1, tireChange,
 				carMechanic1);
 		WorkingAppointment workingAppointment03 = new WorkingAppointment(2022, 1, 21, 12, 00, wkp1, car2, glassRepair,
 				carMechanic1);
@@ -232,7 +232,7 @@ public class MainApplication {
 		planningCalendar.getOverviewOfTodayWorks(carMechanic1, wkp1);
 		// plannerService.getOverviewOfTodayWorks(carMechanic1, wkp2);
 
-		planningCalendar.getSuggestThreeWorkingAppointments(glassRepair, wkp1);
+		planningCalendar.getSuggestThreeWorkingAppointments(tireChange, wkp1);
 		// planningCalendar.getSuggestThreeWorkingAppointments(null, null);
 		// planningCalendar.getSuggestThreeWorkingAppointments(oilChange, wkp1);
 		// planningCalendar.getSuggestThreeWorkingAppointments(tireChange, wkp1);
