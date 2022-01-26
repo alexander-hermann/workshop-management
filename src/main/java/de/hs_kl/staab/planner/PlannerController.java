@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlannerController {
 
 	private final PlannerService plannerService = PlannerService.getInstance();
+	private final PlanningCalendar planningCalendar = PlanningCalendar.getInstance();
 
 	/* ************************************************ */
 	/* * HIER KÖNNEN SIE IHRE REST-METHODEN SCHREIBEN * */
@@ -32,5 +33,10 @@ public class PlannerController {
 	@RequestMapping(value = "/workingplatforms", method = RequestMethod.GET)
 	public List<WorkingPlatform> getAllWorkingPlatforms() {
 		return plannerService.getListOfWorkingPlatforms();
+	}
+
+	@RequestMapping(value = "/appointments", method = RequestMethod.GET)
+	public List<Appointment> getAllAppointments() {
+		return planningCalendar.getListOfAppointments();
 	}
 }
