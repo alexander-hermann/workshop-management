@@ -14,6 +14,15 @@ import java.util.stream.Collectors;
 
 public class PlanningCalendar {
 
+	private static PlanningCalendar INSTANCE;
+
+	public static PlanningCalendar getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new PlanningCalendar();
+		}
+		return INSTANCE;
+	}
+
 	private List<Appointment> listOfAppointments = new ArrayList<>();
 
 	/* ******************************************************** */

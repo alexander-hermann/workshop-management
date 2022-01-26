@@ -51,7 +51,7 @@ public class MainApplication {
 
 	private static void runApplication() {
 		PlannerService plannerService = PlannerService.getInstance();
-		PlanningCalendar planningCalendar = new PlanningCalendar();
+		PlanningCalendar planningCalendar = PlanningCalendar.getInstance();
 		CustomerService customerService = CustomerService.getInstance();
 		UserService userService = UserService.getInstance();
 
