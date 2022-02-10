@@ -568,7 +568,7 @@ public class PlanningCalendar {
 			if (listOfFoundPlannedWorks.size() > 0) {
 				for (Appointment currentWorkingAppointment : listOfFoundPlannedWorks) {
 					System.out.println("The " + carMechanic.getId() + " has the "
-							+ ((WorkingAppointment) currentWorkingAppointment).getService().getId() + " on the date and time "
+							+ ((WorkingAppointment) currentWorkingAppointment).getService() + " on the date and time "
 							+ currentWorkingAppointment.startOfAppointment + " and on the working platform "
 							+ currentWorkingAppointment.getWorkingPlatform().getId());
 				}
