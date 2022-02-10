@@ -52,4 +52,16 @@ public class PlannerController {
 		}
 		return foundOfWorkingAppointments;
 	}
+
+	@RequestMapping(value = "/consultingappointments", method = RequestMethod.GET)
+	public List<Appointment> getAllConsultingAppointments() {
+		List<Appointment> foundOfConsultingAppointments = new ArrayList<>();
+
+		for (Appointment appointment : planningCalendar.getListOfAppointments()) {
+			if (appointment instanceof ConsultingAppointment) {
+				foundOfConsultingAppointments.add(appointment);
+			}
+		}
+		return foundOfConsultingAppointments;
+	}
 }
