@@ -18,9 +18,11 @@ public class WorkingAppointment extends Appointment {
 		this.isCompleted = false;
 		this.carMechanic = carMechanic;
 
-		double total = collectionOfWork.stream().mapToDouble(Service::getDurationInH).sum();
+		// Calculates the total duration time
+		double totalDurationTimeInH = collectionOfWork.stream().mapToDouble(Service::getDurationInH).sum();
 
-		this.endOfAppointment = this.startOfAppointment.plusMinutes((long) (total * TIME_CONVERSION_FAKTOR_IN_MINUTES));
+		this.endOfAppointment = this.startOfAppointment
+				.plusMinutes((long) (totalDurationTimeInH * TIME_CONVERSION_FAKTOR_IN_MINUTES));
 
 		this.vehicle.listOfWorkingAppointmentForVehicle.add(this);
 		this.carMechanic.listOfWorkingAppointmentForCarMechanic.add(this);
