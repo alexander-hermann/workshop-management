@@ -1,5 +1,8 @@
 package de.hs_kl.staab;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -71,6 +74,18 @@ public class MainApplication {
 		Service tireChange = new Service("Reifenwechsel", 1.0);
 		Service glassRepair = new Service("Glasreparatur", 2.0);
 		Service inspectionCar = new Service("KFZ-Inspektion", 1.5);
+
+		List<Service> collectionOfWorkForCustomer01 = new ArrayList<Service>();
+		collectionOfWorkForCustomer01.add(oilChange);
+		collectionOfWorkForCustomer01.add(glassRepair);
+
+		List<Service> collectionOfWorkForCustomer02 = new ArrayList<Service>();
+		collectionOfWorkForCustomer02.add(inspectionCar);
+		collectionOfWorkForCustomer02.add(oilChange);
+
+		List<Service> collectionOfWorkForCustomer03 = new ArrayList<Service>();
+		collectionOfWorkForCustomer03.add(glassRepair);
+		collectionOfWorkForCustomer03.add(inspectionCar);
 
 		InvoiceAddress invoiceAddressOfCustomer1 = new InvoiceAddress("Hauptstraße", 20, 66840, "Zweibrücken");
 		InvoiceAddress invoiceAddressOfCustomer2 = new InvoiceAddress("Hauptstraße", 30, 66880, "Kaiserslautern");
