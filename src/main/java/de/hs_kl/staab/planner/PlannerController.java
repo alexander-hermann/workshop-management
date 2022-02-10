@@ -64,4 +64,16 @@ public class PlannerController {
 		}
 		return foundOfConsultingAppointments;
 	}
+
+	@RequestMapping(value = "/cleaningappointments", method = RequestMethod.GET)
+	public List<Appointment> getAllCleaningAppointments() {
+		List<Appointment> foundOfCleaningAppointments = new ArrayList<>();
+
+		for (Appointment appointment : planningCalendar.getListOfAppointments()) {
+			if (appointment instanceof CleaningAppointment) {
+				foundOfCleaningAppointments.add(appointment);
+			}
+		}
+		return foundOfCleaningAppointments;
+	}
 }
