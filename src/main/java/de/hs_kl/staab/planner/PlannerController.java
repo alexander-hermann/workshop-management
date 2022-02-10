@@ -1,5 +1,6 @@
 package de.hs_kl.staab.planner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,5 +39,17 @@ public class PlannerController {
 	@RequestMapping(value = "/appointments", method = RequestMethod.GET)
 	public List<Appointment> getAllAppointments() {
 		return planningCalendar.getListOfAppointments();
+	}
+
+	@RequestMapping(value = "/workingappointments", method = RequestMethod.GET)
+	public List<Appointment> getAllWorkingAppointments() {
+		List<Appointment> foundOfWorkingAppointments = new ArrayList<>();
+
+		for (Appointment appointment : planningCalendar.getListOfAppointments()) {
+			if (appointment instanceof WorkingAppointment) {
+				foundOfWorkingAppointments.add(appointment);
+			}
+		}
+		return foundOfWorkingAppointments;
 	}
 }
