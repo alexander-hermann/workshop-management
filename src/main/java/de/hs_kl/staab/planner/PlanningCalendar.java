@@ -599,11 +599,85 @@ public class PlanningCalendar {
 			
 			LocalTime startTimeOfService;
 			LocalTime endTimeOfService;
-			int cleaningDurationInMin;
+			int cleaningDurationInMin = 0;
 			
 			switch(cleaningProgram) {
 			case FAST: cleaningDurationInMin = (int) (0.5 * Appointment.TIME_CONVERSION_FAKTOR_IN_MINUTES); break;
 			case INTENSE: cleaningDurationInMin = (int) (1.0 * Appointment.TIME_CONVERSION_FAKTOR_IN_MINUTES); break;
+			}
+			
+			LocalTime lastPossibleAppointmentOfDay = END_TIME_OF_DAY.minusMinutes((long) cleaningDurationInMin);
+			long durationInMinutes = ChronoUnit.MINUTES.between(START_TIME_OF_DAY, lastPossibleAppointmentOfDay);
+			
+			// 1. Creates future appointments for the customer
+			for(LocalDate localDate : workingDays) {
+				for(long minutes = 0; minutes <= durationInMinutes; minutes += cleaningDurationInMin) {
+								
+					startTimeOfService = START_TIME_OF_DAY.plusMinutes(minutes);
+					endTimeOfService = startTimeOfService.plusMinutes((long) (cleaningDurationInMin));
+								
+					LocalDateTime startOfSuggestionDate = localDate.atTime(startTimeOfService);
+					LocalDateTime endOfSuggestionDate = localDate.atTime(endTimeOfService);
+								
+					listOfSuggestionDates.add(new SuggestionDate(startOfSuggestionDate, endOfSuggestionDate));
+				}
+			}
+			
+			// 2.
+			for(SuggestionDate suggestionDate : listOfSuggestionDates) {
+				for(Appointment appointment : listOfAppointments) {
+					// Filters out all cleaning appointments
+					if(appointment instanceof CleaningAppointment) {
+						if(appointment.getDay().compareTo(planningTime) >= 0) {
+							
+							if(appointment.getWorkingPlatform().equals(workingPlatform)) {
+								
+								// @formatter:off
+								boolean cond01 = suggestionDate.getStart().equals(appointment.getDayWithStartTime());
+								boolean cond02 = suggestionDate.getEnd().equals(appointment.getDayWithEndTime());
+
+								boolean cond03 = suggestionDate.getStart().isAfter(appointment.getDayWithStartTime());
+								boolean cond04 = suggestionDate.getStart().isBefore(appointment.getDayWithEndTime());
+
+								boolean cond05 = suggestionDate.getEnd().isAfter(appointment.getDayWithStartTime());
+								boolean cond06 = suggestionDate.getEnd().isBefore(appointment.getDayWithEndTime());
+
+								boolean cond07 = appointment.getDayWithStartTime().isAfter(suggestionDate.getStart());
+
+								boolean cond08 = appointment.getDayWithStartTime().isBefore(suggestionDate.getEnd());
+
+								boolean cond09 = appointment.getDayWithEndTime().isBefore(suggestionDate.getEnd());
+
+								boolean cond10 = appointment.getDayWithEndTime().isAfter(suggestionDate.getStart());
+								
+								if(cond01 && cond02) { listOfRemoveSuggestionDates.add(suggestionDate);
+								} else if(cond03 && cond04) {	listOfRemoveSuggestionDates.add(suggestionDate); 
+								} else if(cond05 && cond06) {	listOfRemoveSuggestionDates.add(suggestionDate); 
+								} else if(cond07 && cond08) {	listOfRemoveSuggestionDates.add(suggestionDate); 
+								} else if(cond09 && cond10) {	listOfRemoveSuggestionDates.add(suggestionDate); 
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// 3.
+			listOfSuggestionDates.removeAll(listOfRemoveSuggestionDates);
+			
+			// 4.
+			if(!listOfSuggestionDates.isEmpty()) {
+				SuggestionDate suggestionDate = listOfSuggestionDates.get(0);
+				int year = suggestionDate.getStart().getYear();
+				int month = suggestionDate.getStart().getMonthValue();
+				int day = suggestionDate.getStart().getDayOfMonth();
+				int hour = suggestionDate.getStart().getHour();
+				int minutes = suggestionDate.getStart().getMinute();
+
+				listOfAppointments.add(new CleaningAppointment(year, month, day, hour, minutes, workingPlatform, cleaningProgram, dispatcher));
+				System.out.println("Es wurde erfolgreich ein Termin angelegt.");
+			} else {
+				System.err.println("KEIN TERMIN FREI; DER ZEITRAUM IST AUSGEBUCHT.");
 			}
 		} else {
 			System.err.println("ERROR");
@@ -654,32 +728,23 @@ public class PlanningCalendar {
 						if(appointment.getDay().compareTo(planningTime) >= 0) {
 							if(appointment.getWorkingPlatform().equals(workingPlatform)) {
 								
-								boolean cond01 = suggestionDate.getStart()
-										.equals(appointment.getDayWithStartTime());
-								boolean cond02 = suggestionDate.getEnd()
-										.equals(appointment.getDayWithEndTime());
+								// @formatter:off
+								boolean cond01 = suggestionDate.getStart().equals(appointment.getDayWithStartTime());
+								boolean cond02 = suggestionDate.getEnd().equals(appointment.getDayWithEndTime());
 
-								boolean cond03 = suggestionDate.getStart()
-										.isAfter(appointment.getDayWithStartTime());
-								boolean cond04 = suggestionDate.getStart()
-										.isBefore(appointment.getDayWithEndTime());
+								boolean cond03 = suggestionDate.getStart().isAfter(appointment.getDayWithStartTime());
+								boolean cond04 = suggestionDate.getStart().isBefore(appointment.getDayWithEndTime());
 
-								boolean cond05 = suggestionDate.getEnd()
-										.isAfter(appointment.getDayWithStartTime());
-								boolean cond06 = suggestionDate.getEnd()
-										.isBefore(appointment.getDayWithEndTime());
+								boolean cond05 = suggestionDate.getEnd().isAfter(appointment.getDayWithStartTime());
+								boolean cond06 = suggestionDate.getEnd().isBefore(appointment.getDayWithEndTime());
 
-								boolean cond07 = appointment.getDayWithStartTime()
-										.isAfter(suggestionDate.getStart());
+								boolean cond07 = appointment.getDayWithStartTime().isAfter(suggestionDate.getStart());
 
-								boolean cond08 = appointment.getDayWithStartTime()
-										.isBefore(suggestionDate.getEnd());
+								boolean cond08 = appointment.getDayWithStartTime().isBefore(suggestionDate.getEnd());
 
-								boolean cond09 = appointment.getDayWithEndTime()
-										.isBefore(suggestionDate.getEnd());
+								boolean cond09 = appointment.getDayWithEndTime().isBefore(suggestionDate.getEnd());
 
-								boolean cond10 = appointment.getDayWithEndTime()
-										.isAfter(suggestionDate.getStart());
+								boolean cond10 = appointment.getDayWithEndTime().isAfter(suggestionDate.getStart());
 								
 								if(cond01 && cond02) { listOfRemoveSuggestionDates.add(suggestionDate);
 								} else if(cond03 && cond04) {	listOfRemoveSuggestionDates.add(suggestionDate); 
