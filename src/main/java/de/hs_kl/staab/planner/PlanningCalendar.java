@@ -308,6 +308,22 @@ public class PlanningCalendar {
 		return totalHoursOfDay;
 	}
 
+	public Appointment getNewAppointment(LocalDateTime localDateTime, WorkingPlatform workingPlatform,
+			CLEANINGPROGRAMM cleaningProgram, Dispatcher dispatcher) {
+
+		int year = (int) localDateTime.plusMinutes(10).getYear();
+		int month = (int) localDateTime.plusMinutes(10).getMonthValue();
+		int day = (int) localDateTime.plusMinutes(10).getDayOfMonth();
+		int hour = (int) localDateTime.plusMinutes(10).getHour();
+		int minute = (int) localDateTime.plusMinutes(10).getMinute();
+
+		CleaningAppointment newAppointment = new CleaningAppointment(year, month, day, hour, minute, workingPlatform,
+				cleaningProgram, dispatcher);
+
+		return newAppointment;
+
+	}
+
 	public void createAppointmentWithLocalDateTime(LocalDateTime localDateTime, WorkingPlatform workingPlatform,
 			CLEANINGPROGRAMM cleaningProgram, Dispatcher dispatcher) {
 		int year = (int) localDateTime.plusMinutes(10).getYear();
@@ -424,37 +440,25 @@ public class PlanningCalendar {
 							thisAppointmentFromList.getDayWithEndTime(), nextAppointmentFromList.getDayWithStartTime());
 
 					if (nextAppointmentFromList.getId().equals(lastAppointmentFromList.getId())) {
+
 						if (differenceBetweenAppointments > 50 && cleaningProgram.equals(CLEANINGPROGRAMM.FAST)) {
 
-							int year = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getYear();
-							int month = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10)
-									.getMonthValue();
-							int day = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getDayOfMonth();
-							int hour = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getHour();
-							int minute = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getMinute();
-
-							CleaningAppointment newAppointment = new CleaningAppointment(year, month, day, hour, minute,
-									workingPlatform, cleaningProgram, dispatcher);
-
-							if (newAppointment.isAppointmentInWorkingTime()) {
-								createNewAppointment(newAppointment);
+							if (getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
+									workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
+								createNewAppointment(
+										getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
+												workingPlatform, cleaningProgram, dispatcher));
 								return;
 							}
 
 						} else if (differenceBetweenAppointments > 80
 								&& cleaningProgram.equals(CLEANINGPROGRAMM.INTENSE)) {
-							int year = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getYear();
-							int month = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10)
-									.getMonthValue();
-							int day = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getDayOfMonth();
-							int hour = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getHour();
-							int minute = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getMinute();
 
-							CleaningAppointment newAppointment = new CleaningAppointment(year, month, day, hour, minute,
-									workingPlatform, cleaningProgram, dispatcher);
-
-							if (newAppointment.isAppointmentInWorkingTime()) {
-								createNewAppointment(newAppointment);
+							if (getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
+									workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
+								createNewAppointment(
+										getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
+												workingPlatform, cleaningProgram, dispatcher));
 								return;
 							}
 
@@ -465,53 +469,34 @@ public class PlanningCalendar {
 						return;
 
 					}
-					// if the next appointment is after 80 minutes and in the working hours
+
 					else if (timeAfterDuration.isBefore(firstAppointmentFromList.getDayWithStartTime())) {
 
-						int year = (int) firstAppointmentFromList.getDayWithStartTime().minusMinutes(80).getYear();
-						int month = (int) firstAppointmentFromList.getDayWithStartTime().minusMinutes(80)
-								.getMonthValue();
-						int day = (int) firstAppointmentFromList.getDayWithStartTime().minusMinutes(80).getDayOfMonth();
-						int hour = (int) firstAppointmentFromList.getDayWithStartTime().minusMinutes(80).getHour();
-						int minute = (int) firstAppointmentFromList.getDayWithStartTime().minusMinutes(80).getMinute();
-
-						CleaningAppointment newAppointment = new CleaningAppointment(year, month, day, hour, minute,
-								workingPlatform, cleaningProgram, dispatcher);
-
-						if (newAppointment.isAppointmentInWorkingTime()) {
-							createNewAppointment(newAppointment);
+						if (getNewAppointment(firstAppointmentFromList.getDayWithStartTime().minusMinutes(80),
+								workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
+							createNewAppointment(
+									getNewAppointment(firstAppointmentFromList.getDayWithStartTime().minusMinutes(80),
+											workingPlatform, cleaningProgram, dispatcher));
 							return;
 						}
 
 					} else if (differenceBetweenAppointments > 50 && cleaningProgram.equals(CLEANINGPROGRAMM.FAST)) {
 
-						int year = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getYear();
-						int month = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getMonthValue();
-						int day = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getDayOfMonth();
-						int hour = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getHour();
-						int minute = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getMinute();
-
-						CleaningAppointment newAppointment = new CleaningAppointment(year, month, day, hour, minute,
-								workingPlatform, cleaningProgram, dispatcher);
-
-						if (newAppointment.isAppointmentInWorkingTime()) {
-							createNewAppointment(newAppointment);
+						if (getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
+								workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
+							createNewAppointment(
+									getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
+											workingPlatform, cleaningProgram, dispatcher));
 							return;
 						}
 
 					} else if (differenceBetweenAppointments > 80 && cleaningProgram.equals(CLEANINGPROGRAMM.INTENSE)) {
 
-						int year = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getYear();
-						int month = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getMonthValue();
-						int day = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getDayOfMonth();
-						int hour = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getHour();
-						int minute = (int) thisAppointmentFromList.getDayWithEndTime().plusMinutes(10).getMinute();
-
-						CleaningAppointment newAppointment = new CleaningAppointment(year, month, day, hour, minute,
-								workingPlatform, cleaningProgram, dispatcher);
-
-						if (newAppointment.isAppointmentInWorkingTime()) {
-							createNewAppointment(newAppointment);
+						if (getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
+								workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
+							createNewAppointment(
+									getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
+											workingPlatform, cleaningProgram, dispatcher));
 							return;
 						}
 
@@ -540,7 +525,7 @@ public class PlanningCalendar {
 
 		{
 
-			createAppointmentWhenIsInWorkingHours(now, workingPlatform, cleaningProgram, dispatcher);
+			createAppointmentWhenIsInWorkingHours(now.plusMinutes(10), workingPlatform, cleaningProgram, dispatcher);
 		}
 	}
 
