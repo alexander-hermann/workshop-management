@@ -8,8 +8,8 @@ import java.time.temporal.IsoFields;
 
 public abstract class Appointment implements Terminable {
 
-	private final static LocalTime OPENING_TIME_START = LocalTime.of(8, 00);
-	private final static LocalTime OPENING_TIME_END = LocalTime.of(16, 00);
+	protected final static LocalTime OPENING_TIME_START = LocalTime.of(8, 00);
+	protected final static LocalTime OPENING_TIME_END = LocalTime.of(16, 00);
 
 	protected final static int TIME_CONVERSION_FAKTOR_IN_MINUTES = 60;
 
