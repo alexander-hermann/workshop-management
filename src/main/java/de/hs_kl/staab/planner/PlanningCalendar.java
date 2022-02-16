@@ -586,6 +586,13 @@ public class PlanningCalendar {
 		
 		if(workingPlatform != null && cleaningProgram != null && dispatcher != null) {
 			
+			final int PREPARATION_TIME_IN_DAY = 2;
+			
+			// Today + Preparation time to prepare the work on the vehicle (2 day)
+			final LocalDate planningTime = LocalDate.now().plusDays(PREPARATION_TIME_IN_DAY);
+			
+			final LocalTime START_TIME_OF_DAY = Appointment.OPENING_TIME_START;
+			final LocalTime END_TIME_OF_DAY = Appointment.OPENING_TIME_END;
 		}
 	}
 	
@@ -598,8 +605,8 @@ public class PlanningCalendar {
 			// Today + Preparation time to prepare the work on the vehicle (2 day)
 			final LocalDate planningTime = LocalDate.now().plusDays(PREPARATION_TIME_IN_DAY);
 			
-			final LocalTime START_TIME_OF_DAY = LocalTime.of(8, 00);
-			final LocalTime END_TIME_OF_DAY = LocalTime.of(16, 00);
+			final LocalTime START_TIME_OF_DAY = Appointment.OPENING_TIME_START;
+			final LocalTime END_TIME_OF_DAY = Appointment.OPENING_TIME_END;
 			
 			List<LocalDate> workingDays = this.getWorkingDays(planningTime, planningTime.plusWeeks(1));
 			List<SuggestionDate> listOfSuggestionDates = new ArrayList<>();
