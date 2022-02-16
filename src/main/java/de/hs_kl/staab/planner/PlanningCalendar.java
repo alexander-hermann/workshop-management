@@ -581,6 +581,14 @@ public class PlanningCalendar {
 		}
 	}
 	
+	public void setAutomaticallyCleaningAppointment2(WorkingPlatform workingPlatform, CLEANINGPROGRAMM cleaningProgram,
+			Dispatcher dispatcher) {
+		
+		if(workingPlatform != null && cleaningProgram != null && dispatcher != null) {
+			
+		}
+	}
+	
 	public void getSuggestThreeWorkingAppointments(Service service, WorkingPlatform workingPlatform) {
 		
 		if(service != null && workingPlatform != null) {
