@@ -139,8 +139,8 @@ public class MainApplication {
 		WorkingAppointment workingAppointment12 = new WorkingAppointment(2022, 1, 15, 14, 00, wkp3, car2,
 				collectionOfWorkForCustomer01, carMechanic1);
 
-		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 1, 06, 14, 00, wkp1,
-				CLEANINGPROGRAMM.INTENSE, dispatcher1);
+		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 2, 18, 8, 00, wkp1,
+				CLEANINGPROGRAMM.FAST, dispatcher1);
 		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2022, 1, 12, 12, 00, wkp3,
 				CLEANINGPROGRAMM.INTENSE, dispatcher1);
 		CleaningAppointment cleaningAppointment3 = new CleaningAppointment(2022, 1, 12, 15, 00, wkp3,
@@ -225,7 +225,7 @@ public class MainApplication {
 		planningCalendar.getWeekOverview(10, 2016);
 
 		planningCalendar.setAutomaticallyCleaningAppointment(wkp3, CLEANINGPROGRAMM.INTENSE, dispatcher1);
-		planningCalendar.setAutomaticallyCleaningAppointment2(wkp3, CLEANINGPROGRAMM.FAST, dispatcher1);
+		planningCalendar.setAutomaticallyCleaningAppointment2(wkp1, CLEANINGPROGRAMM.INTENSE, dispatcher1);
 
 		planningCalendar.getAppointments();
 

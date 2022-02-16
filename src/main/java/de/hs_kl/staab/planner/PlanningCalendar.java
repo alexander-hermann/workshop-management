@@ -675,6 +675,7 @@ public class PlanningCalendar {
 				int minutes = suggestionDate.getStart().getMinute();
 
 				listOfAppointments.add(new CleaningAppointment(year, month, day, hour, minutes, workingPlatform, cleaningProgram, dispatcher));
+				System.out.println(suggestionDate);
 				System.out.println("Es wurde erfolgreich ein Termin angelegt.");
 			} else {
 				System.err.println("KEIN TERMIN FREI; DER ZEITRAUM IST AUSGEBUCHT.");
