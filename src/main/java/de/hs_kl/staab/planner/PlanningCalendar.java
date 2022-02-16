@@ -585,7 +585,6 @@ public class PlanningCalendar {
 			Dispatcher dispatcher) {
 		
 		if(workingPlatform != null && cleaningProgram != null && dispatcher != null) {
-			
 			final int PREPARATION_TIME_IN_DAY = 2;
 			
 			// Today + Preparation time to prepare the work on the vehicle (2 day)
@@ -593,6 +592,21 @@ public class PlanningCalendar {
 			
 			final LocalTime START_TIME_OF_DAY = Appointment.OPENING_TIME_START;
 			final LocalTime END_TIME_OF_DAY = Appointment.OPENING_TIME_END;
+			
+			List<LocalDate> workingDays = this.getWorkingDays(planningTime, planningTime.plusWeeks(1));
+			List<SuggestionDate> listOfSuggestionDates = new ArrayList<>();
+			List<SuggestionDate> listOfRemoveSuggestionDates = new ArrayList<>();
+			
+			LocalTime startTimeOfService;
+			LocalTime endTimeOfService;
+			int cleaningDurationInMin;
+			
+			switch(cleaningProgram) {
+			case FAST: cleaningDurationInMin = (int) (0.5 * Appointment.TIME_CONVERSION_FAKTOR_IN_MINUTES); break;
+			case INTENSE: cleaningDurationInMin = (int) (1.0 * Appointment.TIME_CONVERSION_FAKTOR_IN_MINUTES); break;
+			}
+		} else {
+			System.err.println("ERROR");
 		}
 	}
 	
