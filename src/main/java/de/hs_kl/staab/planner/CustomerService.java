@@ -198,7 +198,7 @@ public class CustomerService {
 	}
 
 	// add new vehicle to customer
-	public void addVehicleForCustomer(Customer customer, Vehicle vehicleToAdd) {
+	public void updateCustomerForVehicle(Customer customer, Vehicle vehicleToAdd) {
 		// Avoid NullPointerException
 		String checkCustomerHasValue = (customer != null) ? customer.getId() : "null";
 
@@ -206,14 +206,13 @@ public class CustomerService {
 			if (listOfCustomers.contains(customer) && customer != null) {
 				if (vehicleToAdd != null) {
 
-					for (Vehicle vehicle : customer.getListOfVehiclesForCustomer()) {
+					for (Vehicle vehicle : listOfVehicles) {
 						if (vehicle.getLicensePlate().equals(vehicleToAdd.getLicensePlate())) {
-							System.err.println("Vehicle with license plate " + vehicleToAdd.getLicensePlate()
-									+ " already exist in list of vehicles for customer with ID " + customer.getId());
+							vehicle.setCustomer(customer);
+
 						}
 					}
 
-					customer.addVehicleToCustomer(vehicleToAdd);
 					System.out.println("Customer " + customer.getId() + " add the vehicle: " + vehicleToAdd);
 				} else {
 					System.err.println("The vehicle cannot be added to the customer " + customer.getId()
@@ -232,82 +231,33 @@ public class CustomerService {
 
 	// get List of vehicles for a specific customer
 	public void getListOfVehiclesForCustomer(Customer customer) {
-		if (!listOfCustomers.isEmpty() && customer != null) {
-			if (listOfCustomers.contains(customer)) {
-				if (!customer.getListOfVehiclesForCustomer().isEmpty()) {
-					for (Vehicle currentVehicle : customer.getListOfVehiclesForCustomer()) {
-						System.out.println("The customer " + customer.getId() + " is the owner of vehicle "
-								+ currentVehicle.getLicensePlate());
-					}
+		if (customer != null) {
+			if (!listOfCustomers.isEmpty()) {
 
-				} else {
-					System.err.println("The customer " + customer.getId() + " has no vehicles.");
-				}
-			} else {
-				System.err.println(
-						"The customer with ID " + customer.getId() + " does not exist in the list of customers.");
-			}
-		} else {
-			System.err.println("The list of customers is empty or you have not entered a customer.");
-		}
-	}
+				if (listOfCustomers.contains(customer)) {
+					if (!listOfVehicles.isEmpty()) {
+						for (Vehicle currentVehicle : listOfVehicles) {
+							if (currentVehicle.getCustomer().equals(customer)) {
+								System.out.println("The customer " + customer.getId() + " is the owner of vehicle "
+										+ currentVehicle.getLicensePlate());
+							}
+						}
 
-	// remove specific vehicle from list of vehicle for a specific customer
-	public void removeVehicleForCustomer(Customer customer, Vehicle vehicleToRemove) {
-		if (!listOfCustomers.isEmpty()) {
-			if (listOfCustomers.contains(customer)) {
-				if (!customer.getListOfVehiclesForCustomer().isEmpty()) {
-
-					customer.removeVehicleForCustomer(vehicleToRemove);
-
-					System.out.println("Vehicle with license plate " + vehicleToRemove.getLicensePlate()
-							+ " removed from customer " + customer.getId());
-				}
-
-				else {
-					System.err.println("List of vehicles for customer with ID " + customer.getId() + " is empty");
-				}
-			} else {
-				System.err.println(
-						"The customer with the ID " + customer.getId() + " does not exist in the list of customers.");
-			}
-		} else {
-			System.err.println(
-
-					"The list of customers is empty.");
-		}
-
-	}
-
-	public void getVehicleForCustomer(Customer searchedCustomer, Vehicle searchedVehicle) {
-		// Avoid NullPointerException
-		String checkCustomerHasValue = (searchedCustomer != null) ? searchedCustomer.getId() : "null";
-
-		List<Vehicle> listWithFoundCustomerVehicles = new ArrayList<>();
-
-		if (listOfCustomers.contains(searchedCustomer) && searchedCustomer != null) {
-			if (!searchedCustomer.getListOfVehiclesForCustomer().isEmpty() && searchedVehicle != null) {
-				for (Vehicle currentVehicle : searchedCustomer.getListOfVehiclesForCustomer()) {
-					if (currentVehicle.equals(searchedVehicle)) {
-						listWithFoundCustomerVehicles.add(currentVehicle);
-					}
-				}
-
-				if (!listWithFoundCustomerVehicles.isEmpty()) {
-					for (Vehicle vehicle : listWithFoundCustomerVehicles) {
-						System.out.println(vehicle);
+					} else {
+						System.err.println("The customer " + customer.getId() + " has no vehicles.");
 					}
 				} else {
-					System.err.println("The customer " + searchedCustomer.getId() + " does not have the vehicle "
-							+ searchedVehicle);
+					System.err.println(" You have not entered a customer.");
+					System.err.println(
+							"The customer with ID " + customer.getId() + " does not exist in the list of customers.");
 				}
 			} else {
-				System.err.println("The customer " + checkCustomerHasValue
-						+ " has no vehicles or you have not entered a vehicle.");
+				System.err.println(" The list of customers is empty.");
+
 			}
 		} else {
-			System.err.println("The costumer " + checkCustomerHasValue
-					+ " was not found in the list of costumers or you have not entered a customer.");
+			System.err.println(" You have not entered a customer.");
+
 		}
 	}
 

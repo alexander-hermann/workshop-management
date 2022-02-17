@@ -1,7 +1,6 @@
 
 package de.hs_kl.staab.planner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Customer extends Person {
@@ -19,8 +18,6 @@ public class Customer extends Person {
 		CUSTOMER_ID_COUNTER++;
 		this.invoiceAddressOfPerson = invoiceAddressOfPerson;
 
-		this.listOfVehiclesForCustomer = new ArrayList<>();
-
 	}
 
 	@Override
@@ -35,18 +32,6 @@ public class Customer extends Person {
 
 	public String getId() {
 		return customerId;
-	}
-
-	public List<Vehicle> getListOfVehiclesForCustomer() {
-		return listOfVehiclesForCustomer;
-	}
-
-	public void addVehicleToCustomer(Vehicle vehicle) {
-		this.listOfVehiclesForCustomer.add(vehicle);
-	}
-
-	public void removeVehicleForCustomer(Vehicle vehicle) {
-		this.listOfVehiclesForCustomer.remove(vehicle);
 	}
 
 	public void setCustomerId(String customerId) {

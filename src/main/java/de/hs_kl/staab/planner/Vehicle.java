@@ -16,9 +16,10 @@ public abstract class Vehicle {
 	protected int yearOfConstruction;
 	protected String licensePlate;
 	protected List<WorkingAppointment> listOfWorkingAppointmentForVehicle;
+	protected Customer customer;
 
 	public Vehicle(String licensePlate, String brand, String model, int yearOfConstruction, int yearOfAdmission,
-			int monthOfAdmission, int dayOfAdmission) {
+			int monthOfAdmission, int dayOfAdmission, Customer customer) {
 		this.idOfVehicle = VEHICLE_PREFIX + VEHICLE_ID_COUNTER;
 		VEHICLE_ID_COUNTER++;
 
@@ -28,6 +29,7 @@ public abstract class Vehicle {
 		this.yearOfConstruction = yearOfConstruction;
 		this.DateOfAdmission = LocalDate.of(yearOfAdmission, monthOfAdmission, dayOfAdmission);
 		this.listOfWorkingAppointmentForVehicle = new ArrayList<>();
+		this.customer = customer;
 	}
 
 	public String getId() {
@@ -40,6 +42,14 @@ public abstract class Vehicle {
 
 	public String getModel() {
 		return model;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Customer getCustomer() {
+		return customer;
 	}
 
 	public LocalDate getDateOfAdmission() {
@@ -73,6 +83,8 @@ public abstract class Vehicle {
 		builder.append(yearOfConstruction);
 		builder.append(", licensePlate=");
 		builder.append(licensePlate);
+		builder.append(", customer=");
+		builder.append(customer);
 		builder.append("]");
 		return builder.toString();
 	}
