@@ -82,4 +82,9 @@ public class PlannerController {
 	public List<Customer> getAllCustomers() {
 		return customerService.getAllCustomers();
 	}
+
+	@RequestMapping(value = "/vehicles", method = RequestMethod.GET)
+	public List<Vehicle> getAllVehicles() {
+		return customerService.getListOfVehicles();
+	}
 }
