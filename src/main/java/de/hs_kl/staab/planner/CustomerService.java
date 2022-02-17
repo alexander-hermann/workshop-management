@@ -30,6 +30,14 @@ public class CustomerService {
 	private List<Customer> listOfCustomers = new ArrayList<>();
 	private List<Vehicle> listOfVehicles = new ArrayList<>();
 
+	public List<Customer> getAllCustomers() {
+		return listOfCustomers;
+	}
+
+	public List<Vehicle> getListOfVehicles() {
+		return listOfVehicles;
+	}
+
 	// create a new vehicle
 	public void createNewVehicle(Vehicle newVehicle) {
 		if (newVehicle != null) {
