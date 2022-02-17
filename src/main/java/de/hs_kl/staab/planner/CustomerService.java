@@ -264,8 +264,7 @@ public class CustomerService {
 
 			}
 		} else {
-			System.err.println(" You have not entered a customer.");
-
+			System.err.println("[CustomerService] You have not entered a customer.");
 		}
 	}
 

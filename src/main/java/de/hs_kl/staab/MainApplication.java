@@ -166,9 +166,9 @@ public class MainApplication {
 		customerService.updateCustomerForVehicle(customer2, null);
 
 		customerService.getCustomerById("CS-1");
-		System.out.println("##############");
 		customerService.getListOfVehiclesForCustomer(customer1);
 		customerService.getListOfVehiclesForCustomer(customer2);
+		System.out.println("##############");
 		customerService.getListOfVehiclesForCustomer(null);
 
 		customerService.getVehicleByLicensePlate("HOM-SB 211");
