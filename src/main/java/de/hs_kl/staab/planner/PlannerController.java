@@ -20,6 +20,7 @@ public class PlannerController {
 
 	private final PlannerService plannerService = PlannerService.getInstance();
 	private final PlanningCalendar planningCalendar = PlanningCalendar.getInstance();
+	private final CustomerService customerService = CustomerService.getInstance();
 
 	/* ************************************************ */
 	/* * HIER KÖNNEN SIE IHRE REST-METHODEN SCHREIBEN * */
@@ -75,5 +76,10 @@ public class PlannerController {
 			}
 		}
 		return foundOfCleaningAppointments;
+	}
+
+	@RequestMapping(value = "/customers", method = RequestMethod.GET)
+	public List<Customer> getAllCustomers() {
+		return customerService.getAllCustomers();
 	}
 }
