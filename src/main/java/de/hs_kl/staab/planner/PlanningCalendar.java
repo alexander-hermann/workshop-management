@@ -171,7 +171,7 @@ public class PlanningCalendar {
 				}
 			}
 		} else {
-			throw new IllegalArgumentException("The list of appointments is empty.");
+			System.err.println("The list of appointments is empty.");
 		}
 		System.err.println("The appointment with the id " + appointmentId + " was not found.");
 	}

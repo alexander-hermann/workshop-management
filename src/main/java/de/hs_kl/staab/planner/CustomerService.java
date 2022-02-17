@@ -64,14 +64,14 @@ public class CustomerService {
 	}
 
 	// Return all vehicles
-	public List<Vehicle> getVehicles() {
+	public void getVehicles() {
 		if (!listOfVehicles.isEmpty()) {
 			for (Vehicle vehicle : listOfVehicles) {
 				System.out.println(vehicle);
 			}
-			return listOfVehicles;
+
 		} else {
-			throw new IllegalStateException("The list of vehicles is empty.");
+			System.err.println("The list of vehicles is empty.");
 		}
 	}
 
@@ -128,28 +128,28 @@ public class CustomerService {
 	}
 
 	// return the customer with the specific customer ID
-	public Customer getCustomerById(String customerId) {
+	public void getCustomerById(String customerId) {
 		if (!listOfCustomers.isEmpty()) {
 			for (Customer customer : listOfCustomers) {
 				if (customer.getId().equals(customerId)) {
 					System.out.println("Customer with customer ID " + customerId + "found.");
-					return customer;
+					System.out.println(customer);
 				}
 
 			}
 		} else {
 			System.err.println("The list of customers for this customer ID " + customerId + " is empty.");
 		}
-		throw new IllegalStateException("The customer with the id " + customerId + " is not found.");
+		System.err.println("The customer with the id " + customerId + " is not found.");
 	}
 
 	// Return all customers
-	public List<Customer> getListOfCustomers() {
+	public void getListOfCustomers() {
 		if (!listOfCustomers.isEmpty()) {
 			System.out.println(listOfCustomers);
-			return listOfCustomers;
+
 		} else {
-			throw new IllegalStateException("The list of customers is empty.");
+			System.err.println("The list of customers is empty.");
 		}
 	}
 
@@ -170,12 +170,12 @@ public class CustomerService {
 				}
 			}
 			if (listOfUpdatedCustomer.isEmpty()) {
-				throw new IllegalArgumentException("No customer with customer ID " + oldCustomer + " found");
+				System.err.println("No customer with customer ID " + oldCustomer + " found");
 			}
 
 		} else {
-			throw new IllegalArgumentException(
-					"The customer can not be updated, because the list for the customer with the customer ID "
+			System.err
+					.println("The customer can not be updated, because the list for the customer with the customer ID "
 							+ oldCustomer + " is empty.");
 		}
 	}
@@ -187,12 +187,11 @@ public class CustomerService {
 				listOfCustomers.remove(removeCustomer);
 				System.out.println("Customer with customer ID " + removeCustomer.getId() + " has been removed ");
 			} else {
-				throw new IllegalArgumentException(
-						"The customer can not be removed, because the " + "customer with the customer ID "
-								+ removeCustomer.getId() + " does not exist in the list of customers.");
+				System.err.println("The customer can not be removed, because the " + "customer with the customer ID "
+						+ removeCustomer.getId() + " does not exist in the list of customers.");
 			}
 		} else {
-			throw new IllegalArgumentException(
+			System.err.println(
 
 					"The customer can not be removed, because the list of customers is empty.");
 		}
@@ -209,8 +208,7 @@ public class CustomerService {
 
 					for (Vehicle vehicle : customer.getListOfVehiclesForCustomer()) {
 						if (vehicle.getLicensePlate().equals(vehicleToAdd.getLicensePlate())) {
-							throw new IllegalArgumentException("Vehicle with license plate "
-									+ vehicleToAdd.getLicensePlate()
+							System.err.println("Vehicle with license plate " + vehicleToAdd.getLicensePlate()
 									+ " already exist in list of vehicles for customer with ID " + customer.getId());
 						}
 					}
@@ -226,7 +224,7 @@ public class CustomerService {
 						+ " does not exist in the list for customers or you have not entered a customer.");
 			}
 		} else {
-			throw new IllegalArgumentException(
+			System.err.println(
 
 					"The list of customers is empty.");
 		}
@@ -267,15 +265,14 @@ public class CustomerService {
 				}
 
 				else {
-					throw new IllegalArgumentException(
-							"List of vehicles for customer with ID " + customer.getId() + " is empty");
+					System.err.println("List of vehicles for customer with ID " + customer.getId() + " is empty");
 				}
 			} else {
-				throw new IllegalArgumentException(
+				System.err.println(
 						"The customer with the ID " + customer.getId() + " does not exist in the list of customers.");
 			}
 		} else {
-			throw new IllegalArgumentException(
+			System.err.println(
 
 					"The list of customers is empty.");
 		}
