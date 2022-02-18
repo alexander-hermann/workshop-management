@@ -41,6 +41,8 @@ public class CustomerService {
 	// create a new vehicle
 	public void createNewVehicle(Vehicle newVehicle) {
 		if (newVehicle != null) {
+
+			// if vehicle not in the listofvehicles add vehicle to list
 			if (!listOfVehicles.contains(newVehicle)) {
 				listOfVehicles.add(newVehicle);
 				System.out.println("New vehicle succesfully added -> " + newVehicle);
@@ -56,6 +58,8 @@ public class CustomerService {
 	public void getVehicleByLicensePlate(String licensePlate) {
 		if (!listOfVehicles.isEmpty()) {
 
+			// output is the vehicle if the license plate which was entered in the method
+			// equals the license plate of a vehicle in the listofvehicles
 			for (Vehicle vehicle : listOfVehicles) {
 				if (vehicle.getLicensePlate().equals(licensePlate)) {
 					System.out.println(vehicle + " found.");
@@ -83,14 +87,18 @@ public class CustomerService {
 		}
 	}
 
+	// update a vehicle when entering the specific vehicle and the new instance
 	public void updateVehicle(Vehicle oldVehicle, Vehicle newVehicle) {
 		List<Vehicle> listOfUpdatedVehicle = new ArrayList<>();
 
 		if (!listOfVehicles.isEmpty()) {
+
+			// if the new object equals the old object
 			for (Vehicle currentVehicle : listOfVehicles) {
 				if (currentVehicle.equals(oldVehicle)) {
 					listOfUpdatedVehicle.add(currentVehicle);
 
+					// Assigns the id of the old object to the new object
 					int indexOfOldVehicleInTheList = listOfVehicles.indexOf(oldVehicle);
 					listOfVehicles.set(indexOfOldVehicleInTheList, newVehicle);
 				}
@@ -123,6 +131,8 @@ public class CustomerService {
 	// create a new customer
 	public void createNewCustomer(Customer newCustomer) {
 		if (newCustomer != null) {
+
+			// if customer not in the listofcustomers add customer to list
 			if (!listOfCustomers.contains(newCustomer)) {
 				listOfCustomers.add(newCustomer);
 				System.out.println(newCustomer + " added.");
@@ -138,10 +148,13 @@ public class CustomerService {
 	// return the customer with the specific customer ID
 	public void getCustomerById(String customerId) {
 		if (!listOfCustomers.isEmpty()) {
+
+			// output is the customer if the customer Id which was entered in the method
+			// equals the customer Id in the listofcustomers
 			for (Customer customer : listOfCustomers) {
 				if (customer.getId().equals(customerId)) {
-					System.out.println("Customer with customer ID " + customerId + "found.");
-					System.out.println(customer);
+
+					System.out.println(customer + "found.");
 				}
 
 			}
@@ -152,7 +165,7 @@ public class CustomerService {
 	}
 
 	// Return all customers
-	public void getListOfCustomers() {
+	public void getCustomers() {
 		if (!listOfCustomers.isEmpty()) {
 			System.out.println(listOfCustomers);
 
@@ -161,11 +174,13 @@ public class CustomerService {
 		}
 	}
 
-	// update a customer when entering the specific customer ID and the new instance
+	// update a customer when entering the specific customer and the new instance
 	public void updateCustomer(Customer oldCustomer, Customer newCustomer) {
 		List<Customer> listOfUpdatedCustomer = new ArrayList<>();
 
 		if (!listOfCustomers.isEmpty()) {
+
+			// if the new object equals the old object
 			for (Customer currentCustomer : listOfCustomers) {
 				if (currentCustomer.equals(oldCustomer)) {
 					listOfUpdatedCustomer.add(currentCustomer);
@@ -205,7 +220,7 @@ public class CustomerService {
 		}
 	}
 
-	// add new vehicle to customer
+	// update customer for vehicle
 	public void updateCustomerForVehicle(Customer customer, Vehicle vehicleToAdd) {
 		// Avoid NullPointerException
 		String checkCustomerHasValue = (customer != null) ? customer.getId() : "null";
@@ -214,6 +229,8 @@ public class CustomerService {
 			if (listOfCustomers.contains(customer) && customer != null) {
 				if (vehicleToAdd != null) {
 
+					// if the license plate of the vehicle which was entered in the method equals a
+					// license plate of a vehicle in the listofvehicles change customer for vehicle
 					for (Vehicle vehicle : listOfVehicles) {
 						if (vehicle.getLicensePlate().equals(vehicleToAdd.getLicensePlate())) {
 							vehicle.setCustomer(customer);
@@ -244,6 +261,9 @@ public class CustomerService {
 
 				if (listOfCustomers.contains(customer)) {
 					if (!listOfVehicles.isEmpty()) {
+
+						// output is the customer id and the license plate of the vehicle if the
+						// customer which was entered in the method equals the customer for a car
 						for (Vehicle currentVehicle : listOfVehicles) {
 							if (currentVehicle.getCustomer().equals(customer)) {
 								System.out.println("The customer " + customer.getId() + " is the owner of vehicle "
@@ -275,6 +295,8 @@ public class CustomerService {
 
 		List<WorkingAppointment> listOfFoundWorkingAppointmentsForVehicle = new ArrayList<>();
 
+		// add completed working appointment for vehicle to
+		// listOfFoundWorkingAppointmentsForVehicle
 		if (listOfVehicles.contains(vehicle) && vehicle != null) {
 			for (WorkingAppointment currentWorkingAppointment : vehicle.listOfWorkingAppointmentForVehicle) {
 				if (currentWorkingAppointment.isCompleted() == true) {
@@ -282,6 +304,8 @@ public class CustomerService {
 				}
 			}
 
+			// output is the service and the start of the completed working appointment from
+			// listOfFoundWorkingAppointmentsForVehicle or the error message
 			if (listOfFoundWorkingAppointmentsForVehicle.size() > 0) {
 				for (WorkingAppointment currentWorkingAppointment : listOfFoundWorkingAppointmentsForVehicle) {
 					System.out.println(currentWorkingAppointment.getService() + " on the date "
