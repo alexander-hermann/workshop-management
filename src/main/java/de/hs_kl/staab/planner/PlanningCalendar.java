@@ -48,114 +48,108 @@ public class PlanningCalendar {
 		List<Appointment> listOfFoundAppointments = new ArrayList<>();
 
 		if (inputAppointment != null) {
-			// 1. Search all elements
-			for (Appointment searchAppointment : listOfAppointments) {
-				if (searchAppointment.getDay().equals(inputAppointment.getDay())) {
+			if (inputAppointment.getDay().getDayOfWeek() != DayOfWeek.SUNDAY) {
 
-					if (searchAppointment instanceof WorkingAppointment
-							|| searchAppointment instanceof CleaningAppointment) {
-						if (searchAppointment.getWorkingPlatform().equals(inputAppointment.getWorkingPlatform())) {
-							listOfFoundAppointments.add(searchAppointment);
-						}
-					} else if (searchAppointment instanceof ConsultingAppointment) {
-						if (((ConsultingAppointment) searchAppointment).getCustomerConsultant()
-								.equals(((ConsultingAppointment) inputAppointment).getCustomerConsultant())) {
-							listOfFoundAppointments.add(searchAppointment);
+				// 1. Search all elements
+				for (Appointment searchAppointment : listOfAppointments) {
+					if (searchAppointment.getDay().equals(inputAppointment.getDay())) {
+
+						if (searchAppointment instanceof WorkingAppointment
+								|| searchAppointment instanceof CleaningAppointment) {
+							if (searchAppointment.getWorkingPlatform().equals(inputAppointment.getWorkingPlatform())) {
+								listOfFoundAppointments.add(searchAppointment);
+							}
+						} else if (searchAppointment instanceof ConsultingAppointment) {
+							if (((ConsultingAppointment) searchAppointment).getCustomerConsultant()
+									.equals(((ConsultingAppointment) inputAppointment).getCustomerConsultant())) {
+								listOfFoundAppointments.add(searchAppointment);
+							}
 						}
 					}
 				}
-			}
 
-			if (!listOfAppointments.contains(inputAppointment)) {
-				if (inputAppointment.isAppointmentInWorkingTime()) {
+				if (!listOfAppointments.contains(inputAppointment)) {
+					if (inputAppointment.isAppointmentInWorkingTime()) {
 
-					if (!listOfFoundAppointments.isEmpty()) {
-						boolean conditionAddAppointment = false;
-						for (Appointment appointment : listOfFoundAppointments) {
+						if (!listOfFoundAppointments.isEmpty()) {
+							boolean conditionAddAppointment = false;
+							for (Appointment appointment : listOfFoundAppointments) {
 
-							boolean cond1 = inputAppointment.getDayWithStartTime()
-									.equals(appointment.getDayWithStartTime());
-
-							boolean cond3 = inputAppointment.getDayWithStartTime()
-									.isAfter(appointment.getDayWithStartTime());
-							boolean cond4 = inputAppointment.getDayWithStartTime()
-									.isBefore(appointment.getDayWithEndTime());
-
-							boolean cond5 = inputAppointment.getDayWithEndTime()
-									.isAfter(appointment.getDayWithStartTime());
-							boolean cond6 = inputAppointment.getDayWithEndTime()
-									.isBefore(appointment.getDayWithEndTime());
-
-							boolean cond7 = appointment.getDayWithStartTime()
-									.isAfter(inputAppointment.getDayWithStartTime());
-
-							boolean cond8 = appointment.getDayWithStartTime()
-									.isBefore(inputAppointment.getDayWithEndTime());
-
-							boolean cond9 = appointment.getDayWithEndTime()
-									.isBefore(inputAppointment.getDayWithEndTime());
-
-							boolean cond10 = appointment.getDayWithEndTime()
-									.isAfter(inputAppointment.getDayWithStartTime());
-
-							if (cond1) {
-								System.err.println("The start time " + appointment.getDayWithStartTime()
-										+ " of the appointment " + appointment.getId() + " equals with the start time "
-										+ inputAppointment.getDayWithStartTime() + " of the appointment "
-										+ inputAppointment.getId() + ". Appointment " + inputAppointment.getId()
-										+ " can´t be added.");
-								return;
-							} else if (cond3 && cond4) {
-								System.err.println("The start time " + inputAppointment.getDayWithStartTime()
-										+ " of the appointment " + inputAppointment.getId()
-										+ " is between the start time " + appointment.getDayWithStartTime()
-										+ " and end time " + appointment.getDayWithEndTime() + " of the appointment "
-										+ appointment.getId() + ". Appointment " + inputAppointment.getId()
-										+ " can´t be added.");
-								return;
-							} else if (cond5 && cond6) {
-								System.err.println("The end time " + inputAppointment.getDayWithEndTime()
-										+ " of the appointment " + inputAppointment.getId()
-										+ " is between the start time " + appointment.getDayWithStartTime()
-										+ " and end time " + appointment.getDayWithEndTime() + " of the appointment "
-										+ appointment.getId() + ". Appointment " + inputAppointment.getId()
-										+ " can´t be added.");
-								return;
-							} else if (cond7 && cond8) {
-								System.err.println("The start time " + appointment.getDayWithStartTime()
-										+ " of the appointment " + appointment.getId() + " is between the start time "
-										+ inputAppointment.getDayWithStartTime() + " and end time "
-										+ inputAppointment.getDayWithEndTime() + " of the appointment "
-										+ inputAppointment.getId() + ". Appointment " + inputAppointment.getId()
-										+ " can´t be added.");
-								return;
-							} else if (cond9 && cond10) {
-								System.err.println("The end time " + appointment.getDayWithEndTime()
-										+ " of the appointment " + appointment.getId() + " is between the start time "
-										+ inputAppointment.getDayWithStartTime() + " and end time "
-										+ inputAppointment.getDayWithEndTime() + " of the appointment "
-										+ inputAppointment.getId() + ". Appointment " + inputAppointment.getId()
-										+ " can´t be added.");
-								return;
+								// @formatter:off
+								boolean cond1 = inputAppointment.getDayWithStartTime().equals(appointment.getDayWithStartTime());
+								
+								boolean cond3 = inputAppointment.getDayWithStartTime().isAfter(appointment.getDayWithStartTime());
+								boolean cond4 = inputAppointment.getDayWithStartTime().isBefore(appointment.getDayWithEndTime());
+								
+								boolean cond5 = inputAppointment.getDayWithEndTime().isAfter(appointment.getDayWithStartTime());
+								boolean cond6 = inputAppointment.getDayWithEndTime().isBefore(appointment.getDayWithEndTime());
+								
+								boolean cond7 = appointment.getDayWithStartTime().isAfter(inputAppointment.getDayWithStartTime());
+								boolean cond8 = appointment.getDayWithStartTime().isBefore(inputAppointment.getDayWithEndTime());
+								
+								boolean cond9 = appointment.getDayWithEndTime().isBefore(inputAppointment.getDayWithEndTime());
+								boolean cond10 = appointment.getDayWithEndTime().isAfter(inputAppointment.getDayWithStartTime());
+								
+								if (cond1) {
+									System.err.println("The start time " + appointment.getDayWithStartTime()
+									+ " of the appointment " + appointment.getId() + " equals with the start time "
+									+ inputAppointment.getDayWithStartTime() + " of the appointment "
+									+ inputAppointment.getId() + ". Appointment " + inputAppointment.getId()
+									+ " can´t be added.");
+									return;
+								} else if (cond3 && cond4) {
+									System.err.println("The start time " + inputAppointment.getDayWithStartTime()
+									+ " of the appointment " + inputAppointment.getId()
+									+ " is between the start time " + appointment.getDayWithStartTime()
+									+ " and end time " + appointment.getDayWithEndTime() + " of the appointment "
+									+ appointment.getId() + ". Appointment " + inputAppointment.getId()
+									+ " can´t be added.");
+									return;
+								} else if (cond5 && cond6) {
+									System.err.println("The end time " + inputAppointment.getDayWithEndTime()
+									+ " of the appointment " + inputAppointment.getId()
+									+ " is between the start time " + appointment.getDayWithStartTime()
+									+ " and end time " + appointment.getDayWithEndTime() + " of the appointment "
+									+ appointment.getId() + ". Appointment " + inputAppointment.getId()
+									+ " can´t be added.");
+									return;
+								} else if (cond7 && cond8) {
+									System.err.println("The start time " + appointment.getDayWithStartTime()
+									+ " of the appointment " + appointment.getId() + " is between the start time "
+									+ inputAppointment.getDayWithStartTime() + " and end time "
+									+ inputAppointment.getDayWithEndTime() + " of the appointment "
+									+ inputAppointment.getId() + ". Appointment " + inputAppointment.getId()
+									+ " can´t be added.");
+									return;
+								} else if (cond9 && cond10) {
+									System.err.println("The end time " + appointment.getDayWithEndTime()
+									+ " of the appointment " + appointment.getId() + " is between the start time "
+									+ inputAppointment.getDayWithStartTime() + " and end time "
+									+ inputAppointment.getDayWithEndTime() + " of the appointment "
+									+ inputAppointment.getId() + ". Appointment " + inputAppointment.getId()
+									+ " can´t be added.");
+									return;
+								}
+								conditionAddAppointment = true;
 							}
-							conditionAddAppointment = true;
-						}
-						if (conditionAddAppointment) {
+							if (conditionAddAppointment) {
+								listOfAppointments.add(inputAppointment);
+								System.out.println("The appointment " + inputAppointment.getId() + " was successfully added.");
+							}
+						} else {
 							listOfAppointments.add(inputAppointment);
-							System.out.println(
-									"The Appointment " + inputAppointment.getId() + " was successfully added.");
+							System.out.println("The appointment " + inputAppointment.getId() + " was successfully added.");
 						}
+						
 					} else {
-						listOfAppointments.add(inputAppointment);
-						System.out.println("The Appointment " + inputAppointment.getId() + " was successfully added.");
+						System.err.println("The appointment " + inputAppointment.getId() + " is outside of working hours.");
 					}
-
 				} else {
-					System.err.println("The appointment is outside of working hours.");
+					System.err.println("The appointment " + inputAppointment.getId() + " can't be added, because the appointment " + inputAppointment.getId()
+					+ " already exists in the list.");
 				}
 			} else {
-				System.err.println("The appointment can't be added, because the appointment " + inputAppointment.getId()
-						+ " already exists in the list.");
+				System.err.println("The appointment " + inputAppointment.getId() + " can't be added, because the day is a sunday.");
 			}
 		} else {
 			System.err.println("You must entered an appointment.");

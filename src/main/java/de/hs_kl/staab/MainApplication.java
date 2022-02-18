@@ -109,7 +109,7 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1, customerConsultant1);
 		ConsultingAppointment consultingAppointment5 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1, customerConsultant2);
 
-		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 24, 8, 00, wkp1, car1, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 2, 20, 8, 00, wkp1, car1, collectionOfWorkForCustomer01, carMechanic1);
 		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 2, 17, 10, 30, wkp1, car1, collectionOfWorkForCustomer01, carMechanic1);
 		WorkingAppointment workingAppointment03 = new WorkingAppointment(2022, 2, 17, 8, 00, wkp1, car2, collectionOfWorkForCustomer01, carMechanic1);
 		WorkingAppointment workingAppointment04 = new WorkingAppointment(2022, 2, 17, 14, 00, wkp1, car2, collectionOfWorkForCustomer01, carMechanic1);
