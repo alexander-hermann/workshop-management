@@ -54,6 +54,8 @@ public class MainApplication {
 	}
 
 	private static void runApplication() {
+
+		// @formatter:off
 		PlannerService plannerService = PlannerService.getInstance();
 		PlanningCalendar planningCalendar = PlanningCalendar.getInstance();
 		CustomerService customerService = CustomerService.getInstance();
@@ -92,10 +94,8 @@ public class MainApplication {
 		InvoiceAddress invoiceAddressOfCustomer3 = new InvoiceAddress("Hauptstraße", 15, 66820, "Bierbach");
 
 		Customer customer1 = new Customer("Ammar Said", invoiceAddressOfCustomer1, "+49176 258484750", "ammar@web.de");
-		Customer customer2 = new Customer("Alexander Hermann", invoiceAddressOfCustomer2, "0176-5656556",
-				"alex@web.de");
-		Customer customer3 = new Customer("Hendrik Treitz", invoiceAddressOfCustomer3, "+49176-4548484",
-				"hendrik@web.de");
+		Customer customer2 = new Customer("Alexander Hermann", invoiceAddressOfCustomer2, "0176-5656556","alex@web.de");
+		Customer customer3 = new Customer("Hendrik Treitz", invoiceAddressOfCustomer3, "+49176-4548484","hendrik@web.de");
 		Customer customer4 = new Customer("Max Müller", null, "+490176-99988874", "max@web.de");
 
 		Vehicle car1 = new Car("HOM-SB 211", "BMW", "M1", 2016, 2018, 8, 1, customer1);
@@ -103,50 +103,29 @@ public class MainApplication {
 		Vehicle car3 = new Car("KUS-AM 24", "Audi", "RS6", 2010, 2013, 8, 1, customer3);
 		Vehicle car4 = new Car("KL-AX 500", "Porsche", "Taycan Turbo S", 2019, 2020, 8, 2, customer4);
 
-		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2021, 12, 20, 8, 00, customer1, 1,
-				customerConsultant1);
-		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2021, 12, 20, 9, 00, customer1, 1,
-				customerConsultant1);
-		ConsultingAppointment consultingAppointment3 = new ConsultingAppointment(2021, 12, 20, 10, 00, customer1, 1,
-				customerConsultant1);
-		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1,
-				customerConsultant1);
-		ConsultingAppointment consultingAppointment5 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1,
-				customerConsultant2);
+		ConsultingAppointment consultingAppointment1 = new ConsultingAppointment(2021, 12, 20, 8, 00, customer1, 1, customerConsultant1);
+		ConsultingAppointment consultingAppointment2 = new ConsultingAppointment(2021, 12, 20, 9, 00, customer1, 1, customerConsultant1);
+		ConsultingAppointment consultingAppointment3 = new ConsultingAppointment(2021, 12, 20, 10, 00, customer1, 1, customerConsultant1);
+		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1, customerConsultant1);
+		ConsultingAppointment consultingAppointment5 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1, customerConsultant2);
 
-		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 24, 8, 00, wkp1, car1,
-				collectionOfWorkForCustomer01, carMechanic1);
-		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 2, 17, 10, 30, wkp1, car1,
-				collectionOfWorkForCustomer01, carMechanic1);
-		WorkingAppointment workingAppointment03 = new WorkingAppointment(2022, 2, 17, 8, 00, wkp1, car2,
-				collectionOfWorkForCustomer01, carMechanic1);
-		WorkingAppointment workingAppointment04 = new WorkingAppointment(2022, 2, 17, 14, 00, wkp1, car2,
-				collectionOfWorkForCustomer01, carMechanic1);
-		WorkingAppointment workingAppointment05 = new WorkingAppointment(2022, 1, 22, 8, 00, wkp2, car2,
-				collectionOfWorkForCustomer01, carMechanic1);
-		WorkingAppointment workingAppointment06 = new WorkingAppointment(2022, 1, 15, 10, 00, wkp2, car2,
-				collectionOfWorkForCustomer01, carMechanic1);
-		WorkingAppointment workingAppointment07 = new WorkingAppointment(2022, 1, 15, 12, 00, wkp2, car2,
-				collectionOfWorkForCustomer01, carMechanic1);
-		WorkingAppointment workingAppointment08 = new WorkingAppointment(2022, 1, 15, 14, 00, wkp2, car2,
-				collectionOfWorkForCustomer01, carMechanic1);
-		WorkingAppointment workingAppointment09 = new WorkingAppointment(2022, 1, 15, 8, 00, wkp3, car2,
-				collectionOfWorkForCustomer01, carMechanic1);
-		WorkingAppointment workingAppointment10 = new WorkingAppointment(2022, 1, 15, 10, 00, wkp3, car2,
-				collectionOfWorkForCustomer01, carMechanic1);
-		WorkingAppointment workingAppointment11 = new WorkingAppointment(2022, 1, 15, 12, 00, wkp3, car2,
-				collectionOfWorkForCustomer01, carMechanic1);
-		WorkingAppointment workingAppointment12 = new WorkingAppointment(2022, 1, 15, 14, 00, wkp3, car2,
-				collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 1, 24, 8, 00, wkp1, car1, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 2, 17, 10, 30, wkp1, car1, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment03 = new WorkingAppointment(2022, 2, 17, 8, 00, wkp1, car2, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment04 = new WorkingAppointment(2022, 2, 17, 14, 00, wkp1, car2, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment05 = new WorkingAppointment(2022, 1, 22, 8, 00, wkp2, car2, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment06 = new WorkingAppointment(2022, 1, 15, 10, 00, wkp2, car2, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment07 = new WorkingAppointment(2022, 1, 15, 12, 00, wkp2, car2, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment08 = new WorkingAppointment(2022, 1, 15, 14, 00, wkp2, car2, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment09 = new WorkingAppointment(2022, 1, 15, 8, 00, wkp3, car2, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment10 = new WorkingAppointment(2022, 1, 15, 10, 00, wkp3, car2, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment11 = new WorkingAppointment(2022, 1, 15, 12, 00, wkp3, car2, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment12 = new WorkingAppointment(2022, 1, 15, 14, 00, wkp3, car2, collectionOfWorkForCustomer01, carMechanic1);
 
-		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 2, 18, 8, 00, wkp1,
-				CLEANINGPROGRAMM.FAST, dispatcher1);
-		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2022, 1, 12, 12, 00, wkp3,
-				CLEANINGPROGRAMM.INTENSE, dispatcher1);
-		CleaningAppointment cleaningAppointment3 = new CleaningAppointment(2022, 1, 12, 15, 00, wkp3,
-				CLEANINGPROGRAMM.INTENSE, dispatcher1);
-		CleaningAppointment cleaningAppointment4 = new CleaningAppointment(2022, 1, 12, 13, 05, wkp3,
-				CLEANINGPROGRAMM.INTENSE, dispatcher1);
+		CleaningAppointment cleaningAppointment1 = new CleaningAppointment(2022, 2, 18, 8, 00, wkp1, CLEANINGPROGRAMM.FAST, dispatcher1);
+		CleaningAppointment cleaningAppointment2 = new CleaningAppointment(2022, 1, 12, 12, 00, wkp3, CLEANINGPROGRAMM.INTENSE, dispatcher1);
+		CleaningAppointment cleaningAppointment3 = new CleaningAppointment(2022, 1, 12, 15, 00, wkp3, CLEANINGPROGRAMM.INTENSE, dispatcher1);
+		CleaningAppointment cleaningAppointment4 = new CleaningAppointment(2022, 1, 12, 13, 05, wkp3, CLEANINGPROGRAMM.INTENSE, dispatcher1);
 
 		// ########################################################
 		customerService.createNewVehicle(car1);
