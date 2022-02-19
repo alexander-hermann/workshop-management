@@ -57,17 +57,18 @@ public class PlannerService {
 		return listOfServices;
 	}
 
-	public WorkingPlatform getWorkingPlatformById(String workingPlatformId) {
+	public void getWorkingPlatformById(String workingPlatformId) {
 		if (!listOfWorkingPlatforms.isEmpty()) {
+
 			for (WorkingPlatform workingPlatform : listOfWorkingPlatforms) {
 				if (workingPlatform.getId().equals(workingPlatformId)) {
-					return workingPlatform;
+					System.out.println(workingPlatform);
 				}
 			}
 		} else {
-			throw new IllegalArgumentException("The list of workingplatforms is empty.");
+			System.err.println("The list of workingplatforms is empty.");
 		}
-		throw new IllegalArgumentException("The workingplatform with the id " + workingPlatformId + " was not found.");
+		System.err.println("The workingplatform with the id " + workingPlatformId + " was not found.");
 	}
 
 	public void getWorkingPlatforms() {
@@ -76,7 +77,7 @@ public class PlannerService {
 				System.out.println(workingPlatform);
 			}
 		} else {
-			throw new IllegalArgumentException("The list of workingplatforms is empty.");
+			System.err.println("The list of workingplatforms is empty.");
 		}
 	}
 
@@ -100,8 +101,7 @@ public class PlannerService {
 				}
 			}
 		} else {
-			throw new IllegalArgumentException(
-					"The working platform cannot be updated because the list of workingplatforms is empty.");
+			System.err.println("The working platform cannot be updated because the list of workingplatforms is empty.");
 		}
 	}
 
@@ -110,22 +110,22 @@ public class PlannerService {
 			listOfWorkingPlatforms.remove(removeWorkingPlatform);
 			System.out.println("The workingplatform " + removeWorkingPlatform.getId() + "  was successfully deleted.");
 		} else {
-			throw new IllegalArgumentException("The workingplatform " + removeWorkingPlatform.getId()
+			System.err.println("The workingplatform " + removeWorkingPlatform.getId()
 					+ " can't be deleted, because the list of workingplatforms is empty.");
 		}
 	}
 
-	public Service getServiceById(String serviceId) {
+	public void getServiceById(String serviceId) {
 		if (!listOfServices.isEmpty()) {
 			for (Service service : listOfServices) {
 				if (service.getId().equals(serviceId)) {
-					return service;
+					System.out.println(service);
 				}
 			}
 		} else {
-			throw new IllegalArgumentException("The list of services is empty.");
+			System.err.println("The list of services is empty.");
 		}
-		throw new IllegalArgumentException("The service with the id " + serviceId + " was not found.");
+		System.err.println("The service with the id " + serviceId + " was not found.");
 	}
 
 	public void getServices() {
@@ -134,7 +134,7 @@ public class PlannerService {
 				System.out.println(service);
 			}
 		} else {
-			throw new IllegalArgumentException("The list of services is empty.");
+			System.err.println("The list of services is empty.");
 		}
 	}
 
@@ -143,7 +143,7 @@ public class PlannerService {
 			listOfServices.add(newService);
 			System.out.println("The service " + newService.getId() + "  was successfully added.");
 		} else {
-			throw new IllegalArgumentException("The service cannot be added because it already exists in the list");
+			System.err.println("The service cannot be added because it already exists in the list");
 		}
 	}
 
@@ -158,7 +158,7 @@ public class PlannerService {
 				}
 			}
 		} else {
-			throw new IllegalArgumentException("The service cannot be updated because the list of services is empty.");
+			System.err.println("The service cannot be updated because the list of services is empty.");
 		}
 	}
 
@@ -167,7 +167,7 @@ public class PlannerService {
 			listOfServices.remove(removeService);
 			System.out.println("The service " + removeService.getId() + "  was successfully deleted.");
 		} else {
-			throw new IllegalArgumentException("The service " + removeService.getId()
+			System.err.println("The service " + removeService.getId()
 					+ " can't be deleted, because the list of services is empty.");
 		}
 	}
