@@ -3,6 +3,8 @@ package de.hs_kl.staab.planner;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,7 @@ public class PlannerController {
 	private final PlannerService plannerService = PlannerService.getInstance();
 	private final PlanningCalendar planningCalendar = PlanningCalendar.getInstance();
 	private final CustomerService customerService = CustomerService.getInstance();
+	private final UserService userService = UserService.getInstance();
 
 	/* ************************************************ */
 	/* * HIER KÖNNEN SIE IHRE REST-METHODEN SCHREIBEN * */
@@ -37,6 +40,7 @@ public class PlannerController {
 		return plannerService.getListOfWorkingPlatforms();
 	}
 
+	// ###############################################
 	@RequestMapping(value = "/appointments", method = RequestMethod.GET)
 	public List<Appointment> getAllAppointments() {
 		return planningCalendar.getListOfAppointments();
@@ -78,6 +82,7 @@ public class PlannerController {
 		return foundOfCleaningAppointments;
 	}
 
+	// ###############################################
 	@RequestMapping(value = "/customers", method = RequestMethod.GET)
 	public List<Customer> getAllCustomers() {
 		return customerService.getAllCustomers();
@@ -86,5 +91,24 @@ public class PlannerController {
 	@RequestMapping(value = "/vehicles", method = RequestMethod.GET)
 	public List<Vehicle> getAllVehicles() {
 		return customerService.getListOfVehicles();
+	}
+
+	// ###############################################
+	// USER-SERVICE
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public List<User> getAllUsers() {
+		return userService.getUsers();
+	}
+
+	@GetMapping(value = "/users/{idOfUser}")
+	public User getUserById(@PathVariable String idOfUser) {
+		List<User> listOfUsers = userService.getUsers();
+		User findUser = null;
+		for (User user : listOfUsers) {
+			if (user.getId().equals(idOfUser)) {
+				findUser = user;
+			}
+		}
+		return findUser;
 	}
 }
