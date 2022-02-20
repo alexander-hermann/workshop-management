@@ -83,8 +83,6 @@ public abstract class Vehicle {
 		builder.append(yearOfConstruction);
 		builder.append(", licensePlate=");
 		builder.append(licensePlate);
-		builder.append(", customer=");
-		builder.append(customer);
 		builder.append("]");
 		return builder.toString();
 	}

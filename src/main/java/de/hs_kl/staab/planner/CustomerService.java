@@ -135,7 +135,7 @@ public class CustomerService {
 			// if customer not in the listofcustomers add customer to list
 			if (!listOfCustomers.contains(newCustomer)) {
 				listOfCustomers.add(newCustomer);
-				System.out.println(newCustomer + " added.");
+				System.out.println("New customer successfully added -> " + newCustomer);
 			} else {
 				System.err.println("Customer with the Customer Id " + newCustomer.getId()
 						+ " already exist. Search for Customer with Id or update Customer");
@@ -149,26 +149,31 @@ public class CustomerService {
 	public void getCustomerById(String customerId) {
 		if (!listOfCustomers.isEmpty()) {
 
+			Customer foundCustomerById = null;
+
 			// output is the customer if the customer Id which was entered in the method
 			// equals the customer Id in the listofcustomers
 			for (Customer customer : listOfCustomers) {
 				if (customer.getId().equals(customerId)) {
-
-					System.out.println(customer + "found.");
+					foundCustomerById = customer;
 				}
+			}
 
+			if (foundCustomerById != null) {
+				System.out.println("The customer " + foundCustomerById.getId() + " was successfully founded. "
+						+ foundCustomerById);
+			} else {
+				System.err.println("The customer with the id " + customerId + " is not found.");
 			}
 		} else {
 			System.err.println("The list of customers for this customer ID " + customerId + " is empty.");
 		}
-		System.err.println("The customer with the id " + customerId + " is not found.");
 	}
 
 	// Return all customers
 	public void getCustomers() {
 		if (!listOfCustomers.isEmpty()) {
 			System.out.println(listOfCustomers);
-
 		} else {
 			System.err.println("The list of customers is empty.");
 		}
@@ -248,9 +253,7 @@ public class CustomerService {
 						+ " does not exist in the list for customers or you have not entered a customer.");
 			}
 		} else {
-			System.err.println(
-
-					"The list of customers is empty.");
+			System.err.println("The list of customers is empty.");
 		}
 	}
 
@@ -262,29 +265,35 @@ public class CustomerService {
 				if (listOfCustomers.contains(customer)) {
 					if (!listOfVehicles.isEmpty()) {
 
+						List<Vehicle> foundVehicles = new ArrayList<>();
+						int counterOfVehicle = 0;
+
 						// output is the customer id and the license plate of the vehicle if the
 						// customer which was entered in the method equals the customer for a car
 						for (Vehicle currentVehicle : listOfVehicles) {
 							if (currentVehicle.getCustomer().equals(customer)) {
-								System.out.println("The customer " + customer.getId() + " is the owner of vehicle "
-										+ currentVehicle.getLicensePlate());
+								counterOfVehicle++;
+								foundVehicles.add(currentVehicle);
 							}
 						}
 
-					} else {
-						System.err.println("The customer " + customer.getId() + " has no vehicles.");
+						if (!foundVehicles.isEmpty()) {
+							System.out.println("The customer " + customer.getFullName() + " has " + counterOfVehicle
+									+ " vehicle(s). " + foundVehicles);
+						} else {
+							System.err.println("The customer " + customer.getId() + " has no vehicles.");
+						}
 					}
 				} else {
-					System.err.println(" You have not entered a customer.");
 					System.err.println(
 							"The customer with ID " + customer.getId() + " does not exist in the list of customers.");
 				}
 			} else {
-				System.err.println(" The list of customers is empty.");
+				System.err.println("The list of customers is empty.");
 
 			}
 		} else {
-			System.err.println("[CustomerService] You have not entered a customer.");
+			System.err.println("You have not entered a customer.");
 		}
 	}
 

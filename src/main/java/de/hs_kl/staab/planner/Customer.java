@@ -1,15 +1,12 @@
 
 package de.hs_kl.staab.planner;
 
-import java.util.List;
-
 public class Customer extends Person {
 
 	private static final String CUSTOMER_PREFIX = "CS-";
 	private static int CUSTOMER_ID_COUNTER = 1;
 	private String customerId;
 	private InvoiceAddress invoiceAddressOfPerson;
-	private List<Vehicle> listOfVehiclesForCustomer;
 
 	public Customer(String fullName, InvoiceAddress invoiceAddressOfPerson, String phoneNumber, String emailAddress) {
 		super(fullName, phoneNumber, emailAddress);
@@ -18,12 +15,6 @@ public class Customer extends Person {
 		CUSTOMER_ID_COUNTER++;
 		this.invoiceAddressOfPerson = invoiceAddressOfPerson;
 
-	}
-
-	@Override
-	public String toString() {
-		return super.toString() + " customerId=" + customerId + ", invoiceAddressOfPerson=" + invoiceAddressOfPerson
-				+ "]";
 	}
 
 	public InvoiceAddress getInvoiceAddressOfPerson() {
@@ -38,4 +29,15 @@ public class Customer extends Person {
 		this.customerId = customerId;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Customer [customerId=");
+		builder.append(customerId);
+		builder.append(super.toString());
+		builder.append(", invoiceAddressOfPerson=");
+		builder.append(invoiceAddressOfPerson);
+		builder.append("]");
+		return builder.toString();
+	}
 }
