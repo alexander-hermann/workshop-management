@@ -79,13 +79,6 @@ public class PlannerController {
 		}
 		return foundOfWorkingAppointments;
 	}
-	
-	@RequestMapping(value = "/workingappointments/{idOfWorkingAppointment}")
-	public List<Appointment> getWorkingAppointmentById(@PathVariable int idOfWorkingAppointment) {
-		String idWithPrefix = "AP-" + idOfWorkingAppointment;
-		List<Appointment> workingAppointmentById = planningCalendar.getListOfAppointments().stream().filter(a -> a.getId().equals(idWithPrefix)).collect(Collectors.toList());
-		return workingAppointmentById;
-	}
 
 	@RequestMapping(value = "/consultingappointments", method = RequestMethod.GET)
 	public List<Appointment> getAllConsultingAppointments() {
