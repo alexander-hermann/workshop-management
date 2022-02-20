@@ -113,7 +113,8 @@ public class PlannerController {
 	
 	@RequestMapping(value = "/customers/{idOfCustomer}")
 	public List<Customer> getCustomerById(@PathVariable String idOfCustomer) {
-		List<Customer> customer = customerService.getAllCustomers().stream().filter(c -> c.getId().equals(idOfCustomer)).collect(Collectors.toList());
+		String idWithPrefix = "CS-" + idOfCustomer;
+		List<Customer> customer = customerService.getAllCustomers().stream().filter(c -> c.getId().equals(idWithPrefix)).collect(Collectors.toList());
 		return customer;
 	}
 
@@ -124,7 +125,8 @@ public class PlannerController {
 	
 	@RequestMapping(value = "/vehicles/{idOfVehicle}")
 	public List<Vehicle> getVehicleById(@PathVariable String idOfVehicle) {
-		List<Vehicle> vehicle = customerService.getListOfVehicles().stream().filter(v -> v.getId().equals(idOfVehicle)).collect(Collectors.toList());
+		String idWithPrefix = "VH-" + idOfVehicle;
+		List<Vehicle> vehicle = customerService.getListOfVehicles().stream().filter(v -> v.getId().equals(idWithPrefix)).collect(Collectors.toList());
 		return vehicle;
 	}
 
@@ -137,7 +139,8 @@ public class PlannerController {
 
 	@RequestMapping(value = "/users/{idOfUser}")
 	public List<User> getUserById(@PathVariable String idOfUser) {
-		List<User> user = userService.getUsers().stream().filter(u -> u.getId().equals(idOfUser)).collect(Collectors.toList());
+		String idWithPrefix = "User-" + idOfUser;
+		List<User> user = userService.getUsers().stream().filter(u -> u.getId().equals(idWithPrefix)).collect(Collectors.toList());
 		return user;
 	}
 }
