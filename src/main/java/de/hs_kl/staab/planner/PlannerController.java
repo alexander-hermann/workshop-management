@@ -60,6 +60,13 @@ public class PlannerController {
 	public List<Appointment> getAllAppointments() {
 		return planningCalendar.getListOfAppointments();
 	}
+	
+	@RequestMapping(value = "/appointments/{idOfAppointment}")
+	public List<Appointment> getAppointmentById(@PathVariable int idOfAppointment) {
+		String idWithPrefix = "AP-" + idOfAppointment;
+		List<Appointment> appointmentById = planningCalendar.getListOfAppointments().stream().filter(a -> a.getId().equals(idWithPrefix)).collect(Collectors.toList());
+		return appointmentById;
+	}
 
 	@RequestMapping(value = "/workingappointments", method = RequestMethod.GET)
 	public List<Appointment> getAllWorkingAppointments() {
@@ -71,6 +78,13 @@ public class PlannerController {
 			}
 		}
 		return foundOfWorkingAppointments;
+	}
+	
+	@RequestMapping(value = "/workingappointments/{idOfWorkingAppointment}")
+	public List<Appointment> getWorkingAppointmentById(@PathVariable int idOfWorkingAppointment) {
+		String idWithPrefix = "AP-" + idOfWorkingAppointment;
+		List<Appointment> workingAppointmentById = planningCalendar.getListOfAppointments().stream().filter(a -> a.getId().equals(idWithPrefix)).collect(Collectors.toList());
+		return workingAppointmentById;
 	}
 
 	@RequestMapping(value = "/consultingappointments", method = RequestMethod.GET)
