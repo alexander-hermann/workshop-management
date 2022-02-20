@@ -47,6 +47,13 @@ public class PlannerController {
 	public List<WorkingPlatform> getAllWorkingPlatforms() {
 		return plannerService.getListOfWorkingPlatforms();
 	}
+	
+	@RequestMapping(value = "/workingplatforms/{idOfWorkingPlatform}")
+	public List<WorkingPlatform> getWorkingPlatformById(@PathVariable int idOfWorkingPlatform) {
+		String idWithPrefix = "WKP-" + idOfWorkingPlatform;
+		List<WorkingPlatform> workingPlatform = plannerService.getListOfWorkingPlatforms().stream().filter(w -> w.getId().equals(idWithPrefix)).collect(Collectors.toList());
+		return workingPlatform;
+	}
 
 	// ###############################################
 	@RequestMapping(value = "/appointments", method = RequestMethod.GET)
