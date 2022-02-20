@@ -2,6 +2,7 @@ package de.hs_kl.staab.planner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/planner")
 public class PlannerController {
 
+	// @formatter:off
 	private final PlannerService plannerService = PlannerService.getInstance();
 	private final PlanningCalendar planningCalendar = PlanningCalendar.getInstance();
 	private final CustomerService customerService = CustomerService.getInstance();
@@ -101,14 +103,8 @@ public class PlannerController {
 	}
 
 	@GetMapping(value = "/users/{idOfUser}")
-	public User getUserById(@PathVariable String idOfUser) {
-		List<User> listOfUsers = userService.getUsers();
-		User findUser = null;
-		for (User user : listOfUsers) {
-			if (user.getId().equals(idOfUser)) {
-				findUser = user;
-			}
-		}
-		return findUser;
+	public List<User> getUserById(@PathVariable String idOfUser) {
+		List<User> user = userService.getUsers().stream().filter(u -> u.getId().equals(idOfUser)).collect(Collectors.toList());
+		return user;
 	}
 }
