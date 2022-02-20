@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +34,13 @@ public class PlannerController {
 	@RequestMapping(value = "/services", method = RequestMethod.GET)
 	public List<Service> getAllServices() {
 		return plannerService.getListOfServices();
+	}
+	
+	@RequestMapping(value = "/services/{idOfService}")
+	public List<Service> getServiceById(@PathVariable int idOfService) {
+		String idWithPrefix = "SE-" + idOfService;
+		List<Service> service = plannerService.getListOfServices().stream().filter(s -> s.getId().equals(idWithPrefix)).collect(Collectors.toList());
+		return service;
 	}
 
 	@RequestMapping(value = "/workingplatforms", method = RequestMethod.GET)
@@ -115,7 +121,7 @@ public class PlannerController {
 		return userService.getUsers();
 	}
 
-	@GetMapping(value = "/users/{idOfUser}")
+	@RequestMapping(value = "/users/{idOfUser}")
 	public List<User> getUserById(@PathVariable String idOfUser) {
 		List<User> user = userService.getUsers().stream().filter(u -> u.getId().equals(idOfUser)).collect(Collectors.toList());
 		return user;
