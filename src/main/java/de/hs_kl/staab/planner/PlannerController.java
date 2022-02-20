@@ -85,9 +85,16 @@ public class PlannerController {
 	}
 
 	// ###############################################
+	// CUSTOMER-SERVICE
 	@RequestMapping(value = "/customers", method = RequestMethod.GET)
 	public List<Customer> getAllCustomers() {
 		return customerService.getAllCustomers();
+	}
+	
+	@RequestMapping(value = "/customers/{idOfCustomer}")
+	public List<Customer> getCustomerById(@PathVariable String idOfCustomer) {
+		List<Customer> customer = customerService.getAllCustomers().stream().filter(c -> c.getId().equals(idOfCustomer)).collect(Collectors.toList());
+		return customer;
 	}
 
 	@RequestMapping(value = "/vehicles", method = RequestMethod.GET)
