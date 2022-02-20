@@ -101,6 +101,12 @@ public class PlannerController {
 	public List<Vehicle> getAllVehicles() {
 		return customerService.getListOfVehicles();
 	}
+	
+	@RequestMapping(value = "/vehicles/{idOfVehicle}")
+	public List<Vehicle> getVehicleById(@PathVariable String idOfVehicle) {
+		List<Vehicle> vehicle = customerService.getListOfVehicles().stream().filter(v -> v.getId().equals(idOfVehicle)).collect(Collectors.toList());
+		return vehicle;
+	}
 
 	// ###############################################
 	// USER-SERVICE
