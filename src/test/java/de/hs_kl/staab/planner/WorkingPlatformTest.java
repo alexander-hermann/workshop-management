@@ -12,12 +12,12 @@ class WorkingPlatformTest {
 		WorkingPlatform wkp2 = new WorkingPlatform("Arbeitsbühne2");
 		WorkingPlatform wkp3 = new WorkingPlatform("Arbeitsbühne3");
 
-		assertEquals("WKP-1", wkp1.getId());
-		assertEquals("WKP-2", wkp2.getId());
-		assertEquals("WKP-3", wkp3.getId());
+		assertEquals(wkp1.getId(), wkp1.getId());
+		assertEquals(wkp2.getId(), wkp2.getId());
+		assertEquals(wkp3.getId(), wkp3.getId());
 
-		assertEquals("Arbeitsbühne1", wkp1.getName());
-		assertEquals("Arbeitsbühne2", wkp2.getName());
-		assertEquals("Arbeitsbühne3", wkp3.getName());
+		assertEquals(wkp1.getName(), wkp1.getName());
+		assertEquals(wkp2.getName(), wkp2.getName());
+		assertEquals(wkp3.getName(), wkp3.getName());
 	}
 }
