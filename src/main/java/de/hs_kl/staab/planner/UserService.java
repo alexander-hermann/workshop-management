@@ -37,6 +37,8 @@ public class UserService {
 	// create a new user for the application
 
 	public void createNewUser(User newUser) {
+
+		// if user not in the listofusers add user to list
 		if (!listOfUsers.contains(newUser)) {
 
 			listOfUsers.add(newUser);
@@ -48,6 +50,9 @@ public class UserService {
 
 	public void getUserByUserName(String userName) {
 		if (!listOfUsers.isEmpty()) {
+
+			// get the user if the user name which was entered in the method
+			// equals the user name in the listofusers
 			for (User user : listOfUsers) {
 				if (user.getId().equals(userName)) {
 					System.out.println(user + " found.");
@@ -77,6 +82,8 @@ public class UserService {
 		List<User> listOfUpdatedUser = new ArrayList<>();
 
 		if (!listOfUsers.isEmpty()) {
+
+			// if the new object equals the old object
 			for (User currentUser : listOfUsers) {
 				if (currentUser.equals(oldUser)) {
 

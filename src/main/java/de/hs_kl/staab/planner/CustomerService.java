@@ -58,7 +58,7 @@ public class CustomerService {
 	public void getVehicleByLicensePlate(String licensePlate) {
 		if (!listOfVehicles.isEmpty()) {
 
-			// output is the vehicle if the license plate which was entered in the method
+			// get the vehicle if the license plate which was entered in the method
 			// equals the license plate of a vehicle in the listofvehicles
 			for (Vehicle vehicle : listOfVehicles) {
 				if (vehicle.getLicensePlate().equals(licensePlate)) {
@@ -151,7 +151,7 @@ public class CustomerService {
 
 			Customer foundCustomerById = null;
 
-			// output is the customer if the customer Id which was entered in the method
+			// get the customer if the customer Id which was entered in the method
 			// equals the customer Id in the listofcustomers
 			for (Customer customer : listOfCustomers) {
 				if (customer.getId().equals(customerId)) {
@@ -243,7 +243,8 @@ public class CustomerService {
 						}
 					}
 
-					System.out.println("Customer " + customer.getId() + " add the vehicle: " + vehicleToAdd);
+					System.out.println("Customer " + customer.getFullName() + " " + customer.getId()
+							+ " add the vehicle: " + vehicleToAdd);
 				} else {
 					System.err.println("The vehicle cannot be added to the customer " + customer.getId()
 							+ " because you have not entered a vehicle.");
@@ -268,7 +269,7 @@ public class CustomerService {
 						List<Vehicle> foundVehicles = new ArrayList<>();
 						int counterOfVehicle = 0;
 
-						// output is the customer id and the license plate of the vehicle if the
+						// get the customer´s full name, id and the license plate of the vehicle if the
 						// customer which was entered in the method equals the customer for a car
 						for (Vehicle currentVehicle : listOfVehicles) {
 							if (currentVehicle.getCustomer().equals(customer)) {
@@ -278,8 +279,8 @@ public class CustomerService {
 						}
 
 						if (!foundVehicles.isEmpty()) {
-							System.out.println("The customer " + customer.getFullName() + " has " + counterOfVehicle
-									+ " vehicle(s). " + foundVehicles);
+							System.out.println("The customer " + customer.getFullName() + " " + customer.getId()
+									+ " has " + counterOfVehicle + " vehicle(s). " + foundVehicles);
 						} else {
 							System.err.println("The customer " + customer.getId() + " has no vehicles.");
 						}
@@ -315,7 +316,7 @@ public class CustomerService {
 				}
 			}
 
-			// output is the service and the start of the completed working appointment from
+			// get the service and the start of the completed working appointment from
 			// listOfFoundWorkingAppointmentsForVehicle or the error message
 			if (!listOfFoundWorkingAppointmentsForVehicle.isEmpty()) {
 				System.out.println("The vehicle " + vehicle.getId() + " has " + counterServiceHistory
