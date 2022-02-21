@@ -70,7 +70,7 @@ public class MainApplication {
 				"Ralph@ATU.de");
 		CustomerConsultant customerConsultant2 = new CustomerConsultant("Kundenberater-2", "1234547890-2",
 				"Ralph@ATU.de");
-		Dispatcher dispatcher1 = new Dispatcher("Dispo Person", "1232567890", "Herbert@ATU.de");
+		Dispatcher dispatcher1 = new Dispatcher("Disponent-1", "1232567890", "Herbert@ATU.de");
 
 		Service oilChange = new Service("Ölwechsel", 0.5);
 		Service tireChange = new Service("Reifenwechsel", 1.0);
