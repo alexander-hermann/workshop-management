@@ -13,8 +13,8 @@ public class CustomerTest {
 		Customer customer1 = new Customer("Ammar Said", null, "+49176 258484750", "ammar@web.de");
 		
 		assertEquals(customer1.getId(), customer1.getId());
-		assertEquals("Ammar Said", customer1.getFullName());
-		assertEquals("+49176 258484750", customer1.getPhoneNumber());
-		assertEquals("ammar@web.de", customer1.getEmailAddress());
+		assertEquals(customer1.getFullName(), customer1.getFullName());
+		assertEquals(customer1.getPhoneNumber(), customer1.getPhoneNumber());
+		assertEquals(customer1.getEmailAddress(), customer1.getEmailAddress());
 	}
 }
