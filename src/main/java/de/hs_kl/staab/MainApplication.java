@@ -65,7 +65,7 @@ public class MainApplication {
 		WorkingPlatform wkp2 = new WorkingPlatform("Arbeitsbühne2");
 		WorkingPlatform wkp3 = new WorkingPlatform("Arbeitsbühne3");
 
-		CarMechanic carMechanic1 = new CarMechanic("KFZ-Mechaniker", "1234567890", "Otto@ATU.de");
+		CarMechanic carMechanic1 = new CarMechanic("KFZ-Mechaniker-1", "1234567890", "Otto@ATU.de");
 		CustomerConsultant customerConsultant1 = new CustomerConsultant("Kundenberater-1", "1234547890-1",
 				"Ralph@ATU.de");
 		CustomerConsultant customerConsultant2 = new CustomerConsultant("Kundenberater-2", "1234547890-2",
