@@ -83,16 +83,6 @@ public abstract class Appointment implements Terminable {
 		return builder.toString();
 	}
 
-	/*
-	 * public boolean equals(Object obj) { if (this == obj) return true; if (obj ==
-	 * null) return false; if (getClass() != obj.getClass()) return false;
-	 * Appointment other = (Appointment) obj; return calenderWeekOfAppointment ==
-	 * other.calenderWeekOfAppointment && Objects.equals(dayOfAppointment,
-	 * other.dayOfAppointment) && Objects.equals(endOfAppointment,
-	 * other.endOfAppointment) && Objects.equals(startOfAppointment,
-	 * other.startOfAppointment); }
-	 */
-
 	@Override
 	public long getDurationInMin() {
 		LocalTime startTime = this.getStart();
