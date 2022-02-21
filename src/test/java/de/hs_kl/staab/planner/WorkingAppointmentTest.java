@@ -33,6 +33,7 @@ public class WorkingAppointmentTest {
 		assertEquals(workingAppointment01.getDay(), workingAppointment01.getDay());
 		assertEquals(workingAppointment01.getWorkingPlatform(), workingAppointment01.getWorkingPlatform());
 		assertEquals(workingAppointment01.getStart(), workingAppointment01.getStart());
+		assertEquals(workingAppointment01.getDurationInMin(), workingAppointment01.getDurationInMin());
 
 	}
 }
