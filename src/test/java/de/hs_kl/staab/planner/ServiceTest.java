@@ -15,7 +15,7 @@ public class ServiceTest {
 
 		assertEquals(oilChange.getId(), oilChange.getId());
 		assertEquals(tireChange.getId(), tireChange.getId());
-		assertEquals(tireChange.getId(), glassRepair.getId());
+		assertEquals(glassRepair.getId(), glassRepair.getId());
 		assertEquals(inspectionCar.getId(), inspectionCar.getId());
 
 		assertEquals(oilChange.getName(), oilChange.getName());
