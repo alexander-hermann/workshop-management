@@ -194,7 +194,6 @@ public class MainApplication {
 		planningCalendar.getWeekOverview(10, 2016);
 
 		planningCalendar.setAutomaticallyCleaningAppointment(wkp1, CLEANINGPROGRAMM.INTENSE, dispatcher1);
-		planningCalendar.setAutomaticallyCleaningAppointment2(wkp1, CLEANINGPROGRAMM.INTENSE, dispatcher1);
 
 		planningCalendar.getAppointments();
 
