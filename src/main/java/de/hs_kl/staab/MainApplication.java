@@ -217,9 +217,5 @@ public class MainApplication {
 		// plannerService.getOverviewOfTodayWorks(carMechanic1, wkp2);
 
 		planningCalendar.getSuggestThreeWorkingAppointments(tireChange, wkp1);
-		System.out.println(planningCalendar.getListOfAppointments());
-		// planningCalendar.getSuggestThreeWorkingAppointments(null, null);
-		// planningCalendar.getSuggestThreeWorkingAppointments(oilChange, wkp1);
-		// planningCalendar.getSuggestThreeWorkingAppointments(tireChange, wkp1);
 	}
 }
