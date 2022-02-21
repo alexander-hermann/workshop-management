@@ -1,6 +1,5 @@
 package de.hs_kl.staab.planner;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,38 +75,20 @@ public class PlannerController {
 
 	@RequestMapping(value = "/workingappointments", method = RequestMethod.GET)
 	public List<Appointment> getAllWorkingAppointments() {
-		List<Appointment> foundOfWorkingAppointments = new ArrayList<>();
-
-		for (Appointment appointment : planningCalendar.getListOfAppointments()) {
-			if (appointment instanceof WorkingAppointment) {
-				foundOfWorkingAppointments.add(appointment);
-			}
-		}
-		return foundOfWorkingAppointments;
+		List<Appointment> searchWorkingAppointments = planningCalendar.getListOfAppointments().stream().filter(a -> a instanceof WorkingAppointment).collect(Collectors.toList());
+		return searchWorkingAppointments;
 	}
 
 	@RequestMapping(value = "/consultingappointments", method = RequestMethod.GET)
 	public List<Appointment> getAllConsultingAppointments() {
-		List<Appointment> foundOfConsultingAppointments = new ArrayList<>();
-
-		for (Appointment appointment : planningCalendar.getListOfAppointments()) {
-			if (appointment instanceof ConsultingAppointment) {
-				foundOfConsultingAppointments.add(appointment);
-			}
-		}
-		return foundOfConsultingAppointments;
+		List<Appointment> searchConsultingAppointments = planningCalendar.getListOfAppointments().stream().filter(a -> a instanceof ConsultingAppointment).collect(Collectors.toList());
+		return searchConsultingAppointments;
 	}
 
 	@RequestMapping(value = "/cleaningappointments", method = RequestMethod.GET)
 	public List<Appointment> getAllCleaningAppointments() {
-		List<Appointment> foundOfCleaningAppointments = new ArrayList<>();
-
-		for (Appointment appointment : planningCalendar.getListOfAppointments()) {
-			if (appointment instanceof CleaningAppointment) {
-				foundOfCleaningAppointments.add(appointment);
-			}
-		}
-		return foundOfCleaningAppointments;
+		List<Appointment> searchCleaningAppointments = planningCalendar.getListOfAppointments().stream().filter(a -> a instanceof CleaningAppointment).collect(Collectors.toList());
+		return searchCleaningAppointments;
 	}
 
 	// ###############################################
