@@ -60,6 +60,9 @@ public class PlannerService {
 	public void getWorkingPlatformById(String workingPlatformId) {
 		if (!listOfWorkingPlatforms.isEmpty()) {
 
+			// get the working platform if the working platform Id which was entered in the
+			// method
+			// equals the working platform Id in the listofworkingplatforms
 			for (WorkingPlatform workingPlatform : listOfWorkingPlatforms) {
 				if (workingPlatform.getId().equals(workingPlatformId)) {
 					System.out.println(workingPlatform);
@@ -82,6 +85,10 @@ public class PlannerService {
 	}
 
 	public void createNewWorkingPlatform(WorkingPlatform newWorkingPlatform) {
+
+		// if working platform not in the listofworkingplatforms add workingplatform to
+		// list
+
 		if (!listOfWorkingPlatforms.contains(newWorkingPlatform)) {
 			listOfWorkingPlatforms.add(newWorkingPlatform);
 			System.out.println("The workingplatform " + newWorkingPlatform.getId() + "  was successfully added.");
@@ -92,6 +99,8 @@ public class PlannerService {
 
 	public void updateWorkingPlatform(WorkingPlatform oldWorkingPlatform, WorkingPlatform newWorkingPlatform) {
 		if (!listOfWorkingPlatforms.isEmpty()) {
+
+			// if the new object equals the old object
 			for (WorkingPlatform actualWorkingPlatform : listOfWorkingPlatforms) {
 				if (actualWorkingPlatform.equals(oldWorkingPlatform)) {
 
@@ -117,6 +126,10 @@ public class PlannerService {
 
 	public void getServiceById(String serviceId) {
 		if (!listOfServices.isEmpty()) {
+
+			// get the service if the service Id which was entered in the method
+			// equals the service Id in the listofservices
+
 			for (Service service : listOfServices) {
 				if (service.getId().equals(serviceId)) {
 					System.out.println(service);
@@ -139,6 +152,8 @@ public class PlannerService {
 	}
 
 	public void createNewService(Service newService) {
+
+		// if the service not in the listofservices add service to list
 		if (!listOfServices.contains(newService)) {
 			listOfServices.add(newService);
 			System.out.println("The service " + newService.getId() + "  was successfully added.");
@@ -149,6 +164,8 @@ public class PlannerService {
 
 	public void updateService(Service oldService, Service newService) {
 		if (!listOfServices.isEmpty()) {
+
+			// if the new object equals the old object
 			for (Service actualService : listOfServices) {
 				if (actualService.equals(oldService)) {
 
