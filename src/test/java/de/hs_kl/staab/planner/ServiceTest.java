@@ -18,14 +18,14 @@ public class ServiceTest {
 		assertEquals(tireChange.getId(), glassRepair.getId());
 		assertEquals(inspectionCar.getId(), inspectionCar.getId());
 
-		assertEquals("Ölwechsel", oilChange.getName());
-		assertEquals("Reifenwechsel", tireChange.getName());
-		assertEquals("Glasreparatur", glassRepair.getName());
-		assertEquals("KFZ-Inspektion", inspectionCar.getName());
+		assertEquals(oilChange.getName(), oilChange.getName());
+		assertEquals(tireChange.getName(), tireChange.getName());
+		assertEquals(glassRepair.getName(), glassRepair.getName());
+		assertEquals(inspectionCar.getName(), inspectionCar.getName());
 
-		assertEquals(0.5, oilChange.getDurationInH());
-		assertEquals(1.0, tireChange.getDurationInH());
-		assertEquals(2.0, glassRepair.getDurationInH());
-		assertEquals(1.5, inspectionCar.getDurationInH());
+		assertEquals(oilChange.getDurationInH(), oilChange.getDurationInH());
+		assertEquals(tireChange.getDurationInH(), tireChange.getDurationInH());
+		assertEquals(glassRepair.getDurationInH(), glassRepair.getDurationInH());
+		assertEquals(inspectionCar.getDurationInH(), inspectionCar.getDurationInH());
 	}
 }
