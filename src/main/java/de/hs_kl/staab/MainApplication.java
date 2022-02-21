@@ -108,8 +108,8 @@ public class MainApplication {
 		ConsultingAppointment consultingAppointment4 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1, customerConsultant1);
 		ConsultingAppointment consultingAppointment5 = new ConsultingAppointment(2021, 12, 20, 14, 15, customer1, 1, customerConsultant2);
 
-		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 2, 20, 8, 00, wkp1, car1, collectionOfWorkForCustomer01, carMechanic1);
-		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 2, 17, 10, 30, wkp1, car1, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 2, 19, 8, 00, wkp1, car1, collectionOfWorkForCustomer01, carMechanic1);
+		WorkingAppointment workingAppointment02 = new WorkingAppointment(2022, 2, 21, 10, 30, wkp1, car1, collectionOfWorkForCustomer01, carMechanic1);
 		WorkingAppointment workingAppointment03 = new WorkingAppointment(2022, 2, 17, 8, 00, wkp1, car2, collectionOfWorkForCustomer01, carMechanic1);
 		WorkingAppointment workingAppointment04 = new WorkingAppointment(2022, 2, 17, 14, 00, wkp1, car2, collectionOfWorkForCustomer01, carMechanic1);
 		WorkingAppointment workingAppointment05 = new WorkingAppointment(2022, 1, 22, 8, 00, wkp2, car2, collectionOfWorkForCustomer01, carMechanic1);
@@ -148,9 +148,6 @@ public class MainApplication {
 
 		customerService.getVehicleByLicensePlate("HOM-SB 211");
 		customerService.getVehicleByLicensePlate("HOM-SH 212");
-
-		System.out.println("##############");
-		customerService.getServiceHistoryForVehicle(car1);
 		
 		// #############################################################
 		userService.createNewUser(dispatcher1);
@@ -205,13 +202,12 @@ public class MainApplication {
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment02);
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment03);
 		planningCalendar.setWorkingAppoinmentToCompleted(workingAppointment04);
-		System.out.println("Service history for car1: ");
-
-		// Check if all finished work is issued for car1
-		customerService.getServiceHistoryForVehicle(car1);
 
 		System.out.println("Appointments of yesterday:");
 		planningCalendar.getYesterdayWorkingAppointments();
+		
+		System.out.println("##############");
+		customerService.getServiceHistoryForVehicle(car1);
 
 		// planningCalendar.getAppointments();
 		planningCalendar.getAppointmentById("AP-14");

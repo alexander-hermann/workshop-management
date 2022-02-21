@@ -247,7 +247,13 @@ public class PlanningCalendar {
 
 	public void getYesterdayWorkingAppointments() {
 		LocalDate yesterdayDay = LocalDate.now().minusDays(1);
+		
+		if(yesterdayDay.getDayOfWeek() == DayOfWeek.SUNDAY) {
+			yesterdayDay = yesterdayDay.minusDays(1);
+		}
+		
 		List<WorkingAppointment> listOfFoundWorkingAppointments = new ArrayList<>();
+		int countWorkingAppointments = 0;
 
 		for (Appointment appointment : listOfAppointments) {
 			if (appointment instanceof WorkingAppointment) {
@@ -256,11 +262,13 @@ public class PlanningCalendar {
 
 				if (searchCondition) {
 					listOfFoundWorkingAppointments.add((WorkingAppointment) appointment);
+					countWorkingAppointments++;
 				}
 			}
 		}
 
 		if (listOfFoundWorkingAppointments.size() > 0) {
+			System.out.println("The day " + yesterdayDay + " has " + countWorkingAppointments + " working appointment(s):");
 			for (WorkingAppointment workingAppointment : listOfFoundWorkingAppointments) {
 				System.out.println(workingAppointment);
 			}
