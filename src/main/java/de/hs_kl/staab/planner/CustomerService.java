@@ -302,6 +302,7 @@ public class CustomerService {
 	public void getServiceHistoryForVehicle(Vehicle vehicle) {
 		// Avoid NullPointerException
 		String checkVehicleHasValue = (vehicle != null) ? vehicle.getId() : "null";
+		int counterServiceHistory = 0;
 
 		List<WorkingAppointment> listOfFoundWorkingAppointmentsForVehicle = new ArrayList<>();
 
@@ -310,16 +311,19 @@ public class CustomerService {
 		if (listOfVehicles.contains(vehicle) && vehicle != null) {
 			for (WorkingAppointment currentWorkingAppointment : vehicle.listOfWorkingAppointmentForVehicle) {
 				if (currentWorkingAppointment.isCompleted() == true) {
+					counterServiceHistory++;
 					listOfFoundWorkingAppointmentsForVehicle.add(currentWorkingAppointment);
 				}
 			}
 
 			// get the service and the start of the completed working appointment from
 			// listOfFoundWorkingAppointmentsForVehicle or the error message
-			if (listOfFoundWorkingAppointmentsForVehicle.size() > 0) {
+			if (!listOfFoundWorkingAppointmentsForVehicle.isEmpty()) {
+				System.out.println("The vehicle " + vehicle.getId() + " has " + counterServiceHistory
+						+ " collection of services:");
 				for (WorkingAppointment currentWorkingAppointment : listOfFoundWorkingAppointmentsForVehicle) {
 					System.out.println(currentWorkingAppointment.getService() + " on the date "
-							+ currentWorkingAppointment.startOfAppointment);
+							+ currentWorkingAppointment.getDayWithStartTime());
 				}
 			} else {
 				System.err.println("There are no working appointments in the history of the vehicle with the id "
