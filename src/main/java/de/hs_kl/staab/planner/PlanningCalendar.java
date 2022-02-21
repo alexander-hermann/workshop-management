@@ -420,14 +420,12 @@ public class PlanningCalendar {
 		}
 	}
 
-	public void setAutomaticallyCleaningAppointment(WorkingPlatform workingPlatform, CLEANINGPROGRAMM cleaningProgram,
-			Dispatcher dispatcher) {
+	public void setAutomaticallyCleaningAppointment(WorkingPlatform workingPlatform, CLEANINGPROGRAMM cleaningProgram, Dispatcher dispatcher) {
 
 		LocalDateTime timeAfterDuration = LocalDateTime.now().plusMinutes(80);
 		LocalDateTime now = LocalDateTime.now();
 
 		List<Appointment> listOfPlannedWorksForWorkingPlatformAfterNow = new ArrayList<>();
-
 		
 		// add all cleaning and working appointments if the end time is after now to listofplannedworksforworkingplatfromafternow
 		for (Appointment appointment : listOfAppointments) {
@@ -460,20 +458,14 @@ public class PlanningCalendar {
 				int listAppointmentCounter;
 				for (listAppointmentCounter = 0; listAppointmentCounter < sizeListAppointmentsAfterNow; listAppointmentCounter++) {
 
-					Appointment thisAppointmentFromList = listOfPlannedWorksForWorkingPlatformAfterNow
-							.get(listAppointmentCounter);
-					Appointment nextAppointmentFromList = listOfPlannedWorksForWorkingPlatformAfterNow
-							.get(listAppointmentCounter + 1);
+					Appointment thisAppointmentFromList = listOfPlannedWorksForWorkingPlatformAfterNow.get(listAppointmentCounter);
+					Appointment nextAppointmentFromList = listOfPlannedWorksForWorkingPlatformAfterNow.get(listAppointmentCounter + 1);
 					Appointment firstAppointmentFromList = listOfPlannedWorksForWorkingPlatformAfterNow.get(0);
-					Appointment lastAppointmentFromList = listOfPlannedWorksForWorkingPlatformAfterNow
-							.get(sizeListAppointmentsAfterNow - 1);
+					Appointment lastAppointmentFromList = listOfPlannedWorksForWorkingPlatformAfterNow.get(sizeListAppointmentsAfterNow - 1);
 
 					// difference between the end time of the this appointment with the start time of the
 					// next appointment thats the differencebetweenappointments
-					
-
-					int differenceBetweenAppointments = (int) ChronoUnit.MINUTES.between(
-							thisAppointmentFromList.getDayWithEndTime(), nextAppointmentFromList.getDayWithStartTime());
+					int differenceBetweenAppointments = (int) ChronoUnit.MINUTES.between(thisAppointmentFromList.getDayWithEndTime(), nextAppointmentFromList.getDayWithStartTime());
 
 					// if the last appointment in list is reached
 					if (nextAppointmentFromList.getId().equals(lastAppointmentFromList.getId())) {
@@ -482,98 +474,62 @@ public class PlanningCalendar {
 						if (differenceBetweenAppointments > 50 && cleaningProgram.equals(CLEANINGPROGRAMM.FAST)) {
 
 							// if the start time of the new appointment is in working time create new Appointment
-							if (getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
-									workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
-								createNewAppointment(
-										getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
-												workingPlatform, cleaningProgram, dispatcher));
+							if (getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10), workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
+								createNewAppointment(getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10), workingPlatform, cleaningProgram, dispatcher));
 								return;
 							}
-
-							
 							// if the cleaning program for the new cleaning appointment is intense and the interval between two appointments greater then 80 minutes and last appointment in list
 						} else if (differenceBetweenAppointments > 80
 								&& cleaningProgram.equals(CLEANINGPROGRAMM.INTENSE)) {
 
 							
 							// if the start time of the new appointment is in working time create new Appointment
-							if (getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
-									workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
-								createNewAppointment(
-										getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
-												workingPlatform, cleaningProgram, dispatcher));
+							if (getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10), workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
+								createNewAppointment(getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10), workingPlatform, cleaningProgram, dispatcher));
 								return;
 							}
-
 						}
 						// create new Appointment if the appointment is in working time after last appointment
-						createAppointmentWhenIsInWorkingHours(lastAppointmentFromList.getDayWithEndTime(),
-								workingPlatform, cleaningProgram, dispatcher);
-
+						createAppointmentWhenIsInWorkingHours(lastAppointmentFromList.getDayWithEndTime(), workingPlatform, cleaningProgram, dispatcher);
 						return;
-
 					}
-
 					// if the end time of the new appointment is before the start time of the first appointment in list
 					else if (timeAfterDuration.isBefore(firstAppointmentFromList.getDayWithStartTime())) {
 
 						// if the start time of the new appointment is in working time create new Appointment
-						if (getNewAppointment(firstAppointmentFromList.getDayWithStartTime().minusMinutes(80),
-								workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
-							createNewAppointment(
-									getNewAppointment(firstAppointmentFromList.getDayWithStartTime().minusMinutes(80),
-											workingPlatform, cleaningProgram, dispatcher));
+						if (getNewAppointment(firstAppointmentFromList.getDayWithStartTime().minusMinutes(80), workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
+							createNewAppointment(getNewAppointment(firstAppointmentFromList.getDayWithStartTime().minusMinutes(80), workingPlatform, cleaningProgram, dispatcher));
 							return;
 						}
-
 						// if the cleaning program for the new cleaning appointment is fast and the interval between two appointments greater then 50 minutes and not last appointment in list
 					} else if (differenceBetweenAppointments > 50 && cleaningProgram.equals(CLEANINGPROGRAMM.FAST)) {
 
-						if (getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
-								workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
-							createNewAppointment(
-									getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
-											workingPlatform, cleaningProgram, dispatcher));
+						if (getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10), workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
+							createNewAppointment(getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10), workingPlatform, cleaningProgram, dispatcher));
 							return;
 						}
-
 						// if the cleaning program for the new cleaning appointment is intense and the interval between two appointments greater then 80 minutes
 					} else if (differenceBetweenAppointments > 80 && cleaningProgram.equals(CLEANINGPROGRAMM.INTENSE)) {
 
-						if (getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
-								workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
-							createNewAppointment(
-									getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10),
-											workingPlatform, cleaningProgram, dispatcher));
+						if (getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10), workingPlatform, cleaningProgram, dispatcher).isAppointmentInWorkingTime()) {
+							createNewAppointment(getNewAppointment(thisAppointmentFromList.getDayWithEndTime().plusMinutes(10), workingPlatform, cleaningProgram, dispatcher));
 							return;
 						}
-
 					}
-
 				}
-
 			}
-
 			else if (sizeListAppointmentsAfterNow == 1) {
 
 				// if the end time of the new appointment is before the start time of the appointment in list
-				if (timeAfterDuration.isBefore(nextAppointmentForWorkingPlatform.getDayWithStartTime())
-						&& now.getHour() >= 8 && now.getHour() < 15) {
-
+				if (timeAfterDuration.isBefore(nextAppointmentForWorkingPlatform.getDayWithStartTime())&& now.getHour() >= 8 && now.getHour() < 15) {
 					createAppointmentWithoutCondition(now, workingPlatform, cleaningProgram, dispatcher);
-
 				} else {
-					createAppointmentWhenIsInWorkingHours(nextAppointmentForWorkingPlatform.getDayWithEndTime(),
-							workingPlatform, cleaningProgram, dispatcher);
-
+					createAppointmentWhenIsInWorkingHours(nextAppointmentForWorkingPlatform.getDayWithEndTime(), workingPlatform, cleaningProgram, dispatcher);
 				}
 			}
 		}
 		// If there is no scheduled appointment for this working platform add new appointment to list of appointments
-		else
-
-		{
-
+		else {
 			createAppointmentWhenIsInWorkingHours(now.plusMinutes(10), workingPlatform, cleaningProgram, dispatcher);
 		}
 	}
