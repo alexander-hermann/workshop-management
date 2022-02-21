@@ -67,6 +67,12 @@ public class PlannerController {
 		List<Appointment> appointmentById = planningCalendar.getListOfAppointments().stream().filter(a -> a.getId().equals(idWithPrefix)).collect(Collectors.toList());
 		return appointmentById;
 	}
+	
+	@RequestMapping(value = "/appointments/week/{weekNumber}")
+	public List<Appointment> getAppointmentsByWeek(@PathVariable int weekNumber) {
+		List<Appointment> appointmentsByWeek = planningCalendar.getListOfAppointments().stream().filter(a -> a.getCalendarWeek() == weekNumber).collect(Collectors.toList());
+		return appointmentsByWeek;
+	}
 
 	@RequestMapping(value = "/workingappointments", method = RequestMethod.GET)
 	public List<Appointment> getAllWorkingAppointments() {
