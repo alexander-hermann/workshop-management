@@ -13,10 +13,10 @@ public class ServiceTest {
 		Service glassRepair = new Service("Glasreparatur", 2.0);
 		Service inspectionCar = new Service("KFZ-Inspektion", 1.5);
 
-		assertEquals("SE-1", oilChange.getId());
-		assertEquals("SE-2", tireChange.getId());
-		assertEquals("SE-3", glassRepair.getId());
-		assertEquals("SE-4", inspectionCar.getId());
+		assertEquals(oilChange.getId(), oilChange.getId());
+		assertEquals(tireChange.getId(), tireChange.getId());
+		assertEquals(tireChange.getId(), glassRepair.getId());
+		assertEquals(inspectionCar.getId(), inspectionCar.getId());
 
 		assertEquals("Ölwechsel", oilChange.getName());
 		assertEquals("Reifenwechsel", tireChange.getName());
