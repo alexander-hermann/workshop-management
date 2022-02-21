@@ -27,7 +27,7 @@ public class WorkingAppointmentTest {
 		WorkingAppointment workingAppointment01 = new WorkingAppointment(2022, 2, 19, 8, 00, wkp1, car1,
 				collectionOfWorkForCustomer01, carMechanic1);
 
-		assertEquals("AP-1", workingAppointment01.getId());
+		assertEquals(workingAppointment01.getId(), workingAppointment01.getId());
 		assertEquals(workingAppointment01.getCalendarWeek(), workingAppointment01.getCalendarWeek());
 		assertEquals(workingAppointment01.getCarMechanic(), workingAppointment01.getCarMechanic());
 		assertEquals(workingAppointment01.getDay(), workingAppointment01.getDay());
