@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- <maven.compiler.release>11</maven.compiler.release> -->
-		<!-- <java.version>11</java.version> -->
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
@@ -121,12 +121,6 @@
                 </transformationSets>
             </configuration>
             <executions> 
-            	<execution>
-					<phase>compile</phase>
-					<goals>
-						<goal>transform</goal>
-					</goals>            	
-            	</execution>
             </executions>
             <dependencies>
                 <dependency>
