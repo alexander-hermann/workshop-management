@@ -219,9 +219,7 @@ public class CustomerService {
 						+ removeCustomer.getId() + " does not exist in the list of customers.");
 			}
 		} else {
-			System.err.println(
-
-					"The customer can not be removed, because the list of customers is empty.");
+			System.err.println("The customer can not be removed, because the list of customers is empty.");
 		}
 	}
 
@@ -239,10 +237,8 @@ public class CustomerService {
 					for (Vehicle vehicle : listOfVehicles) {
 						if (vehicle.getLicensePlate().equals(vehicleToAdd.getLicensePlate())) {
 							vehicle.setCustomer(customer);
-
 						}
 					}
-
 					System.out.println("Customer " + customer.getFullName() + " " + customer.getId()
 							+ " add the vehicle: " + vehicleToAdd);
 				} else {
